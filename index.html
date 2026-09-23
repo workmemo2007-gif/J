@@ -253,7 +253,7 @@
         const GRID_SIZE = 3;
         const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
 
-        // تحديد ترتيب الفوز المستهدف بناءً على وضع الصورة المطلوب
+        // 1. الترتيب الصحيح القياسي للمصفوفة (تطابق الصورة الأصلية 100%)
         const TARGET_BOARD = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
         let currentBoard = [];
@@ -358,7 +358,6 @@
             while (solved) {
                 const indexes = Array.from({ length: TOTAL_TILES }, (_, i) => i);
                 currentBoard = shuffleArray(indexes);
-                // للتأكد من عدم تبديل اللعبة في الحالة الفائزة بدايةً
                 solved = currentBoard.every((val, idx) => val === TARGET_BOARD[idx]);
             }
 
@@ -461,10 +460,11 @@
             finishBtn.className = "w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2";
         }
 
-        // فحص الإجابة بناءً على الترتيب المعتمد
+        // 2. دالة التحقق
         function checkAnswer() {
             resetButtonStyles();
 
+            // فحص كل قطعة مقابل موقعها الأصلي
             const isCorrect = currentBoard.every((val, index) => val === TARGET_BOARD[index]);
 
             if (isCorrect) {
