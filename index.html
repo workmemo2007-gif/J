@@ -143,36 +143,28 @@
 </head>
 <body class="flex flex-col items-center justify-between min-h-screen p-3 md:p-6 text-slate-800">
 
-    <!-- Main Wrapper -->
     <div class="w-full max-w-3xl flex flex-col items-center gap-5 my-auto">
         
-        <!-- Header Section: TV Screen & Robot Side by Side -->
         <div class="w-full flex flex-col md:flex-row items-center justify-center gap-4">
             
-            <!-- Bear Robot Companion (الدبدوب الروبوت بجانب الشاشة) -->
             <div class="flex flex-col items-center shrink-0">
                 <div id="bearContainer" class="bear-container w-24 h-24 md:w-28 md:h-28 relative">
                     <svg id="bearSvg" viewBox="0 0 200 200" class="w-full h-full drop-shadow-xl">
                         <circle cx="100" cy="110" r="75" fill="#38bdf8" opacity="0.15" />
                         
-                        <!-- Ears -->
                         <circle id="leftEar" cx="45" cy="55" r="24" fill="#0284c7" stroke="#e0f2fe" stroke-width="5" />
                         <circle cx="45" cy="55" r="13" fill="#bae6fd" />
                         <circle id="rightEar" cx="155" cy="55" r="24" fill="#0284c7" stroke="#e0f2fe" stroke-width="5" />
                         <circle cx="155" cy="55" r="13" fill="#bae6fd" />
                         
-                        <!-- Antenna -->
                         <line x1="100" y1="40" x2="100" y2="18" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
                         <circle id="antennaBall" cx="100" cy="14" r="9" fill="#38bdf8" class="animate-pulse" />
 
-                        <!-- Head/Body -->
                         <rect x="35" y="45" width="130" height="120" rx="45" fill="#f0f9ff" stroke="#0284c7" stroke-width="6" />
                         
-                        <!-- Cheeks -->
                         <circle cx="62" cy="118" r="10" fill="#f472b6" opacity="0.5" />
                         <circle cx="138" cy="118" r="10" fill="#f472b6" opacity="0.5" />
 
-                        <!-- EYES & EXPRESSIONS -->
                         <g id="eyesNeutral">
                             <circle cx="70" cy="95" r="10" fill="#0f172a" />
                             <circle cx="73" cy="92" r="3" fill="#ffffff" />
@@ -192,7 +184,6 @@
                             <path d="M 100 65 L 102 72 L 109 74 L 102 76 L 100 83 L 98 76 L 91 74 L 98 72 Z" fill="#f59e0b" />
                         </g>
 
-                        <!-- MOUTHS -->
                         <ellipse cx="100" cy="115" rx="22" ry="16" fill="#bae6fd" />
                         <ellipse cx="100" cy="110" rx="8" ry="5" fill="#0369a1" />
 
@@ -203,11 +194,9 @@
                 </div>
             </div>
 
-            <!-- Background/Top TV Screen -->
             <div class="w-full max-w-md">
                 <div id="tvScreen" class="tv-screen broken rounded-2xl h-32 md:h-36 flex flex-col items-center justify-center p-2 text-center">
                     
-                    <!-- Broken State Content -->
                     <div id="screenOffContent" class="flex flex-col items-center gap-1">
                         <div class="flex items-center gap-1.5 text-slate-400">
                             <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -218,7 +207,6 @@
                         <p class="glitch-text text-sky-300/60 text-[10px] md:text-xs font-mono">=== NO SIGNAL ===</p>
                     </div>
 
-                    <!-- Active Success State Content -->
                     <div id="screenOnContent" class="hidden w-full h-full flex flex-col items-center justify-center relative overflow-hidden">
                         <img id="fullPreviewImage" class="w-full h-full object-cover rounded-lg shadow-md" alt="Completed Image" />
                         <div class="absolute bottom-1 bg-black/60 text-white text-xs px-3 py-0.5 rounded-full font-bold">
@@ -230,22 +218,16 @@
 
         </div>
 
-        <!-- Bear Speech Bubble -->
         <div id="bearSpeech" class="bg-white/90 backdrop-blur border border-sky-200 text-sky-900 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-sm transition-all duration-300">
             رتب أجزاء الصورة المبعثرة لإعادة تشغيل الشاشة! 🤖
         </div>
 
-        <!-- Target Grid Board (لوحة تجميع الصورة) -->
         <div class="w-full bg-white/80 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl border border-sky-100 flex flex-col items-center gap-5">
             
-            <!-- Puzzle Grid Canvas/Container (3x3 Grid) -->
             <div id="puzzleBoard" class="grid grid-cols-3 gap-1.5 p-2 bg-sky-500/10 rounded-2xl border-2 border-dashed border-sky-300 w-64 h-64 md:w-80 md:h-80 shadow-inner">
-                <!-- 9 Slots will be injected here via JavaScript -->
-            </div>
+                </div>
 
-            <!-- Action Controls -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1 w-full max-w-md">
-                <!-- Check Answer Button (تم الانتهاء) -->
                 <button id="finishBtn" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
                     <span>تم الإنهاء</span>
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -253,7 +235,6 @@
                     </svg>
                 </button>
 
-                <!-- Reset Button (إعادة المحاولة) -->
                 <button id="resetBtn" class="w-full sm:w-auto px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm rounded-2xl transition-all duration-200 flex items-center justify-center gap-2">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
@@ -267,59 +248,15 @@
     </div>
 
     <script>
-        // Generated High Quality SVG Image URL for the puzzle
-        function generatePuzzleImageSVG() {
-            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
-                <defs>
-                    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#0284c7" />
-                        <stop offset="50%" stop-color="#38bdf8" />
-                        <stop offset="100%" stop-color="#818cf8" />
-                    </linearGradient>
-                    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stop-color="#fbbf24" />
-                        <stop offset="100%" stop-color="#f59e0b" />
-                    </linearGradient>
-                </defs>
-                <rect width="400" height="400" fill="url(#bg)" />
-                <circle cx="200" cy="180" r="110" fill="#ffffff" opacity="0.2" />
-                <circle cx="200" cy="180" r="85" fill="#ffffff" opacity="0.3" />
-                
-                <!-- Cute Teddy Bear Face in Center -->
-                <circle cx="130" cy="110" r="30" fill="#d97706" />
-                <circle cx="130" cy="110" r="18" fill="#fef3c7" />
-                <circle cx="270" cy="110" r="30" fill="#d97706" />
-                <circle cx="270" cy="110" r="18" fill="#fef3c7" />
-                
-                <circle cx="200" cy="180" r="80" fill="#f59e0b" />
-                <ellipse cx="200" cy="200" rx="35" ry="25" fill="#fef3c7" />
-                <ellipse cx="200" cy="190" rx="14" ry="9" fill="#78350f" />
-                
-                <circle cx="165" cy="160" r="10" fill="#78350f" />
-                <circle cx="168" cy="157" r="3" fill="#ffffff" />
-                <circle cx="235" cy="160" r="10" fill="#78350f" />
-                <circle cx="238" cy="157" r="3" fill="#ffffff" />
-                
-                <path d="M 188 208 Q 200 218 212 208" fill="none" stroke="#78350f" stroke-width="4" stroke-linecap="round" />
-                
-                <!-- Magic Stars & Flowers -->
-                <polygon points="80,70 85,85 100,85 87,95 92,110 80,100 68,110 73,95 60,85 75,85" fill="url(#starGrad)" />
-                <polygon points="320,70 325,85 340,85 327,95 332,110 320,100 308,110 313,95 300,85 315,85" fill="url(#starGrad)" />
-                
-                <!-- Ribbon / Text -->
-                <rect x="50" y="300" width="300" height="55" rx="20" fill="#ffffff" opacity="0.95" />
-                <text x="200" y="338" font-family="Tajawal, sans-serif" font-size="28" font-weight="900" fill="#0284c7" text-anchor="middle">علويتي رتاج ❤️</text>
-            </svg>`;
-            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
-        }
-
-        const PUZZLE_IMAGE_URL = generatePuzzleImageSVG();
+        // رابط الصورة المباشر من GitHub
+        const PUZZLE_IMAGE_URL = 'https://raw.githubusercontent.com/workmemo2007-gif/R1/d48fd0621b8ea4ef108223bc003444d090b0d963/1AA2BE45-B1F5-4899-9BB5-77544E7FABE6.jpeg';
+        
         const GRID_SIZE = 3; // 3x3 Grid
         const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
 
         // Game State Variables
-        let currentBoard = []; // Array storing current tile indices
-        let selectedTileIndex = null; // Index of currently clicked/selected tile to swap
+        let currentBoard = [];
+        let selectedTileIndex = null;
 
         // Audio Synthesizer Controller
         class SoundFX {
@@ -422,7 +359,6 @@
         // Initialize Game
         function initGame() {
             selectedTileIndex = null;
-            // Create initial scrambled order ensuring it's not solved initially
             let solved = true;
             while (solved) {
                 const indexes = Array.from({ length: TOTAL_TILES }, (_, i) => i);
@@ -444,7 +380,7 @@
                 const tile = document.createElement('div');
                 tile.className = 'puzzle-tile w-full h-full rounded-xl cursor-pointer border-2 border-white/60 shadow-md relative overflow-hidden select-none';
 
-                // Calculate Background Position based on Original Index (No Hints/Numbers)
+                // حساب موقع الجزء المقطوع من الصورة
                 const row = Math.floor(originalIndex / GRID_SIZE);
                 const col = originalIndex % GRID_SIZE;
                 const posX = (col / (GRID_SIZE - 1)) * 100;
@@ -454,12 +390,10 @@
                 tile.style.backgroundSize = '300% 300%';
                 tile.style.backgroundPosition = `${posX}% ${posY}%`;
 
-                // Highlight Selected Tile for Swap
                 if (selectedTileIndex === boardPosition) {
                     tile.classList.add('selected-tile');
                 }
 
-                // Handle Tile Click / Swap Logic
                 tile.onclick = () => handleTileClick(boardPosition);
 
                 puzzleBoard.appendChild(tile);
@@ -471,13 +405,10 @@
             soundFX.playTap();
 
             if (selectedTileIndex === null) {
-                // Select first tile
                 selectedTileIndex = position;
             } else if (selectedTileIndex === position) {
-                // Deselect if clicking the same tile
                 selectedTileIndex = null;
             } else {
-                // Swap the two tiles
                 const temp = currentBoard[selectedTileIndex];
                 currentBoard[selectedTileIndex] = currentBoard[position];
                 currentBoard[position] = temp;
