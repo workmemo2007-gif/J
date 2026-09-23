@@ -3,713 +3,580 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة لغز ترتيب الصور التفاعلية مع الدبدوب الروبوت</title>
-    <!-- Tailwind CSS -->
+    <title>لغز ترتيب الصورة المبعثرة - علويتي رتاج</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
-        * {
-            font-family: 'Cairo', sans-serif;
-            user-select: none;
-            -webkit-user-select: none;
-        }
-
         body {
-            background: linear-gradient(135deg, #a8ff78 0%, #78ffd6 100%);
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #e0f2fe 0%, #bae6fd 50%, #f0f9ff 100%);
             min-height: 100vh;
+            user-select: none;
+            overflow-x: hidden;
         }
 
-        /* Red Shake Animation for Incorrect Solution */
-        @keyframes errorShake {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-12px) rotate(-3deg); }
-            40%, 80% { transform: translateX(12px) rotate(3deg); }
+        /* Broken Screen Effect */
+        .tv-screen {
+            background-color: #0f172a;
+            position: relative;
+            overflow: hidden;
+            border: 6px solid #334155;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8), 0 8px 20px -5px rgba(0, 0, 0, 0.3);
+            transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Green Joy Bounce Animation for Correct Solution */
-        @keyframes successBounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0) scale(1); }
-            40% { transform: translateY(-20px) scale(1.08); }
-            60% { transform: translateY(-10px) scale(1.04); }
+        .tv-screen.broken::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 10;
+            background-size: 100% 4px, 6px 100%;
+            pointer-events: none;
         }
 
-        /* Bear Shaking Head Animation when Angry */
-        @keyframes bearAngryShake {
-            0%, 100% { transform: rotate(0deg) scale(1); }
-            20% { transform: rotate(-8deg) scale(1.05); }
-            40% { transform: rotate(8deg) scale(1.05); }
-            60% { transform: rotate(-8deg) scale(1.05); }
-            80% { transform: rotate(8deg) scale(1.05); }
+        .tv-screen.broken .glitch-text {
+            animation: glitch 1.5s infinite linear alternate-reverse;
         }
 
-        /* Bear Happy Dance Animation */
-        @keyframes bearHappyDance {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-12px) rotate(-5deg); }
-            75% { transform: translateY(-12px) rotate(5deg); }
+        @keyframes glitch {
+            0% { transform: translate(0); text-shadow: -2px 0 #ff0055, 2px 0 #00e5ff; }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); text-shadow: 2px 0 #ff0055, -2px 0 #00e5ff; }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); text-shadow: -2px 0 #ff0055, -2px 0 #00e5ff; }
         }
 
-        /* Floating Steam animation for Angry Bear */
-        @keyframes steamFloat {
-            0% { opacity: 0; transform: translateY(0) scale(0.5); }
-            50% { opacity: 0.8; }
-            100% { opacity: 0; transform: translateY(-20px) scale(1.2); }
+        .tv-screen.active {
+            background: #0f172a;
+            border-color: #38bdf8;
+            box-shadow: 0 0 25px rgba(56, 189, 248, 0.6), inset 0 0 12px rgba(255, 255, 255, 0.5);
         }
 
-        .btn-error {
-            animation: errorShake 0.6s ease-in-out;
-            background-color: #ef4444 !important;
-            border-color: #b91c1c !important;
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.6) !important;
+        /* Bear Animation Classes */
+        .bear-container {
+            transition: transform 0.3s ease;
         }
 
-        .btn-success {
-            animation: successBounce 0.8s ease-in-out;
-            background-color: #22c55e !important;
-            border-color: #15803d !important;
-            box-shadow: 0 0 25px rgba(34, 197, 94, 0.8) !important;
-        }
-
-        .bear-angry {
-            animation: bearAngryShake 0.6s ease-in-out;
+        .bear-sad {
+            animation: headShake 0.8s ease-in-out, droop 0.5s forwards;
         }
 
         .bear-happy {
-            animation: bearHappyDance 0.8s ease-in-out infinite;
+            animation: happyJump 0.6s ease-in-out infinite alternate;
         }
 
-        /* Tile dragging styles */
+        @keyframes headShake {
+            0%, 100% { transform: translateX(0) rotate(0); }
+            20% { transform: translateX(-10px) rotate(-5deg); }
+            40% { transform: translateX(10px) rotate(5deg); }
+            60% { transform: translateX(-8px) rotate(-3deg); }
+            80% { transform: translateX(8px) rotate(3deg); }
+        }
+
+        @keyframes happyJump {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-12px) scale(1.05); }
+        }
+
+        /* Shake Red Error Animation for Button */
+        .btn-shake-red {
+            animation: shakeRed 0.6s cubic-bezier(.36,.07,.19,.97) both;
+            background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.7) !important;
+            color: white !important;
+        }
+
+        @keyframes shakeRed {
+            10%, 90% { transform: translate3d(-2px, 0, 0) scale(1.02); }
+            20%, 80% { transform: translate3d(4px, 0, 0) scale(1.02); }
+            30%, 50%, 70% { transform: translate3d(-6px, 0, 0) scale(1.02); }
+            40%, 60% { transform: translate3d(6px, 0, 0) scale(1.02); }
+        }
+
+        /* Shake Green Success Animation for Button */
+        .btn-shake-green {
+            animation: shakeGreen 0.6s cubic-bezier(.36,.07,.19,.97) both;
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+            box-shadow: 0 0 25px rgba(16, 185, 129, 0.8) !important;
+            color: white !important;
+        }
+
+        @keyframes shakeGreen {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.15) rotate(3deg); }
+            50% { transform: scale(1.1) rotate(-3deg); }
+            70% { transform: scale(1.12) rotate(2deg); }
+            100% { transform: scale(1); }
+        }
+
+        /* Puzzle Tile Styling */
+        .puzzle-slot {
+            transition: all 0.25s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+        }
+
         .puzzle-tile {
-            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-            touch-action: none;
-            cursor: grab;
+            transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+            touch-action: manipulation;
+            background-repeat: no-repeat;
+        }
+
+        .puzzle-tile:hover {
+            transform: scale(1.03);
+            filter: brightness(1.05);
         }
 
         .puzzle-tile:active {
-            cursor: grabbing;
+            transform: scale(0.95);
         }
 
-        .puzzle-tile.selected {
-            border: 3px solid #3b82f6 !important;
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.8);
-            transform: scale(1.03);
-            z-index: 10;
-        }
-
-        .puzzle-tile.drag-over {
-            border: 3px dashed #ef4444 !important;
-            opacity: 0.8;
-        }
-
-        /* Speech Bubble Tail */
-        .speech-bubble::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            right: 40px;
-            border-width: 12px 12px 0;
-            border-style: solid;
-            border-color: #ffffff transparent;
-            display: block;
-            width: 0;
-        }
-
-        /* Custom Scrollbar for image gallery */
-        .custom-scroll::-webkit-scrollbar {
-            height: 6px;
-        }
-        .custom-scroll::-webkit-scrollbar-thumb {
-            background: #cbd5e1;
-            border-radius: 10px;
+        .selected-tile {
+            outline: 3px solid #0284c7;
+            outline-offset: -3px;
+            box-shadow: 0 0 12px rgba(2, 132, 199, 0.8);
         }
     </style>
 </head>
-<body class="flex flex-col items-center justify-between p-3 md:p-6 min-h-screen">
+<body class="flex flex-col items-center justify-between min-h-screen p-3 md:p-6 text-slate-800">
 
-    <!-- Header -->
-    <header class="text-center mb-4 w-full max-w-4xl">
-        <h1 class="text-3xl md:text-5xl font-black text-slate-800 drop-shadow-md flex items-center justify-center gap-3">
-            <span>🧩</span> لعبة لغز الصور مع الدبدوب الروبوت <span>🤖</span>
-        </h1>
-        <p class="text-slate-700 font-bold text-sm md:text-base mt-1">
-            رتب أجزاء الصورة المبعثرة بالضغط عليها وتبديلها أو بسحبها وإسقاطها!
-        </p>
-    </header>
-
-    <!-- Main Content Grid -->
-    <main class="w-full max-w-5xl bg-white/90 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-2xl border-4 border-white flex flex-col lg:flex-row gap-6 items-stretch justify-center">
-
-        <!-- Left Side: Bear Robot & Dialogue Box & Preview -->
-        <section class="lg:w-2/5 flex flex-col items-center justify-between gap-4 bg-gradient-to-b from-amber-50 to-orange-50 p-4 rounded-2xl border-2 border-amber-200">
+    <!-- Main Wrapper -->
+    <div class="w-full max-w-3xl flex flex-col items-center gap-5 my-auto">
+        
+        <!-- Header Section: TV Screen & Robot Side by Side -->
+        <div class="w-full flex flex-col md:flex-row items-center justify-center gap-4">
             
-            <!-- Dialogue / Speech Screen -->
-            <div class="speech-bubble relative w-full bg-white border-2 border-amber-300 p-4 rounded-2xl shadow-md min-h-[100px] flex items-center justify-center text-center">
-                <p id="bearMessage" class="text-slate-800 font-extrabold text-base md:text-lg leading-relaxed">
-                    مرحباً بك يا بطل! أنا الدبدوب الروبوت 🐻🤖 اختر صورة وابدأ بتركيب اللغز!
-                </p>
+            <!-- Bear Robot Companion (الدبدوب الروبوت بجانب الشاشة) -->
+            <div class="flex flex-col items-center shrink-0">
+                <div id="bearContainer" class="bear-container w-24 h-24 md:w-28 md:h-28 relative">
+                    <svg id="bearSvg" viewBox="0 0 200 200" class="w-full h-full drop-shadow-xl">
+                        <circle cx="100" cy="110" r="75" fill="#38bdf8" opacity="0.15" />
+                        
+                        <!-- Ears -->
+                        <circle id="leftEar" cx="45" cy="55" r="24" fill="#0284c7" stroke="#e0f2fe" stroke-width="5" />
+                        <circle cx="45" cy="55" r="13" fill="#bae6fd" />
+                        <circle id="rightEar" cx="155" cy="55" r="24" fill="#0284c7" stroke="#e0f2fe" stroke-width="5" />
+                        <circle cx="155" cy="55" r="13" fill="#bae6fd" />
+                        
+                        <!-- Antenna -->
+                        <line x1="100" y1="40" x2="100" y2="18" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
+                        <circle id="antennaBall" cx="100" cy="14" r="9" fill="#38bdf8" class="animate-pulse" />
+
+                        <!-- Head/Body -->
+                        <rect x="35" y="45" width="130" height="120" rx="45" fill="#f0f9ff" stroke="#0284c7" stroke-width="6" />
+                        
+                        <!-- Cheeks -->
+                        <circle cx="62" cy="118" r="10" fill="#f472b6" opacity="0.5" />
+                        <circle cx="138" cy="118" r="10" fill="#f472b6" opacity="0.5" />
+
+                        <!-- EYES & EXPRESSIONS -->
+                        <g id="eyesNeutral">
+                            <circle cx="70" cy="95" r="10" fill="#0f172a" />
+                            <circle cx="73" cy="92" r="3" fill="#ffffff" />
+                            <circle cx="130" cy="95" r="10" fill="#0f172a" />
+                            <circle cx="133" cy="92" r="3" fill="#ffffff" />
+                        </g>
+
+                        <g id="eyesSad" class="hidden">
+                            <path d="M 60 90 Q 70 102 80 90" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
+                            <path d="M 120 90 Q 130 102 140 90" fill="none" stroke="#0f172a" stroke-width="5" stroke-linecap="round" />
+                            <path d="M 58 100 C 55 110, 62 118, 62 118 C 62 118, 68 110, 65 100 Z" fill="#38bdf8" />
+                        </g>
+
+                        <g id="eyesHappy" class="hidden">
+                            <path d="M 60 98 Q 70 82 80 98" fill="none" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
+                            <path d="M 120 98 Q 130 82 140 98" fill="none" stroke="#0284c7" stroke-width="6" stroke-linecap="round" />
+                            <path d="M 100 65 L 102 72 L 109 74 L 102 76 L 100 83 L 98 76 L 91 74 L 98 72 Z" fill="#f59e0b" />
+                        </g>
+
+                        <!-- MOUTHS -->
+                        <ellipse cx="100" cy="115" rx="22" ry="16" fill="#bae6fd" />
+                        <ellipse cx="100" cy="110" rx="8" ry="5" fill="#0369a1" />
+
+                        <path id="mouthNeutral" d="M 94 120 Q 100 125 106 120" fill="none" stroke="#0369a1" stroke-width="4" stroke-linecap="round" />
+                        <path id="mouthSad" d="M 92 125 Q 100 116 108 125" fill="none" stroke="#0369a1" stroke-width="4" stroke-linecap="round" class="hidden" />
+                        <path id="mouthHappy" d="M 90 118 Q 100 132 110 118 Z" fill="#0369a1" class="hidden" />
+                    </svg>
+                </div>
             </div>
 
-            <!-- Mascot / Bear Robot Character SVG -->
-            <div class="relative my-2 flex items-center justify-center">
-                <!-- Steam icons for angry state -->
-                <div id="steamLeft" class="absolute -top-6 left-4 text-red-500 opacity-0 text-xl font-bold">💨</div>
-                <div id="steamRight" class="absolute -top-6 right-4 text-red-500 opacity-0 text-xl font-bold">💨</div>
-                
-                <!-- Hearts for happy state -->
-                <div id="heartsAnim" class="absolute -top-8 text-pink-500 opacity-0 text-2xl animate-bounce">💖 ✨ 🌟</div>
-
-                <!-- SVG Bear Robot -->
-                <svg id="bearSvg" class="w-44 h-44 md:w-52 md:h-52 drop-shadow-lg transition-transform duration-300" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Ears -->
-                    <circle cx="50" cy="50" r="28" fill="#d97706" stroke="#78350f" stroke-width="4"/>
-                    <circle cx="50" cy="50" r="16" fill="#fef3c7"/>
-                    <circle cx="150" cy="50" r="28" fill="#d97706" stroke="#78350f" stroke-width="4"/>
-                    <circle cx="150" cy="50" r="16" fill="#fef3c7"/>
+            <!-- Background/Top TV Screen -->
+            <div class="w-full max-w-md">
+                <div id="tvScreen" class="tv-screen broken rounded-2xl h-32 md:h-36 flex flex-col items-center justify-center p-2 text-center">
                     
-                    <!-- Antenna -->
-                    <line x1="100" y1="40" x2="100" y2="15" stroke="#64748b" stroke-width="5" stroke-linecap="round"/>
-                    <circle id="antennaLight" cx="100" cy="12" r="9" fill="#3b82f6" stroke="#1d4ed8" stroke-width="2"/>
+                    <!-- Broken State Content -->
+                    <div id="screenOffContent" class="flex flex-col items-center gap-1">
+                        <div class="flex items-center gap-1.5 text-slate-400">
+                            <svg class="w-5 h-5 animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path>
+                            </svg>
+                            <span class="text-xs md:text-sm font-bold tracking-wider opacity-80">الشاشة معطلة</span>
+                        </div>
+                        <p class="glitch-text text-sky-300/60 text-[10px] md:text-xs font-mono">=== NO SIGNAL ===</p>
+                    </div>
 
-                    <!-- Head -->
-                    <rect x="35" y="40" width="130" height="110" rx="40" fill="#f59e0b" stroke="#78350f" stroke-width="5"/>
-                    
-                    <!-- Robot Visor/Face Plate -->
-                    <rect x="50" y="65" width="100" height="55" rx="20" fill="#1e293b" stroke="#475569" stroke-width="3"/>
-
-                    <!-- Eyes -->
-                    <!-- Normal / Happy Eyes -->
-                    <g id="eyesNormal">
-                        <circle cx="75" cy="90" r="10" fill="#38bdf8"/>
-                        <circle cx="78" cy="87" r="3" fill="#ffffff"/>
-                        <circle cx="125" cy="90" r="10" fill="#38bdf8"/>
-                        <circle cx="128" cy="87" r="3" fill="#ffffff"/>
-                    </g>
-                    <!-- Angry Eyes (Hidden by default) -->
-                    <g id="eyesAngry" class="hidden">
-                        <path d="M 62 82 L 88 92" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="75" cy="95" r="7" fill="#ef4444"/>
-                        <path d="M 138 82 L 112 92" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
-                        <circle cx="125" cy="95" r="7" fill="#ef4444"/>
-                    </g>
-                    <!-- Happy Happy Eyes (Hidden by default) -->
-                    <g id="eyesHappy" class="hidden">
-                        <path d="M 65 92 Q 75 78 85 92" fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round"/>
-                        <path d="M 115 92 Q 125 78 135 92" fill="none" stroke="#22c55e" stroke-width="5" stroke-linecap="round"/>
-                    </g>
-
-                    <!-- Snout -->
-                    <ellipse cx="100" cy="125" rx="22" ry="16" fill="#fef3c7" stroke="#78350f" stroke-width="2"/>
-                    <!-- Nose -->
-                    <polygon points="93,118 107,118 100,126" fill="#451a03"/>
-
-                    <!-- Mouth -->
-                    <!-- Normal Mouth -->
-                    <path id="mouthNormal" d="M 92 131 Q 100 138 108 131" fill="none" stroke="#451a03" stroke-width="3" stroke-linecap="round"/>
-                    <!-- Angry Mouth -->
-                    <path id="mouthAngry" d="M 92 136 Q 100 128 108 136" fill="none" stroke="#ef4444" stroke-width="4" stroke-linecap="round" class="hidden"/>
-                    <!-- Happy Mouth -->
-                    <path id="mouthHappy" d="M 90 128 Q 100 144 110 128 Z" fill="#ef4444" stroke="#451a03" stroke-width="2" class="hidden"/>
-
-                    <!-- Cheeks -->
-                    <circle cx="58" cy="105" r="8" fill="#f43f5e" opacity="0.4"/>
-                    <circle cx="142" cy="105" r="8" fill="#f43f5e" opacity="0.4"/>
-                </svg>
-            </div>
-
-            <!-- Original Image Preview Container -->
-            <div class="w-full bg-white p-3 rounded-2xl border-2 border-amber-200 flex flex-col items-center">
-                <span class="text-xs font-bold text-slate-500 mb-2 flex items-center gap-1">
-                    <i class="fa-solid fa-eye"></i> الصورة الأصلية المراد تجميعها:
-                </span>
-                <div class="relative w-32 h-32 md:w-36 md:h-36 rounded-xl overflow-hidden shadow-inner border-2 border-slate-300">
-                    <img id="previewImg" src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop" alt="الصورة الأصلية" class="w-full h-full object-cover">
-                    <button id="toggleHintBtn" class="absolute bottom-1 right-1 bg-black/60 hover:bg-black/80 text-white text-xs px-2 py-1 rounded-lg backdrop-blur-sm transition">
-                        <i class="fa-solid fa-lightbulb text-yellow-300"></i> تلميح
-                    </button>
+                    <!-- Active Success State Content -->
+                    <div id="screenOnContent" class="hidden w-full h-full flex flex-col items-center justify-center relative overflow-hidden">
+                        <img id="fullPreviewImage" class="w-full h-full object-cover rounded-lg shadow-md" alt="Completed Image" />
+                        <div class="absolute bottom-1 bg-black/60 text-white text-xs px-3 py-0.5 rounded-full font-bold">
+                            علويتي رتاج ✨
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Stats Bar (Timer & Moves) -->
-            <div class="w-full flex justify-around items-center bg-amber-100/80 p-2.5 rounded-xl text-slate-800 font-extrabold text-sm border border-amber-300">
-                <div class="flex items-center gap-1.5">
-                    <i class="fa-solid fa-stopwatch text-amber-600"></i>
-                    <span>الوقت: <span id="timerText" class="text-blue-700">00:00</span></span>
-                </div>
-                <div class="h-4 w-0.5 bg-amber-300"></div>
-                <div class="flex items-center gap-1.5">
-                    <i class="fa-solid fa-arrows-rotate text-amber-600"></i>
-                    <span>الحركات: <span id="movesText" class="text-blue-700">0</span></span>
-                </div>
-            </div>
+        </div>
 
-        </section>
+        <!-- Bear Speech Bubble -->
+        <div id="bearSpeech" class="bg-white/90 backdrop-blur border border-sky-200 text-sky-900 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-sm transition-all duration-300">
+            رتب أجزاء الصورة المبعثرة لإعادة تشغيل الشاشة! 🤖
+        </div>
 
-        <!-- Right Side: Puzzle Board & Controls -->
-        <section class="lg:w-3/5 flex flex-col items-center justify-between gap-4">
+        <!-- Target Grid Board (لوحة تجميع الصورة) -->
+        <div class="w-full bg-white/80 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl border border-sky-100 flex flex-col items-center gap-5">
             
-            <!-- Settings Bar (Grid size, presets, upload) -->
-            <div class="w-full bg-slate-100 p-3 rounded-2xl border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs md:text-sm">
-                
-                <!-- Grid Size Selector -->
-                <div class="flex items-center gap-1">
-                    <label class="font-bold text-slate-700">الصعوبة:</label>
-                    <select id="gridSizeSelect" class="bg-white border border-slate-300 font-bold text-slate-800 rounded-lg px-2 py-1 focus:ring-2 focus:ring-amber-500 outline-none">
-                        <option value="3" selected>سهل (3x3)</option>
-                        <option value="4">متوسط (4x4)</option>
-                        <option value="5">صعب (5x5)</option>
-                    </select>
-                </div>
+            <!-- Puzzle Grid Canvas/Container (3x3 Grid) -->
+            <div id="puzzleBoard" class="grid grid-cols-3 gap-1.5 p-2 bg-sky-500/10 rounded-2xl border-2 border-dashed border-sky-300 w-64 h-64 md:w-80 md:h-80 shadow-inner">
+                <!-- 9 Slots will be injected here via JavaScript -->
+            </div>
 
-                <!-- Custom Upload -->
-                <label class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-3 py-1.5 rounded-lg cursor-pointer transition flex items-center gap-1.5 shadow">
-                    <i class="fa-solid fa-upload"></i>
-                    <span>رفع صورة</span>
-                    <input type="file" id="imageUpload" accept="image/*" class="hidden">
-                </label>
+            <!-- Action Controls -->
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1 w-full max-w-md">
+                <!-- Check Answer Button (تم الانتهاء) -->
+                <button id="finishBtn" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
+                    <span>تم الإنهاء</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                </button>
 
-                <!-- Shuffle Button -->
-                <button id="shuffleBtn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-3 py-1.5 rounded-lg transition shadow flex items-center gap-1">
-                    <i class="fa-solid fa-shuffle"></i> إعادة الخلط
+                <!-- Reset Button (إعادة المحاولة) -->
+                <button id="resetBtn" class="w-full sm:w-auto px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm rounded-2xl transition-all duration-200 flex items-center justify-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                    </svg>
+                    <span>إعادة المحاولة</span>
                 </button>
             </div>
 
-            <!-- Image Selection Presets Thumbnails -->
-            <div class="w-full flex items-center gap-2 overflow-x-auto pb-1 custom-scroll">
-                <span class="text-xs font-bold text-slate-500 whitespace-nowrap">اختر صورة:</span>
-                <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=400&auto=format&fit=crop" class="preset-img w-11 h-11 rounded-lg border-2 border-amber-500 cursor-pointer object-cover hover:scale-105 transition" data-url="https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1566438480900-0609be27a4be?q=80&w=400&auto=format&fit=crop" class="preset-img w-11 h-11 rounded-lg border-2 border-transparent cursor-pointer object-cover hover:scale-105 transition" data-url="https://images.unsplash.com/photo-1566438480900-0609be27a4be?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=400&auto=format&fit=crop" class="preset-img w-11 h-11 rounded-lg border-2 border-transparent cursor-pointer object-cover hover:scale-105 transition" data-url="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=600&auto=format&fit=crop">
-                <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=400&auto=format&fit=crop" class="preset-img w-11 h-11 rounded-lg border-2 border-transparent cursor-pointer object-cover hover:scale-105 transition" data-url="https://images.unsplash.com/photo-1579783902614-a3fb3927b675?q=80&w=600&auto=format&fit=crop">
-            </div>
+        </div>
 
-            <!-- Puzzle Canvas/Board Area -->
-            <div class="relative w-full aspect-square max-w-[360px] sm:max-w-[420px] bg-slate-200 rounded-2xl p-2 border-4 border-slate-300 shadow-inner flex items-center justify-center">
-                <!-- Hint Overlay -->
-                <div id="hintOverlay" class="absolute inset-2 rounded-xl bg-cover bg-center opacity-0 pointer-events-none transition-opacity duration-300 z-0"></div>
-                
-                <!-- Tile Grid Container -->
-                <div id="puzzleGrid" class="w-full h-full grid gap-1 relative z-10">
-                    <!-- Tiles will be dynamically injected here -->
-                </div>
-            </div>
-
-            <!-- Check / Submit Completion Button (Primary Required Feature) -->
-            <button id="checkSolutionBtn" class="w-full max-w-md bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-black text-lg md:text-xl py-3.5 px-6 rounded-2xl shadow-xl border-b-4 border-teal-800 transition-all duration-200 transform active:scale-95 flex items-center justify-center gap-3">
-                <i class="fa-solid fa-circle-check text-2xl"></i>
-                <span>إتمام الصورة والتحقق من الحل</span>
-            </button>
-
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="mt-4 text-center text-slate-700 text-xs font-bold">
-        صُنع بحب ✨ لعبة تفاعلية ممتعة للأطفال والكبار
-    </footer>
+    </div>
 
     <script>
-        // Game State Variables
-        let gridSize = 3; // Default 3x3
-        let currentImageUrl = 'https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=600&auto=format&fit=crop';
-        let tilesState = []; // Array of current tile indexes
-        let originalOrder = []; // Correct sequence
-        let selectedTileIndex = null;
-        let movesCount = 0;
-        let timerSeconds = 0;
-        let timerInterval = null;
-        let gameStarted = false;
-        let isHintVisible = false;
-
-        // DOM Elements
-        const puzzleGrid = document.getElementById('puzzleGrid');
-        const previewImg = document.getElementById('previewImg');
-        const hintOverlay = document.getElementById('hintOverlay');
-        const checkSolutionBtn = document.getElementById('checkSolutionBtn');
-        const bearMessage = document.getElementById('bearMessage');
-        const bearSvg = document.getElementById('bearSvg');
-        const gridSizeSelect = document.getElementById('gridSizeSelect');
-        const imageUpload = document.getElementById('imageUpload');
-        const shuffleBtn = document.getElementById('shuffleBtn');
-        const toggleHintBtn = document.getElementById('toggleHintBtn');
-        const timerText = document.getElementById('timerText');
-        const movesText = document.getElementById('movesText');
-
-        // Bear SVG Sub-Elements
-        const eyesNormal = document.getElementById('eyesNormal');
-        const eyesAngry = document.getElementById('eyesAngry');
-        const eyesHappy = document.getElementById('eyesHappy');
-        const mouthNormal = document.getElementById('mouthNormal');
-        const mouthAngry = document.getElementById('mouthAngry');
-        const mouthHappy = document.getElementById('mouthHappy');
-        const antennaLight = document.getElementById('antennaLight');
-        const steamLeft = document.getElementById('steamLeft');
-        const steamRight = document.getElementById('steamRight');
-        const heartsAnim = document.getElementById('heartsAnim');
-
-        // Web Audio API Sound Generator (No external MP3 required)
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        let audioCtx = null;
-
-        function initAudio() {
-            if (!audioCtx) {
-                audioCtx = new AudioCtx();
-            }
+        // Generated High Quality SVG Image URL for the puzzle
+        function generatePuzzleImageSVG() {
+            const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 400 400">
+                <defs>
+                    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#0284c7" />
+                        <stop offset="50%" stop-color="#38bdf8" />
+                        <stop offset="100%" stop-color="#818cf8" />
+                    </linearGradient>
+                    <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#fbbf24" />
+                        <stop offset="100%" stop-color="#f59e0b" />
+                    </linearGradient>
+                </defs>
+                <rect width="400" height="400" fill="url(#bg)" />
+                <circle cx="200" cy="180" r="110" fill="#ffffff" opacity="0.2" />
+                <circle cx="200" cy="180" r="85" fill="#ffffff" opacity="0.3" />
+                
+                <!-- Cute Teddy Bear Face in Center -->
+                <circle cx="130" cy="110" r="30" fill="#d97706" />
+                <circle cx="130" cy="110" r="18" fill="#fef3c7" />
+                <circle cx="270" cy="110" r="30" fill="#d97706" />
+                <circle cx="270" cy="110" r="18" fill="#fef3c7" />
+                
+                <circle cx="200" cy="180" r="80" fill="#f59e0b" />
+                <ellipse cx="200" cy="200" rx="35" ry="25" fill="#fef3c7" />
+                <ellipse cx="200" cy="190" rx="14" ry="9" fill="#78350f" />
+                
+                <circle cx="165" cy="160" r="10" fill="#78350f" />
+                <circle cx="168" cy="157" r="3" fill="#ffffff" />
+                <circle cx="235" cy="160" r="10" fill="#78350f" />
+                <circle cx="238" cy="157" r="3" fill="#ffffff" />
+                
+                <path d="M 188 208 Q 200 218 212 208" fill="none" stroke="#78350f" stroke-width="4" stroke-linecap="round" />
+                
+                <!-- Magic Stars & Flowers -->
+                <polygon points="80,70 85,85 100,85 87,95 92,110 80,100 68,110 73,95 60,85 75,85" fill="url(#starGrad)" />
+                <polygon points="320,70 325,85 340,85 327,95 332,110 320,100 308,110 313,95 300,85 315,85" fill="url(#starGrad)" />
+                
+                <!-- Ribbon / Text -->
+                <rect x="50" y="300" width="300" height="55" rx="20" fill="#ffffff" opacity="0.95" />
+                <text x="200" y="338" font-family="Tajawal, sans-serif" font-size="28" font-weight="900" fill="#0284c7" text-anchor="middle">علويتي رتاج ❤️</text>
+            </svg>`;
+            return 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
         }
 
-        function playSound(type) {
-            initAudio();
-            if (!audioCtx) return;
+        const PUZZLE_IMAGE_URL = generatePuzzleImageSVG();
+        const GRID_SIZE = 3; // 3x3 Grid
+        const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
 
-            const osc = audioCtx.createOscillator();
-            const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
+        // Game State Variables
+        let currentBoard = []; // Array storing current tile indices
+        let selectedTileIndex = null; // Index of currently clicked/selected tile to swap
 
-            const now = audioCtx.currentTime;
+        // Audio Synthesizer Controller
+        class SoundFX {
+            constructor() {
+                this.ctx = null;
+            }
 
-            if (type === 'click') {
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            }
+
+            playTap() {
+                this.init();
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
                 osc.type = 'sine';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(800, now + 0.08);
-                gain.gain.setValueAtTime(0.3, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.08);
-                osc.start(now);
-                osc.stop(now + 0.08);
-            } else if (type === 'error') {
+                osc.frequency.setValueAtTime(450, this.ctx.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(850, this.ctx.currentTime + 0.08);
+                gain.gain.setValueAtTime(0.15, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.08);
+            }
+
+            playError() {
+                this.init();
+                if (!this.ctx) return;
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
                 osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(180, now);
-                osc.frequency.setValueAtTime(130, now + 0.15);
-                gain.gain.setValueAtTime(0.4, now);
-                gain.gain.linearRampToValueAtTime(0.01, now + 0.4);
-                osc.start(now);
-                osc.stop(now + 0.4);
-            } else if (type === 'success') {
-                // Happy chord fanfare
-                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
-                notes.forEach((freq, index) => {
-                    const subOsc = audioCtx.createOscillator();
-                    const subGain = audioCtx.createGain();
-                    subOsc.type = 'triangle';
-                    subOsc.frequency.setValueAtTime(freq, now + index * 0.1);
-                    subGain.gain.setValueAtTime(0.3, now + index * 0.1);
-                    subGain.gain.linearRampToValueAtTime(0.01, now + index * 0.1 + 0.3);
-                    subOsc.connect(subGain);
-                    subGain.connect(audioCtx.destination);
-                    subOsc.start(now + index * 0.1);
-                    subOsc.stop(now + index * 0.1 + 0.3);
+                osc.frequency.setValueAtTime(180, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(130, this.ctx.currentTime + 0.15);
+                gain.gain.setValueAtTime(0.2, this.ctx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + 0.35);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.35);
+            }
+
+            playSuccess() {
+                this.init();
+                if (!this.ctx) return;
+                const notes = [523.25, 659.25, 783.99, 1046.50];
+                notes.forEach((freq, idx) => {
+                    const osc = this.ctx.createOscillator();
+                    const gain = this.ctx.createGain();
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(freq, this.ctx.currentTime + idx * 0.1);
+                    gain.gain.setValueAtTime(0.2, this.ctx.currentTime + idx * 0.1);
+                    gain.gain.linearRampToValueAtTime(0.01, this.ctx.currentTime + idx * 0.1 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(this.ctx.destination);
+                    osc.start(this.ctx.currentTime + idx * 0.1);
+                    osc.stop(this.ctx.currentTime + idx * 0.1 + 0.25);
                 });
             }
         }
 
-        function startTimer() {
-            clearInterval(timerInterval);
-            timerSeconds = 0;
-            timerText.textContent = '00:00';
-            timerInterval = setInterval(() => {
-                timerSeconds++;
-                const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
-                const secs = (timerSeconds % 60).toString().padStart(2, '0');
-                timerText.textContent = `${mins}:${secs}`;
-            }, 1000);
-        }
+        const soundFX = new SoundFX();
 
-        function resetStats() {
-            clearInterval(timerInterval);
-            timerSeconds = 0;
-            movesCount = 0;
-            timerText.textContent = '00:00';
-            movesText.textContent = '0';
-            gameStarted = false;
-        }
+        // DOM Elements
+        const puzzleBoard = document.getElementById('puzzleBoard');
+        const finishBtn = document.getElementById('finishBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const tvScreen = document.getElementById('tvScreen');
+        const screenOffContent = document.getElementById('screenOffContent');
+        const screenOnContent = document.getElementById('screenOnContent');
+        const fullPreviewImage = document.getElementById('fullPreviewImage');
 
-        function initPuzzle() {
-            puzzleGrid.innerHTML = '';
-            puzzleGrid.style.gridTemplateColumns = `repeat(${gridSize}, minmax(0, 1fr))`;
-            puzzleGrid.style.gridTemplateRows = `repeat(${gridSize}, minmax(0, 1fr))`;
+        // Bear Elements
+        const bearContainer = document.getElementById('bearContainer');
+        const eyesNeutral = document.getElementById('eyesNeutral');
+        const eyesSad = document.getElementById('eyesSad');
+        const eyesHappy = document.getElementById('eyesHappy');
+        const mouthNeutral = document.getElementById('mouthNeutral');
+        const mouthSad = document.getElementById('mouthSad');
+        const mouthHappy = document.getElementById('mouthHappy');
+        const bearSpeech = document.getElementById('bearSpeech');
+        const antennaBall = document.getElementById('antennaBall');
 
-            const totalTiles = gridSize * gridSize;
-            originalOrder = Array.from({ length: totalTiles }, (_, i) => i);
-            tilesState = [...originalOrder];
+        // Initialize Image Preview
+        fullPreviewImage.src = PUZZLE_IMAGE_URL;
 
-            // Update previews
-            previewImg.src = currentImageUrl;
-            hintOverlay.style.backgroundImage = `url(${currentImageUrl})`;
-
-            shuffleTiles();
-            renderTiles();
-            resetStats();
-            setBearState('idle', 'رتبت لك الصورة بشكل مبعثر! اضغط على القطع أو اسحبها لترتيبها 🧩🐻');
-        }
-
-        function shuffleTiles() {
-            // Shuffle array using Fisher-Yates
-            for (let i = tilesState.length - 1; i > 0; i--) {
+        // Shuffle Function
+        function shuffleArray(array) {
+            const arr = [...array];
+            for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
-                [tilesState[i], tilesState[j]] = [tilesState[j], tilesState[i]];
+                [arr[i], arr[j]] = [arr[j], arr[i]];
             }
-            // Ensure it's not already solved on load
-            if (isSolved()) {
-                shuffleTiles();
-            }
+            return arr;
         }
 
-        function renderTiles() {
-            puzzleGrid.innerHTML = '';
-            const totalTiles = gridSize * gridSize;
+        // Initialize Game
+        function initGame() {
+            selectedTileIndex = null;
+            // Create initial scrambled order ensuring it's not solved initially
+            let solved = true;
+            while (solved) {
+                const indexes = Array.from({ length: TOTAL_TILES }, (_, i) => i);
+                currentBoard = shuffleArray(indexes);
+                solved = currentBoard.every((val, idx) => val === idx);
+            }
 
-            tilesState.forEach((tileValue, currentIndex) => {
+            setBearState('neutral');
+            resetScreen();
+            resetButtonStyles();
+            renderBoard();
+        }
+
+        // Render Puzzle Grid
+        function renderBoard() {
+            puzzleBoard.innerHTML = '';
+
+            currentBoard.forEach((originalIndex, boardPosition) => {
                 const tile = document.createElement('div');
-                tile.className = 'puzzle-tile relative rounded-lg overflow-hidden bg-slate-300 border-2 border-white/80 shadow-md flex items-center justify-center font-bold text-white text-xs select-none';
-                tile.dataset.index = currentIndex;
-                tile.dataset.value = tileValue;
-                tile.draggable = true;
+                tile.className = 'puzzle-tile w-full h-full rounded-xl cursor-pointer border-2 border-white/60 shadow-md relative overflow-hidden select-none';
 
-                // Calculate CSS background position for tile slice
-                const row = Math.floor(tileValue / gridSize);
-                const col = tileValue % gridSize;
-                const posX = (col / (gridSize - 1)) * 100;
-                const posY = (row / (gridSize - 1)) * 100;
+                // Calculate Background Position based on Original Index (No Hints/Numbers)
+                const row = Math.floor(originalIndex / GRID_SIZE);
+                const col = originalIndex % GRID_SIZE;
+                const posX = (col / (GRID_SIZE - 1)) * 100;
+                const posY = (row / (GRID_SIZE - 1)) * 100;
 
-                tile.style.backgroundImage = `url(${currentImageUrl})`;
-                tile.style.backgroundSize = `${gridSize * 100}% ${gridSize * 100}%`;
+                tile.style.backgroundImage = `url('${PUZZLE_IMAGE_URL}')`;
+                tile.style.backgroundSize = '300% 300%';
                 tile.style.backgroundPosition = `${posX}% ${posY}%`;
 
-                // Tile index indicator overlay
-                const numberBadge = document.createElement('span');
-                numberBadge.className = 'absolute top-1 left-1 bg-black/50 text-white text-[10px] px-1.5 py-0.5 rounded-full pointer-events-none backdrop-blur-xs';
-                numberBadge.textContent = tileValue + 1;
-                tile.appendChild(numberBadge);
+                // Highlight Selected Tile for Swap
+                if (selectedTileIndex === boardPosition) {
+                    tile.classList.add('selected-tile');
+                }
 
-                // Click selection event
-                tile.addEventListener('click', () => handleTileClick(currentIndex));
+                // Handle Tile Click / Swap Logic
+                tile.onclick = () => handleTileClick(boardPosition);
 
-                // Drag & Drop events
-                tile.addEventListener('dragstart', (e) => handleDragStart(e, currentIndex));
-                tile.addEventListener('dragover', handleDragOver);
-                tile.addEventListener('dragleave', handleDragLeave);
-                tile.addEventListener('drop', (e) => handleDrop(e, currentIndex));
-
-                // Touch Events Support for mobile devices
-                tile.addEventListener('touchstart', (e) => handleTouchStart(e, currentIndex), { passive: true });
-                
-                puzzleGrid.appendChild(tile);
+                puzzleBoard.appendChild(tile);
             });
         }
 
-        function handleTileClick(index) {
-            playSound('click');
-            if (!gameStarted) {
-                startTimer();
-                gameStarted = true;
-            }
+        // Handle Tile Selection & Swapping
+        function handleTileClick(position) {
+            soundFX.playTap();
 
             if (selectedTileIndex === null) {
                 // Select first tile
-                selectedTileIndex = index;
-                highlightSelectedTile();
-            } else if (selectedTileIndex === index) {
-                // Deselect if clicked twice
+                selectedTileIndex = position;
+            } else if (selectedTileIndex === position) {
+                // Deselect if clicking the same tile
                 selectedTileIndex = null;
-                highlightSelectedTile();
             } else {
-                // Swap with second tile
-                swapTiles(selectedTileIndex, index);
+                // Swap the two tiles
+                const temp = currentBoard[selectedTileIndex];
+                currentBoard[selectedTileIndex] = currentBoard[position];
+                currentBoard[position] = temp;
                 selectedTileIndex = null;
-                highlightSelectedTile();
             }
+
+            renderBoard();
         }
 
-        function highlightSelectedTile() {
-            const tiles = puzzleGrid.querySelectorAll('.puzzle-tile');
-            tiles.forEach((tile, idx) => {
-                if (idx === selectedTileIndex) {
-                    tile.classList.add('selected');
-                } else {
-                    tile.classList.remove('selected');
-                }
-            });
-        }
-
-        function swapTiles(idx1, idx2) {
-            [tilesState[idx1], tilesState[idx2]] = [tilesState[idx2], tilesState[idx1]];
-            movesCount++;
-            movesText.textContent = movesCount;
-            renderTiles();
-        }
-
-        // Drag & Drop Logic
-        let draggedIndex = null;
-
-        function handleDragStart(e, index) {
-            draggedIndex = index;
-            e.dataTransfer.setData('text/plain', index);
-            if (!gameStarted) {
-                startTimer();
-                gameStarted = true;
-            }
-        }
-
-        function handleDragOver(e) {
-            e.preventDefault();
-            e.currentTarget.classList.add('drag-over');
-        }
-
-        function handleDragLeave(e) {
-            e.currentTarget.classList.remove('drag-over');
-        }
-
-        function handleDrop(e, targetIndex) {
-            e.preventDefault();
-            e.currentTarget.classList.remove('drag-over');
-            if (draggedIndex !== null && draggedIndex !== targetIndex) {
-                playSound('click');
-                swapTiles(draggedIndex, targetIndex);
-                draggedIndex = null;
-            }
-        }
-
-        // Mobile Touch Swap support
-        let touchStartIndex = null;
-        function handleTouchStart(e, index) {
-            if (selectedTileIndex === null) {
-                handleTileClick(index);
-            } else {
-                handleTileClick(index);
-            }
-        }
-
-        function isSolved() {
-            return tilesState.every((val, idx) => val === originalOrder[idx]);
-        }
-
-        // Main Solution Verification Event on Button Click
-        checkSolutionBtn.addEventListener('click', () => {
-            if (isSolved()) {
-                // --- CORRECT SOLUTION ---
-                playSound('success');
-                setBearState('happy', 'ممتاز جــداً! 🥳🎉 أنت بطل ذكي للغاية وتمكنت من حل اللغز بنجاح!');
-                
-                // Button animation and style
-                checkSolutionBtn.classList.remove('btn-error');
-                checkSolutionBtn.classList.add('btn-success');
-                
-                clearInterval(timerInterval);
-
-                setTimeout(() => {
-                    checkSolutionBtn.classList.remove('btn-success');
-                }, 1200);
-
-            } else {
-                // --- INCORRECT SOLUTION ---
-                playSound('error');
-                setBearState('angry', 'حاول مرة أخرى يا بطل! 😡 الصورة ليست مكتملة وبها قطع مبعثرة!');
-                
-                // Button error animation and flash red
-                checkSolutionBtn.classList.remove('btn-success');
-                checkSolutionBtn.classList.add('btn-error');
-
-                setTimeout(() => {
-                    checkSolutionBtn.classList.remove('btn-error');
-                }, 800);
-            }
-        });
-
-        function setBearState(state, message) {
-            bearMessage.textContent = message;
-
-            // Reset classes & elements
-            bearSvg.classList.remove('bear-angry', 'bear-happy');
-            eyesNormal.classList.add('hidden');
-            eyesAngry.classList.add('hidden');
+        // Robot Companion Facial State Controller
+        function setBearState(state) {
+            bearContainer.classList.remove('bear-sad', 'bear-happy');
+            eyesNeutral.classList.add('hidden');
+            eyesSad.classList.add('hidden');
             eyesHappy.classList.add('hidden');
-            mouthNormal.classList.add('hidden');
-            mouthAngry.classList.add('hidden');
+            mouthNeutral.classList.add('hidden');
+            mouthSad.classList.add('hidden');
             mouthHappy.classList.add('hidden');
 
-            steamLeft.style.opacity = '0';
-            steamRight.style.opacity = '0';
-            heartsAnim.style.opacity = '0';
-
-            if (state === 'angry') {
-                bearSvg.classList.add('bear-angry');
-                eyesAngry.classList.remove('hidden');
-                mouthAngry.classList.remove('hidden');
-                antennaLight.setAttribute('fill', '#ef4444');
-                antennaLight.setAttribute('stroke', '#991b1b');
-                
-                steamLeft.style.opacity = '1';
-                steamRight.style.opacity = '1';
-                steamLeft.style.animation = 'steamFloat 0.8s ease-out infinite';
-                steamRight.style.animation = 'steamFloat 0.8s ease-out infinite 0.2s';
-
+            if (state === 'sad') {
+                bearContainer.classList.add('bear-sad');
+                eyesSad.classList.remove('hidden');
+                mouthSad.classList.remove('hidden');
+                bearSpeech.innerText = "أوووه! ترتيب الصورة غير صحيح 😢 حاول مجدداً!";
+                bearSpeech.className = "bg-rose-50 border border-rose-200 text-rose-700 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-sm animate-bounce";
+                antennaBall.setAttribute('fill', '#ef4444');
             } else if (state === 'happy') {
-                bearSvg.classList.add('bear-happy');
+                bearContainer.classList.add('bear-happy');
                 eyesHappy.classList.remove('hidden');
                 mouthHappy.classList.remove('hidden');
-                antennaLight.setAttribute('fill', '#22c55e');
-                antennaLight.setAttribute('stroke', '#15803d');
-                
-                heartsAnim.style.opacity = '1';
-
-            } else { // Idle state
-                eyesNormal.classList.remove('hidden');
-                mouthNormal.classList.remove('hidden');
-                antennaLight.setAttribute('fill', '#3b82f6');
-                antennaLight.setAttribute('stroke', '#1d4ed8');
+                bearSpeech.innerText = "مذهل جداً! اكتملت الصورة واشتغلت الشاشة 🎉";
+                bearSpeech.className = "bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-sm";
+                antennaBall.setAttribute('fill', '#10b981');
+            } else {
+                eyesNeutral.classList.remove('hidden');
+                mouthNeutral.classList.remove('hidden');
+                bearSpeech.innerText = "رتب أجزاء الصورة المبعثرة لإعادة تشغيل الشاشة! 🤖";
+                bearSpeech.className = "bg-white/90 border border-sky-200 text-sky-900 text-xs md:text-sm font-bold px-4 py-1.5 rounded-full shadow-sm";
+                antennaBall.setAttribute('fill', '#38bdf8');
             }
         }
 
-        // Difficulty level change
-        gridSizeSelect.addEventListener('change', (e) => {
-            gridSize = parseInt(e.target.value);
-            initPuzzle();
-        });
+        function activateScreen() {
+            tvScreen.classList.remove('broken');
+            tvScreen.classList.add('active');
+            screenOffContent.classList.add('hidden');
+            screenOnContent.classList.remove('hidden');
+        }
 
-        // Reshuffle button
-        shuffleBtn.addEventListener('click', () => {
-            playSound('click');
-            shuffleTiles();
-            renderTiles();
-            resetStats();
-            setBearState('idle', 'تم إعادة خلط القطع! ركز جيداً واشرع في الحل 🧠');
-        });
+        function resetScreen() {
+            tvScreen.classList.remove('active');
+            tvScreen.classList.add('broken');
+            screenOffContent.classList.remove('hidden');
+            screenOnContent.classList.add('hidden');
+        }
 
-        // Preset images selection
-        document.querySelectorAll('.preset-img').forEach(img => {
-            img.addEventListener('click', (e) => {
-                document.querySelectorAll('.preset-img').forEach(p => p.classList.replace('border-amber-500', 'border-transparent'));
-                e.target.classList.replace('border-transparent', 'border-amber-500');
-                currentImageUrl = e.target.dataset.url;
-                initPuzzle();
-            });
-        });
+        function resetButtonStyles() {
+            finishBtn.className = "w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2";
+        }
 
-        // Custom Image Upload
-        imageUpload.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (event) => {
-                    currentImageUrl = event.target.result;
-                    initPuzzle();
-                };
-                reader.readAsDataURL(file);
+        // Check if Puzzle Is Correctly Solved
+        function checkAnswer() {
+            resetButtonStyles();
+
+            const isCorrect = currentBoard.every((val, index) => val === index);
+
+            if (isCorrect) {
+                soundFX.playSuccess();
+                setBearState('happy');
+                activateScreen();
+                finishBtn.classList.add('btn-shake-green');
+
+                if (window.confetti) {
+                    confetti({
+                        particleCount: 120,
+                        spread: 80,
+                        origin: { y: 0.6 }
+                    });
+                }
+            } else {
+                soundFX.playError();
+                setBearState('sad');
+                resetScreen();
+                finishBtn.classList.add('btn-shake-red');
+
+                setTimeout(() => {
+                    finishBtn.classList.remove('btn-shake-red');
+                }, 700);
             }
+        }
+
+        finishBtn.addEventListener('click', checkAnswer);
+        resetBtn.addEventListener('click', () => {
+            soundFX.playTap();
+            initGame();
         });
 
-        // Toggle Hint Overlay
-        toggleHintBtn.addEventListener('click', () => {
-            isHintVisible = !isHintVisible;
-            hintOverlay.style.opacity = isHintVisible ? '0.35' : '0';
-        });
-
-        // Initialize puzzle on window load
-        window.onload = () => {
-            initPuzzle();
+        window.onload = function() {
+            initGame();
         };
     </script>
 </body>
