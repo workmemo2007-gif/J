@@ -260,8 +260,8 @@
         const GRID_SIZE = 3;
         const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
 
-        // 1. الترتيب الصحيح القياسي للمصفوفة (تطابق الصورة الأصلية 100%)
-        const TARGET_BOARD = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        // الترتيب الصحيح بعد استبدال الجوانب (العامود الأيمن بالأيسر) مع الإبقاء على الوسط كما هو
+        const TARGET_BOARD = [2, 1, 0, 5, 4, 3, 8, 7, 6];
 
         let currentBoard = [];
         let selectedTileIndex = null;
@@ -382,7 +382,7 @@
                 const tile = document.createElement('div');
                 tile.className = 'puzzle-tile w-full h-full rounded-xl cursor-pointer border-2 border-white/60 shadow-md relative overflow-hidden select-none';
 
-                // حساب الموقع الدقيق بالبكسل/النسبة المئوية وفق الشبكة
+                // حساب الموقع الدقيق وفق الشبكة
                 const row = Math.floor(originalIndex / GRID_SIZE);
                 const col = originalIndex % GRID_SIZE;
                 
@@ -421,12 +421,10 @@
             renderBoard();
         }
 
-        // دالة إعطاء المساعدة: تبديل أول قطعة خاطئة مع القطعة التي تنتمي لهذا المكان
         function giveHint() {
             soundFX.playTap();
             selectedTileIndex = null;
 
-            // البحث عن أول موضع فيه قطعة خافئة
             let wrongIndex = -1;
             for (let i = 0; i < TOTAL_TILES; i++) {
                 if (currentBoard[i] !== TARGET_BOARD[i]) {
@@ -439,7 +437,6 @@
                 const correctValue = TARGET_BOARD[wrongIndex];
                 const currentIndexOfCorrectValue = currentBoard.indexOf(correctValue);
 
-                // تبديل القطعة الخاطئة مع المكان الصحيح لها
                 const temp = currentBoard[wrongIndex];
                 currentBoard[wrongIndex] = currentBoard[currentIndexOfCorrectValue];
                 currentBoard[currentIndexOfCorrectValue] = temp;
@@ -503,11 +500,9 @@
             finishBtn.className = "w-full sm:w-auto px-6 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-sm md:text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-1.5";
         }
 
-        // 2. دالة التحقق
         function checkAnswer() {
             resetButtonStyles();
 
-            // فحص كل قطعة مقابل موقعها الأصلي
             const isCorrect = currentBoard.every((val, index) => val === TARGET_BOARD[index]);
 
             if (isCorrect) {
