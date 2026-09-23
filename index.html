@@ -225,7 +225,7 @@
         <div class="w-full bg-white/80 backdrop-blur-md rounded-3xl p-4 md:p-6 shadow-xl border border-sky-100 flex flex-col items-center gap-5">
             
             <div id="puzzleBoard" class="grid grid-cols-3 gap-1.5 p-2 bg-sky-500/10 rounded-2xl border-2 border-dashed border-sky-300 w-64 h-64 md:w-80 md:h-80 shadow-inner">
-                </div>
+            </div>
 
             <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-1 w-full max-w-md">
                 <button id="finishBtn" class="w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2">
@@ -248,8 +248,8 @@
     </div>
 
     <script>
-        // رابط الصورة المباشر من GitHub
-        const PUZZLE_IMAGE_URL = 'https://raw.githubusercontent.com/workmemo2007-gif/R1/d48fd0621b8ea4ef108223bc003444d090b0d963/1AA2BE45-B1F5-4899-9BB5-77544E7FABE6.jpeg';
+        // رابط الصورة المباشر المحدث من GitHub
+        const PUZZLE_IMAGE_URL = 'https://raw.githubusercontent.com/workmemo2007-gif/R1/8cdc86bc9d87047114af81f2a2f85f77cb6e33b4/IMG_2540.jpeg';
         
         const GRID_SIZE = 3; // 3x3 Grid
         const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
@@ -380,7 +380,6 @@
                 const tile = document.createElement('div');
                 tile.className = 'puzzle-tile w-full h-full rounded-xl cursor-pointer border-2 border-white/60 shadow-md relative overflow-hidden select-none';
 
-                // حساب موقع الجزء المقطوع من الصورة
                 const row = Math.floor(originalIndex / GRID_SIZE);
                 const col = originalIndex % GRID_SIZE;
                 const posX = (col / (GRID_SIZE - 1)) * 100;
