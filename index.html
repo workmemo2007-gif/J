@@ -248,17 +248,17 @@
     </div>
 
     <script>
-        // رابط الصورة المباشر المحدث من GitHub
         const PUZZLE_IMAGE_URL = 'https://raw.githubusercontent.com/workmemo2007-gif/R1/8cdc86bc9d87047114af81f2a2f85f77cb6e33b4/IMG_2540.jpeg';
         
-        const GRID_SIZE = 3; // 3x3 Grid
+        const GRID_SIZE = 3;
         const TOTAL_TILES = GRID_SIZE * GRID_SIZE;
 
-        // Game State Variables
+        // تحديد ترتيب الفوز المستهدف بناءً على وضع الصورة المطلوب
+        const TARGET_BOARD = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
         let currentBoard = [];
         let selectedTileIndex = null;
 
-        // Audio Synthesizer Controller
         class SoundFX {
             constructor() {
                 this.ctx = null;
@@ -323,7 +323,6 @@
 
         const soundFX = new SoundFX();
 
-        // DOM Elements
         const puzzleBoard = document.getElementById('puzzleBoard');
         const finishBtn = document.getElementById('finishBtn');
         const resetBtn = document.getElementById('resetBtn');
@@ -332,7 +331,6 @@
         const screenOnContent = document.getElementById('screenOnContent');
         const fullPreviewImage = document.getElementById('fullPreviewImage');
 
-        // Bear Elements
         const bearContainer = document.getElementById('bearContainer');
         const eyesNeutral = document.getElementById('eyesNeutral');
         const eyesSad = document.getElementById('eyesSad');
@@ -343,10 +341,8 @@
         const bearSpeech = document.getElementById('bearSpeech');
         const antennaBall = document.getElementById('antennaBall');
 
-        // Initialize Image Preview
         fullPreviewImage.src = PUZZLE_IMAGE_URL;
 
-        // Shuffle Function
         function shuffleArray(array) {
             const arr = [...array];
             for (let i = arr.length - 1; i > 0; i--) {
@@ -356,14 +352,14 @@
             return arr;
         }
 
-        // Initialize Game
         function initGame() {
             selectedTileIndex = null;
             let solved = true;
             while (solved) {
                 const indexes = Array.from({ length: TOTAL_TILES }, (_, i) => i);
                 currentBoard = shuffleArray(indexes);
-                solved = currentBoard.every((val, idx) => val === idx);
+                // للتأكد من عدم تبديل اللعبة في الحالة الفائزة بدايةً
+                solved = currentBoard.every((val, idx) => val === TARGET_BOARD[idx]);
             }
 
             setBearState('neutral');
@@ -372,7 +368,6 @@
             renderBoard();
         }
 
-        // Render Puzzle Grid
         function renderBoard() {
             puzzleBoard.innerHTML = '';
 
@@ -399,7 +394,6 @@
             });
         }
 
-        // Handle Tile Selection & Swapping
         function handleTileClick(position) {
             soundFX.playTap();
 
@@ -417,7 +411,6 @@
             renderBoard();
         }
 
-        // Robot Companion Facial State Controller
         function setBearState(state) {
             bearContainer.classList.remove('bear-sad', 'bear-happy');
             eyesNeutral.classList.add('hidden');
@@ -468,11 +461,11 @@
             finishBtn.className = "w-full sm:w-auto px-8 py-3 bg-gradient-to-r from-sky-400 to-sky-500 hover:from-sky-500 hover:to-sky-600 text-white font-black text-base rounded-2xl shadow-lg shadow-sky-300/50 transform active:scale-95 transition-all duration-200 flex items-center justify-center gap-2";
         }
 
-        // Check if Puzzle Is Correctly Solved
+        // فحص الإجابة بناءً على الترتيب المعتمد
         function checkAnswer() {
             resetButtonStyles();
 
-            const isCorrect = currentBoard.every((val, index) => val === index);
+            const isCorrect = currentBoard.every((val, index) => val === TARGET_BOARD[index]);
 
             if (isCorrect) {
                 soundFX.playSuccess();
