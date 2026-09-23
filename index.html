@@ -374,10 +374,13 @@
                 const tile = document.createElement('div');
                 tile.className = 'puzzle-tile w-full h-full rounded-xl cursor-pointer border-2 border-white/60 shadow-md relative overflow-hidden select-none';
 
+                // حساب الموقع الدقيق بالبكسل/النسبة المئوية وفق الشبكة
                 const row = Math.floor(originalIndex / GRID_SIZE);
                 const col = originalIndex % GRID_SIZE;
-                const posX = (col / (GRID_SIZE - 1)) * 100;
-                const posY = (row / (GRID_SIZE - 1)) * 100;
+                
+                // النسبة الصحيحة لقص خلفيات 3x3 هي 0% و 50% و 100%
+                const posX = col * 50;
+                const posY = row * 50;
 
                 tile.style.backgroundImage = `url('${PUZZLE_IMAGE_URL}')`;
                 tile.style.backgroundSize = '300% 300%';
