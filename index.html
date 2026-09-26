@@ -1,13 +1,12 @@
+// Cloud Sky — Originkit
+
 "use client"
 
 import * as React from "react"
-import { useEffect, useRef, useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useEffect, useRef } from "react"
 
-// ==========================================
-// 1. مكون خلفية السماء (CloudSky WebGL)
-// ==========================================
 const MAX_DPR = 2
+
 const PUFF_UP = 0.34
 const PUFF_DOWN = 0.19
 const ERODE = 0.7
@@ -18,7 +17,9 @@ const FAR_MIX = 0.55
 const NEAR_DRIFT = 0.055
 const FAR_DRIFT = 0.026
 const CIRRUS_DRIFT = 0.014
+
 const PUFF_WMAX = 2.15
+
 const SHADE_BLEND = 12.0
 
 const VERT_SRC = `
@@ -72,6 +73,7 @@ float fbm(vec2 p){
 
 vec2 blobs(vec2 uv, float seed){
   vec2 id = floor(uv), f = fract(uv);
+
   float best = -1e4;
   float wsum = 0.0, ysum = 0.0;
   float wMax = min(${PUFF_WMAX.toFixed(3)}, 0.72 * uSize);
@@ -81,10 +83,12 @@ vec2 blobs(vec2 uv, float seed){
       vec2 o = vec2(float(i), float(j));
       if (max(abs(o.x), abs(o.y)) > reach) continue;
       vec2 h = hash22(id + o + seed);
+
       if (fract(h.x * 37.1) > uCoverage) continue;
       vec2 c = o + 0.15 + h * 0.7;
       float w = min(${PUFF_WMAX.toFixed(3)}, (0.30 + 0.42 * fract(h.y * 19.7)) * uSize);
       vec2 d = f - c;
+
       float ry = (d.y > 0.0 ? ${PUFF_UP.toFixed(3)} : ${PUFF_DOWN.toFixed(3)}) * uSize * (0.8 + 0.5 * fract(h.y * 7.3));
       float e = length(vec2(d.x / max(w, 1e-3), d.y / max(ry, 1e-3)));
       float val = 1.0 - e;
@@ -106,7 +110,9 @@ vec2 blobs(vec2 uv, float seed){
 
 vec2 cloudField(vec2 uv, float seed, float detailScale){
   vec2 b = blobs(uv, seed);
-  float n = fbm(uv * detailScale + seed * 3.1) * 0.72 + fbm(uv * detailScale * 3.3 + seed * 7.7) * 0.28;
+
+  float n = fbm(uv * detailScale + seed * 3.1) * 0.72
+          + fbm(uv * detailScale * 3.3 + seed * 7.7) * 0.28;
   return vec2(b.x - (1.0 - n) * ${ERODE.toFixed(3)}, b.y);
 }
 
@@ -126,6 +132,7 @@ void main(){
   float sd = length(p - sunP);
 
   sky += uGlow.rgb * uGlow.a * exp(-sd * 3.4) * 0.30;
+
   vec3 col = sky;
 
   if (uCirrus > 0.0) {
@@ -140,6 +147,7 @@ void main(){
   float fa = clamp(fd.x * uSoftness, 0.0, 1.0);
   if (fa > 0.0) {
     vec3 lit = shadeCloud(fd.y, sky);
+
     col = mix(col, mix(lit, sky, ${FAR_MIX.toFixed(3)}), fa);
   }
 
@@ -148,8 +156,10 @@ void main(){
   float na = clamp(nd.x * uSoftness, 0.0, 1.0);
   if (na > 0.0) {
     vec3 lit = shadeCloud(nd.y, sky);
+
     float above = clamp(cloudField(nuv + vec2(0.0, ${SHADOW_STEP.toFixed(3)}), 3.0, 8.5).x * uSoftness, 0.0, 1.0);
     lit *= 1.0 - 0.18 * uShadow * above;
+
     lit += uGlow.rgb * uGlow.a * 0.22 * exp(-length(p - sunP) * 1.6);
     col = mix(col, lit, na);
   }
@@ -158,214 +168,292 @@ void main(){
 }
 `
 
-function compile(gl, type, src) {
-  const sh = gl.createShader(type)
-  if (!sh) return null
-  gl.shaderSource(sh, src)
-  gl.compileShader(sh)
-  if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
-    gl.deleteShader(sh)
-    return null
-  }
-  return sh
+function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLShader | null {
+    const sh = gl.createShader(type)
+    if (!sh) return null
+    gl.shaderSource(sh, src)
+    gl.compileShader(sh)
+    if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+        console.error("CloudSky shader:", gl.getShaderInfoLog(sh))
+        gl.deleteShader(sh)
+        return null
+    }
+    return sh
 }
 
-function parseColor(input, fb) {
-  if (!input) return fb
-  const str = String(input).trim()
-  if (str.charAt(0) === "#") {
-    let hex = str.slice(1)
-    if (hex.length === 3 || hex.length === 4) {
-      hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + (hex.length === 4 ? hex[3] + hex[3] : "")
+type RGBA = [number, number, number, number]
+
+function parseColor(input: string | undefined, fb: RGBA): RGBA {
+    if (!input) return fb
+    const str = String(input).trim()
+    if (str.charAt(0) === "#") {
+        let hex = str.slice(1)
+        if (hex.length === 3 || hex.length === 4) {
+            hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2] + (hex.length === 4 ? hex[3] + hex[3] : "")
+        }
+        if (hex.length >= 6) {
+            const r = parseInt(hex.slice(0, 2), 16)
+            const g = parseInt(hex.slice(2, 4), 16)
+            const b = parseInt(hex.slice(4, 6), 16)
+            const a = hex.length >= 8 ? parseInt(hex.slice(6, 8), 16) / 255 : 1
+            if (!isNaN(r) && !isNaN(g) && !isNaN(b)) return [r / 255, g / 255, b / 255, a]
+        }
+        return fb
     }
-    if (hex.length >= 6) {
-      const r = parseInt(hex.slice(0, 2), 16)
-      const g = parseInt(hex.slice(2, 4), 16)
-      const b = parseInt(hex.slice(4, 6), 16)
-      const a = hex.length >= 8 ? parseInt(hex.slice(6, 8), 16) / 255 : 1
-      if (!isNaN(r) && !isNaN(g) && !isNaN(b)) return [r / 255, g / 255, b / 255, a]
+    const m = str.match(/[\d.]+/g)
+    if (m && m.length >= 3) {
+        return [
+            Math.min(255, parseFloat(m[0])) / 255,
+            Math.min(255, parseFloat(m[1])) / 255,
+            Math.min(255, parseFloat(m[2])) / 255,
+            m.length >= 4 ? Math.min(1, parseFloat(m[3])) : 1,
+        ]
     }
     return fb
+}
+
+function num(v: unknown, fb: number): number {
+    return typeof v === "number" && isFinite(v) ? v : fb
+}
+
+function clampN(v: number, lo: number, hi: number): number {
+    return v < lo ? lo : v > hi ? hi : v
+}
+
+type Clouds = { softness?: number; shadow?: number; cirrus?: number }
+type Sun = { x?: number; y?: number; glow?: string }
+type Pointer = { parallax?: number; wind?: number; damping?: number }
+
+const CLOUD_DEFAULTS: Required<Clouds> = { softness: 100, shadow: 100, cirrus: 45 }
+const SUN_DEFAULTS: Required<Sun> = { x: 78, y: 92, glow: "rgba(232, 243, 255, 0.9)" }
+const POINTER_DEFAULTS: Required<Pointer> = { parallax: 100, wind: 100, damping: 20 }
+
+interface Props {
+    style?: React.CSSProperties
+    width?: number
+    height?: number
+    background?: string
+    baseColor?: string
+    accentColor?: string
+    density?: number
+    speed?: number
+    size?: number
+    clouds?: Clouds
+    sun?: Sun
+    pointer?: Pointer
+}
+
+function __OriginkitBase_CloudSky(props: Props) {
+    const {
+        style,
+        background = "#0075FF",
+        baseColor = "#B4D2F0",
+        accentColor = "#FFFFFF",
+        density = 100,
+        speed = 64,
+        size = 130,
+        clouds,
+        sun,
+        pointer,
+        width,
+        height,
+    } = props
+
+    const clouds_ = { ...CLOUD_DEFAULTS, ...(clouds || {}) }
+    const sun_ = { ...SUN_DEFAULTS, ...(sun || {}) }
+    const pointer_ = { ...POINTER_DEFAULTS, ...(pointer || {}) }
+
+    const canvasRef = useRef<HTMLCanvasElement>(null)
+    const sizeRef = useRef({ w: 0, h: 0 })
+    sizeRef.current = { w: num(width, 0), h: num(height, 0) }
+
+    const vRef = useRef<Record<string, number | string>>({})
+    vRef.current = {
+        zenith: background,
+        horizon: baseColor,
+        cloud: accentColor,
+        glow: sun_.glow,
+        coverage: clampN(num(density, 55), 0, 100) / 100,
+        speed: clampN(num(speed, 50), 0, 100) / 50,
+        size: clampN(num(size, 100), 20, 300) / 100,
+        softness: 4.5 / Math.max(0.15, clampN(num(clouds_.softness, 100), 20, 300) / 100),
+        shadow: clampN(num(clouds_.shadow, 100), 0, 200) / 100,
+        cirrus: clampN(num(clouds_.cirrus, 45), 0, 100) / 100,
+        sunX: clampN(num(sun_.x, 78), 0, 100) / 100,
+        sunY: clampN(num(sun_.y, 92), 0, 100) / 100,
+        parallax: clampN(num(pointer_.parallax, 100), 0, 300) / 100,
+        wind: clampN(num(pointer_.wind, 100), 0, 300) / 100,
+        damping: clampN(num(pointer_.damping, 20), 1, 100),
+    }
+
+    const ptrRef = useRef({ x: 0, y: 0, inside: false })
+
+    useEffect(() => {
+        const canvas = canvasRef.current
+        if (!canvas) return
+        const gl = canvas.getContext("webgl", { alpha: false, antialias: false, depth: false })
+        if (!gl) {
+            console.error("CloudSky: WebGL unavailable")
+            return
+        }
+
+        const vs = compile(gl, gl.VERTEX_SHADER, VERT_SRC)
+        const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG_SRC)
+        if (!vs || !fs) return
+        const prog = gl.createProgram()
+        if (!prog) return
+        gl.attachShader(prog, vs)
+        gl.attachShader(prog, fs)
+        gl.linkProgram(prog)
+        if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+            console.error("CloudSky link:", gl.getProgramInfoLog(prog))
+            return
+        }
+        gl.useProgram(prog)
+
+        const buf = gl.createBuffer()
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf)
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
+        const aPos = gl.getAttribLocation(prog, "a_pos")
+        gl.enableVertexAttribArray(aPos)
+        gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0)
+
+        const locs: Record<string, WebGLUniformLocation | null> = {}
+        const u = (name: string) => {
+            if (!(name in locs)) locs[name] = gl.getUniformLocation(prog, name)
+            return locs[name]
+        }
+
+        let raf = 0
+        let last = performance.now()
+
+        let nearX = 0
+        let farX = 0
+        let cirrusX = 0
+        let leanX = 0
+        let leanY = 0
+
+        const render = (now: number) => {
+            const dt = Math.min(0.05, (now - last) / 1000)
+            last = now
+            const v = vRef.current
+            const p = ptrRef.current
+
+            const k = 1 - Math.exp(-(v.damping as number) * 0.12 * dt)
+            leanX += ((p.inside ? p.x : 0) - leanX) * k
+            leanY += ((p.inside ? p.y : 0) - leanY) * k
+
+            const gust = 1 + leanX * (v.wind as number)
+            const rate = (v.speed as number) * gust
+            nearX = (nearX - NEAR_DRIFT * rate * dt) % 1000
+            farX = (farX - FAR_DRIFT * rate * dt) % 1000
+            cirrusX = (cirrusX - CIRRUS_DRIFT * rate * dt) % 1000
+
+            const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR)
+            const cw = sizeRef.current.w || canvas.clientWidth || 1200
+            const ch = sizeRef.current.h || canvas.clientHeight || 800
+            const bw = Math.max(1, Math.round(cw * dpr))
+            const bh = Math.max(1, Math.round(ch * dpr))
+            if (canvas.width !== bw || canvas.height !== bh) {
+                canvas.width = bw
+                canvas.height = bh
+            }
+            gl.viewport(0, 0, bw, bh)
+
+            const zen = parseColor(v.zenith as string, [0.369, 0.576, 0.824, 1])
+            const hor = parseColor(v.horizon as string, [0.706, 0.824, 0.941, 1])
+            const cld = parseColor(v.cloud as string, [1, 1, 1, 1])
+            const glow = parseColor(v.glow as string, [0.91, 0.953, 1, 0.9])
+
+            gl.uniform2f(u("uRes"), bw, bh)
+            gl.uniform1f(u("uNearX"), nearX)
+            gl.uniform1f(u("uFarX"), farX)
+            gl.uniform1f(u("uCirrusX"), cirrusX)
+            gl.uniform1f(u("uCoverage"), v.coverage as number)
+            gl.uniform1f(u("uSize"), v.size as number)
+            gl.uniform1f(u("uSoftness"), v.softness as number)
+            gl.uniform1f(u("uShadow"), v.shadow as number)
+            gl.uniform1f(u("uCirrus"), v.cirrus as number)
+            gl.uniform2f(u("uSun"), v.sunX as number, v.sunY as number)
+            gl.uniform2f(u("uParallax"), -leanX * (v.parallax as number) * 0.07, -leanY * (v.parallax as number) * 0.05)
+            gl.uniform3f(u("uZenith"), zen[0], zen[1], zen[2])
+            gl.uniform3f(u("uHorizon"), hor[0], hor[1], hor[2])
+            gl.uniform3f(u("uCloud"), cld[0], cld[1], cld[2])
+            gl.uniform4f(u("uGlow"), glow[0], glow[1], glow[2], glow[3])
+
+            gl.drawArrays(gl.TRIANGLES, 0, 3)
+            raf = requestAnimationFrame(render)
+        }
+
+        const track = (e: PointerEvent) => {
+            const r = canvas.getBoundingClientRect()
+            if (r.width <= 0 || r.height <= 0) return
+            ptrRef.current.x = ((e.clientX - r.left) / r.width) * 2 - 1
+            ptrRef.current.y = 1 - ((e.clientY - r.top) / r.height) * 2
+            ptrRef.current.inside = true
+        }
+        const onLeave = () => {
+            ptrRef.current.inside = false
+        }
+
+        canvas.addEventListener("pointermove", track)
+        canvas.addEventListener("pointerenter", track)
+        canvas.addEventListener("pointerleave", onLeave)
+
+        raf = requestAnimationFrame(render)
+
+        return () => {
+            cancelAnimationFrame(raf)
+            canvas.removeEventListener("pointermove", track)
+            canvas.removeEventListener("pointerenter", track)
+            canvas.removeEventListener("pointerleave", onLeave)
+        }
+    }, [])
+
+    return (
+        <div
+            style={{
+                position: "relative",
+                overflow: "hidden",
+                background,
+                isolation: "isolate",
+                minWidth: 1200,
+                minHeight: 800,
+                width: typeof width === "number" && width > 0 ? width : "100%",
+                height: typeof height === "number" && height > 0 ? height : "100%",
+                ...style,
+            }}
+        >
+            <canvas
+                ref={canvasRef}
+                style={{ position: "absolute", inset: 0, width: "100%", height: "100%", display: "block" }}
+            />
+        </div>
+    )
+}
+
+const __originkitPresetProps = {
+  "clouds": {
+    "cirrus": 100,
+    "shadow": 70,
+    "softness": 200
+  },
+  "sun": {
+    "x": 100,
+    "y": 100,
+    "glow": "#FFFFFF"
+  },
+  "pointer": {
+    "wind": 300,
+    "damping": 50,
+    "parallax": 300
   }
-  return fb
+};
+
+export default function CloudSky(props: Record<string, unknown>) {
+  return <__OriginkitBase_CloudSky {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
 }
 
-function CloudSky({ background = "#0b0d19", baseColor = "#1a233a", accentColor = "#4a6fa5" }) {
-  const canvasRef = useRef(null)
 
-  useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const gl = canvas.getContext("webgl", { alpha: false, antialias: false, depth: false })
-    if (!gl) return
 
-    const vs = compile(gl, gl.VERTEX_SHADER, VERT_SRC)
-    const fs = compile(gl, gl.FRAGMENT_SHADER, FRAG_SRC)
-    if (!vs || !fs) return
-    const prog = gl.createProgram()
-    gl.attachShader(prog, vs)
-    gl.attachShader(prog, fs)
-    gl.linkProgram(prog)
-    gl.useProgram(prog)
-
-    const buf = gl.createBuffer()
-    gl.bindBuffer(gl.ARRAY_BUFFER, buf)
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW)
-    const aPos = gl.getAttribLocation(prog, "a_pos")
-    gl.enableVertexAttribArray(aPos)
-    gl.vertexAttribPointer(aPos, 2, gl.FLOAT, false, 0, 0)
-
-    const locs = {}
-    const u = (name) => {
-      if (!(name in locs)) locs[name] = gl.getUniformLocation(prog, name)
-      return locs[name]
-    }
-
-    let raf = 0
-    let last = performance.now()
-    let nearX = 0, farX = 0, cirrusX = 0
-
-    const render = (now) => {
-      const dt = Math.min(0.05, (now - last) / 1000)
-      last = now
-
-      nearX = (nearX - NEAR_DRIFT * 1.2 * dt) % 1000
-      farX = (farX - FAR_DRIFT * 1.2 * dt) % 1000
-      cirrusX = (cirrusX - CIRRUS_DRIFT * 1.2 * dt) % 1000
-
-      const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR)
-      const bw = Math.max(1, Math.round(canvas.clientWidth * dpr))
-      const bh = Math.max(1, Math.round(canvas.clientHeight * dpr))
-      if (canvas.width !== bw || canvas.height !== bh) {
-        canvas.width = bw
-        canvas.height = bh
-      }
-      gl.viewport(0, 0, bw, bh)
-
-      const zen = parseColor(background, [0.04, 0.05, 0.1])
-      const hor = parseColor(baseColor, [0.1, 0.14, 0.23])
-      const cld = parseColor(accentColor, [0.29, 0.43, 0.65])
-
-      gl.uniform2f(u("uRes"), bw, bh)
-      gl.uniform1f(u("uNearX"), nearX)
-      gl.uniform1f(u("uFarX"), farX)
-      gl.uniform1f(u("uCirrusX"), cirrusX)
-      gl.uniform1f(u("uCoverage"), 0.6)
-      gl.uniform1f(u("uSize"), 1.2)
-      gl.uniform1f(u("uSoftness"), 2.2)
-      gl.uniform1f(u("uShadow"), 0.7)
-      gl.uniform1f(u("uCirrus"), 1.0)
-      gl.uniform2f(u("uSun"), 0.8, 0.8)
-      gl.uniform2f(u("uParallax"), 0, 0)
-      gl.uniform3f(u("uZenith"), zen[0], zen[1], zen[2])
-      gl.uniform3f(u("uHorizon"), hor[0], hor[1], hor[2])
-      gl.uniform3f(u("uCloud"), cld[0], cld[1], cld[2])
-      gl.uniform4f(u("uGlow"), 0.8, 0.9, 1.0, 0.5)
-
-      gl.drawArrays(gl.TRIANGLES, 0, 3)
-      raf = requestAnimationFrame(render)
-    }
-
-    raf = requestAnimationFrame(render)
-    return () => cancelAnimationFrame(raf)
-  }, [background, baseColor, accentColor])
-
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 w-full h-full pointer-events-none"
-    />
-  )
-}
-
-// ==========================================
-// 2. مكون معرض الصور المغناطيسي (Magnetic Carousel)
-// ==========================================
-const CAROUSEL_IMAGES = [
-  { id: 1, src: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80", title: "Canyon Stream" },
-  { id: 2, src: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80", title: "Desert Oasis" },
-  { id: 3, src: "https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80", title: "Forest Lake" },
-  { id: 4, src: "https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=800&q=80", title: "Aurora Borealis" },
-  { id: 5, src: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80", title: "Misty Mountain" },
-  { id: 6, src: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=800&q=80", title: "Autumn Woods" },
-  { id: 7, src: "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?auto=format&fit=crop&w=800&q=80", title: "Sunset Glow" },
-]
-
-export default function MagneticCarouselSky() {
-  const [activeId, setActiveId] = useState(null)
-
-  return (
-    <div className="relative w-full h-screen bg-[#070913] flex flex-col items-center justify-center overflow-hidden font-sans select-none">
-      {/* خلفية السماء التفاعلية */}
-      <CloudSky background="#070913" baseColor="#111827" accentColor="#1f2937" />
-
-      {/* الحاوية الرئيسية للتأثير */}
-      <div className="relative z-10 max-w-5xl w-full p-8 rounded-3xl bg-black/40 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-col items-center">
-        
-        {/* شريط الصور (Carousel) */}
-        <div className="relative flex items-center justify-center gap-3 w-full h-[360px] px-4 py-6">
-          {CAROUSEL_IMAGES.map((img) => {
-            const isHovered = activeId === img.id
-            const isAnyHovered = activeId !== null
-
-            return (
-              <motion.div
-                key={img.id}
-                onMouseEnter={() => setActiveId(img.id)}
-                onMouseLeave={() => setActiveId(null)}
-                layout
-                initial={false}
-                animate={{
-                  width: isHovered ? "320px" : isAnyHovered ? "60px" : "90px",
-                  scale: isHovered ? 1.05 : 1,
-                  zIndex: isHovered ? 20 : 1,
-                }}
-                transition={{
-                  type: "spring",
-                  stiffness: 300,
-                  damping: 25,
-                }}
-                className="relative h-full rounded-2xl overflow-hidden cursor-pointer shadow-lg border border-white/20 hover:border-white/60 transition-colors"
-              >
-                {/* صورة الشريط */}
-                <img
-                  src={img.src}
-                  alt={img.title}
-                  className="w-full h-full object-cover object-center pointer-events-none"
-                />
-
-                {/* طبقة التظليل التدرجي عند hover */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-opacity duration-300 ${
-                    isHovered ? "opacity-100" : "opacity-0"
-                  }`}
-                />
-
-                {/* عنوان الصورة المحددة */}
-                <AnimatePresence>
-                  {isHovered && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 15 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute bottom-4 left-4 right-4 text-white font-medium text-lg drop-shadow-md"
-                    >
-                      {img.title}
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
-            )
-          })}
-        </div>
-
-        {/* النص السفلي */}
-        <div className="mt-4 flex items-center justify-between w-full px-4 text-white/70 text-sm">
-          <span className="font-semibold text-white tracking-wide">Magnetic Carousel</span>
-          <span className="bg-white/10 px-3 py-1 rounded-full border border-white/10 text-xs">Interactive Hover</span>
-        </div>
-      </div>
-    </div>
-  )
-}
+ادمج تاثير الصور مع هذه الخلفيه في الاعلى
