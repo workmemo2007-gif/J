@@ -241,9 +241,10 @@ interface Props {
     clouds?: Clouds
     sun?: Sun
     pointer?: Pointer
+    exportCodeEnabled?: boolean
 }
 
-function __OriginkitBase_CloudSky(props: Props) {
+export default function CloudSky(props: Props) {
     const {
         style,
         background = "#0075FF",
@@ -257,6 +258,7 @@ function __OriginkitBase_CloudSky(props: Props) {
         pointer,
         width,
         height,
+        exportCodeEnabled = true,
     } = props
 
     const clouds_ = { ...CLOUD_DEFAULTS, ...(clouds || {}) }
@@ -430,26 +432,4 @@ function __OriginkitBase_CloudSky(props: Props) {
             />
         </div>
     )
-}
-
-const __originkitPresetProps = {
-  "clouds": {
-    "cirrus": 100,
-    "shadow": 70,
-    "softness": 200
-  },
-  "sun": {
-    "x": 100,
-    "y": 100,
-    "glow": "#FFFFFF"
-  },
-  "pointer": {
-    "wind": 300,
-    "damping": 50,
-    "parallax": 300
-  }
-};
-
-export default function CloudSky(props: Record<string, unknown>) {
-  return <__OriginkitBase_CloudSky {...(__originkitPresetProps as Record<string, unknown>)} {...props} />;
 }
