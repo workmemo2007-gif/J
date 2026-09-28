@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقعي الإلكتروني</title>
+    <style>
+        /* إعدادات الخلفية والجسم */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            
+            /* رابط الصورة التي طلبتها */
+            background-image: url('https://raw.githubusercontent.com/workmemo2007-gif/R1/c4c2ac757d6fb303ea96a912e78dc58c420103f4/IMG_2572.png');
+            
+            /* إعدادات التصفح والصعود والنزول للخلفية */
+            background-size: cover;          /* تغطية الشاشة بالكامل */
+            background-position: center;      /* توسيط الصورة */
+            background-repeat: no-repeat;    /* عدم تكرار الصورة */
+            background-attachment: fixed;    /* جعل الخلفية ثابتة أثناء التصفح (Fixed Parallax Effect) */
+        }
+
+        /* شريط التنقل العلوي */
+        nav {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+
+        nav .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #4CAF50;
+        }
+
+        /* الحاوية الرئيسية للمحتوى */
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+
+        /* بطاقات المحتوى الشفافة لسهولة القراءة */
+        .card {
+            background: rgba(0, 0, 0, 0.7); /* خلفية سوداء شفافة لتوضيح النصوص فوق الصورة */
+            padding: 30px;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            line-height: 1.8;
+        }
+
+        .card h1, .card h2 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #45a049;
+        }
+
+        /* التذييل (الفوتر) */
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8);
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">موقعي</div>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#about">عن الموقع</a></li>
+            <li><a href="#services">الخدمات</a></li>
+            <li><a href="#contact">اتصل بنا</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        
+        <div class="card" id="home">
+            <h1>مرحباً بك في موقعي الجديد</h1>
+            <p>هذا النص قابل للتعديل. يمكنك تغيير العناوين والفقرات وإضافة الأزرار أو الصور بكل سهولة من خلال التعديل على ملف الـ HTML.</p>
+            <a href="#" class="btn">اضغط هنا</a>
+        </div>
+
+        <div class="card" id="about">
+            <h2>عن الموقع</h2>
+            <p>يمكنك كتابة نبذة عنك أو عن مشروعك في هذا القسم. لاحظ كيف تظل خلفية الموقع ثابته ومريحة للعين أثناء الصعود والنزول والتصفح.</p>
+        </div>
+
+        <div class="card" id="services">
+            <h2>خدماتنا</h2>
+            <p>أضف هنا قائمة بالخدمات أو المنتجات التي تقدمها:</p>
+            <ul>
+                <li>الخدمة الأولى: كتابة وتنسيق النصوص</li>
+                <li>الخدمة الثانية: تصميم واستضافة المواقع</li>
+                <li>الخدمة الثالثة: الدعم الفني والمتابعة</li>
+            </ul>
+        </div>
+
+        <div class="card" id="contact">
+            <h2>تواصل معنا</h2>
+            <p>يمكنك ترك بريدك الإلكتروني أو روابط حساباتك على مواقع التواصل الاجتماعي هنا.</p>
+            <p>البريد الإلكتروني: example@email.com</p>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 - موقعي الإلكتروني</p>
+    </footer>
+
+</body>
+</html>
