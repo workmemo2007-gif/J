@@ -1,310 +1,756 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>موقعي الإلكتروني</title>
+    <title>دعوة زفاف أحمد & سارة | أهلاً بكم في ليلة عمرنا</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Amiri & Aref Ruqaa & Cairo -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Lucide / Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: {
+                            100: '#FBF5E8',
+                            300: '#E6CA65',
+                            400: '#D4AF37',
+                            500: '#C5A059',
+                            600: '#B0883A',
+                            700: '#8C6721',
+                        },
+                        cream: {
+                            50: '#FFFEFC',
+                            100: '#FAFAFA',
+                            200: '#F5F2EB',
+                            300: '#EFEBE0',
+                        },
+                        charcoal: '#222222',
+                    },
+                    fontFamily: {
+                        amiri: ['Amiri', 'serif'],
+                        ruqaa: ['Aref Ruqaa', 'serif'],
+                        cairo: ['Cairo', 'sans-serif'],
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        pulseSlow: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-8px)' },
+                        },
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' },
+                        }
+                    },
+                    animation: {
+                        fadeInUp: 'fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        pulseSlow: 'pulseSlow 4s infinite ease-in-out',
+                        float: 'float 4s infinite ease-in-out',
+                        shimmer: 'shimmer 3s infinite linear',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        /* إعدادات الخلفية والجسم */
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #ffffff;
-            
-            /* رابط الصورة الأولى (الخلفية) */
-            background-image: url('https://raw.githubusercontent.com/workmemo2007-gif/R1/c4c2ac757d6fb303ea96a912e78dc58c420103f4/IMG_2572.png');
-            
-            background-size: cover;          
-            background-position: center;      
-            background-repeat: no-repeat;    
-            background-attachment: fixed;    
+            font-family: 'Cairo', sans-serif;
+            background-color: #F8F6F0;
+            color: #2C2C2C;
+            overflow-x: hidden;
         }
 
-        /* شريط التنقل العلوي */
-        nav {
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
+        /* Luxury White Marble Texture Effect */
+        .marble-bg {
+            background-color: #f7f6f2;
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(225, 220, 208, 0.4) 0px, transparent 50%),
+                radial-gradient(at 80% 0%, rgba(212, 175, 55, 0.08) 0px, transparent 40%),
+                radial-gradient(at 90% 85%, rgba(235, 230, 220, 0.6) 0px, transparent 50%),
+                radial-gradient(at 0% 90%, rgba(197, 160, 89, 0.06) 0px, transparent 40%);
+            background-attachment: fixed;
         }
 
-        nav .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #4CAF50;
+        /* Gold Foil Gradient Text */
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shimmer 6s linear infinite;
         }
 
-        nav ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            gap: 20px;
+        .gold-border-gradient {
+            border-image: linear-gradient(135deg, #B38728, #FBF5B7, #AA771C) 1;
         }
 
-        nav ul li a {
-            color: #fff;
-            text-decoration: none;
-            font-size: 18px;
-            transition: color 0.3s;
+        /* Glassmorphism Card Effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.05), 0 0 15px rgba(212, 175, 55, 0.1);
         }
 
-        nav ul li a:hover {
-            color: #4CAF50;
+        .glass-card-gold {
+            background: rgba(250, 248, 242, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            box-shadow: 0 10px 30px rgba(176, 136, 58, 0.08);
         }
 
-        /* الحاوية الرئيسية للمحتوى */
-        .container {
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-
-        /* بطاقات المحتوى الشفافة */
-        .card {
-            background: rgba(0, 0, 0, 0.7); 
-            padding: 30px;
-            margin-bottom: 40px;
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            line-height: 1.8;
-        }
-
-        .card h1, .card h2 {
-            color: #4CAF50;
-            margin-top: 0;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 10px 25px;
-            background-color: #4CAF50;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: background 0.3s;
-        }
-
-        .btn:hover {
-            background-color: #45a049;
-        }
-
-        /* --- تنسيقات الصورة الجديدة والتأثيرات --- */
-        .image-card {
-            text-align: center;
-            /* إعدادات حركة الظهور عند التمرير */
+        /* Smooth reveal animation classes */
+        .reveal-on-scroll {
             opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(35px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* الكلاس الذي يُضاف للظهور عند التمرير */
-        .image-card.reveal {
+        .reveal-on-scroll.active {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .blurred-img-container {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            display: inline-block;
-            max-width: 100%;
-        }
-
-        .blurred-img {
-            width: 100%;
-            max-width: 100%;
-            height: auto;
-            display: block;
-            border-radius: 12px;
-            /* ضبابية الصورة */
-            filter: blur(8px);
-            transition: filter 0.4s ease, transform 0.4s ease;
-        }
-
-        .blurred-img-container:hover .blurred-img {
-            filter: blur(4px);
-            transform: scale(1.02);
-        }
-
-        /* النص التوضيحي فوق الصورة */
-        .click-hint {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            pointer-events: none;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: opacity 0.3s ease;
-        }
-
-        /* --- النافذة المنبثقة (Modal) للرؤية الواضحة --- */
-        .modal {
-            display: none;
+        /* Canvas Particle overlay */
+        #particles-canvas {
             position: fixed;
-            z-index: 2000;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .modal.show {
-            display: flex;
-            opacity: 1;
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
-
-        .modal-content {
-            max-width: 90%;
-            max-height: 85vh;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-            animation: zoomIn 0.3s ease;
+        ::-webkit-scrollbar-track {
+            background: #F5F2EB;
         }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s;
+        ::-webkit-scrollbar-thumb {
+            background: #C5A059;
+            border-radius: 4px;
         }
-
-        .close-btn:hover {
-            color: #4CAF50;
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.7); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        /* التذييل */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8);
-            margin-top: 50px;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #B0883A;
         }
     </style>
 </head>
-<body>
+<body class="marble-bg min-h-screen relative text-gray-800 selection:bg-gold-300 selection:text-gray-900">
 
-    <nav>
-        <div class="logo">موقعي</div>
-        <ul>
-            <li><a href="#home">الرئيسية</a></li>
-            <li><a href="#about">عن الموقع</a></li>
-            <li><a href="#services">الخدمات</a></li>
-            <li><a href="#contact">اتصل بنا</a></li>
-        </ul>
-    </nav>
+    <canvas id="particles-canvas"></canvas>
 
-    <div class="container">
+    <div class="fixed bottom-6 left-6 z-50">
+        <button id="musicToggle" onclick="toggleAudio()" class="group relative flex items-center justify-center w-14 h-14 rounded-full bg-white/90 text-gold-600 shadow-xl border border-gold-300/60 hover:scale-110 hover:bg-gold-50 transition-all duration-300 focus:outline-none" title="تشغيل / إيقاف الموسيقى الهادئة">
+            <span class="absolute -top-1 -right-1 flex h-4 w-4">
+              <span id="musicPing" class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-4 w-4 bg-gold-500"></span>
+            </span>
+            <i id="musicIcon" class="fa-solid fa-music text-xl text-gold-600 group-hover:rotate-12 transition-transform"></i>
+        </button>
+    </div>
+
+    <header class="py-6 px-4 md:px-8 flex justify-between items-center max-w-6xl mx-auto border-b border-gold-400/20">
+        <div class="font-ruqaa text-2xl md:text-3xl text-gold-600 font-bold tracking-wider">
+            أحمد & سارة
+        </div>
+        <div class="flex items-center space-x-3 space-x-reverse text-sm font-medium">
+            <button onclick="shareInvitation()" class="px-4 py-2 rounded-full bg-white/80 border border-gold-400/40 text-gold-700 hover:bg-gold-50 transition-all flex items-center gap-2 shadow-sm">
+                <i class="fa-solid fa-share-nodes"></i>
+                <span class="hidden sm:inline">مشاركة الدعوة</span>
+            </button>
+            <button onclick="addToCalendar()" class="px-4 py-2 rounded-full bg-gold-500 text-white hover:bg-gold-600 transition-all flex items-center gap-2 shadow-md hover:shadow-gold-500/20">
+                <i class="fa-regular fa-calendar-plus"></i>
+                <span>حفظ التاريخ</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="relative min-h-[85vh] flex flex-col justify-center items-center text-center px-4 py-16 overflow-hidden">
         
-        <div class="card" id="home">
-            <h1>مرحباً بك في موقعي الجديد</h1>
-            <p>هذا النص قابل للتعديل. يمكنك تغيير العناوين والفقرات وإضافة الأزرار أو الصور بكل سهولة من خلال التعديل على ملف الـ HTML.</p>
-            <a href="#" class="btn">اضغط هنا</a>
+        <!-- Decorative Classical Frame Accents -->
+        <div class="absolute top-8 left-1/2 -translate-x-1/2 w-full max-w-3xl pointer-events-none opacity-40">
+            <svg viewBox="0 0 500 80" class="w-full h-auto fill-none stroke-gold-500" stroke-width="1">
+                <path d="M 50,40 Q 250,10 450,40 M 100,50 Q 250,25 400,50" />
+                <circle cx="250" cy="22" r="4" fill="#C5A059" />
+            </svg>
         </div>
 
-        <div class="card" id="about">
-            <h2>عن الموقع</h2>
-            <p>يمكنك كتابة نبذة عنك أو عن مشروعك في هذا القسم. لاحظ كيف تظل خلفية الموقع ثابته ومريحة للعين أثناء الصعود والنزول والتصفح.</p>
+        <div class="z-10 max-w-3xl mx-auto animate-fadeInUp">
+            
+            <!-- Floral / Classical Flourish Icon -->
+            <div class="mb-6 flex justify-center items-center gap-4 text-gold-500">
+                <div class="h-[1px] w-12 md:w-24 bg-gradient-to-r from-transparent to-gold-400"></div>
+                <i class="fa-solid fa-heart text-2xl text-gold-500 animate-pulseSlow"></i>
+                <div class="h-[1px] w-12 md:w-24 bg-gradient-to-l from-transparent to-gold-400"></div>
+            </div>
+
+            <p class="text-gold-700 font-amiri text-lg md:text-2xl mb-3 tracking-wide">بسم الله الرحمن الرحيم</p>
+            <h2 class="text-gray-600 font-amiri text-lg md:text-xl tracking-widest uppercase mb-4">يسرنا دعوتكم لحضور حفل زفاف</h2>
+
+            <!-- Bride & Groom Names -->
+            <div class="my-6 relative py-4">
+                <h1 class="font-ruqaa text-5xl sm:text-7xl md:text-8xl gold-gradient-text font-bold leading-tight drop-shadow-sm">
+                    أحمد <span class="text-3xl sm:text-5xl text-gold-400 font-amiri italic mx-2">&</span> سارة
+                </h1>
+            </div>
+
+            <p class="font-amiri text-lg md:text-2xl text-gray-700 italic max-w-xl mx-auto leading-relaxed mt-2 mb-8">
+                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
+            </p>
+
+            <!-- Wedding Date Badge -->
+            <div class="inline-flex items-center gap-3 px-8 py-3 rounded-full glass-card border border-gold-400/50 shadow-lg my-4">
+                <i class="fa-regular fa-clock text-gold-600 text-lg"></i>
+                <span class="font-bold text-gray-800 text-lg md:text-xl tracking-wider">الجمعة، 20 نوفمبر 2026</span>
+            </div>
+
+            <div class="mt-10 grid grid-cols-4 gap-3 md:gap-6 max-w-xl mx-auto">
+                <div class="glass-card-gold p-3 sm:p-4 rounded-2xl border border-gold-300/60 shadow-sm flex flex-col items-center">
+                    <span id="cd-days" class="font-bold text-2xl sm:text-4xl text-gold-700">00</span>
+                    <span class="text-xs sm:text-sm text-gray-600 mt-1">يوم</span>
+                </div>
+                <div class="glass-card-gold p-3 sm:p-4 rounded-2xl border border-gold-300/60 shadow-sm flex flex-col items-center">
+                    <span id="cd-hours" class="font-bold text-2xl sm:text-4xl text-gold-700">00</span>
+                    <span class="text-xs sm:text-sm text-gray-600 mt-1">ساعة</span>
+                </div>
+                <div class="glass-card-gold p-3 sm:p-4 rounded-2xl border border-gold-300/60 shadow-sm flex flex-col items-center">
+                    <span id="cd-minutes" class="font-bold text-2xl sm:text-4xl text-gold-700">00</span>
+                    <span class="text-xs sm:text-sm text-gray-600 mt-1">دقيقة</span>
+                </div>
+                <div class="glass-card-gold p-3 sm:p-4 rounded-2xl border border-gold-300/60 shadow-sm flex flex-col items-center">
+                    <span id="cd-seconds" class="font-bold text-2xl sm:text-4xl text-gold-700">00</span>
+                    <span class="text-xs sm:text-sm text-gray-600 mt-1">ثانية</span>
+                </div>
+            </div>
+
+            <!-- Action CTA Button -->
+            <div class="mt-12">
+                <a href="#rsvp" class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 text-white font-bold text-lg shadow-lg hover:shadow-gold-500/30 hover:scale-105 transition-all duration-300">
+                    <i class="fa-solid fa-envelope-open-text"></i>
+                    <span>تأكيد الحضور</span>
+                </a>
+            </div>
+
         </div>
 
-        <!-- الصورة المضافة اسفل الصورة الأولى (الخلفية/عن الموقع) -->
-        <div class="card image-card" id="scroll-image">
-            <h2>معرض الصور</h2>
-            <p>انقر على الصورة الموضحة أدناه لإزالة الضبابية وعرضها بالحجم الكامل:</p>
-            <div class="blurred-img-container" onclick="openModal()">
-                <img src="https://raw.githubusercontent.com/workmemo2007-gif/J/d27e3eedd926c2a3dd38928541dd92d7b7a6af08/Picsart_26-09-29_13-48-13-069.png" alt="صورة مميزة" class="blurred-img" id="imgSource">
-                <div class="click-hint">🔍 انقر للتوضيح</div>
+        <!-- Down Arrow floating -->
+        <a href="#welcome" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-gold-500 animate-float hover:text-gold-700 transition-colors">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </a>
+    </section>
+
+    <section id="welcome" class="py-20 px-4 max-w-4xl mx-auto text-center reveal-on-scroll">
+        <div class="glass-card rounded-3xl p-8 md:p-12 border border-gold-300/50 relative overflow-hidden shadow-2xl">
+            <!-- Corner Decorative Elements -->
+            <div class="absolute top-0 right-0 w-24 h-24 border-t-2 border-r-2 border-gold-400/40 rounded-tr-3xl"></div>
+            <div class="absolute bottom-0 left-0 w-24 h-24 border-b-2 border-l-2 border-gold-400/40 rounded-bl-3xl"></div>
+
+            <i class="fa-solid fa-quote-right text-4xl text-gold-400/40 mb-4 block"></i>
+
+            <h3 class="font-ruqaa text-3xl md:text-4xl text-gold-700 mb-6">أهلاً بكم في ليلة فرحتنا</h3>
+            
+            <p class="font-amiri text-xl md:text-2xl text-gray-700 leading-loose mb-6">
+                تكتمل سعادتنا وتكتسي ليلتنا بأجمل حُلّة بحضوركم الكريم.<br>
+                يسعدنا أن تشاركونا لحظات الفرح والمودة في هذه الليلة الاستثنائية،<br>
+                لتكتمل بها فرحتنا وتتوج بها أجمل الذكريات.
+            </p>
+
+            <p class="font-ruqaa text-2xl text-gold-600 font-bold mt-8">
+                ـ الداعون: عائلة العريس & عائلة العروس
+            </p>
+        </div>
+    </section>
+
+    <section class="py-16 px-4 max-w-6xl mx-auto">
+        <div class="text-center mb-12 reveal-on-scroll">
+            <h2 class="font-ruqaa text-4xl text-gold-700 mb-2">تفاصيل الحفل والموقع</h2>
+            <div class="w-20 h-1 bg-gold-400 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            
+            <!-- Card 1: Time & Date -->
+            <div class="glass-card rounded-2xl p-8 text-center hover:-translate-y-2 transition-all duration-300 reveal-on-scroll">
+                <div class="w-16 h-16 rounded-full bg-gold-100 border border-gold-300 flex items-center justify-center mx-auto mb-6 text-gold-600 text-2xl">
+                    <i class="fa-regular fa-calendar-check"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-800 mb-2">الزمان</h3>
+                <p class="text-gold-700 font-semibold mb-1">الجمعة، 20 نوفمبر 2026</p>
+                <p class="text-gray-600 text-sm">تبدأ مراسم الاستقبال في تمام الساعة 7:30 مساءً</p>
+            </div>
+
+            <!-- Card 2: Venue -->
+            <div class="glass-card rounded-2xl p-8 text-center hover:-translate-y-2 transition-all duration-300 reveal-on-scroll">
+                <div class="w-16 h-16 rounded-full bg-gold-100 border border-gold-300 flex items-center justify-center mx-auto mb-6 text-gold-600 text-2xl">
+                    <i class="fa-solid fa-location-dot"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-800 mb-2">المكان</h3>
+                <p class="text-gold-700 font-semibold mb-1">قاعة الملكة الكبرى - الفندق الملكي</p>
+                <p class="text-gray-600 text-sm mb-4">طريق الملك فهد، الرياض</p>
+                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs font-bold text-gold-600 hover:text-gold-800 underline">
+                    <span>فتح في خرائط جوجل</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                </a>
+            </div>
+
+            <!-- Card 3: Dress Code -->
+            <div class="glass-card rounded-2xl p-8 text-center hover:-translate-y-2 transition-all duration-300 reveal-on-scroll">
+                <div class="w-16 h-16 rounded-full bg-gold-100 border border-gold-300 flex items-center justify-center mx-auto mb-6 text-gold-600 text-2xl">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 class="font-bold text-xl text-gray-800 mb-2">كود الملابس (Dress Code)</h3>
+                <p class="text-gold-700 font-semibold mb-1">الزي الرسمي الفاخر</p>
+                <p class="text-gray-600 text-sm">البشت الرسمي للرجال / ألوان الأوف وايت والذهبي والأسود الملكي</p>
+            </div>
+
+        </div>
+
+        <!-- Interactive Map Frame Card -->
+        <div class="mt-12 glass-card rounded-3xl p-4 md:p-6 border border-gold-300/40 shadow-xl reveal-on-scroll">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-4 px-2">
+                <div>
+                    <h4 class="font-bold text-lg text-gray-800">موقع القاعة على الخريطة</h4>
+                    <p class="text-sm text-gray-500">يمكنكم التوجه مباشرة عبر الخريطة التفاعلية أدناه</p>
+                </div>
+                <a href="https://maps.google.com" target="_blank" class="mt-3 md:mt-0 px-6 py-2.5 rounded-xl bg-gold-500 text-white font-semibold text-sm hover:bg-gold-600 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-diamond-turn-right"></i>
+                    <span>الاتجاهات المباشرة</span>
+                </a>
+            </div>
+            <div class="w-full h-80 rounded-2xl overflow-hidden border border-gold-200">
+                <iframe 
+                    title="موقع الحفل"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.682337777174!2d46.675295!3d24.713552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQyJzE4LjgiTiA0NsKwNDAnMzEuMSJF!5e0!3m2!1sar!2s!4v1620000000000!5m2!1sar!2s" 
+                    class="w-full h-full border-0" 
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
             </div>
         </div>
+    </section>
 
-        <div class="card" id="services">
-            <h2>خدماتنا</h2>
-            <p>أضف هنا قائمة بالخدمات أو المنتجات التي تقدمها:</p>
-            <ul>
-                <li>الخدمة الأولى: كتابة وتنسيق النصوص</li>
-                <li>الخدمة الثانية: تصميم واستضافة المواقع</li>
-                <li>الخدمة الثالثة: الدعم الفني والمتابعة</li>
-            </ul>
+    <section class="py-16 px-4 max-w-4xl mx-auto">
+        <div class="text-center mb-16 reveal-on-scroll">
+            <h2 class="font-ruqaa text-4xl text-gold-700 mb-2">جدول الحفل الأنيق</h2>
+            <p class="text-gray-600 text-sm">مواعيد فقرات ليلتنا الميمونة</p>
+            <div class="w-16 h-1 bg-gold-400 mx-auto rounded-full mt-2"></div>
         </div>
 
-        <div class="card" id="contact">
-            <h2>تواصل معنا</h2>
-            <p>يمكنك ترك بريدك الإلكتروني أو روابط حساباتك على مواقع التواصل الاجتماعي هنا.</p>
-            <p>البريد الإلكتروني: example@email.com</p>
+        <div class="relative border-r-2 border-gold-300/60 mr-4 md:mr-32 space-y-10">
+            
+            <!-- Timeline Item 1 -->
+            <div class="relative pr-8 reveal-on-scroll">
+                <div class="absolute -right-[13px] top-1 w-6 h-6 rounded-full bg-gold-500 border-4 border-white shadow"></div>
+                <div class="glass-card p-6 rounded-2xl border-r-4 border-r-gold-500">
+                    <span class="text-gold-700 font-bold text-sm bg-gold-100 px-3 py-1 rounded-full inline-block mb-2">07:30 مساءً</span>
+                    <h3 class="font-bold text-xl text-gray-800">استقبال الضيوف الكرام</h3>
+                    <p class="text-gray-600 text-sm mt-1">الترحيب وتقديم القهوة السعودية والتبخير في مدخل القاعة الملكي.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 2 -->
+            <div class="relative pr-8 reveal-on-scroll">
+                <div class="absolute -right-[13px] top-1 w-6 h-6 rounded-full bg-gold-500 border-4 border-white shadow"></div>
+                <div class="glass-card p-6 rounded-2xl border-r-4 border-r-gold-500">
+                    <span class="text-gold-700 font-bold text-sm bg-gold-100 px-3 py-1 rounded-full inline-block mb-2">09:00 مساءً</span>
+                    <h3 class="font-bold text-xl text-gray-800">مراسم الزفة السعيدة</h3>
+                    <p class="text-gray-600 text-sm mt-1">دخول العروسين واستعراض العرضة والفقرات الترحيبية.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 3 -->
+            <div class="relative pr-8 reveal-on-scroll">
+                <div class="absolute -right-[13px] top-1 w-6 h-6 rounded-full bg-gold-500 border-4 border-white shadow"></div>
+                <div class="glass-card p-6 rounded-2xl border-r-4 border-r-gold-500">
+                    <span class="text-gold-700 font-bold text-sm bg-gold-100 px-3 py-1 rounded-full inline-block mb-2">10:00 مساءً</span>
+                    <h3 class="font-bold text-xl text-gray-800">مأدبة العشاء الملكية</h3>
+                    <p class="text-gray-600 text-sm mt-1">تناول العشاء والاحتفال بتقطيع كعكة الزفاف المباركة.</p>
+                </div>
+            </div>
+
+            <!-- Timeline Item 4 -->
+            <div class="relative pr-8 reveal-on-scroll">
+                <div class="absolute -right-[13px] top-1 w-6 h-6 rounded-full bg-gold-500 border-4 border-white shadow"></div>
+                <div class="glass-card p-6 rounded-2xl border-r-4 border-r-gold-500">
+                    <span class="text-gold-700 font-bold text-sm bg-gold-100 px-3 py-1 rounded-full inline-block mb-2">11:30 مساءً</span>
+                    <h3 class="font-bold text-xl text-gray-800">ختام الحفل والتوديع</h3>
+                    <p class="text-gray-600 text-sm mt-1">التقاط الصور التذكارية وتوديع الضيوف بالشكر والامتنان.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="rsvp" class="py-20 px-4 max-w-3xl mx-auto">
+        <div class="glass-card rounded-3xl p-8 md:p-12 border border-gold-300 shadow-2xl relative reveal-on-scroll">
+            
+            <div class="text-center mb-8">
+                <i class="fa-solid fa-envelope-open-text text-4xl text-gold-500 mb-3 block"></i>
+                <h2 class="font-ruqaa text-4xl text-gold-700 mb-2">تأكيد الحضور (RSVP)</h2>
+                <p class="text-gray-600 text-sm">لطفاً أكد حضورك لمساعدتنا في تنظيم أفضل لكم</p>
+            </div>
+
+            <form id="rsvpForm" onsubmit="handleRSVPSubmit(event)" class="space-y-6">
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2 text-sm">الاسم الكامل *</label>
+                    <input type="text" required placeholder="أدخل اسمك الكريم" class="w-full px-4 py-3 rounded-xl bg-white/80 border border-gold-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-gray-800">
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2 text-sm">رقم الجوال *</label>
+                        <input type="tel" required placeholder="05xxxxxxxx" class="w-full px-4 py-3 rounded-xl bg-white/80 border border-gold-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-gray-800 text-left" dir="ltr">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2 text-sm">عدد المرافقين</label>
+                        <select class="w-full px-4 py-3 rounded-xl bg-white/80 border border-gold-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-gray-800">
+                            <option value="1">شخص واحد (بدون مرافق)</option>
+                            <option value="2">مرافق واحد (+1)</option>
+                            <option value="3">مرافقان (+2)</option>
+                            <option value="4">ثلاثة مرافقين (+3)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2 text-sm">موقف الحضور *</label>
+                    <div class="grid grid-cols-2 gap-4">
+                        <label class="flex items-center justify-center gap-2 p-3 rounded-xl border border-gold-300 cursor-pointer bg-white/60 hover:bg-gold-50 transition-colors">
+                            <input type="radio" name="attendance" value="attending" checked class="accent-gold-600">
+                            <span class="font-semibold text-gray-800">يشرفني الحضور ✨</span>
+                        </label>
+                        <label class="flex items-center justify-center gap-2 p-3 rounded-xl border border-gold-300 cursor-pointer bg-white/60 hover:bg-gold-50 transition-colors">
+                            <input type="radio" name="attendance" value="declining" class="accent-gold-600">
+                            <span class="font-semibold text-gray-600">أعتذر عن الحضور 🤍</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2 text-sm">رسالة تهنئة للعروسين (اختياري)</label>
+                    <textarea rows="3" id="guestMessage" placeholder="اكتب مباركتك الجميلة للعروسين..." class="w-full px-4 py-3 rounded-xl bg-white/80 border border-gold-300 focus:outline-none focus:ring-2 focus:ring-gold-500 text-gray-800"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-xl bg-gradient-to-r from-gold-600 via-gold-500 to-gold-600 text-white font-bold text-lg shadow-lg hover:shadow-gold-500/30 hover:scale-[1.01] active:scale-95 transition-all">
+                    تأكيد إرسال الرد
+                </button>
+            </form>
+
+            <div id="rsvpSuccessMessage" class="hidden text-center py-8">
+                <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h3 class="font-bold text-2xl text-gray-800 mb-2">تم تسجيل إجابتك بنجاح!</h3>
+                <p class="text-gray-600">نشكرك جزيل الشكر، ونتطلع لرؤيتك في ليلة فرحتنا.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="py-16 px-4 max-w-5xl mx-auto">
+        <div class="text-center mb-12 reveal-on-scroll">
+            <h2 class="font-ruqaa text-4xl text-gold-700 mb-2">دفتر التهاني والتبريكات</h2>
+            <p class="text-gray-600 text-sm">كلماتكم الجميلة تضيء ليلتنا</p>
+            <div class="w-16 h-1 bg-gold-400 mx-auto rounded-full mt-2"></div>
         </div>
 
-    </div>
+        <div id="wishesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Default Wish Card 1 -->
+            <div class="glass-card p-6 rounded-2xl border border-gold-300/40 relative">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center">
+                        م
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">محمد العتيبي</h4>
+                        <span class="text-xs text-gray-400">منذ ساعة</span>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed font-amiri text-lg">
+                    "ألف مبروك للعروسين الجميلين أحمد وسارة! بارك الله لكما وبارك عليكما وجمع بينكما في خير."
+                </p>
+            </div>
 
-    <!-- النافذة المنبثقة للصورة الواضحة -->
-    <div class="modal" id="imageModal" onclick="closeModal()">
-        <span class="close-btn">&times;</span>
-        <img class="modal-content" id="fullImg">
-    </div>
+            <!-- Default Wish Card 2 -->
+            <div class="glass-card p-6 rounded-2xl border border-gold-300/40 relative">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center">
+                        ن
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">نورة وسعد</h4>
+                        <span class="text-xs text-gray-400">منذ ساعتين</span>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed font-amiri text-lg">
+                    "يا رب تجعل أيامكم كلها حب وسعادة وتوفيق. متحمسين جداً لحضور هذه الليلة الفخمة!"
+                </p>
+            </div>
 
-    <footer>
-        <p>جميع الحقوق محفوظة &copy; 2026 - موقعي الإلكتروني</p>
+            <!-- Default Wish Card 3 -->
+            <div class="glass-card p-6 rounded-2xl border border-gold-300/40 relative">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="w-10 h-10 rounded-full bg-gold-100 text-gold-700 font-bold flex items-center justify-center">
+                        خ
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 text-sm">د. خالد الشمري</h4>
+                        <span class="text-xs text-gray-400">منذ 3 ساعات</span>
+                    </div>
+                </div>
+                <p class="text-gray-700 text-sm leading-relaxed font-amiri text-lg">
+                    "أجمل التبريكات للعائلتين الكريمتين. دامت دياركم عامرة بالأفراح والمسرّات."
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="py-12 border-t border-gold-400/20 text-center relative z-10 bg-white/40">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="font-ruqaa text-3xl text-gold-700 mb-2">أحمد & سارة</h3>
+            <p class="font-amiri text-gray-600 text-lg mb-4">نشكركم على مشاركتنا فرحتنا ودمتم بحفظ الله ورعايته</p>
+            <p class="text-xs text-gray-400">© 2026 جميع الحقوق محفوظة | دعوة زفاف إلكترونية فاخرة</p>
+        </div>
     </footer>
 
     <script>
-        // 1. حركة ظهور الصورة عند التمرير لأسفل (Scroll Animation)
+        const weddingDate = new Date("November 20, 2026 19:30:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+
+            if (distance < 0) {
+                document.getElementById("cd-days").innerText = "00";
+                document.getElementById("cd-hours").innerText = "00";
+                document.getElementById("cd-minutes").innerText = "00";
+                document.getElementById("cd-seconds").innerText = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("cd-days").innerText = days < 10 ? '0' + days : days;
+            document.getElementById("cd-hours").innerText = hours < 10 ? '0' + hours : hours;
+            document.getElementById("cd-minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("cd-seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('reveal');
+                    entry.target.classList.add('active');
                 }
             });
-        }, { threshold: 0.2 });
+        }, { threshold: 0.1 });
 
-        const targetImage = document.getElementById('scroll-image');
-        observer.observe(targetImage);
+        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
 
-        // 2. التحكم بالنافذة المنبثقة عند النقر لتوضيح الصورة
-        function openModal() {
-            const modal = document.getElementById('imageModal');
-            const fullImg = document.getElementById('fullImg');
-            const imgSource = document.getElementById('imgSource');
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
 
-            fullImg.src = imgSource.src;
-            modal.classList.add('show');
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.speedY = Math.random() * -0.5 - 0.2;
+                this.opacity = Math.random() * 0.6 + 0.2;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.y < 0) {
+                    this.y = canvas.height;
+                    this.x = Math.random() * canvas.width;
+                }
+            }
+            draw() {
+                ctx.fillStyle = `rgba(212, 175, 55, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
         }
 
-        function closeModal() {
-            const modal = document.getElementById('imageModal');
-            modal.classList.remove('show');
+        for (let i = 0; i < 45; i++) {
+            particles.push(new Particle());
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        function handleRSVPSubmit(event) {
+            event.preventDefault();
+            const form = event.target;
+            const name = form.querySelector('input[type="text"]').value;
+            const message = document.getElementById('guestMessage').value;
+
+            // Trigger Confetti
+            if (typeof confetti === 'function') {
+                confetti({
+                    particleCount: 80,
+                    spread: 70,
+                    origin: { y: 0.6 },
+                    colors: ['#D4AF37', '#C5A059', '#FBF5B7']
+                });
+            }
+
+            // Hide form and show success message
+            form.style.display = 'none';
+            document.getElementById('rsvpSuccessMessage').classList.remove('hidden');
+
+            // Add Wish if present
+            if (message.trim() !== "") {
+                const wishesContainer = document.getElementById('wishesGrid');
+                const newCard = document.createElement('div');
+                newCard.className = 'glass-card p-6 rounded-2xl border border-gold-400 relative animate-fadeInUp';
+                newCard.innerHTML = `
+                    <div class="flex items-center gap-3 mb-3">
+                        <div class="w-10 h-10 rounded-full bg-gold-200 text-gold-800 font-bold flex items-center justify-center">
+                            ${name.charAt(0)}
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">${name}</h4>
+                            <span class="text-xs text-gold-600 font-semibold">الآن</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-700 text-sm leading-relaxed font-amiri text-lg">
+                        "${message}"
+                    </p>
+                `;
+                wishesContainer.prepend(newCard);
+            }
+        }
+
+        function shareInvitation() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'دعوة زفاف أحمد وسارة',
+                    text: 'يتشرف أحمد وسارة بدعوتكم لحضور حفل زفافهما الميمون.',
+                    url: window.location.href,
+                }).catch(() => {});
+            } else {
+                navigator.clipboard.writeText(window.location.href);
+                alert('تم نسخ رابط الدعوة بنجاح!');
+            }
+        }
+
+        function addToCalendar() {
+            const title = encodeURIComponent("حفل زفاف أحمد وسارة");
+            const details = encodeURIComponent("يتشرف أحمد وسارة بدعوتكم لحضور حفل زفافهما في قاعة الملكة الكبرى.");
+            const location = encodeURIComponent("قاعة الملكة الكبرى، الفندق الملكي، الرياض");
+            const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261120T163000Z/20261120T210000Z&details=${details}&location=${location}`;
+            window.open(googleUrl, '_blank');
+        }
+
+        let audioCtx = null;
+        let isPlaying = false;
+        let melodyInterval = null;
+
+        function toggleAudio() {
+            const icon = document.getElementById('musicIcon');
+            const ping = document.getElementById('musicPing');
+
+            if (!isPlaying) {
+                startClassicalMelody();
+                icon.className = "fa-solid fa-volume-high text-xl text-gold-600";
+                ping.classList.remove('hidden');
+                isPlaying = true;
+            } else {
+                stopClassicalMelody();
+                icon.className = "fa-solid fa-music text-xl text-gold-600";
+                ping.classList.add('hidden');
+                isPlaying = false;
+            }
+        }
+
+        function startClassicalMelody() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+
+            // Relaxing classical pentatonic chord progression
+            const notes = [261.63, 293.66, 329.63, 392.00, 440.00, 523.25, 587.33, 659.25];
+            let step = 0;
+
+            melodyInterval = setInterval(() => {
+                if (!isPlaying) return;
+
+                // Pick harmonious notes
+                const freq = notes[Math.floor(Math.random() * notes.length)];
+                
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine'; // Soft harmonic tone
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+
+                gain.gain.setValueAtTime(0.01, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.12, audioCtx.currentTime + 0.2);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start();
+                osc.stop(audioCtx.currentTime + 2.6);
+
+                step++;
+            }, 600);
+        }
+
+        function stopClassicalMelody() {
+            if (melodyInterval) {
+                clearInterval(melodyInterval);
+            }
         }
     </script>
-
 </body>
 </html>
-
