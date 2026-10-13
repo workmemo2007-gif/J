@@ -1,853 +1,936 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" class="scroll-smooth">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>دعوة زفاف أحمد & سارة | أهلاً بكم في ليلة عمرنا</title>
+    <title>ايس هوم | Ice Home - القائمة الرقمية</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Canvas Confetti -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts - Cairo & Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        gold: {
-                            100: '#FBF5E8',
-                            300: '#E6CA65',
-                            400: '#D4AF37',
-                            500: '#C5A059',
-                            600: '#B0883A',
-                            700: '#8C6721',
+                        burgundy: {
+                            50: '#fdf2f4',
+                            100: '#fbe5e9',
+                            200: '#f7ced6',
+                            600: '#a3153d',
+                            700: '#800020', // Main Burgundy
+                            800: '#5b0e2d', // Deep Maroon
+                            900: '#4a0017',
                         },
-                        charcoal: '#1A1A1A',
-                    },
-                    fontFamily: {
-                        amiri: ['Amiri', 'serif'],
-                        ruqaa: ['Aref Ruqaa', 'serif'],
-                        cairo: ['Cairo', 'sans-serif'],
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-6px)' },
+                        ivory: {
+                            DEFAULT: '#FAF8f5',
+                            card: '#FFFFFF',
+                            soft: '#F4EFEA',
                         }
                     },
-                    animation: {
-                        fadeInUp: 'fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-                        float: 'float 4s infinite ease-in-out',
+                    fontFamily: {
+                        cairo: ['Cairo', 'sans-serif'],
+                        tajawal: ['Tajawal', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-
+    
     <style>
+        /* */
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #FAFAFA;
-            color: #1A1A1A;
+            background-color: #FAF8f5;
+            color: #2D2D2D;
             overflow-x: hidden;
         }
 
-        /* خلفية بيضاء ساطعة بنمط هندسي ناعم جداً */
-        .bright-bg {
-            background-color: #FFFFFF;
-            background-image: 
-                radial-gradient(#E5E7EB 0.75px, transparent 0.75px),
-                radial-gradient(#E5E7EB 0.75px, #FFFFFF 0.75px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-        }
-
-        /* الورقة البيضاء الممتدة بطول الصفحة */
-        .paper-sheet {
-            background-color: #FFFFFF;
-            box-shadow: 0 0 50px rgba(0, 0, 0, 0.06), 0 0 1px rgba(0, 0, 0, 0.15);
-            border-left: 1px solid #E5E7EB;
-            border-right: 1px solid #E5E7EB;
-        }
-
-        /* إطارات سوداء ناعمة ومزخرفة */
-        .black-frame {
-            border: 1px solid #1A1A1A;
-            position: relative;
-            background: #FFFFFF;
-        }
-        
-        .black-frame::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            right: 3px;
-            bottom: 3px;
-            border: 1px dashed rgba(26, 26, 26, 0.3);
+        /* Animated Translucent Pattern Background */
+        .pattern-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
             pointer-events: none;
+            z-index: 0;
+            opacity: 0.12;
+            background-image: radial-gradient(rgba(128, 0, 32, 0.25) 1px, transparent 1px), radial-gradient(rgba(91, 14, 45, 0.2) 1px, #FAF8f5 1px);
+            background-size: 40px 40px;
+            background-position: 0 0, 20px 20px;
+            animation: movePattern 40s linear infinite;
         }
 
-        /* نص متدرج ذهبي */
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #99772D 0%, #D4AF37 50%, #8C6721 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        @keyframes movePattern {
+            0% { background-position: 0 0, 20px 20px; }
+            100% { background-position: 400px 400px, 420px 420px; }
         }
 
-        .reveal-on-scroll {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Animated Floating Arabesque Ornaments */
+        .ornament-float {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.08;
+            animation: floatAnim 18s ease-in-out infinite alternate;
         }
 
-        .reveal-on-scroll.active {
-            opacity: 1;
-            transform: translateY(0);
+        @keyframes floatAnim {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-25px) rotate(15deg) scale(1.05); }
+            100% { transform: translateY(15px) rotate(-10deg) scale(0.95); }
         }
 
-        /* Scrollbar */
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(128, 0, 32, 0.1);
+        }
+
+        .glass-header {
+            background: rgba(128, 0, 32, 0.92);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 6px;
+            height: 6px;
         }
         ::-webkit-scrollbar-track {
-            background: #FFFFFF;
+            background: #FAF8f5;
         }
         ::-webkit-scrollbar-thumb {
-            background: #1A1A1A;
+            background: #800020;
+            border-radius: 10px;
         }
 
-        /* ===== أنماط البوم الصور Coverflow Gallery ===== */
-        .coverflow-section {
-            user-select: none;
-            -webkit-user-drag: none;
-            perspective: 1000px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-top: 2rem;
-            margin-bottom: 2.5rem;
+        /* Category Scrollbar Hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
-        .coverflow-container {
-            position: relative;
-            width: 100%;
-            height: 420px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1200px;
-            cursor: grab;
-        }
-
-        .coverflow-container:active {
-            cursor: grabbing;
-        }
-
-        .coverflow-wrapper {
-            position: relative;
-            width: 260px;
-            height: 340px;
-            transform-style: preserve-3d;
-        }
-
-        @media (min-width: 640px) {
-            .coverflow-container {
-                height: 460px;
-            }
-            .coverflow-wrapper {
-                width: 280px;
-                height: 360px;
-            }
-        }
-
-        .card {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 20px;
-            overflow: hidden;
-            background: transparent;
-            filter: drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35));
-            transition: transform 0.55s cubic-bezier(0.25, 1, 0.5, 1), 
-                        filter 0.55s ease, 
-                        opacity 0.55s ease;
-            transform-origin: center center;
-            will-change: transform, filter;
-        }
-
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 20px;
-            display: block;
-            pointer-events: none;
-        }
-
-        .card-fallback {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 3rem;
-            border-radius: 20px;
-            background: rgba(0, 0, 0, 0.05);
-        }
-
-        .opening .card {
-            animation: openingAnim 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes openingAnim {
-            0% {
-                transform: translate3d(0, 80px, -400px) rotateY(0deg) scale(0.5);
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
-
-        .dots-container {
-            margin-top: 15px;
-            display: flex;
-            gap: 10px;
-            z-index: 10;
-        }
-
-        .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.25);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .dot.active {
-            background: #000000;
-            transform: scale(1.4);
-            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        .hero-gradient-overlay {
+            background: linear-gradient(180deg, rgba(74, 0, 23, 0.4) 0%, rgba(91, 14, 45, 0.85) 75%, rgba(128, 0, 32, 1) 100%);
         }
     </style>
 </head>
-<body class="bright-bg min-h-screen relative text-gray-900 selection:bg-gray-200">
+<body class="relative min-h-screen pb-24 select-none">
 
-    <!-- خلفية الصوت -->
-    <audio id="bgAudio" autoplay loop preload="auto" class="hidden">
-        <source src="https://j.top4top.io/m_33454ly8c1.mp3" type="audio/mpeg">
-    </audio>
+    <!-- Background Animated Pattern Canvas/Overlay -->
+    <div class="pattern-bg"></div>
 
-    <!-- الورقة البيضاء الممتدة من الأعلى إلى الأسفل -->
-    <main class="paper-sheet max-w-3xl mx-auto min-h-screen px-4 sm:px-8 py-8 relative z-10">
+    <!-- Floating Ornamental Motifs (Subtle Moving Gray/Burgundy SVGs) -->
+    <svg class="ornament-float top-10 right-5 w-40 h-40 text-gray-700" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M50 0 C60 25, 75 40, 100 50 C75 60, 60 75, 50 100 C40 75, 25 60, 0 50 C25 40, 40 25, 50 0 Z" />
+    </svg>
+    <svg class="ornament-float bottom-1/3 left-5 w-56 h-56 text-gray-700" style="animation-delay: -5s;" viewBox="0 0 100 100" fill="currentColor">
+        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
 
-        <!-- الهيدر أعلى الورقة -->
-        <header class="pb-6 flex justify-between items-center border-b border-gray-200">
-            <div class="font-ruqaa text-2xl text-gray-900 font-bold">
-                أحمد & سارة
-            </div>
-            <div class="flex items-center space-x-2 space-x-reverse text-xs">
-                <button onclick="shareInvitation()" class="px-3 py-1.5 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-100 transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-share-nodes"></i>
-                    <span class="hidden sm:inline">مشاركة</span>
-                </button>
-                <button onclick="addToCalendar()" class="px-3 py-1.5 rounded-full bg-gray-900 text-white hover:bg-gray-800 transition-all flex items-center gap-1.5 shadow-sm">
-                    <i class="fa-regular fa-calendar-plus"></i>
-                    <span>حفظ التاريخ</span>
-                </button>
-            </div>
-        </header>
-
-        <!-- قسم ألبوم الصور المميز (Coverflow Gallery) -->
-        <section class="coverflow-section animate-fadeInUp">
-            <div class="coverflow-container" id="coverflow">
-                <div class="coverflow-wrapper opening" id="wrapper">
-                    <!-- سيتم توليد البطاقات عبر JavaScript -->
-                </div>
-            </div>
-            <div class="dots-container" id="dots"></div>
-        </section>
-
-        <!-- الهيدر والآية القرانية -->
-        <section class="text-center pt-4 pb-6 animate-fadeInUp">
+    <!-- Hero Cover Section -->
+    <header class="relative w-full h-80 sm:h-96 overflow-hidden shadow-2xl">
+        <!-- Cover Background Image -->
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" 
+             alt="Ice Home Cafe Cover" 
+             class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 hover:scale-100">
+        
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-between p-4 sm:p-8">
             
-            <!-- زخرفة علوية سوداء ناعمة -->
-            <div class="flex justify-center items-center gap-2 mb-4 text-gray-900 opacity-80">
-                <span>❖</span>
-                <div class="h-[1px] w-16 bg-gray-900"></div>
-                <i class="fa-solid fa-heart text-xs"></i>
-                <div class="h-[1px] w-16 bg-gray-900"></div>
-                <span>❖</span>
-            </div>
+            <!-- Top Bar: Status & Socials -->
+            <div class="flex justify-between items-center z-10">
+                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                    مفتوح الآن لاستقبالكم
+                </span>
 
-            <h1 class="font-amiri text-xl md:text-2xl text-gray-900 font-bold mb-2">
-                بسم الله الرحمن الرحيم
-            </h1>
-            <p class="font-amiri text-base md:text-lg text-gray-700 italic max-w-xl mx-auto leading-relaxed">
-                "وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً"
-            </p>
-
-            <div class="mt-8">
-                <p class="text-gray-600 font-amiri text-base tracking-widest mb-2">يسرنا دعوتكم لحضور حفل زفاف</p>
-                
-                <!-- الأسماء -->
-                <div class="my-4">
-                    <h2 class="font-ruqaa text-4xl sm:text-6xl gold-gradient-text font-bold leading-tight">
-                        أحمد <span class="text-2xl text-gray-900 font-amiri italic mx-1">&</span> سارة
-                    </h2>
-                </div>
-
-                <!-- شارة التاريخ بلمسة سوداء ناعمة -->
-                <div class="inline-flex items-center gap-2 px-5 py-2 border border-gray-900 bg-white shadow-sm my-2 text-sm">
-                    <i class="fa-regular fa-clock text-gray-900 text-xs"></i>
-                    <span class="font-bold text-gray-900 tracking-wide">الجمعة، 20 نوفمبر 2026</span>
-                </div>
-            </div>
-
-            <!-- العداد التنازلي المصغر -->
-            <div class="mt-8 grid grid-cols-4 gap-2 max-w-md mx-auto">
-                <div class="black-frame p-2 text-center">
-                    <span id="cd-days" class="font-bold text-lg text-gray-900 block">00</span>
-                    <span class="text-[10px] text-gray-600">يوم</span>
-                </div>
-                <div class="black-frame p-2 text-center">
-                    <span id="cd-hours" class="font-bold text-lg text-gray-900 block">00</span>
-                    <span class="text-[10px] text-gray-600">ساعة</span>
-                </div>
-                <div class="black-frame p-2 text-center">
-                    <span id="cd-minutes" class="font-bold text-lg text-gray-900 block">00</span>
-                    <span class="text-[10px] text-gray-600">دقيقة</span>
-                </div>
-                <div class="black-frame p-2 text-center">
-                    <span id="cd-seconds" class="font-bold text-lg text-gray-900 block">00</span>
-                    <span class="text-[10px] text-gray-600">ثانية</span>
-                </div>
-            </div>
-
-            <div class="mt-8">
-                <a href="#rsvp" class="inline-flex items-center gap-2 px-6 py-2.5 bg-gray-900 text-white text-sm font-semibold hover:bg-gray-800 transition-all shadow">
-                    <i class="fa-solid fa-envelope-open-text text-xs"></i>
-                    <span>تأكيد الحضور</span>
-                </a>
-            </div>
-        </section>
-
-        <!-- قسم الترحيب -->
-        <section class="py-10 text-center reveal-on-scroll">
-            <div class="black-frame p-6 sm:p-8 relative">
-                <h3 class="font-ruqaa text-2xl text-gray-900 mb-4">أهلاً بكم في ليلة فرحتنا</h3>
-                <p class="font-amiri text-lg text-gray-700 leading-relaxed">
-                    تكتمل سعادتنا وتكتسي ليلتنا بأجمل حُلّة بحضوركم الكريم.<br>
-                    يسعدنا أن تشاركونا لحظات الفرح والمودة في هذه الليلة الاستثنائية،<br>
-                    لتكتمل بها فرحتنا وتتوج بها أجمل الذكريات.
-                </p>
-                <p class="font-ruqaa text-lg text-gray-900 font-bold mt-6">
-                    ـ الداعون: عائلة العريس & عائلة العروس
-                </p>
-            </div>
-        </section>
-
-        <!-- تفاصيل الحفل والموقع -->
-        <section class="py-8">
-            <div class="text-center mb-8 reveal-on-scroll">
-                <h2 class="font-ruqaa text-2xl text-gray-900">تفاصيل الحفل والموقع</h2>
-                <div class="w-12 h-[1px] bg-gray-900 mx-auto mt-1"></div>
-            </div>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                <!-- الزمان -->
-                <div class="black-frame p-4 text-center reveal-on-scroll">
-                    <i class="fa-regular fa-calendar-check text-gray-900 text-base mb-2 block"></i>
-                    <h3 class="font-bold text-sm text-gray-900 mb-1">الزمان</h3>
-                    <p class="text-gray-900 text-xs font-semibold">الجمعة، 20 نوفمبر 2026</p>
-                    <p class="text-gray-600 text-[11px] mt-1">الاستقبال الساعة 7:30 مساءً</p>
-                </div>
-
-                <!-- المكان -->
-                <div class="black-frame p-4 text-center reveal-on-scroll">
-                    <i class="fa-solid fa-location-dot text-gray-900 text-base mb-2 block"></i>
-                    <h3 class="font-bold text-sm text-gray-900 mb-1">المكان</h3>
-                    <p class="text-gray-900 text-xs font-semibold">قاعة الملكة - الفندق الملكي</p>
-                    <p class="text-gray-600 text-[11px] mt-1 mb-2">الرياض</p>
-                    <a href="https://maps.google.com" target="_blank" class="inline-block text-[10px] font-bold text-gray-900 underline">
-                        خرائط جوجل <i class="fa-solid fa-arrow-up-right-from-square text-[8px]"></i>
+                <div class="flex items-center gap-3 text-white/90">
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition border border-white/20">
+                        <i class="fab font-bold fa-instagram"></i>
+                    </a>
+                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition border border-white/20">
+                        <i class="fab fa-snapchat"></i>
+                    </a>
+                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition border border-white/20">
+                        <i class="fas fa-phone"></i>
                     </a>
                 </div>
-
-                <!-- كود الملابس -->
-                <div class="black-frame p-4 text-center reveal-on-scroll">
-                    <i class="fa-solid fa-user-tie text-gray-900 text-base mb-2 block"></i>
-                    <h3 class="font-bold text-sm text-gray-900 mb-1">الزي الرسمي</h3>
-                    <p class="text-gray-900 text-xs font-semibold">الزي الرسمي الفاخر</p>
-                    <p class="text-gray-600 text-[11px] mt-1">البشت الرسمي / ألوان ملكية</p>
-                </div>
             </div>
 
-            <!-- الخريطة -->
-            <div class="mt-6 black-frame p-2 reveal-on-scroll">
-                <div class="w-full h-52 overflow-hidden">
-                    <iframe 
-                        title="موقع الحفل"
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3624.682337777174!2d46.675295!3d24.713552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDQyJzE4LjgiTiA0NsKwNDAnMzEuMSJF!5e0!3m2!1sar!2s!4v1620000000000!5m2!1sar!2s" 
-                        class="w-full h-full border-0" 
-                        allowfullscreen="" 
-                        loading="lazy">
-                    </iframe>
-                </div>
-            </div>
-        </section>
+            <!-- Header Main Content (Logo & Title) -->
+            <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 mt-auto mb-2">
+                
+                <!-- Circular Logo Badge Positioned Prominently on the Right -->
+                <div class="flex items-center gap-4 text-center sm:text-right">
+                    <div class="relative group">
+                        <!-- Outer Decorative Glow Circle -->
+                        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-70 blur group-hover:opacity-100 transition duration-500"></div>
+                        
+                        <!-- Circular Logo Badge -->
+                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/80 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
+                            <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
+                                <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-pulse"></i>
+                                <span class="font-extrabold text-sm sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
+                                <span class="text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
+                            </div>
+                        </div>
+                    </div>
 
-        <!-- جدول الحفل -->
-        <section class="py-8">
-            <div class="text-center mb-8 reveal-on-scroll">
-                <h2 class="font-ruqaa text-2xl text-gray-900">جدول الحفل</h2>
-                <div class="w-12 h-[1px] bg-gray-900 mx-auto mt-1"></div>
-            </div>
-
-            <div class="space-y-3 max-w-lg mx-auto">
-                <div class="black-frame p-3 flex items-center justify-between reveal-on-scroll">
-                    <span class="text-xs font-bold text-gray-900 bg-gray-100 px-2 py-1 border border-gray-300">07:30 م</span>
-                    <div class="text-right flex-1 mr-4">
-                        <h4 class="font-bold text-sm text-gray-900">استقبال الضيوف الكرام</h4>
-                        <p class="text-[11px] text-gray-600">الترحيب والقهوة السعودية</p>
+                    <!-- Cafe Name & Tagline -->
+                    <div class="text-white">
+                        <h1 class="text-3xl sm:text-4xl font-black text-amber-100 tracking-wide drop-shadow-md">
+                            آيس هوم <span class="text-xl font-normal text-amber-300/90 font-tajawal">| Ice Home</span>
+                        </h1>
+                        <p class="text-xs sm:text-sm text-gray-200 mt-1 max-w-md font-tajawal">
+                            عالم الفخامة والانتعاش.. أجود أنواع المشروبات المبتكرة، الحلويات الفاخرة، والآيس كريم المميز
+                        </p>
+                        <div class="flex items-center justify-center sm:justify-start gap-4 text-xs text-amber-200/90 mt-2 font-tajawal">
+                            <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
+                            <span>•</span>
+                            <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
+                        </div>
                     </div>
                 </div>
 
-                <div class="black-frame p-3 flex items-center justify-between reveal-on-scroll">
-                    <span class="text-xs font-bold text-gray-900 bg-gray-100 px-2 py-1 border border-gray-300">09:00 م</span>
-                    <div class="text-right flex-1 mr-4">
-                        <h4 class="font-bold text-sm text-gray-900">مراسم الزفة السعيدة</h4>
-                        <p class="text-[11px] text-gray-600">دخول العروسين والفقرات الترحيبية</p>
-                    </div>
-                </div>
-
-                <div class="black-frame p-3 flex items-center justify-between reveal-on-scroll">
-                    <span class="text-xs font-bold text-gray-900 bg-gray-100 px-2 py-1 border border-gray-300">10:00 م</span>
-                    <div class="text-right flex-1 mr-4">
-                        <h4 class="font-bold text-sm text-gray-900">مأدبة العشاء الملكية</h4>
-                        <p class="text-[11px] text-gray-600">تناول العشاء وتقطيع الكعكة</p>
-                    </div>
-                </div>
-
-                <div class="black-frame p-3 flex items-center justify-between reveal-on-scroll">
-                    <span class="text-xs font-bold text-gray-900 bg-gray-100 px-2 py-1 border border-gray-300">11:30 م</span>
-                    <div class="text-right flex-1 mr-4">
-                        <h4 class="font-bold text-sm text-gray-900">ختام الحفل</h4>
-                        <p class="text-[11px] text-gray-600">التقاط الصور والتوديع</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- قسم تأكيد الحضور (RSVP) -->
-        <section id="rsvp" class="py-8">
-            <div class="black-frame p-6 sm:p-8 reveal-on-scroll">
-                <div class="text-center mb-6">
-                    <i class="fa-solid fa-envelope-open-text text-2xl text-gray-900 mb-1 block"></i>
-                    <h2 class="font-ruqaa text-2xl text-gray-900">تأكيد الحضور (RSVP)</h2>
-                    <p class="text-xs text-gray-600">لطفاً أكد حضورك لمساعدتنا في التنظيم</p>
-                </div>
-
-                <form id="rsvpForm" onsubmit="handleRSVPSubmit(event)" class="space-y-4">
+                <!-- Wifi / Info Quick Badge -->
+                <div class="hidden md:flex items-center gap-2 bg-black/30 backdrop-blur-md px-3 py-2 rounded-xl border border-white/10 text-xs text-white">
+                    <i class="fas fa-wifi text-amber-300 text-base"></i>
                     <div>
-                        <label class="block text-gray-900 text-xs font-semibold mb-1">الاسم الكامل *</label>
-                        <input type="text" required placeholder="أدخل اسمك الكريم" class="w-full px-3 py-2 bg-white border border-gray-400 focus:outline-none focus:border-gray-900 text-xs">
+                        <div class="text-[10px] text-gray-300">شبكة Вай-фай المجانية</div>
+                        <div class="font-bold tracking-wider text-amber-200">IceHome_Guest</div>
                     </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-gray-900 text-xs font-semibold mb-1">رقم الجوال *</label>
-                            <input type="tel" required placeholder="05xxxxxxxx" class="w-full px-3 py-2 bg-white border border-gray-400 focus:outline-none focus:border-gray-900 text-xs text-left" dir="ltr">
-                        </div>
-                        <div>
-                            <label class="block text-gray-900 text-xs font-semibold mb-1">عدد المرافقين</label>
-                            <select class="w-full px-3 py-2 bg-white border border-gray-400 focus:outline-none focus:border-gray-900 text-xs">
-                                <option value="1">شخص واحد</option>
-                                <option value="2">مرافق واحد (+1)</option>
-                                <option value="3">مرافقان (+2)</option>
-                                <option value="4">ثلاثة مرافقين (+3)</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-900 text-xs font-semibold mb-1">موقف الحضور *</label>
-                        <div class="grid grid-cols-2 gap-3 text-xs">
-                            <label class="flex items-center justify-center gap-2 p-2 border border-gray-400 cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="attendance" value="attending" checked class="accent-gray-900">
-                                <span class="font-semibold text-gray-900">يشرفني الحضور ✨</span>
-                            </label>
-                            <label class="flex items-center justify-center gap-2 p-2 border border-gray-400 cursor-pointer hover:bg-gray-50">
-                                <input type="radio" name="attendance" value="declining" class="accent-gray-900">
-                                <span class="font-semibold text-gray-600">أعتذر عن الحضور 🤍</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-gray-900 text-xs font-semibold mb-1">رسالة تهنئة (اختياري)</label>
-                        <textarea rows="2" id="guestMessage" placeholder="اكتب مباركتك..." class="w-full px-3 py-2 bg-white border border-gray-400 focus:outline-none focus:border-gray-900 text-xs"></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full py-3 bg-gray-900 text-white font-bold text-sm shadow hover:bg-gray-800 transition-all">
-                        تأكيد إرسال الرد
-                    </button>
-                </form>
-
-                <div id="rsvpSuccessMessage" class="hidden text-center py-6">
-                    <i class="fa-solid fa-check text-2xl text-gray-900 mb-2 block"></i>
-                    <h3 class="font-bold text-lg text-gray-900 mb-1">تم تسجيل إجابتك بنجاح!</h3>
-                    <p class="text-xs text-gray-600">نشكرك جزيل الشكر، ونتطلع لرؤيتك.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- دفتر التهاني -->
-        <section class="py-8">
-            <div class="text-center mb-6 reveal-on-scroll">
-                <h2 class="font-ruqaa text-2xl text-gray-900">دفتر التهاني والتبريكات</h2>
-                <div class="w-12 h-[1px] bg-gray-900 mx-auto mt-1"></div>
-            </div>
-
-            <div id="wishesGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div class="black-frame p-4">
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-7 h-7 bg-gray-900 text-white font-bold text-xs flex items-center justify-center">م</div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 text-xs">محمد العتيبي</h4>
-                            <span class="text-[10px] text-gray-500">منذ ساعة</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-800 text-xs font-amiri leading-relaxed">
-                        "ألف مبروك للعروسين الجميلين أحمد وسارة! بارك الله لكما وبارك عليكما وجمع بينكما في خير."
-                    </p>
                 </div>
 
-                <div class="black-frame p-4">
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-7 h-7 bg-gray-900 text-white font-bold text-xs flex items-center justify-center">ن</div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 text-xs">نورة وسعد</h4>
-                            <span class="text-[10px] text-gray-500">منذ ساعتين</span>
-                        </div>
-                    </div>
-                    <p class="text-gray-800 text-xs font-amiri leading-relaxed">
-                        "يا رب تجعل أيامكم كلها حب وسعادة وتوفيق. متحمسين جداً لحضور هذه الليلة!"
-                    </p>
-                </div>
             </div>
-        </section>
 
-        <!-- الفوتر داخل الورقة -->
-        <footer class="pt-8 pb-4 border-t border-gray-200 text-center mt-6">
-            <h3 class="font-ruqaa text-2xl text-gray-900 mb-1">أحمد & سارة</h3>
-            <p class="font-amiri text-gray-600 text-sm mb-2">نشكركم على مشاركتنا فرحتنا</p>
-            <p class="text-[10px] text-gray-400">© 2026 جميع الحقوق محفوظة | دعوة زفاف إلكترونية</p>
-        </footer>
+        </div>
+    </header>
+
+    <!-- Sticky Search & Category Bar Wrapper -->
+    <div class="sticky top-0 z-30 bg-burgundy-800/95 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-4 py-3">
+            
+            <!-- Search & Quick Filters -->
+            <div class="flex items-center gap-3 mb-3">
+                <div class="relative flex-1">
+                    <input type="text" id="searchInput" oninput="handleSearch()" 
+                           placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
+                           class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
+                    <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
+                </div>
+
+                <!-- Quick Filter Options -->
+                <button onclick="toggleFilterModal()" class="flex items-center gap-2 bg-amber-400 text-burgundy-900 px-3.5 py-2.5 rounded-full text-xs font-bold hover:bg-amber-300 transition shadow">
+                    <i class="fas fa-sliders-h"></i>
+                    <span class="hidden sm:inline">تصفية السريعة</span>
+                </button>
+            </div>
+
+            <!-- Categories Scrollable Navigation Bar -->
+            <nav id="categoryNav" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs sm:text-sm font-semibold">
+                <!-- Javascript will inject categories here -->
+            </nav>
+
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto px-4 py-6 relative z-10">
+        
+        <!-- Quick Tag Badges (Special Filters Display) -->
+        <div id="activeFilterBadge" class="hidden mb-4 flex items-center justify-between bg-amber-100 border border-amber-300 text-burgundy-800 px-4 py-2 rounded-xl text-xs">
+            <span>تصفية حسب: <strong id="filterName">الكل</strong></span>
+            <button onclick="resetFilters()" class="text-burgundy-700 font-bold hover:underline">إلغاء التصفية <i class="fas fa-times mr-1"></i></button>
+        </div>
+
+        <!-- Section Title & Counter -->
+        <div class="flex items-center justify-between mb-6 border-r-4 border-burgundy-700 pr-3">
+            <div>
+                <h2 id="currentCategoryTitle" class="text-xl sm:text-2xl font-black text-burgundy-900">
+                    الكل <span class="text-xs text-burgundy-600 font-normal mr-2 font-tajawal">(جميع الأصناف)</span>
+                </h2>
+                <p id="currentCategoryDesc" class="text-xs text-gray-500 mt-0.5">اختر من تشكليتنا الفاخرة المحضرة بكل حب</p>
+            </div>
+            <span id="itemsCountBadge" class="bg-burgundy-100 text-burgundy-800 text-xs font-bold px-3 py-1 rounded-full">
+                0 صنف
+            </span>
+        </div>
+
+        <!-- Dishes Grid Container -->
+        <div id="dishesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <!-- Dishes Cards Will Be Dynamic Injected via JS -->
+        </div>
+
+        <!-- Empty Search State -->
+        <div id="emptyState" class="hidden text-center py-16">
+            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-700 text-3xl">
+                <i class="fas fa-search-minus"></i>
+            </div>
+            <h3 class="text-lg font-bold text-gray-800">لم نجد أي صنف يطابق بحثك</h3>
+            <p class="text-xs text-gray-500 mt-1">جرّب البحث بكلمات أخرى أو اختر قسم آخر من المنيو</p>
+            <button onclick="resetFilters()" class="mt-4 bg-burgundy-700 text-white text-xs px-5 py-2.5 rounded-full hover:bg-burgundy-800 transition">
+                عرض جميع الأصناف
+            </button>
+        </div>
 
     </main>
 
+    <!-- Item Details & Customization Modal -->
+    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-300 max-h-[90vh] flex flex-col border border-burgundy-700/10">
+            
+            <!-- Modal Header Image -->
+            <div class="relative h-56 sm:h-64 overflow-hidden bg-burgundy-900">
+                <img id="modalImage" src="" alt="Dish Detail" class="w-full h-full object-cover">
+                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="absolute bottom-3 right-3 bg-burgundy-900/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold" id="modalCategoryBadge">
+                    قسم المشروبات
+                </div>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-5 overflow-y-auto flex-1 space-y-4">
+                <div class="flex justify-between items-start gap-2">
+                    <div>
+                        <h3 id="modalTitle" class="text-xl font-extrabold text-burgundy-900"></h3>
+                        <p id="modalDesc" class="text-xs text-gray-600 mt-1 leading-relaxed font-tajawal"></p>
+                    </div>
+                    <span id="modalPrice" class="text-lg font-black text-burgundy-700 whitespace-nowrap bg-burgundy-50 px-3 py-1 rounded-xl"></span>
+                </div>
+
+                <!-- Size / Flavor Options (If available) -->
+                <div id="optionsContainer" class="space-y-2 pt-2 border-t border-gray-100">
+                    <label class="block text-xs font-bold text-gray-800">الحجم / الخيار:</label>
+                    <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2">
+                        <!-- Options generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Addons / Extras -->
+                <div id="extrasContainer" class="space-y-2 pt-2 border-t border-gray-100">
+                    <label class="block text-xs font-bold text-gray-800">إضافات اختيارية:</label>
+                    <div id="extrasGrid" class="space-y-1.5">
+                        <!-- Extras generated by JS -->
+                    </div>
+                </div>
+
+                <!-- Special Instructions -->
+                <div class="pt-2 border-t border-gray-100">
+                    <label for="specialNote" class="block text-xs font-bold text-gray-800 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
+                    <textarea id="specialNote" rows="2" placeholder="اكتب أية تفاصيل تفضلها لنحضّرها كما تحب..." class="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-gray-50/50"></textarea>
+                </div>
+            </div>
+
+            <!-- Modal Footer (Quantity & Add To Tray) -->
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-4">
+                <!-- Quantity Counter -->
+                <div class="flex items-center border border-gray-300 rounded-full bg-white px-2 py-1">
+                    <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">-</button>
+                    <span id="modalQty" class="w-8 text-center font-bold text-sm">1</span>
+                    <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">+</button>
+                </div>
+
+                <!-- Add Button -->
+                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>إضافة إلى السلة • </span>
+                    <span id="modalTotalPrice">0 ر.س</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Quick Filter Modal -->
+    <div id="filterModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+        <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-bold text-burgundy-900 text-base"><i class="fas fa-filter text-amber-500 ml-1"></i> تصفية المنيو</h3>
+                <button onclick="toggleFilterModal()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="space-y-2">
+                <button onclick="applyQuickTag('الأكثر مبيعاً')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
+                    <span><i class="fas fa-fire text-orange-500 ml-2"></i> الأكثر مبيعاً</span>
+                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
+                </button>
+                <button onclick="applyQuickTag('جديد')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
+                    <span><i class="fas fa-sparkles text-amber-500 ml-2"></i> أحدث الأطباق والمشروبات</span>
+                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
+                </button>
+                <button onclick="applyQuickTag('خالي من السكر')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
+                    <span><i class="fas fa-leaf text-emerald-500 ml-2"></i> خيارات صحية وخالية من السكر</span>
+                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
+                </button>
+                <button onclick="applyQuickTag('مميز')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
+                    <span><i class="fas fa-crown text-amber-500 ml-2"></i> توقيع ايس هوم (Signature)</span>
+                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Tray / Quick Order Summary Bottom Bar -->
+    <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 z-40 max-w-xl mx-auto transform translate-y-32 opacity-0 transition-all duration-500">
+        <div class="glass-header text-white rounded-2xl p-3 shadow-2xl border border-amber-400/30 flex items-center justify-between gap-3">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="toggleCartDrawer()">
+                <div class="relative w-12 h-12 rounded-xl bg-amber-400 text-burgundy-900 flex items-center justify-center font-black text-lg">
+                    <i class="fas fa-receipt"></i>
+                    <span id="cartCountBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-white">0</span>
+                </div>
+                <div>
+                    <div class="text-xs text-amber-200">ملخص طلبيتك الحالية</div>
+                    <div id="cartBarTotal" class="text-base font-extrabold text-white">0 ر.س</div>
+                </div>
+            </div>
+
+            <button onclick="toggleCartDrawer()" class="bg-amber-400 hover:bg-amber-300 text-burgundy-950 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
+                <span>عرض الطلب</span>
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Order Drawer Modal -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform transition-transform duration-300">
+            
+            <!-- Cart Header -->
+            <div class="p-4 bg-burgundy-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-shopping-basket text-amber-300 text-lg"></i>
+                    <h3 class="font-extrabold text-base">سلة الطلبات - ايس هوم</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white"><i class="fas fa-times text-lg"></i></button>
+            </div>
+
+            <!-- Cart Items List -->
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-gray-100">
+                <!-- Dynamic Items -->
+            </div>
+
+            <!-- Cart Footer & Checkout Options -->
+            <div class="p-4 bg-ivory border-t border-gray-200 space-y-3">
+                <div class="space-y-1.5 text-xs text-gray-600 font-tajawal">
+                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold">0 ر.س</span></div>
+                    <div class="flex justify-between"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
+                    <div class="flex justify-between text-base font-black text-burgundy-900 border-t pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
+                </div>
+
+                <!-- Order Action Buttons -->
+                <div class="grid grid-cols-2 gap-2 pt-2">
+                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow">
+                        <i class="fab fa-whatsapp text-base"></i> إرسال للواتساب
+                    </button>
+                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow">
+                        <i class="fas fa-file-invoice text-base"></i> الفاتورة الرقمية
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <script>
-        // --- ألبوم الصور Coverflow Gallery Script ---
-        const imageData = [
-            { url: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800", title: "صورة 1" },
-            { url: "https://images.pexels.com/photos/2726111/pexels-photo-2726111.jpeg?auto=compress&cs=tinysrgb&w=800", title: "صورة 2" },
-            { url: "https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=800", title: "صورة 3" },
-            { url: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=800", title: "صورة 4" },
-            { url: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=800", title: "صورة 5" }
+        /* Sample Data for "Ice Home" Menu */
+        const categories = [
+            { id: 'all', name: 'الكل', icon: 'fa-border-all' },
+            { id: 'iced-drinks', name: 'المشروبات الباردة والآيس', icon: 'fa-glass-martini-alt' },
+            { id: 'ice-cream', name: 'الآيس كريم والجيلاتو', icon: 'fa-ice-cream' },
+            { id: 'hot-drinks', name: 'المشروبات الساخنة', icon: 'fa-mug-hot' },
+            { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' },
+            { id: 'waffles', name: 'الوافل والبان كيك', icon: 'fa-stroopwafel' },
+            { id: 'mojitos', name: 'الموهيتو والانتعاش', icon: 'fa-cocktail' }
         ];
 
-        const wrapper = document.getElementById('wrapper');
-        const container = document.getElementById('coverflow');
-        const dotsContainer = document.getElementById('dots');
+        const menuItems = [
+            {
+                id: 1,
+                categoryId: 'iced-drinks',
+                name: 'آيس شيكن وايت موكا',
+                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية تعلوها لمسة قرفة',
+                price: 24,
+                tag: 'الأكثر مبيعاً',
+                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }],
+                extras: [{ name: 'إضافة سيرب فانيلا', price: 3 }, { name: 'جرعة اسبريسو إضافية', price: 5 }]
+            },
+            {
+                id: 2,
+                categoryId: 'ice-cream',
+                name: 'آيس كريم هوم سبيشل',
+                desc: 'ثلاث طبقات من جيلاتو الفانيلا والشوكلاتة والفيستق مع صوص التوت البري وقطع البسكويت المقرمش',
+                price: 28,
+                tag: 'مميز',
+                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل فاخر', price: 5 }],
+                extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا إضافي', price: 3 }]
+            },
+            {
+                id: 3,
+                categoryId: 'desserts',
+                name: 'كيكة السباستيان الفاخرة',
+                desc: 'تشيز كيك سان سيباستيان المخبوزة على الطريقة الإسبانية مع صوص الشوكلاتة البلجيكية الدافئة',
+                price: 32,
+                tag: 'الأكثر مبيعاً',
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'شريحة فردية', price: 0 }],
+                extras: [{ name: 'كرة آيس كريم فانيلا', price: 6 }]
+            },
+            {
+                id: 4,
+                categoryId: 'waffles',
+                name: 'وافل نوتيلا بالآيس كريم',
+                desc: 'وافل ذهبي مقرمش مغطى بقطرات النوتيلا الغنية مع كرة من آيس كريم ايس هوم قطع الفراولة',
+                price: 29,
+                tag: 'جديد',
+                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'حجم عادي', price: 0 }, { name: 'حجم مضاعف Double', price: 10 }],
+                extras: [{ name: 'إضافة صوص بستاشيو', price: 5 }]
+            },
+            {
+                id: 5,
+                categoryId: 'iced-drinks',
+                name: 'بوبا ماتشا لاتيه',
+                desc: 'ماتشا يابانية عضوية فاخرة مع حليب الشوفان وحبيبات البوبا الطازجة (يمكن طلبه خالي سكر)',
+                price: 26,
+                tag: 'خالي من السكر',
+                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
+                extras: [{ name: 'حبيبات بوبا إضافية', price: 4 }]
+            },
+            {
+                id: 6,
+                categoryId: 'mojitos',
+                name: 'موهيتو ريد بل بلوبيري',
+                desc: 'إنعاش حقيقي مع التوت الأزرق، أوراق النعناع الطازج، الليمون، ومشروب ريد بل',
+                price: 25,
+                tag: 'مميز',
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'حجم كبير 500ml', price: 0 }],
+                extras: [{ name: 'إضافة سيرب نكهة إضافية', price: 3 }]
+            },
+            {
+                id: 7,
+                categoryId: 'hot-drinks',
+                name: 'سبانيش لاتيه ساخن',
+                desc: 'قهوة اسبريسو غنية مع الحليب المبخر والحليب المكثف المحلى بطعم متوازن ودافئ',
+                price: 22,
+                tag: 'الأكثر مبيعاً',
+                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'كوب وسط', price: 0 }],
+                extras: [{ name: 'رغوة إضافية', price: 2 }]
+            },
+            {
+                id: 8,
+                categoryId: 'desserts',
+                name: 'سوفليه الشوكلاتة الداكنة',
+                desc: 'كيكة السوفليه الدافئة بقالب هائل من الشوكلاتة الذائبة في المنتصف تقدم مع آيس كريم',
+                price: 27,
+                tag: 'جديد',
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
+                sizes: [{ name: 'حجم عادي', price: 0 }],
+                extras: []
+            }
+        ];
 
-        let currentIndex = 2;
-        let isDragging = false;
-        let startX = 0;
+        /* App State Variables */
+        let currentCategory = 'all';
+        let currentSearchQuery = '';
+        let currentActiveTag = null;
+        let cart = [];
+        let selectedItemForModal = null;
+        let selectedSizePrice = 0;
+        let selectedOptionName = '';
+        let selectedExtras = [];
+        let modalQuantity = 1;
 
-        function initGallery() {
-            wrapper.innerHTML = '';
-            dotsContainer.innerHTML = '';
+        /* Initialize Page */
+        window.onload = function() {
+            renderCategories();
+            renderDishes();
+        };
 
-            imageData.forEach((data, index) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.dataset.index = index;
-
-                const img = document.createElement('img');
-                img.src = data.url;
-                img.alt = data.title;
-                img.loading = "eager";
-
-                img.onerror = function() {
-                    this.remove();
-                    const fallback = document.createElement('div');
-                    fallback.className = 'card-fallback';
-                    fallback.innerHTML = `🖼️`;
-                    card.appendChild(fallback);
-                };
-
-                card.appendChild(img);
-                wrapper.appendChild(card);
-
-                const dot = document.createElement('div');
-                dot.className = `dot ${index === currentIndex ? 'active' : ''}`;
-                dot.addEventListener('click', () => goToIndex(index));
-                dotsContainer.appendChild(dot);
-
-                card.addEventListener('click', () => {
-                    if (index !== currentIndex) {
-                        goToIndex(index);
-                    }
-                });
-            });
-
-            updateCoverflow();
-
-            setTimeout(() => {
-                wrapper.classList.remove('opening');
-            }, 1200);
+        /* Render Category Buttons */
+        function renderCategories() {
+            const nav = document.getElementById('categoryNav');
+            nav.innerHTML = categories.map(cat => `
+                <button onclick="selectCategory('${cat.id}')" 
+                        class="px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300 flex items-center gap-2 border ${
+                            currentCategory === cat.id 
+                            ? 'bg-amber-400 text-burgundy-950 border-amber-300 font-bold shadow-md scale-105' 
+                            : 'bg-white/10 text-white border-white/10 hover:bg-white/20'
+                        }">
+                    <i class="fas ${cat.icon} text-xs"></i>
+                    <span>${cat.name}</span>
+                </button>
+            `).join('');
         }
 
-        function updateCoverflow() {
-            const cards = wrapper.querySelectorAll('.card');
-            const dots = dotsContainer.querySelectorAll('.dot');
+        /* Filter & Render Dishes Grid */
+        function renderDishes() {
+            const grid = document.getElementById('dishesGrid');
+            const emptyState = document.getElementById('emptyState');
 
-            cards.forEach((card, index) => {
-                const offset = index - currentIndex;
-                
-                if (offset === 0) {
-                    card.style.transform = `translateX(0px) translateZ(180px) rotateY(0deg)`;
-                    card.style.filter = 'brightness(1) drop-shadow(0px 15px 25px rgba(0, 0, 0, 0.35))';
-                    card.style.opacity = '1';
-                    card.style.zIndex = '10';
-                } else {
-                    const direction = offset > 0 ? 1 : -1;
-                    const distance = Math.abs(offset);
-                    
-                    const translateX = direction * (130 + distance * 35);
-                    const translateZ = -100 * distance;
-                    const rotateY = -direction * 45;
-                    const brightness = Math.max(0.3, 1 - distance * 0.3);
-                    const opacity = distance > 3 ? 0 : 1;
-
-                    card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg)`;
-                    card.style.filter = `brightness(${brightness}) drop-shadow(0px 10px 15px rgba(0, 0, 0, 0.2))`;
-                    card.style.opacity = opacity;
-                    card.style.zIndex = 10 - distance;
-                }
+            let filtered = menuItems.filter(item => {
+                const matchesCategory = (currentCategory === 'all' || item.categoryId === currentCategory);
+                const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
+                const matchesTag = currentActiveTag ? item.tag === currentActiveTag : true;
+                return matchesCategory && matchesSearch && matchesTag;
             });
 
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentIndex);
-            });
-        }
+            // Update Header titles
+            const catObj = categories.find(c => c.id === currentCategory);
+            document.getElementById('currentCategoryTitle').innerText = catObj ? catObj.name : 'الأصناف';
+            document.getElementById('itemsCountBadge').innerText = `${filtered.length} صنف`;
 
-        function goToIndex(index) {
-            if (index >= 0 && index < imageData.length) {
-                currentIndex = index;
-                updateCoverflow();
-            }
-        }
-
-        // Mouse Drag
-        container.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            const diffX = e.clientX - startX;
-            if (Math.abs(diffX) > 45) {
-                if (diffX > 0 && currentIndex > 0) {
-                    goToIndex(currentIndex - 1);
-                    startX = e.clientX;
-                } else if (diffX < 0 && currentIndex < imageData.length - 1) {
-                    goToIndex(currentIndex + 1);
-                    startX = e.clientX;
-                }
-            }
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
-
-        // Touch Swiping
-        container.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startX = e.touches[0].clientX;
-        });
-
-        container.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            const diffX = e.touches[0].clientX - startX;
-            if (Math.abs(diffX) > 35) {
-                if (diffX > 0 && currentIndex > 0) {
-                    goToIndex(currentIndex - 1);
-                    startX = e.touches[0].clientX;
-                } else if (diffX < 0 && currentIndex < imageData.length - 1) {
-                    goToIndex(currentIndex + 1);
-                    startX = e.touches[0].clientX;
-                }
-            }
-        });
-
-        container.addEventListener('touchend', () => {
-            isDragging = false;
-        });
-
-        // Wheel Scroll (التمرير على الألبوم بشكل آمن)
-        container.addEventListener('wheel', (e) => {
-            if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-                e.preventDefault();
-                if (e.deltaX > 0) {
-                    if (currentIndex < imageData.length - 1) goToIndex(currentIndex + 1);
-                } else {
-                    if (currentIndex > 0) goToIndex(currentIndex - 1);
-                }
-            }
-        }, { passive: false });
-
-        // Keyboard Navigation
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
-                if (currentIndex > 0) goToIndex(currentIndex - 1);
-            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
-                if (currentIndex < imageData.length - 1) goToIndex(currentIndex + 1);
-            }
-        });
-
-        initGallery();
-
-        // --- تشغيل الصوت التلقائي وتفاعلات الدعوة ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const audio = document.getElementById('bgAudio');
-            const playAudio = () => {
-                if (audio.paused) {
-                    audio.play().catch(() => {});
-                }
-            };
-            audio.play().catch(() => {
-                document.addEventListener('click', playAudio, { once: true });
-                document.addEventListener('touchstart', playAudio, { once: true });
-                document.addEventListener('scroll', playAudio, { once: true });
-            });
-        });
-
-        const weddingDate = new Date("November 20, 2026 19:30:00").getTime();
-
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = weddingDate - now;
-
-            if (distance < 0) {
-                document.getElementById("cd-days").innerText = "00";
-                document.getElementById("cd-hours").innerText = "00";
-                document.getElementById("cd-minutes").innerText = "00";
-                document.getElementById("cd-seconds").innerText = "00";
+            if (filtered.length === 0) {
+                grid.innerHTML = '';
+                emptyState.classList.remove('hidden');
                 return;
             }
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            emptyState.classList.add('hidden');
 
-            document.getElementById("cd-days").innerText = days < 10 ? '0' + days : days;
-            document.getElementById("cd-hours").innerText = hours < 10 ? '0' + hours : hours;
-            document.getElementById("cd-minutes").innerText = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById("cd-seconds").innerText = seconds < 10 ? '0' + seconds : seconds;
-        }
-
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                }
-            });
-        }, { threshold: 0.1 });
-
-        document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
-
-        function handleRSVPSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const name = form.querySelector('input[type="text"]').value;
-            const message = document.getElementById('guestMessage').value;
-
-            if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 60,
-                    spread: 60,
-                    origin: { y: 0.6 },
-                    colors: ['#1A1A1A', '#D4AF37', '#666666']
-                });
-            }
-
-            form.style.display = 'none';
-            document.getElementById('rsvpSuccessMessage').classList.remove('hidden');
-
-            if (message.trim() !== "") {
-                const wishesContainer = document.getElementById('wishesGrid');
-                const newCard = document.createElement('div');
-                newCard.className = 'black-frame p-4 animate-fadeInUp';
-                newCard.innerHTML = `
-                    <div class="flex items-center gap-2 mb-2">
-                        <div class="w-7 h-7 bg-gray-900 text-white font-bold text-xs flex items-center justify-center">
-                            ${name.charAt(0)}
+            grid.innerHTML = filtered.map(item => `
+                <div class="glass-panel rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-burgundy-900/10 flex flex-col justify-between group">
+                    <div>
+                        <!-- Dish Image & Badge -->
+                        <div class="relative h-48 overflow-hidden bg-gray-100">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            ${item.tag ? `
+                                <span class="absolute top-3 right-3 bg-burgundy-800 text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full border border-amber-300/30 shadow">
+                                    ${item.tag}
+                                </span>
+                            ` : ''}
+                            <div class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-0.5 rounded-lg text-xs font-black">
+                                ${item.price} ر.س
+                            </div>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-gray-900 text-xs">${name}</h4>
-                            <span class="text-[10px] text-gray-500">الآن</span>
+
+                        <!-- Card Body -->
+                        <div class="p-4">
+                            <h3 class="font-black text-burgundy-900 text-base group-hover:text-burgundy-700 transition">${item.name}</h3>
+                            <p class="text-gray-600 text-xs mt-1.5 line-clamp-2 leading-relaxed font-tajawal">${item.desc}</p>
                         </div>
                     </div>
-                    <p class="text-gray-800 text-xs font-amiri leading-relaxed">
-                        "${message}"
-                    </p>
-                `;
-                wishesContainer.prepend(newCard);
-            }
+
+                    <!-- Action Button -->
+                    <div class="p-4 pt-0">
+                        <button onclick="openDishModal(${item.id})" class="w-full bg-burgundy-50 hover:bg-burgundy-700 text-burgundy-800 hover:text-white font-bold py-2.5 rounded-xl text-xs transition-all duration-300 flex items-center justify-center gap-2 border border-burgundy-200">
+                            <i class="fas fa-plus"></i>
+                            <span>إضافة / التفاصيل</span>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
         }
 
-        function shareInvitation() {
-            if (navigator.share) {
-                navigator.share({
-                    title: 'دعوة زفاف أحمد وسارة',
-                    text: 'يتشرف أحمد وسارة بدعوتكم لحضور حفل زفافهما الميمون.',
-                    url: window.location.href,
-                }).catch(() => {});
+        /* Category Selection */
+        function selectCategory(catId) {
+            currentCategory = catId;
+            renderCategories();
+            renderDishes();
+        }
+
+        /* Search Bar Handler */
+        function handleSearch() {
+            currentSearchQuery = document.getElementById('searchInput').value.trim();
+            renderDishes();
+        }
+
+        /* Filter Modal Control */
+        function toggleFilterModal() {
+            const modal = document.getElementById('filterModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function applyQuickTag(tag) {
+            currentActiveTag = tag;
+            document.getElementById('filterName').innerText = tag;
+            document.getElementById('activeFilterBadge').classList.remove('hidden');
+            toggleFilterModal();
+            renderDishes();
+        }
+
+        function resetFilters() {
+            currentActiveTag = null;
+            currentSearchQuery = '';
+            document.getElementById('searchInput').value = '';
+            document.getElementById('activeFilterBadge').classList.add('hidden');
+            renderDishes();
+        }
+
+        /* Open Item Modal Details */
+        function openDishModal(id) {
+            selectedItemForModal = menuItems.find(i => i.id === id);
+            if (!selectedItemForModal) return;
+
+            modalQuantity = 1;
+            selectedSizePrice = 0;
+            selectedOptionName = selectedItemForModal.sizes[0]?.name || '';
+            selectedExtras = [];
+
+            document.getElementById('modalImage').src = selectedItemForModal.image;
+            document.getElementById('modalTitle').innerText = selectedItemForModal.name;
+            document.getElementById('modalDesc').innerText = selectedItemForModal.desc;
+            document.getElementById('modalPrice').innerText = `${selectedItemForModal.price} ر.س`;
+            document.getElementById('modalQty').innerText = modalQuantity;
+            document.getElementById('specialNote').value = '';
+
+            // Render Sizes
+            const sizeContainer = document.getElementById('sizeOptionsGrid');
+            if (selectedItemForModal.sizes && selectedItemForModal.sizes.length > 0) {
+                document.getElementById('optionsContainer').classList.remove('hidden');
+                sizeContainer.innerHTML = selectedItemForModal.sizes.map((s, idx) => `
+                    <label class="cursor-pointer border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-burgundy-700 bg-burgundy-50 font-bold' : 'border-gray-200'}" onclick="selectSize(${s.price}, '${s.name}', this)">
+                        <span>${s.name}</span>
+                        <span class="text-gray-500">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
+                    </label>
+                `).join('');
             } else {
-                navigator.clipboard.writeText(window.location.href);
-                alert('تم نسخ رابط الدعوة بنجاح!');
+                document.getElementById('optionsContainer').classList.add('hidden');
             }
+
+            // Render Extras
+            const extrasContainer = document.getElementById('extrasGrid');
+            if (selectedItemForModal.extras && selectedItemForModal.extras.length > 0) {
+                document.getElementById('extrasContainer').classList.remove('hidden');
+                extrasContainer.innerHTML = selectedItemForModal.extras.map(e => `
+                    <label class="cursor-pointer border border-gray-200 rounded-xl p-2.5 flex items-center justify-between text-xs hover:bg-gray-50">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-burgundy-700 w-4 h-4 rounded">
+                            <span>${e.name}</span>
+                        </div>
+                        <span class="text-burgundy-700 font-bold">+${e.price} ر.س</span>
+                    </label>
+                `).join('');
+            } else {
+                document.getElementById('extrasContainer').classList.add('hidden');
+            }
+
+            updateModalTotalPrice();
+            document.getElementById('dishModal').classList.remove('hidden');
         }
 
-        function addToCalendar() {
-            const title = encodeURIComponent("حفل زفاف أحمد وسارة");
-            const details = encodeURIComponent("يتشرف أحمد وسارة بدعوتكم لحضور حفل زفافهما في قاعة الملكة الكبرى.");
-            const location = encodeURIComponent("قاعة الملكة الكبرى، الفندق الملكي، الرياض");
-            const googleUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}&dates=20261120T163000Z/20261120T210000Z&details=${details}&location=${location}`;
-            window.open(googleUrl, '_blank');
+        function closeDishModal() {
+            document.getElementById('dishModal').classList.add('hidden');
+        }
+
+        function selectSize(price, name, el) {
+            selectedSizePrice = price;
+            selectedOptionName = name;
+            // Highlight styling
+            const siblings = el.parentElement.children;
+            for (let child of siblings) {
+                child.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
+                child.classList.add('border-gray-200');
+            }
+            el.classList.add('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
+            updateModalTotalPrice();
+        }
+
+        function toggleExtra(name, price, checkbox) {
+            if (checkbox.checked) {
+                selectedExtras.push({ name, price });
+            } else {
+                selectedExtras = selectedExtras.filter(e => e.name !== name);
+            }
+            updateModalTotalPrice();
+        }
+
+        function changeModalQty(delta) {
+            modalQuantity = Math.max(1, modalQuantity + delta);
+            document.getElementById('modalQty').innerText = modalQuantity;
+            updateModalTotalPrice();
+        }
+
+        function updateModalTotalPrice() {
+            if (!selectedItemForModal) return;
+            const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
+            const unitPrice = selectedItemForModal.price + selectedSizePrice + extrasTotal;
+            const total = unitPrice * modalQuantity;
+            document.getElementById('modalTotalPrice').innerText = `${total} ر.س`;
+        }
+
+        /* Cart Operations */
+        function confirmAddToCart() {
+            const note = document.getElementById('specialNote').value.trim();
+            const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
+            const unitPrice = selectedItemForModal.price + selectedSizePrice + extrasTotal;
+
+            const cartItem = {
+                cartId: Date.now(),
+                id: selectedItemForModal.id,
+                name: selectedItemForModal.name,
+                option: selectedOptionName,
+                extras: selectedExtras.map(e => e.name).join(', '),
+                note: note,
+                unitPrice: unitPrice,
+                qty: modalQuantity,
+                totalPrice: unitPrice * modalQuantity
+            };
+
+            cart.push(cartItem);
+            closeDishModal();
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const bar = document.getElementById('floatingCartBar');
+            const countBadge = document.getElementById('cartCountBadge');
+            const totalText = document.getElementById('cartBarTotal');
+
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const grandTotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+
+            countBadge.innerText = totalItems;
+            totalText.innerText = `${grandTotal} ر.س`;
+
+            if (cart.length > 0) {
+                bar.classList.remove('translate-y-32', 'opacity-0');
+            } else {
+                bar.classList.add('translate-y-32', 'opacity-0');
+            }
+
+            renderCartDrawerItems();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function renderCartDrawerItems() {
+            const container = document.getElementById('cartItemsContainer');
+            const subTotalText = document.getElementById('subTotalText');
+            const grandTotalText = document.getElementById('grandTotalText');
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fas fa-shopping-basket text-4xl mb-3 text-burgundy-200"></i>
+                        <p class="text-xs font-bold text-gray-500">سلتك فارغة حالياً</p>
+                        <p class="text-[10px] mt-1">اختر أشهى المشروبات والحلويات لإضافتها</p>
+                    </div>
+                `;
+                subTotalText.innerText = '0 ر.س';
+                grandTotalText.innerText = '0 ر.س';
+                return;
+            }
+
+            const grandTotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            subTotalText.innerText = `${grandTotal} ر.س`;
+            grandTotalText.innerText = `${grandTotal} ر.س`;
+
+            container.innerHTML = cart.map(item => `
+                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
+                        <div class="text-[10px] text-gray-500 mt-0.5">
+                            ${item.option ? `<span>الخيار: ${item.option}</span>` : ''}
+                            ${item.extras ? `<span class="block">إضافات: ${item.extras}</span>` : ''}
+                            ${item.note ? `<span class="block text-amber-700">ملاحظة: ${item.note}</span>` : ''}
+                        </div>
+                        <span class="font-black text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
+                    </div>
+
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center border border-gray-200 rounded-lg bg-gray-50">
+                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">-</button>
+                            <span class="text-xs font-bold w-5 text-center">${item.qty}</span>
+                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
+                        </div>
+                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-600 p-1">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function updateCartItemQty(cartId, delta) {
+            const item = cart.find(i => i.cartId === cartId);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.cartId !== cartId);
+            } else {
+                item.totalPrice = item.unitPrice * item.qty;
+            }
+            updateCartUI();
+        }
+
+        function removeCartItem(cartId) {
+            cart = cart.filter(i => i.cartId !== cartId);
+            updateCartUI();
+        }
+
+        /* Order via WhatsApp */
+        function sendOrderWhatsApp() {
+            if (cart.length === 0) return;
+
+            let msg = `*طلب جديد من منيو ايس هوم 🍦☕*\n\n`;
+            cart.forEach((item, index) => {
+                msg += `${index + 1}. *${item.name}* (العدد: ${item.qty})\n`;
+                if (item.option) msg += `   • الحجم/الخيار: ${item.option}\n`;
+                if (item.extras) msg += `   • الإضافات: ${item.extras}\n`;
+                if (item.note) msg += `   • ملاحظة: ${item.note}\n`;
+                msg += `   • السعر: ${item.totalPrice} ر.س\n\n`;
+            });
+
+            const total = cart.reduce((s, i) => s + i.totalPrice, 0);
+            msg += `*إجمالي الطلب:* ${total} ر.س\n`;
+            msg += `شكراً لاختياركم ايس هوم! ❤️`;
+
+            const encoded = encodeURIComponent(msg);
+            window.open(`https://wa.me/966500000000?text=${encoded}`, '_blank');
+        }
+
+        /* Digital Receipt Summary Modal */
+        function showReceiptModal() {
+            if (cart.length === 0) return;
+            const total = cart.reduce((s, i) => s + i.totalPrice, 0);
+            
+            let receiptHTML = `
+                <div class="text-center mb-4 border-b pb-3">
+                    <h3 class="font-extrabold text-burgundy-900 text-lg">آيس هوم | Ice Home</h3>
+                    <p class="text-[10px] text-gray-500">فاتورة طلب رقم #${Math.floor(1000 + Math.random() * 9000)}</p>
+                </div>
+                <div class="space-y-2 text-xs mb-4">
+            `;
+
+            cart.forEach(i => {
+                receiptHTML += `
+                    <div class="flex justify-between">
+                        <span>${i.name} (x${i.qty})</span>
+                        <span class="font-bold">${i.totalPrice} ر.س</span>
+                    </div>
+                `;
+            });
+
+            receiptHTML += `
+                </div>
+                <div class="border-t pt-2 text-xs flex justify-between font-black text-burgundy-900">
+                    <span>الإجمالي النهائي:</span>
+                    <span>${total} ر.س</span>
+                </div>
+            `;
+
+            alert(`طلبك جاهز!\nالمجموع: ${total} ر.س\nتم تجهيز ملخص الفاتورة بنجاح.`);
         }
     </script>
 </body>
