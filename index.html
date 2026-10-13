@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ايس هوم | Ice Home - القائمة الرقمية</title>
+    <title>ايس هوم | Ice Home - القائمة الرقمية الفاخرة</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts - Cairo & Tajawal -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -17,13 +17,13 @@
                 extend: {
                     colors: {
                         burgundy: {
-                            50: '#fdf2f4',
-                            100: '#fbe5e9',
-                            200: '#f7ced6',
-                            600: '#a3153d',
-                            700: '#800020', // Main Burgundy
-                            800: '#5b0e2d', // Deep Maroon
-                            900: '#4a0017',
+                            50: '#fcf2f4',
+                            100: '#f6dbe0',
+                            200: '#ebaac2',
+                            600: '#8c1a35',
+                            700: '#6b1d2f', // Rich Burgundy Primary
+                            800: '#58111a', // Deep Wine
+                            900: '#3d0a11',
                         },
                         ivory: {
                             DEFAULT: '#FAF8f5',
@@ -33,7 +33,6 @@
                     },
                     fontFamily: {
                         cairo: ['Cairo', 'sans-serif'],
-                        tajawal: ['Tajawal', 'sans-serif'],
                     }
                 }
             }
@@ -41,12 +40,12 @@
     </script>
     
     <style>
-        /* */
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #FAF8f5;
             color: #2D2D2D;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
         /* Animated Translucent Pattern Background */
@@ -58,159 +57,164 @@
             height: 100vh;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.12;
-            background-image: radial-gradient(rgba(128, 0, 32, 0.25) 1px, transparent 1px), radial-gradient(rgba(91, 14, 45, 0.2) 1px, #FAF8f5 1px);
-            background-size: 40px 40px;
-            background-position: 0 0, 20px 20px;
+            opacity: 0.16;
+            background-image: radial-gradient(rgba(107, 29, 47, 0.28) 1px, transparent 1px), radial-gradient(rgba(120, 120, 120, 0.22) 1px, #FAF8f5 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
             animation: movePattern 40s linear infinite;
         }
 
         @keyframes movePattern {
-            0% { background-position: 0 0, 20px 20px; }
-            100% { background-position: 400px 400px, 420px 420px; }
+            0% { background-position: 0 0, 15px 15px; }
+            100% { background-position: 300px 300px, 315px 315px; }
         }
 
-        /* Animated Floating Arabesque Ornaments */
+        /* Animated Floating Gray Ornaments */
         .ornament-float {
             position: fixed;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.08;
+            opacity: 0.12;
             animation: floatAnim 18s ease-in-out infinite alternate;
         }
 
         @keyframes floatAnim {
             0% { transform: translateY(0px) rotate(0deg) scale(1); }
             50% { transform: translateY(-25px) rotate(15deg) scale(1.05); }
-            100% { transform: translateY(15px) rotate(-10deg) scale(0.95); }
+            100% { transform: translateY(20px) rotate(-10deg) scale(0.95); }
         }
 
-        /* Glassmorphism Effect */
+        /* Glassmorphism Card Effect */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(128, 0, 32, 0.1);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(107, 29, 47, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .glass-panel:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px -4px rgba(107, 29, 47, 0.14);
+            border-color: rgba(107, 29, 47, 0.25);
         }
 
         .glass-header {
-            background: rgba(128, 0, 32, 0.92);
-            backdrop-filter: blur(10px);
+            background: rgba(88, 17, 26, 0.96);
+            backdrop-filter: blur(12px);
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 6px;
+            width: 5px;
+            height: 5px;
         }
         ::-webkit-scrollbar-track {
             background: #FAF8f5;
         }
         ::-webkit-scrollbar-thumb {
-            background: #800020;
+            background: #6b1d2f;
             border-radius: 10px;
         }
 
-        /* Category Scrollbar Hide */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .hero-gradient-overlay {
+            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.82) 70%, rgba(107, 29, 47, 1) 100%);
         }
 
-        .hero-gradient-overlay {
-            background: linear-gradient(180deg, rgba(74, 0, 23, 0.4) 0%, rgba(91, 14, 45, 0.85) 75%, rgba(128, 0, 32, 1) 100%);
+        /* Animation Classes */
+        @keyframes customPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .animate-custom-pulse {
+            animation: customPulse 2s infinite;
+        }
+
+        .modal-fade-in {
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.9) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .drawer-slide-in {
+            animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes drawerSlideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
         }
     </style>
 </head>
-<body class="relative min-h-screen pb-24 select-none">
+<body class="relative min-h-screen pb-32 select-none">
 
-    <!-- Background Animated Pattern Canvas/Overlay -->
     <div class="pattern-bg"></div>
 
-    <!-- Floating Ornamental Motifs (Subtle Moving Gray/Burgundy SVGs) -->
-    <svg class="ornament-float top-10 right-5 w-40 h-40 text-gray-700" viewBox="0 0 100 100" fill="currentColor">
+    <svg class="ornament-float top-10 right-12 w-32 h-32 text-gray-500" viewBox="0 0 100 100" fill="currentColor">
         <path d="M50 0 C60 25, 75 40, 100 50 C75 60, 60 75, 50 100 C40 75, 25 60, 0 50 C25 40, 40 25, 50 0 Z" />
     </svg>
-    <svg class="ornament-float bottom-1/3 left-5 w-56 h-56 text-gray-700" style="animation-delay: -5s;" viewBox="0 0 100 100" fill="currentColor">
+    <svg class="ornament-float bottom-1/3 left-6 w-44 h-44 text-gray-600" style="animation-delay: -3s;" viewBox="0 0 100 100" fill="currentColor">
         <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
         <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="1.5"/>
     </svg>
 
-    <!-- Hero Cover Section -->
-    <header class="relative w-full h-80 sm:h-96 overflow-hidden shadow-2xl">
-        <!-- Cover Background Image -->
+    <header class="relative w-full h-72 sm:h-88 overflow-hidden shadow-2xl">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" 
-             alt="Ice Home Cafe Cover" 
+             alt="Ice Home Cover" 
              class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 hover:scale-100">
         
-        <!-- Gradient Overlay -->
-        <div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-between p-4 sm:p-8">
+        <div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-between p-4 sm:p-6">
             
-            <!-- Top Bar: Status & Socials -->
+            <!-- Top Bar -->
             <div class="flex justify-between items-center z-10">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                    مفتوح الآن لاستقبالكم
-                </span>
+                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white backdrop-blur-md border border-white/25 transition transform active:scale-95 shadow">
+                    <i class="fas fa-bars text-amber-300 text-lg"></i>
+                </button>
 
-                <div class="flex items-center gap-3 text-white/90">
-                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition border border-white/20">
-                        <i class="fab font-bold fa-instagram"></i>
-                    </a>
-                    <a href="#" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition border border-white/20">
-                        <i class="fab fa-snapchat"></i>
-                    </a>
-                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition border border-white/20">
-                        <i class="fas fa-phone"></i>
+                <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        مفتوح الآن
+                    </span>
+                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center text-white transition border border-white/25">
+                        <i class="fas fa-phone text-xs"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Header Main Content (Logo & Title) -->
-            <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 mt-auto mb-2">
+            <!-- Header Content: Circular Logo on the Right -->
+            <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 mt-auto mb-1">
                 
-                <!-- Circular Logo Badge Positioned Prominently on the Right -->
-                <div class="flex items-center gap-4 text-center sm:text-right">
-                    <div class="relative group">
-                        <!-- Outer Decorative Glow Circle -->
-                        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-70 blur group-hover:opacity-100 transition duration-500"></div>
-                        
-                        <!-- Circular Logo Badge -->
-                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/80 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
+                <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right w-full">
+                    
+                    <!-- Circular Logo Badge on the Right -->
+                    <div class="relative group flex-shrink-0 order-1 sm:order-2">
+                        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
+                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
                             <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
-                                <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-pulse"></i>
+                                <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-custom-pulse"></i>
                                 <span class="font-extrabold text-sm sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
                                 <span class="text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Cafe Name & Tagline -->
-                    <div class="text-white">
-                        <h1 class="text-3xl sm:text-4xl font-black text-amber-100 tracking-wide drop-shadow-md">
-                            آيس هوم <span class="text-xl font-normal text-amber-300/90 font-tajawal">| Ice Home</span>
+                    <!-- Title & Tagline -->
+                    <div class="text-white order-2 sm:order-1 flex-1">
+                        <h1 class="text-2xl sm:text-4xl font-black text-amber-100 tracking-wide drop-shadow-md">
+                            آيس هوم <span class="text-lg font-normal text-amber-300/90">| Ice Home</span>
                         </h1>
-                        <p class="text-xs sm:text-sm text-gray-200 mt-1 max-w-md font-tajawal">
-                            عالم الفخامة والانتعاش.. أجود أنواع المشروبات المبتكرة، الحلويات الفاخرة، والآيس كريم المميز
+                        <p class="text-xs sm:text-sm text-gray-200 mt-1 max-w-md">
+                            عالم الفخامة والانتعاش.. أجود أنواع المشروبات والحلويات الفاخرة
                         </p>
-                        <div class="flex items-center justify-center sm:justify-start gap-4 text-xs text-amber-200/90 mt-2 font-tajawal">
+                        <div class="flex items-center justify-center sm:justify-start gap-3 text-xs text-amber-200/90 mt-2">
                             <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
                             <span>•</span>
                             <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Wifi / Info Quick Badge -->
-                <div class="hidden md:flex items-center gap-2 bg-black/30 backdrop-blur-md px-3 py-2 rounded-xl border border-white/10 text-xs text-white">
-                    <i class="fas fa-wifi text-amber-300 text-base"></i>
-                    <div>
-                        <div class="text-[10px] text-gray-300">شبكة Вай-фай المجانية</div>
-                        <div class="font-bold tracking-wider text-amber-200">IceHome_Guest</div>
-                    </div>
                 </div>
 
             </div>
@@ -218,83 +222,60 @@
         </div>
     </header>
 
-    <!-- Sticky Search & Category Bar Wrapper -->
     <div class="sticky top-0 z-30 bg-burgundy-800/95 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-4 py-3">
-            
-            <!-- Search & Quick Filters -->
-            <div class="flex items-center gap-3 mb-3">
-                <div class="relative flex-1">
-                    <input type="text" id="searchInput" oninput="handleSearch()" 
-                           placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
-                           class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
-                    <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
-                </div>
-
-                <!-- Quick Filter Options -->
-                <button onclick="toggleFilterModal()" class="flex items-center gap-2 bg-amber-400 text-burgundy-900 px-3.5 py-2.5 rounded-full text-xs font-bold hover:bg-amber-300 transition shadow">
-                    <i class="fas fa-sliders-h"></i>
-                    <span class="hidden sm:inline">تصفية السريعة</span>
-                </button>
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+            <div class="relative flex-1">
+                <input type="text" id="searchInput" oninput="handleSearch()" 
+                       placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
+                       class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
+                <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
             </div>
-
-            <!-- Categories Scrollable Navigation Bar -->
-            <nav id="categoryNav" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 text-xs sm:text-sm font-semibold">
-                <!-- Javascript will inject categories here -->
-            </nav>
-
+            
+            <button onclick="toggleSidebarDrawer()" class="flex items-center gap-2 bg-amber-400 text-burgundy-900 px-4 py-2.5 rounded-full text-xs font-bold hover:bg-amber-300 transition shadow active:scale-95">
+                <i class="fas fa-list-ul"></i>
+                <span class="hidden sm:inline">الأقسام</span>
+            </button>
         </div>
     </div>
 
-    <!-- Main Content Container -->
-    <main class="max-w-6xl mx-auto px-4 py-6 relative z-10">
-        
-        <!-- Quick Tag Badges (Special Filters Display) -->
-        <div id="activeFilterBadge" class="hidden mb-4 flex items-center justify-between bg-amber-100 border border-amber-300 text-burgundy-800 px-4 py-2 rounded-xl text-xs">
-            <span>تصفية حسب: <strong id="filterName">الكل</strong></span>
-            <button onclick="resetFilters()" class="text-burgundy-700 font-bold hover:underline">إلغاء التصفية <i class="fas fa-times mr-1"></i></button>
-        </div>
-
-        <!-- Section Title & Counter -->
-        <div class="flex items-center justify-between mb-6 border-r-4 border-burgundy-700 pr-3">
-            <div>
-                <h2 id="currentCategoryTitle" class="text-xl sm:text-2xl font-black text-burgundy-900">
-                    الكل <span class="text-xs text-burgundy-600 font-normal mr-2 font-tajawal">(جميع الأصناف)</span>
-                </h2>
-                <p id="currentCategoryDesc" class="text-xs text-gray-500 mt-0.5">اختر من تشكليتنا الفاخرة المحضرة بكل حب</p>
+    <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between transform drawer-slide-in">
+            <div class="p-5 bg-burgundy-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold">
+                        <i class="fas fa-ice-cream"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-black text-sm">قائمة الأقسام</h3>
+                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال السريع</p>
+                    </div>
+                </div>
+                <button onclick="toggleSidebarDrawer()" class="text-white/80 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition hover:rotate-90">
+                    <i class="fas fa-times"></i>
+                </button>
             </div>
-            <span id="itemsCountBadge" class="bg-burgundy-100 text-burgundy-800 text-xs font-bold px-3 py-1 rounded-full">
-                0 صنف
-            </span>
-        </div>
 
-        <!-- Dishes Grid Container -->
-        <div id="dishesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- Dishes Cards Will Be Dynamic Injected via JS -->
-        </div>
-
-        <!-- Empty Search State -->
-        <div id="emptyState" class="hidden text-center py-16">
-            <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-700 text-3xl">
-                <i class="fas fa-search-minus"></i>
+            <div id="sidebarCategoriesList" class="p-4 overflow-y-auto flex-1 space-y-2">
+                <!-- Injected via JS -->
             </div>
-            <h3 class="text-lg font-bold text-gray-800">لم نجد أي صنف يطابق بحثك</h3>
-            <p class="text-xs text-gray-500 mt-1">جرّب البحث بكلمات أخرى أو اختر قسم آخر من المنيو</p>
-            <button onclick="resetFilters()" class="mt-4 bg-burgundy-700 text-white text-xs px-5 py-2.5 rounded-full hover:bg-burgundy-800 transition">
-                عرض جميع الأصناف
-            </button>
-        </div>
 
+            <div class="p-4 bg-gray-50 border-t text-center text-xs text-gray-500">
+                <span>ايس هوم • جميع الحقوق محفوظة</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-6 relative z-10 space-y-10" id="menuMainContainer">
+        <!-- Rendered dynamically -->
     </main>
 
-    <!-- Item Details & Customization Modal -->
-    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity duration-300">
-        <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl transform transition-all duration-300 max-h-[90vh] flex flex-col border border-burgundy-700/10">
+    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/10">
             
-            <!-- Modal Header Image -->
-            <div class="relative h-56 sm:h-64 overflow-hidden bg-burgundy-900">
+            <div class="relative h-52 sm:h-60 overflow-hidden bg-burgundy-900">
                 <img id="modalImage" src="" alt="Dish Detail" class="w-full h-full object-cover">
-                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition">
+                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition transform active:scale-95">
                     <i class="fas fa-times"></i>
                 </button>
                 <div class="absolute bottom-3 right-3 bg-burgundy-900/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold" id="modalCategoryBadge">
@@ -302,52 +283,41 @@
                 </div>
             </div>
 
-            <!-- Modal Content -->
             <div class="p-5 overflow-y-auto flex-1 space-y-4">
                 <div class="flex justify-between items-start gap-2">
                     <div>
                         <h3 id="modalTitle" class="text-xl font-extrabold text-burgundy-900"></h3>
-                        <p id="modalDesc" class="text-xs text-gray-600 mt-1 leading-relaxed font-tajawal"></p>
+                        <p id="modalDesc" class="text-xs text-gray-600 mt-1 leading-relaxed"></p>
                     </div>
                     <span id="modalPrice" class="text-lg font-black text-burgundy-700 whitespace-nowrap bg-burgundy-50 px-3 py-1 rounded-xl"></span>
                 </div>
 
-                <!-- Size / Flavor Options (If available) -->
                 <div id="optionsContainer" class="space-y-2 pt-2 border-t border-gray-100">
                     <label class="block text-xs font-bold text-gray-800">الحجم / الخيار:</label>
-                    <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2">
-                        <!-- Options generated by JS -->
-                    </div>
+                    <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2"></div>
                 </div>
 
-                <!-- Addons / Extras -->
                 <div id="extrasContainer" class="space-y-2 pt-2 border-t border-gray-100">
                     <label class="block text-xs font-bold text-gray-800">إضافات اختيارية:</label>
-                    <div id="extrasGrid" class="space-y-1.5">
-                        <!-- Extras generated by JS -->
-                    </div>
+                    <div id="extrasGrid" class="space-y-1.5"></div>
                 </div>
 
-                <!-- Special Instructions -->
                 <div class="pt-2 border-t border-gray-100">
                     <label for="specialNote" class="block text-xs font-bold text-gray-800 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
-                    <textarea id="specialNote" rows="2" placeholder="اكتب أية تفاصيل تفضلها لنحضّرها كما تحب..." class="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-gray-50/50"></textarea>
+                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-gray-50/50"></textarea>
                 </div>
             </div>
 
-            <!-- Modal Footer (Quantity & Add To Tray) -->
             <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-4">
-                <!-- Quantity Counter -->
                 <div class="flex items-center border border-gray-300 rounded-full bg-white px-2 py-1">
                     <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">-</button>
                     <span id="modalQty" class="w-8 text-center font-bold text-sm">1</span>
                     <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">+</button>
                 </div>
 
-                <!-- Add Button -->
-                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition">
+                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition transform active:scale-95">
                     <i class="fas fa-shopping-bag"></i>
-                    <span>إضافة إلى السلة • </span>
+                    <span>إضافة للسلة • </span>
                     <span id="modalTotalPrice">0 ر.س</span>
                 </button>
             </div>
@@ -355,41 +325,12 @@
         </div>
     </div>
 
-    <!-- Quick Filter Modal -->
-    <div id="filterModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-        <div class="bg-white w-full max-w-sm rounded-3xl p-5 shadow-2xl space-y-4">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-bold text-burgundy-900 text-base"><i class="fas fa-filter text-amber-500 ml-1"></i> تصفية المنيو</h3>
-                <button onclick="toggleFilterModal()" class="text-gray-400 hover:text-gray-600"><i class="fas fa-times"></i></button>
-            </div>
-            <div class="space-y-2">
-                <button onclick="applyQuickTag('الأكثر مبيعاً')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
-                    <span><i class="fas fa-fire text-orange-500 ml-2"></i> الأكثر مبيعاً</span>
-                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
-                </button>
-                <button onclick="applyQuickTag('جديد')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
-                    <span><i class="fas fa-sparkles text-amber-500 ml-2"></i> أحدث الأطباق والمشروبات</span>
-                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
-                </button>
-                <button onclick="applyQuickTag('خالي من السكر')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
-                    <span><i class="fas fa-leaf text-emerald-500 ml-2"></i> خيارات صحية وخالية من السكر</span>
-                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
-                </button>
-                <button onclick="applyQuickTag('مميز')" class="w-full text-right p-3 rounded-xl bg-gray-50 hover:bg-burgundy-50 hover:text-burgundy-700 transition font-semibold text-xs flex items-center justify-between">
-                    <span><i class="fas fa-crown text-amber-500 ml-2"></i> توقيع ايس هوم (Signature)</span>
-                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Floating Tray / Quick Order Summary Bottom Bar -->
     <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 z-40 max-w-xl mx-auto transform translate-y-32 opacity-0 transition-all duration-500">
-        <div class="glass-header text-white rounded-2xl p-3 shadow-2xl border border-amber-400/30 flex items-center justify-between gap-3">
+        <div class="glass-header text-white rounded-2xl p-3 shadow-2xl border border-amber-400/30 flex items-center justify-between gap-3 animate-custom-pulse">
             <div class="flex items-center gap-3 cursor-pointer" onclick="toggleCartDrawer()">
-                <div class="relative w-12 h-12 rounded-xl bg-amber-400 text-burgundy-900 flex items-center justify-center font-black text-lg">
+                <div class="relative w-12 h-12 rounded-xl bg-amber-400 text-burgundy-900 flex items-center justify-center font-black text-lg shadow-inner">
                     <i class="fas fa-receipt"></i>
-                    <span id="cartCountBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-white">0</span>
+                    <span id="cartCountBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-white font-bold">0</span>
                 </div>
                 <div>
                     <div class="text-xs text-amber-200">ملخص طلبيتك الحالية</div>
@@ -397,57 +338,52 @@
                 </div>
             </div>
 
-            <button onclick="toggleCartDrawer()" class="bg-amber-400 hover:bg-amber-300 text-burgundy-950 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition">
+            <button onclick="toggleCartDrawer()" class="bg-amber-400 hover:bg-amber-300 text-burgundy-950 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition shadow active:scale-95">
                 <span>عرض الطلب</span>
                 <i class="fas fa-arrow-left"></i>
             </button>
         </div>
     </div>
 
-    <!-- Order Drawer Modal -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/60 backdrop-blur-sm transition-opacity">
-        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform transition-transform duration-300">
-            
-            <!-- Cart Header -->
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in">
             <div class="p-4 bg-burgundy-800 text-white flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-shopping-basket text-amber-300 text-lg"></i>
                     <h3 class="font-extrabold text-base">سلة الطلبات - ايس هوم</h3>
                 </div>
-                <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white"><i class="fas fa-times text-lg"></i></button>
+                <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white transition hover:rotate-90"><i class="fas fa-times text-lg"></i></button>
             </div>
 
-            <!-- Cart Items List -->
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-gray-100">
-                <!-- Dynamic Items -->
-            </div>
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-gray-100"></div>
 
-            <!-- Cart Footer & Checkout Options -->
             <div class="p-4 bg-ivory border-t border-gray-200 space-y-3">
-                <div class="space-y-1.5 text-xs text-gray-600 font-tajawal">
+                <div class="space-y-1.5 text-xs text-gray-600">
                     <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold">0 ر.س</span></div>
                     <div class="flex justify-between"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
                     <div class="flex justify-between text-base font-black text-burgundy-900 border-t pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
                 </div>
 
-                <!-- Order Action Buttons -->
                 <div class="grid grid-cols-2 gap-2 pt-2">
-                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow">
+                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
                         <i class="fab fa-whatsapp text-base"></i> إرسال للواتساب
                     </button>
-                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow">
+                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
                         <i class="fas fa-file-invoice text-base"></i> الفاتورة الرقمية
                     </button>
                 </div>
             </div>
-
         </div>
     </div>
 
+    <!-- Custom Notification Box (No standard alerts) -->
+    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900 text-amber-200 px-5 py-3 rounded-2xl shadow-2xl border border-amber-400/40 text-xs font-bold flex items-center gap-3 backdrop-blur-md transition-all duration-300">
+        <i class="fas fa-check-circle text-amber-400 text-base"></i>
+        <span id="notificationText">تمت العملية بنجاح</span>
+    </div>
+
     <script>
-        /* Sample Data for "Ice Home" Menu */
         const categories = [
-            { id: 'all', name: 'الكل', icon: 'fa-border-all' },
             { id: 'iced-drinks', name: 'المشروبات الباردة والآيس', icon: 'fa-glass-martini-alt' },
             { id: 'ice-cream', name: 'الآيس كريم والجيلاتو', icon: 'fa-ice-cream' },
             { id: 'hot-drinks', name: 'المشروبات الساخنة', icon: 'fa-mug-hot' },
@@ -461,76 +397,76 @@
                 id: 1,
                 categoryId: 'iced-drinks',
                 name: 'آيس شيكن وايت موكا',
-                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية تعلوها لمسة قرفة',
+                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية',
                 price: 24,
                 tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80',
+                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80',
                 sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }],
-                extras: [{ name: 'إضافة سيرب فانيلا', price: 3 }, { name: 'جرعة اسبريسو إضافية', price: 5 }]
+                extras: [{ name: 'إضافة سيرب فانيلا', price: 3 }, { name: 'جرعة اسبريسو', price: 5 }]
             },
             {
                 id: 2,
                 categoryId: 'ice-cream',
                 name: 'آيس كريم هوم سبيشل',
-                desc: 'ثلاث طبقات من جيلاتو الفانيلا والشوكلاتة والفيستق مع صوص التوت البري وقطع البسكويت المقرمش',
+                desc: 'جيلاتو الفانيلا والشوكلاتة والفيستق مع صوص التوت البري',
                 price: 28,
                 tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80',
-                sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل فاخر', price: 5 }],
-                extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا إضافي', price: 3 }]
+                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=80',
+                sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }],
+                extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا', price: 3 }]
             },
             {
                 id: 3,
                 categoryId: 'desserts',
                 name: 'كيكة السباستيان الفاخرة',
-                desc: 'تشيز كيك سان سيباستيان المخبوزة على الطريقة الإسبانية مع صوص الشوكلاتة البلجيكية الدافئة',
+                desc: 'تشيز كيك سان سيباستيان المخبوزة مع صوص الشوكلاتة',
                 price: 32,
                 tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80',
-                sizes: [{ name: 'شريحة فردية', price: 0 }],
-                extras: [{ name: 'كرة آيس كريم فانيلا', price: 6 }]
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80',
+                sizes: [{ name: 'شريحة', price: 0 }],
+                extras: [{ name: 'آيس كريم فانيلا', price: 6 }]
             },
             {
                 id: 4,
                 categoryId: 'waffles',
                 name: 'وافل نوتيلا بالآيس كريم',
-                desc: 'وافل ذهبي مقرمش مغطى بقطرات النوتيلا الغنية مع كرة من آيس كريم ايس هوم قطع الفراولة',
+                desc: 'وافل ذهبي مقرمش مغطى بالنوتيلا مع كرة آيس كريم',
                 price: 29,
                 tag: 'جديد',
-                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80',
-                sizes: [{ name: 'حجم عادي', price: 0 }, { name: 'حجم مضاعف Double', price: 10 }],
-                extras: [{ name: 'إضافة صوص بستاشيو', price: 5 }]
+                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=300&q=80',
+                sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }],
+                extras: [{ name: 'صوص بستاشيو', price: 5 }]
             },
             {
                 id: 5,
                 categoryId: 'iced-drinks',
                 name: 'بوبا ماتشا لاتيه',
-                desc: 'ماتشا يابانية عضوية فاخرة مع حليب الشوفان وحبيبات البوبا الطازجة (يمكن طلبه خالي سكر)',
+                desc: 'ماتشا يابانية مع حليب الشوفان وحبيبات البوبا الطازجة',
                 price: 26,
-                tag: 'خالي من السكر',
-                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80',
+                tag: 'صحي',
+                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=300&q=80',
                 sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
-                extras: [{ name: 'حبيبات بوبا إضافية', price: 4 }]
+                extras: [{ name: 'بوبا إضافية', price: 4 }]
             },
             {
                 id: 6,
                 categoryId: 'mojitos',
                 name: 'موهيتو ريد بل بلوبيري',
-                desc: 'إنعاش حقيقي مع التوت الأزرق، أوراق النعناع الطازج، الليمون، ومشروب ريد بل',
+                desc: 'توت أزرق، نعناع طازج، ليمون، ومشروب ريد بل',
                 price: 25,
                 tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80',
-                sizes: [{ name: 'حجم كبير 500ml', price: 0 }],
-                extras: [{ name: 'إضافة سيرب نكهة إضافية', price: 3 }]
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80',
+                sizes: [{ name: 'كبير 500ml', price: 0 }],
+                extras: [{ name: 'نكهة إضافية', price: 3 }]
             },
             {
                 id: 7,
                 categoryId: 'hot-drinks',
                 name: 'سبانيش لاتيه ساخن',
-                desc: 'قهوة اسبريسو غنية مع الحليب المبخر والحليب المكثف المحلى بطعم متوازن ودافئ',
+                desc: 'اسبريسو غنية مع الحليب المبخر والحليب المكثف',
                 price: 22,
                 tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80',
+                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=300&q=80',
                 sizes: [{ name: 'كوب وسط', price: 0 }],
                 extras: [{ name: 'رغوة إضافية', price: 2 }]
             },
@@ -538,19 +474,16 @@
                 id: 8,
                 categoryId: 'desserts',
                 name: 'سوفليه الشوكلاتة الداكنة',
-                desc: 'كيكة السوفليه الدافئة بقالب هائل من الشوكلاتة الذائبة في المنتصف تقدم مع آيس كريم',
+                desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة',
                 price: 27,
                 tag: 'جديد',
-                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80',
-                sizes: [{ name: 'حجم عادي', price: 0 }],
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=300&q=80',
+                sizes: [{ name: 'عادي', price: 0 }],
                 extras: []
             }
         ];
 
-        /* App State Variables */
-        let currentCategory = 'all';
         let currentSearchQuery = '';
-        let currentActiveTag = null;
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -558,123 +491,118 @@
         let selectedExtras = [];
         let modalQuantity = 1;
 
-        /* Initialize Page */
         window.onload = function() {
-            renderCategories();
-            renderDishes();
+            renderSidebarCategories();
+            renderMenuSections();
         };
 
-        /* Render Category Buttons */
-        function renderCategories() {
-            const nav = document.getElementById('categoryNav');
-            nav.innerHTML = categories.map(cat => `
-                <button onclick="selectCategory('${cat.id}')" 
-                        class="px-4 py-2 rounded-full whitespace-nowrap transition-all duration-300 flex items-center gap-2 border ${
-                            currentCategory === cat.id 
-                            ? 'bg-amber-400 text-burgundy-950 border-amber-300 font-bold shadow-md scale-105' 
-                            : 'bg-white/10 text-white border-white/10 hover:bg-white/20'
-                        }">
-                    <i class="fas ${cat.icon} text-xs"></i>
-                    <span>${cat.name}</span>
-                </button>
+        function renderSidebarCategories() {
+            const list = document.getElementById('sidebarCategoriesList');
+            list.innerHTML = categories.map(cat => `
+                <a href="#section-${cat.id}" onclick="toggleSidebarDrawer()" 
+                   class="flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center">
+                            <i class="fas ${cat.icon} text-xs"></i>
+                        </div>
+                        <span>${cat.name}</span>
+                    </div>
+                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
+                </a>
             `).join('');
         }
 
-        /* Filter & Render Dishes Grid */
-        function renderDishes() {
-            const grid = document.getElementById('dishesGrid');
-            const emptyState = document.getElementById('emptyState');
+        function renderMenuSections() {
+            const container = document.getElementById('menuMainContainer');
+            
+            container.innerHTML = categories.map((cat, index) => {
+                const items = menuItems.filter(item => {
+                    const matchesCat = item.categoryId === cat.id;
+                    const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
+                    return matchesCat && matchesSearch;
+                });
 
-            let filtered = menuItems.filter(item => {
-                const matchesCategory = (currentCategory === 'all' || item.categoryId === currentCategory);
-                const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
-                const matchesTag = currentActiveTag ? item.tag === currentActiveTag : true;
-                return matchesCategory && matchesSearch && matchesTag;
-            });
+                if (items.length === 0 && currentSearchQuery) return '';
 
-            // Update Header titles
-            const catObj = categories.find(c => c.id === currentCategory);
-            document.getElementById('currentCategoryTitle').innerText = catObj ? catObj.name : 'الأصناف';
-            document.getElementById('itemsCountBadge').innerText = `${filtered.length} صنف`;
+                let html = `
+                    <section id="section-${cat.id}" class="scroll-mt-24">
+                        <!-- Section Header Title -->
+                        <div class="flex items-center justify-between mb-3 border-r-4 border-burgundy-700 pr-3">
+                            <h2 class="text-base sm:text-lg font-black text-burgundy-900 flex items-center gap-2">
+                                <i class="fas ${cat.icon} text-burgundy-600 text-sm"></i>
+                                ${cat.name}
+                            </h2>
+                            <span class="bg-burgundy-100 text-burgundy-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                                ${items.length} أصناف
+                            </span>
+                        </div>
 
-            if (filtered.length === 0) {
-                grid.innerHTML = '';
-                emptyState.classList.remove('hidden');
-                return;
-            }
+                        <!-- Ultra-Compact Adjacent Dishes Grid -->
+                        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-2.5">
+                `;
 
-            emptyState.classList.add('hidden');
+                items.forEach(item => {
+                    html += `
+                        <div class="glass-panel rounded-xl p-1.5 sm:p-2 shadow-sm hover:shadow-lg transition transform hover:scale-[1.03] border border-burgundy-900/10 flex flex-col justify-between group">
+                            <div>
+                                <!-- Tiny Thumbnail -->
+                                <div class="relative h-20 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
+                                    <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                                    ${item.tag ? `
+                                        <span class="absolute top-1 right-1 bg-burgundy-800 text-amber-300 text-[8px] font-bold px-1.5 py-0.2 rounded shadow">
+                                            ${item.tag}
+                                        </span>
+                                    ` : ''}
+                                    <div class="absolute bottom-1 right-1 bg-black/60 backdrop-blur-md text-amber-300 px-1.5 py-0.2 rounded text-[9px] font-black">
+                                        ${item.price} ر.س
+                                    </div>
+                                </div>
 
-            grid.innerHTML = filtered.map(item => `
-                <div class="glass-panel rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-burgundy-900/10 flex flex-col justify-between group">
-                    <div>
-                        <!-- Dish Image & Badge -->
-                        <div class="relative h-48 overflow-hidden bg-gray-100">
-                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                            ${item.tag ? `
-                                <span class="absolute top-3 right-3 bg-burgundy-800 text-amber-300 text-[10px] font-bold px-2.5 py-1 rounded-full border border-amber-300/30 shadow">
-                                    ${item.tag}
-                                </span>
-                            ` : ''}
-                            <div class="absolute bottom-2 left-2 bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-0.5 rounded-lg text-xs font-black">
-                                ${item.price} ر.س
+                                <!-- Card Mini Info -->
+                                <div class="pt-1.5">
+                                    <h3 class="font-bold text-burgundy-900 text-[11px] sm:text-xs truncate group-hover:text-burgundy-700 transition">${item.name}</h3>
+                                    <p class="text-gray-500 text-[9px] mt-0.5 line-clamp-1">${item.desc}</p>
+                                </div>
+                            </div>
+
+                            <!-- Quick Add Button with Animation -->
+                            <div class="pt-1.5 mt-1">
+                                <button onclick="openDishModal(${item.id})" class="w-full bg-burgundy-50 hover:bg-burgundy-700 text-burgundy-800 hover:text-white font-bold py-1 rounded-md text-[9px] sm:text-[10px] transition flex items-center justify-center gap-1 border border-burgundy-200 active:scale-90">
+                                    <i class="fas fa-plus"></i>
+                                    <span>إضافة</span>
+                                </button>
                             </div>
                         </div>
+                    `;
+                });
 
-                        <!-- Card Body -->
-                        <div class="p-4">
-                            <h3 class="font-black text-burgundy-900 text-base group-hover:text-burgundy-700 transition">${item.name}</h3>
-                            <p class="text-gray-600 text-xs mt-1.5 line-clamp-2 leading-relaxed font-tajawal">${item.desc}</p>
+                html += `</div></section>`;
+
+                // Translucent Gray Animated Divider between sections
+                if (index < categories.length - 1) {
+                    html += `
+                        <div class="my-8 flex items-center justify-center gap-4">
+                            <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-gray-400/60 animate-ping"></div>
+                            <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
                         </div>
-                    </div>
+                    `;
+                }
 
-                    <!-- Action Button -->
-                    <div class="p-4 pt-0">
-                        <button onclick="openDishModal(${item.id})" class="w-full bg-burgundy-50 hover:bg-burgundy-700 text-burgundy-800 hover:text-white font-bold py-2.5 rounded-xl text-xs transition-all duration-300 flex items-center justify-center gap-2 border border-burgundy-200">
-                            <i class="fas fa-plus"></i>
-                            <span>إضافة / التفاصيل</span>
-                        </button>
-                    </div>
-                </div>
-            `).join('');
+                return html;
+            }).join('');
         }
 
-        /* Category Selection */
-        function selectCategory(catId) {
-            currentCategory = catId;
-            renderCategories();
-            renderDishes();
-        }
-
-        /* Search Bar Handler */
         function handleSearch() {
             currentSearchQuery = document.getElementById('searchInput').value.trim();
-            renderDishes();
+            renderMenuSections();
         }
 
-        /* Filter Modal Control */
-        function toggleFilterModal() {
-            const modal = document.getElementById('filterModal');
-            modal.classList.toggle('hidden');
+        function toggleSidebarDrawer() {
+            const drawer = document.getElementById('sidebarDrawer');
+            drawer.classList.toggle('hidden');
         }
 
-        function applyQuickTag(tag) {
-            currentActiveTag = tag;
-            document.getElementById('filterName').innerText = tag;
-            document.getElementById('activeFilterBadge').classList.remove('hidden');
-            toggleFilterModal();
-            renderDishes();
-        }
-
-        function resetFilters() {
-            currentActiveTag = null;
-            currentSearchQuery = '';
-            document.getElementById('searchInput').value = '';
-            document.getElementById('activeFilterBadge').classList.add('hidden');
-            renderDishes();
-        }
-
-        /* Open Item Modal Details */
         function openDishModal(id) {
             selectedItemForModal = menuItems.find(i => i.id === id);
             if (!selectedItemForModal) return;
@@ -691,7 +619,6 @@
             document.getElementById('modalQty').innerText = modalQuantity;
             document.getElementById('specialNote').value = '';
 
-            // Render Sizes
             const sizeContainer = document.getElementById('sizeOptionsGrid');
             if (selectedItemForModal.sizes && selectedItemForModal.sizes.length > 0) {
                 document.getElementById('optionsContainer').classList.remove('hidden');
@@ -705,12 +632,11 @@
                 document.getElementById('optionsContainer').classList.add('hidden');
             }
 
-            // Render Extras
             const extrasContainer = document.getElementById('extrasGrid');
             if (selectedItemForModal.extras && selectedItemForModal.extras.length > 0) {
                 document.getElementById('extrasContainer').classList.remove('hidden');
                 extrasContainer.innerHTML = selectedItemForModal.extras.map(e => `
-                    <label class="cursor-pointer border border-gray-200 rounded-xl p-2.5 flex items-center justify-between text-xs hover:bg-gray-50">
+                    <label class="cursor-pointer border border-gray-200 rounded-xl p-2 flex items-center justify-between text-xs hover:bg-gray-50">
                         <div class="flex items-center gap-2">
                             <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-burgundy-700 w-4 h-4 rounded">
                             <span>${e.name}</span>
@@ -733,7 +659,6 @@
         function selectSize(price, name, el) {
             selectedSizePrice = price;
             selectedOptionName = name;
-            // Highlight styling
             const siblings = el.parentElement.children;
             for (let child of siblings) {
                 child.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
@@ -766,7 +691,6 @@
             document.getElementById('modalTotalPrice').innerText = `${total} ر.س`;
         }
 
-        /* Cart Operations */
         function confirmAddToCart() {
             const note = document.getElementById('specialNote').value.trim();
             const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
@@ -774,7 +698,6 @@
 
             const cartItem = {
                 cartId: Date.now(),
-                id: selectedItemForModal.id,
                 name: selectedItemForModal.name,
                 option: selectedOptionName,
                 extras: selectedExtras.map(e => e.name).join(', '),
@@ -787,6 +710,7 @@
             cart.push(cartItem);
             closeDishModal();
             updateCartUI();
+            showNotification('تمت إضافة الطلب للسلة بنجاح ✨');
         }
 
         function updateCartUI() {
@@ -824,7 +748,6 @@
                     <div class="text-center py-12 text-gray-400">
                         <i class="fas fa-shopping-basket text-4xl mb-3 text-burgundy-200"></i>
                         <p class="text-xs font-bold text-gray-500">سلتك فارغة حالياً</p>
-                        <p class="text-[10px] mt-1">اختر أشهى المشروبات والحلويات لإضافتها</p>
                     </div>
                 `;
                 subTotalText.innerText = '0 ر.س';
@@ -854,7 +777,7 @@
                             <span class="text-xs font-bold w-5 text-center">${item.qty}</span>
                             <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
                         </div>
-                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-600 p-1">
+                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-600 p-1 transition hover:scale-110">
                             <i class="fas fa-trash-alt text-xs"></i>
                         </button>
                     </div>
@@ -879,14 +802,13 @@
             updateCartUI();
         }
 
-        /* Order via WhatsApp */
         function sendOrderWhatsApp() {
             if (cart.length === 0) return;
 
             let msg = `*طلب جديد من منيو ايس هوم 🍦☕*\n\n`;
             cart.forEach((item, index) => {
                 msg += `${index + 1}. *${item.name}* (العدد: ${item.qty})\n`;
-                if (item.option) msg += `   • الحجم/الخيار: ${item.option}\n`;
+                if (item.option) msg += `   • الحجم: ${item.option}\n`;
                 if (item.extras) msg += `   • الإضافات: ${item.extras}\n`;
                 if (item.note) msg += `   • ملاحظة: ${item.note}\n`;
                 msg += `   • السعر: ${item.totalPrice} ر.س\n\n`;
@@ -900,37 +822,20 @@
             window.open(`https://wa.me/966500000000?text=${encoded}`, '_blank');
         }
 
-        /* Digital Receipt Summary Modal */
         function showReceiptModal() {
             if (cart.length === 0) return;
             const total = cart.reduce((s, i) => s + i.totalPrice, 0);
-            
-            let receiptHTML = `
-                <div class="text-center mb-4 border-b pb-3">
-                    <h3 class="font-extrabold text-burgundy-900 text-lg">آيس هوم | Ice Home</h3>
-                    <p class="text-[10px] text-gray-500">فاتورة طلب رقم #${Math.floor(1000 + Math.random() * 9000)}</p>
-                </div>
-                <div class="space-y-2 text-xs mb-4">
-            `;
+            showNotification(`إجمالي الفاتورة الرقمية: ${total} ر.س — جاهزة للطلب`);
+        }
 
-            cart.forEach(i => {
-                receiptHTML += `
-                    <div class="flex justify-between">
-                        <span>${i.name} (x${i.qty})</span>
-                        <span class="font-bold">${i.totalPrice} ر.س</span>
-                    </div>
-                `;
-            });
-
-            receiptHTML += `
-                </div>
-                <div class="border-t pt-2 text-xs flex justify-between font-black text-burgundy-900">
-                    <span>الإجمالي النهائي:</span>
-                    <span>${total} ر.س</span>
-                </div>
-            `;
-
-            alert(`طلبك جاهز!\nالمجموع: ${total} ر.س\nتم تجهيز ملخص الفاتورة بنجاح.`);
+        function showNotification(text) {
+            const notif = document.getElementById('customNotification');
+            document.getElementById('notificationText').innerText = text;
+            notif.classList.remove('hidden', 'opacity-0');
+            setTimeout(() => {
+                notif.classList.add('opacity-0');
+                setTimeout(() => notif.classList.add('hidden'), 300);
+            }, 3000);
         }
     </script>
 </body>
