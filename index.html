@@ -99,9 +99,13 @@
             border-color: rgba(107, 29, 47, 0.25);
         }
 
-        .glass-header {
-            background: rgba(88, 17, 26, 0.96);
-            backdrop-filter: blur(12px);
+        /* Liquid Glass Bottom Navigation */
+        .liquid-glass-nav {
+            background: rgba(88, 17, 26, 0.82);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            box-shadow: 0 10px 30px -5px rgba(61, 10, 17, 0.5);
         }
 
         /* Custom Scrollbar */
@@ -121,7 +125,6 @@
             background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.82) 70%, rgba(107, 29, 47, 1) 100%);
         }
 
-        /* Animation Classes */
         @keyframes customPulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.06); }
@@ -147,7 +150,7 @@
         }
     </style>
 </head>
-<body class="relative min-h-screen pb-32 select-none">
+<body class="relative min-h-screen pb-36 select-none">
 
     <div class="pattern-bg"></div>
 
@@ -183,12 +186,11 @@
                 </div>
             </div>
 
-            <!-- Header Content: Circular Logo on the Right -->
+            <!-- Header Content -->
             <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 mt-auto mb-1">
-                
                 <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right w-full">
                     
-                    <!-- Circular Logo Badge on the Right -->
+                    <!-- Circular Logo Badge -->
                     <div class="relative group flex-shrink-0 order-1 sm:order-2">
                         <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
                         <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
@@ -216,12 +218,12 @@
                     </div>
 
                 </div>
-
             </div>
 
         </div>
     </header>
 
+    <!-- Search Bar & Category Jump -->
     <div class="sticky top-0 z-30 bg-burgundy-800/95 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
             <div class="relative flex-1">
@@ -238,6 +240,7 @@
         </div>
     </div>
 
+    <!-- Sidebar Drawer for Categories -->
     <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
         <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between transform drawer-slide-in">
@@ -266,10 +269,12 @@
         </div>
     </div>
 
+    <!-- Main Menu Container -->
     <main class="max-w-6xl mx-auto px-3 sm:px-4 py-6 relative z-10 space-y-10" id="menuMainContainer">
         <!-- Rendered dynamically -->
     </main>
 
+    <!-- Dish Customization Modal -->
     <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
         <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/10">
             
@@ -325,26 +330,7 @@
         </div>
     </div>
 
-    <div id="floatingCartBar" class="fixed bottom-4 left-4 right-4 z-40 max-w-xl mx-auto transform translate-y-32 opacity-0 transition-all duration-500">
-        <div class="glass-header text-white rounded-2xl p-3 shadow-2xl border border-amber-400/30 flex items-center justify-between gap-3 animate-custom-pulse">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="toggleCartDrawer()">
-                <div class="relative w-12 h-12 rounded-xl bg-amber-400 text-burgundy-900 flex items-center justify-center font-black text-lg shadow-inner">
-                    <i class="fas fa-receipt"></i>
-                    <span id="cartCountBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center border border-white font-bold">0</span>
-                </div>
-                <div>
-                    <div class="text-xs text-amber-200">ملخص طلبيتك الحالية</div>
-                    <div id="cartBarTotal" class="text-base font-extrabold text-white">0 ر.س</div>
-                </div>
-            </div>
-
-            <button onclick="toggleCartDrawer()" class="bg-amber-400 hover:bg-amber-300 text-burgundy-950 font-bold px-4 py-2.5 rounded-xl text-xs flex items-center gap-2 transition shadow active:scale-95">
-                <span>عرض الطلب</span>
-                <i class="fas fa-arrow-left"></i>
-            </button>
-        </div>
-    </div>
-
+    <!-- Cart Drawer -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/60 backdrop-blur-sm transition-opacity">
         <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in">
             <div class="p-4 bg-burgundy-800 text-white flex items-center justify-between">
@@ -376,7 +362,72 @@
         </div>
     </div>
 
-    <!-- Custom Notification Box (No standard alerts) -->
+    <!-- About / Info Modal -->
+    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-burgundy-700/10 text-right">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-black text-burgundy-900 text-lg flex items-center gap-2">
+                    <i class="fas fa-ice-cream text-amber-500"></i>
+                    عن آيس هوم | Ice Home
+                </h3>
+                <button onclick="closeAboutModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+                عالم الفخامة والانتعاش.. نقدم أفاخر المشروبات الباردة والساخنة، الآيس كريم، الجيلاتو، والحلويات المصنوعة بأجود المكونات العالمية لتمنحكم تجربة لا تُنسى.
+            </p>
+            <div class="space-y-2.5 text-xs text-gray-700 pt-2 border-t">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-clock text-burgundy-700 w-5 text-center"></i>
+                    <span>أوقات العمل: يومياً من 2:00 ظهراً وحتى 2:00 صباحاً</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-phone-alt text-burgundy-700 w-5 text-center"></i>
+                    <span dir="ltr">+966 50 000 0000</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-map-marker-alt text-burgundy-700 w-5 text-center"></i>
+                    <span>المملكة العربية السعودية • الفرع الرئيسي</span>
+                </div>
+            </div>
+            <div class="pt-3 border-t flex justify-center gap-3">
+                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://snapchat.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-snapchat"></i>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://whatsapp.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liquid Glass Bottom Navigation Bar -->
+    <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-md mx-auto">
+        <div class="liquid-glass-nav rounded-2xl p-2.5 flex items-center justify-around text-white">
+            <button onclick="scrollToTop()" class="flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl hover:bg-white/15 transition active:scale-95 group">
+                <i class="fas fa-home text-amber-300 text-base group-hover:scale-110 transition"></i>
+                <span class="text-[10px] font-bold tracking-wide">الرئيسية</span>
+            </button>
+            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl hover:bg-white/15 transition active:scale-95 group">
+                <i class="fas fa-shopping-bag text-amber-300 text-base group-hover:scale-110 transition"></i>
+                <span class="text-[10px] font-bold tracking-wide">السلة</span>
+                <span id="bottomCartBadge" class="absolute top-1 right-3 bg-red-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+            </button>
+            <button onclick="openAboutModal()" class="flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl hover:bg-white/15 transition active:scale-95 group">
+                <i class="fas fa-info-circle text-amber-300 text-base group-hover:scale-110 transition"></i>
+                <span class="text-[10px] font-bold tracking-wide">معلوماتنا</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Custom Notification Box -->
     <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900 text-amber-200 px-5 py-3 rounded-2xl shadow-2xl border border-amber-400/40 text-xs font-bold flex items-center gap-3 backdrop-blur-md transition-all duration-300">
         <i class="fas fa-check-circle text-amber-400 text-base"></i>
         <span id="notificationText">تمت العملية بنجاح</span>
@@ -496,6 +547,10 @@
             renderMenuSections();
         };
 
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function renderSidebarCategories() {
             const list = document.getElementById('sidebarCategoriesList');
             list.innerHTML = categories.map(cat => `
@@ -537,7 +592,7 @@
                             </span>
                         </div>
 
-                        <!-- Ultra-Compact Adjacent Dishes Grid -->
+                        <!-- Ultra-Compact Responsive Dishes Grid -->
                         <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-2.5">
                 `;
 
@@ -546,7 +601,7 @@
                         <div class="glass-panel rounded-xl p-1.5 sm:p-2 shadow-sm hover:shadow-lg transition transform hover:scale-[1.03] border border-burgundy-900/10 flex flex-col justify-between group">
                             <div>
                                 <!-- Tiny Thumbnail -->
-                                <div class="relative h-20 sm:h-24 rounded-lg overflow-hidden bg-gray-100">
+                                <div class="relative h-16 sm:h-20 rounded-lg overflow-hidden bg-gray-100">
                                     <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                                     ${item.tag ? `
                                         <span class="absolute top-1 right-1 bg-burgundy-800 text-amber-300 text-[8px] font-bold px-1.5 py-0.2 rounded shadow">
@@ -560,8 +615,8 @@
 
                                 <!-- Card Mini Info -->
                                 <div class="pt-1.5">
-                                    <h3 class="font-bold text-burgundy-900 text-[11px] sm:text-xs truncate group-hover:text-burgundy-700 transition">${item.name}</h3>
-                                    <p class="text-gray-500 text-[9px] mt-0.5 line-clamp-1">${item.desc}</p>
+                                    <h3 class="font-bold text-burgundy-900 text-[10px] sm:text-[11px] truncate group-hover:text-burgundy-700 transition">${item.name}</h3>
+                                    <p class="text-gray-500 text-[8px] sm:text-[9px] mt-0.5 line-clamp-1">${item.desc}</p>
                                 </div>
                             </div>
 
@@ -578,7 +633,7 @@
 
                 html += `</div></section>`;
 
-                // Translucent Gray Animated Divider between sections
+                // Translucent Gray Animated Divider Between Sections
                 if (index < categories.length - 1) {
                     html += `
                         <div class="my-8 flex items-center justify-center gap-4">
@@ -601,6 +656,14 @@
         function toggleSidebarDrawer() {
             const drawer = document.getElementById('sidebarDrawer');
             drawer.classList.toggle('hidden');
+        }
+
+        function openAboutModal() {
+            document.getElementById('aboutModal').classList.remove('hidden');
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.add('hidden');
         }
 
         function openDishModal(id) {
@@ -714,22 +777,9 @@
         }
 
         function updateCartUI() {
-            const bar = document.getElementById('floatingCartBar');
-            const countBadge = document.getElementById('cartCountBadge');
-            const totalText = document.getElementById('cartBarTotal');
-
+            const bottomBadge = document.getElementById('bottomCartBadge');
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            const grandTotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-
-            countBadge.innerText = totalItems;
-            totalText.innerText = `${grandTotal} ر.س`;
-
-            if (cart.length > 0) {
-                bar.classList.remove('translate-y-32', 'opacity-0');
-            } else {
-                bar.classList.add('translate-y-32', 'opacity-0');
-            }
-
+            bottomBadge.innerText = totalItems;
             renderCartDrawerItems();
         }
 
