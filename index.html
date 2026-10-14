@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ايس هوم | Ice Home - المنيو الرقمي التفاعلي</title>
+    <title>ايس هوم | Ice Home - القائمة الرقمية الفاخرة</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
@@ -48,16 +48,20 @@
             scroll-behavior: smooth;
         }
 
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
         /* Animated Translucent Pattern Background */
         .pattern-bg {
             position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            pointer-events: none; z-index: 0; opacity: 0.16;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.16;
             background-image: radial-gradient(rgba(107, 29, 47, 0.28) 1px, transparent 1px), radial-gradient(rgba(120, 120, 120, 0.22) 1px, #FAF8f5 1px);
-            background-size: 30px 30px; animation: movePattern 40s linear infinite;
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            animation: movePattern 40s linear infinite;
         }
 
         @keyframes movePattern {
@@ -65,523 +69,946 @@
             100% { background-position: 300px 300px, 315px 315px; }
         }
 
+        /* Animated Floating Gray Ornaments */
+        .ornament-float {
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.12;
+            animation: floatAnim 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes floatAnim {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(-25px) rotate(15deg) scale(1.05); }
+            100% { transform: translateY(20px) rotate(-10deg) scale(0.95); }
+        }
+
+        /* Gradient Text */
         .gradient-text-gold {
             background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
+        /* Rounded Pill Accordion Button (Matching Image Style) */
+        .category-pill-btn {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(107, 29, 47, 0.25);
+            border-radius: 9999px;
+            box-shadow: 0 4px 15px rgba(107, 29, 47, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .category-pill-btn:hover {
+            border-color: rgba(107, 29, 47, 0.6);
+            transform: scale(1.01);
+            box-shadow: 0 6px 20px rgba(107, 29, 47, 0.12);
+        }
+
+        .category-pill-btn.is-active {
+            background: rgba(107, 29, 47, 0.06);
+            border-color: #6b1d2f;
+            box-shadow: 0 6px 22px rgba(107, 29, 47, 0.18);
+        }
+
+        /* Accordion Smooth Expand Container */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out, padding 0.5s ease;
+            opacity: 0;
+        }
+
+        .accordion-content.is-open {
+            opacity: 1;
+        }
+
+        /* Glass Panel for Dish Card */
         .glass-panel {
             background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(107, 29, 47, 0.1);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .app-bottom-nav {
-            background: rgba(61, 10, 17, 0.88);
+        .glass-panel:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -4px rgba(107, 29, 47, 0.15);
+            border-color: rgba(107, 29, 47, 0.3);
+        }
+
+        /* Liquid Glass Bottom Navigation */
+        .liquid-glass-nav {
+            background: rgba(61, 10, 17, 0.6);
             backdrop-filter: blur(24px);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.25);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Interactive Visual Builder Animations */
-        .preview-img {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+        /* Modal & Drawer Animations */
+        .modal-fade-in {
+            animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        .preview-img.scale-large {
-            transform: scale(1.15) rotate(2deg);
-        }
-
-        .floating-badge {
-            animation: floatUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes floatUp {
-            from { opacity: 0; transform: translateY(15px) scale(0.7); }
-            to { opacity: 1; transform: translateY(0) scale(1); }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.92) translateY(20px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
-        .drawer-slide-in { animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes drawerSlideIn { from { transform: translateX(100%); } to { transform: translateX(0); } }
+        .drawer-slide-in {
+            animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes drawerSlideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
 
-        .modal-fade-in { animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
-        @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.92) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .hero-gradient-overlay {
+            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.8) 70%, rgba(107, 29, 47, 0.95) 100%);
+        }
+
+        @keyframes customPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .animate-custom-pulse {
+            animation: customPulse 2s infinite;
+        }
     </style>
 </head>
 <body class="relative min-h-screen pb-32 select-none">
 
     <div class="pattern-bg"></div>
 
-    <!-- Header -->
-    <header class="relative w-full h-48 sm:h-56 overflow-hidden shadow-xl">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" alt="Ice Home Cover" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-b from-burgundy-950/40 via-burgundy-900/80 to-burgundy-900 flex flex-col justify-between p-4">
-            <div class="flex justify-between items-center">
-                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 flex items-center justify-center text-white border border-white/25">
-                    <i class="fas fa-bars text-amber-300"></i>
+    <svg class="ornament-float top-10 right-12 w-32 h-32 text-gray-500" viewBox="0 0 100 100" fill="currentColor">
+        <path d="M50 0 C60 25, 75 40, 100 50 C75 60, 60 75, 50 100 C40 75, 25 60, 0 50 C25 40, 40 25, 50 0 Z" />
+    </svg>
+    <svg class="ornament-float bottom-1/3 left-6 w-44 h-44 text-gray-600" style="animation-delay: -3s;" viewBox="0 0 100 100" fill="currentColor">
+        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="1.5"/>
+    </svg>
+
+    <!-- Hero Header -->
+    <header class="relative w-full h-64 sm:h-80 overflow-hidden shadow-2xl">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" 
+             alt="Ice Home Cover" 
+             class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 hover:scale-100">
+        
+        <div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-between p-4 sm:p-6">
+            
+            <!-- Top Bar -->
+            <div class="flex justify-between items-center z-10">
+                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white backdrop-blur-md border border-white/25 transition transform hover:scale-110 active:scale-95 shadow">
+                    <i class="fas fa-bars text-amber-300 text-lg"></i>
                 </button>
-                <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-ping ml-1"></span> مفتوح الآن
-                </span>
-            </div>
-            <div class="flex items-center gap-3 mt-auto mb-1">
-                <div class="w-14 h-14 rounded-full bg-burgundy-900 border-2 border-amber-300 p-1 flex items-center justify-center text-amber-300">
-                    <i class="fas fa-ice-cream text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="text-xl font-black text-white gradient-text-gold">آيس هوم | Ice Home</h1>
-                    <p class="text-[11px] text-gray-200">اختر طبقك وقم بتخصيصه تفاعلياً على ذوقك</p>
+
+                <div class="flex items-center gap-3">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                        مفتوح الآن
+                    </span>
+                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition border border-white/25 transform hover:scale-110">
+                        <i class="fas fa-phone text-xs"></i>
+                    </a>
                 </div>
             </div>
+
+            <!-- Header Content (Right Logo + Info) -->
+            <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right">
+                
+                <!-- Circular Logo Badge -->
+                <div class="relative group flex-shrink-0">
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative w-22 h-22 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
+                        <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
+                            <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-custom-pulse"></i>
+                            <span class="font-extrabold text-xs sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
+                            <span class="text-[8px] sm:text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Title & Details -->
+                <div class="text-white flex-1">
+                    <h1 class="text-2xl sm:text-4xl font-black tracking-wide drop-shadow-md gradient-text-gold">
+                        آيس هوم <span class="text-sm sm:text-base font-normal text-amber-200/90">| Ice Home</span>
+                    </h1>
+                    <p class="text-[11px] sm:text-sm text-gray-200 mt-1 max-w-md line-clamp-2">
+                        عالم الفخامة والانتعاش.. أجود أنواع المشروبات والحلويات الفاخرة
+                    </p>
+                    <div class="flex items-center gap-3 text-[10px] sm:text-xs text-amber-200/90 mt-2">
+                        <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
+                        <span>•</span>
+                        <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </header>
 
-    <!-- Search Bar -->
-    <div class="sticky top-0 z-30 bg-burgundy-800/95 backdrop-blur-md border-b border-amber-500/20 shadow-md">
-        <div class="max-w-4xl mx-auto px-4 py-2.5">
-            <div class="relative">
-                <input type="text" id="searchInput" oninput="handleSearch()" placeholder="ابحث عن مشروبك أو تحليتك..." class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400">
-                <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-xs"></i>
+    <!-- Search Bar Bar -->
+    <div class="sticky top-0 z-30 bg-burgundy-800/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+            <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold transition transform active:scale-95 shadow">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            
+            <div class="relative flex-1">
+                <input type="text" id="searchInput" oninput="handleSearch()" 
+                       placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
+                       class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
+                <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
             </div>
         </div>
     </div>
 
-    <!-- App Main Container -->
-    <main class="max-w-4xl mx-auto px-4 py-6 space-y-8" id="appMainContainer"></main>
-
-    <!-- Interactive Builder Screen (Full Screen Customizer) -->
-    <div id="builderScreen" class="fixed inset-0 z-50 hidden bg-ivory flex flex-col modal-fade-in overflow-hidden">
-        
-        <!-- Builder Top Bar -->
-        <div class="bg-burgundy-900 text-white px-4 py-3.5 flex items-center justify-between border-b border-amber-500/20 shadow-lg">
-            <button onclick="closeBuilder()" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center text-amber-300 hover:bg-white/20 transition">
-                <i class="fas fa-arrow-right"></i>
-            </button>
-            <div class="text-center">
-                <h3 class="font-extrabold text-sm text-amber-200" id="builderHeaderTitle">صمم مشروبك</h3>
-                <p class="text-[9px] text-gray-300">التخصيص التفاعلي المباشر</p>
-            </div>
-            <div class="w-9"></div>
-        </div>
-
-        <div class="flex-1 overflow-y-auto pb-28">
-            
-            <!-- Visual Live Stage (Interactive Drink Display) -->
-            <div class="relative w-full h-64 bg-gradient-to-b from-burgundy-900 via-burgundy-800 to-ivory flex items-center justify-center overflow-hidden border-b border-amber-500/10">
-                
-                <!-- Glowing Aura Ring -->
-                <div class="absolute w-48 h-48 rounded-full bg-amber-400/20 blur-2xl animate-pulse"></div>
-
-                <!-- Product Display Base -->
-                <div class="relative z-10 flex items-center justify-center">
-                    <img id="builderVisualImg" src="" class="preview-img w-40 h-40 object-cover rounded-3xl shadow-2xl border-2 border-amber-300/40">
-                </div>
-
-                <!-- Live Dynamic Badges Overlay -->
-                <div id="liveBadgesContainer" class="absolute inset-0 pointer-events-none p-4 flex flex-col justify-between z-20">
-                    <div class="flex justify-between items-start">
-                        <span id="badgeSize" class="floating-badge bg-burgundy-900/90 text-amber-300 border border-amber-400/30 text-[10px] font-black px-3 py-1 rounded-full shadow-lg backdrop-blur-md">
-                            حجم وسط
-                        </span>
-                        <span id="badgeCalories" class="floating-badge bg-amber-500/90 text-burgundy-950 font-black text-[10px] px-2.5 py-1 rounded-full shadow-lg backdrop-blur-md">
-                            🔥 ~210 سعرة
-                        </span>
+    <!-- Sidebar Drawer for Quick Navigation -->
+    <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between transform drawer-slide-in">
+            <div class="p-5 bg-burgundy-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold">
+                        <i class="fas fa-ice-cream"></i>
                     </div>
-
-                    <!-- Selected Addons Pill List -->
-                    <div id="badgeAddonsList" class="flex flex-wrap gap-1.5 justify-center">
-                        <!-- Injected JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Customization Controls Grid -->
-            <div class="max-w-xl mx-auto p-4 space-y-5 text-right">
-                
-                <!-- Title & Base Price -->
-                <div class="flex justify-between items-start border-b pb-3">
                     <div>
-                        <h2 id="builderItemTitle" class="text-xl font-black text-burgundy-900"></h2>
-                        <p id="builderItemDesc" class="text-xs text-gray-500 mt-1"></p>
-                    </div>
-                    <span id="builderBasePrice" class="text-lg font-black text-burgundy-700 bg-burgundy-50 px-3 py-1 rounded-xl"></span>
-                </div>
-
-                <!-- 1. Size Selection -->
-                <div class="space-y-2">
-                    <label class="block text-xs font-black text-burgundy-900 flex items-center gap-1.5">
-                        <i class="fas fa-glass-whiskey text-amber-500"></i> اختر الحجم المطلوب:
-                    </label>
-                    <div id="builderSizesGrid" class="grid grid-cols-2 gap-2.5"></div>
-                </div>
-
-                <!-- 2. Sugar Level Selector (%) -->
-                <div class="space-y-2 pt-2 border-t border-gray-200/60">
-                    <label class="block text-xs font-black text-burgundy-900 flex items-center gap-1.5">
-                        <i class="fas fa-cubes text-amber-500"></i> نسبة السكر:
-                    </label>
-                    <div class="grid grid-cols-4 gap-2">
-                        <button onclick="setSugar(0, this)" class="sugar-btn border rounded-xl py-2 text-xs font-bold transition hover:bg-burgundy-50">بدون (0%)</button>
-                        <button onclick="setSugar(25, this)" class="sugar-btn border rounded-xl py-2 text-xs font-bold transition hover:bg-burgundy-50">قليل (25%)</button>
-                        <button onclick="setSugar(50, this)" class="sugar-btn border border-burgundy-700 bg-burgundy-50 text-burgundy-900 rounded-xl py-2 text-xs font-bold transition">متوسط (50%)</button>
-                        <button onclick="setSugar(100, this)" class="sugar-btn border rounded-xl py-2 text-xs font-bold transition hover:bg-burgundy-50">كامل (100%)</button>
+                        <h3 class="font-black text-sm">قائمة الأقسام</h3>
+                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال المباشر</p>
                     </div>
                 </div>
-
-                <!-- 3. Milk Type Selection -->
-                <div class="space-y-2 pt-2 border-t border-gray-200/60">
-                    <label class="block text-xs font-black text-burgundy-900 flex items-center gap-1.5">
-                        <i class="fas fa-blender text-amber-500"></i> نوع الحليب الفاخر:
-                    </label>
-                    <div class="grid grid-cols-2 gap-2 text-xs">
-                        <label class="border border-burgundy-700 bg-burgundy-50 p-2.5 rounded-xl flex items-center justify-between cursor-pointer font-bold" onclick="selectMilk('كامل الدسم', 0, this)">
-                            <span>حليب كامل الدسم</span> <span class="text-gray-400">أساسي</span>
-                        </label>
-                        <label class="border border-gray-200 p-2.5 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-50" onclick="selectMilk('حليب الشوفان', 4, this)">
-                            <span>حليب الشوفان</span> <span class="text-burgundy-700 font-bold">+4 ر.س</span>
-                        </label>
-                        <label class="border border-gray-200 p-2.5 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-50" onclick="selectMilk('حليب اللوز', 5, this)">
-                            <span>حليب اللوز النباتي</span> <span class="text-burgundy-700 font-bold">+5 ر.س</span>
-                        </label>
-                        <label class="border border-gray-200 p-2.5 rounded-xl flex items-center justify-between cursor-pointer hover:bg-gray-50" onclick="selectMilk('خالي الدسم', 0, this)">
-                            <span>خالي الدسم</span> <span class="text-gray-400">مجاناً</span>
-                        </label>
-                    </div>
-                </div>
-
-                <!-- 4. Ice Level -->
-                <div class="space-y-2 pt-2 border-t border-gray-200/60">
-                    <label class="block text-xs font-black text-burgundy-900 flex items-center gap-1.5">
-                        <i class="fas fa-snowflake text-amber-500"></i> كمية الثلج:
-                    </label>
-                    <div class="grid grid-cols-3 gap-2 text-xs">
-                        <button onclick="setIce('بدون ثلج', this)" class="ice-btn border rounded-xl py-2 font-bold hover:bg-burgundy-50">بدون ثلج</button>
-                        <button onclick="setIce('ثلج معتدل', this)" class="ice-btn border border-burgundy-700 bg-burgundy-50 text-burgundy-900 rounded-xl py-2 font-bold">معتدل ❄️</button>
-                        <button onclick="setIce('ثلج إضافي', this)" class="ice-btn border rounded-xl py-2 font-bold hover:bg-burgundy-50">إضافي 🧊</button>
-                    </div>
-                </div>
-
-                <!-- 5. Interactive Extras & Sauces -->
-                <div class="space-y-2 pt-2 border-t border-gray-200/60">
-                    <label class="block text-xs font-black text-burgundy-900 flex items-center gap-1.5">
-                        <i class="fas fa-mortar-pestle text-amber-500"></i> الإضافات والصوصات الفاخرة:
-                    </label>
-                    <div id="builderExtrasList" class="space-y-2"></div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- Sticky Bottom Checkout Bar -->
-        <div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-2xl z-30">
-            <div class="max-w-xl mx-auto flex items-center justify-between gap-4">
-                <div class="flex items-center border border-gray-300 rounded-full bg-gray-50 px-2 py-1">
-                    <button onclick="changeBuilderQty(-1)" class="w-8 h-8 rounded-full text-burgundy-900 font-black hover:bg-gray-200">-</button>
-                    <span id="builderQtyText" class="w-8 text-center font-black text-sm">1</span>
-                    <button onclick="changeBuilderQty(1)" class="w-8 h-8 rounded-full text-burgundy-900 font-black hover:bg-gray-200">+</button>
-                </div>
-
-                <button onclick="confirmBuilderAddToCart()" class="flex-1 bg-burgundy-800 hover:bg-burgundy-900 text-white font-extrabold py-3.5 px-5 rounded-2xl text-xs sm:text-sm flex items-center justify-between shadow-xl transition active:scale-95">
-                    <span class="flex items-center gap-2"><i class="fas fa-shopping-bag text-amber-300"></i> إضافة للمزيج</span>
-                    <span id="builderTotalPriceText" class="text-amber-300 font-black">0 ر.س</span>
+                <button onclick="toggleSidebarDrawer()" class="text-white/80 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition hover:rotate-90">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
-        </div>
 
+            <div id="sidebarCategoriesList" class="p-4 overflow-y-auto flex-1 space-y-2">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="p-4 bg-gray-50 border-t text-center text-xs text-gray-500">
+                <span>ايس هوم • جميع الحقوق محفوظة</span>
+            </div>
+        </div>
     </div>
 
-    <!-- App Bottom Tab Bar Navigation -->
-    <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-md mx-auto">
-        <div class="app-bottom-nav rounded-2xl py-2 px-3 flex items-center justify-around text-white">
-            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1">
-                <i class="fas fa-home text-amber-300 text-sm"></i><span class="text-[9px] font-bold">الرئيسية</span>
+    <!-- Main Accordion Container (Exact Style from Image) -->
+    <main class="max-w-3xl mx-auto px-4 py-8 relative z-10 space-y-4" id="accordionContainer">
+        <!-- Injected via JS -->
+    </main>
+
+    <!-- Dish Customization Modal -->
+    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/10">
+            
+            <div class="relative h-48 sm:h-56 overflow-hidden bg-burgundy-900">
+                <img id="modalImage" src="" alt="Dish Detail" class="w-full h-full object-cover">
+                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition transform active:scale-95">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="absolute bottom-3 right-3 bg-burgundy-900/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold" id="modalCategoryBadge">
+                    قسم المشروبات
+                </div>
+            </div>
+
+            <div class="p-5 overflow-y-auto flex-1 space-y-4">
+                <div class="flex justify-between items-start gap-2">
+                    <div>
+                        <h3 id="modalTitle" class="text-xl font-extrabold text-burgundy-900"></h3>
+                        <p id="modalDesc" class="text-xs text-gray-600 mt-1 leading-relaxed"></p>
+                    </div>
+                    <span id="modalPrice" class="text-lg font-black text-burgundy-700 whitespace-nowrap bg-burgundy-50 px-3 py-1 rounded-xl"></span>
+                </div>
+
+                <div id="optionsContainer" class="space-y-2 pt-2 border-t border-gray-100">
+                    <label class="block text-xs font-bold text-gray-800">الحجم / الخيار:</label>
+                    <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2"></div>
+                </div>
+
+                <div id="extrasContainer" class="space-y-2 pt-2 border-t border-gray-100">
+                    <label class="block text-xs font-bold text-gray-800">إضافات اختيارية:</label>
+                    <div id="extrasGrid" class="space-y-1.5"></div>
+                </div>
+
+                <div class="pt-2 border-t border-gray-100">
+                    <label for="specialNote" class="block text-xs font-bold text-gray-800 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
+                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-gray-50/50"></textarea>
+                </div>
+            </div>
+
+            <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-4">
+                <div class="flex items-center border border-gray-300 rounded-full bg-white px-2 py-1">
+                    <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">-</button>
+                    <span id="modalQty" class="w-8 text-center font-bold text-sm">1</span>
+                    <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">+</button>
+                </div>
+
+                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition transform active:scale-95">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span>إضافة للسلة • </span>
+                    <span id="modalTotalPrice">0 ر.س</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in">
+            <div class="p-4 bg-burgundy-800 text-white flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-shopping-basket text-amber-300 text-lg"></i>
+                    <h3 class="font-extrabold text-base">سلة الطلبات - ايس هوم</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white transition hover:rotate-90"><i class="fas fa-times text-lg"></i></button>
+            </div>
+
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-gray-100"></div>
+
+            <div class="p-4 bg-ivory border-t border-gray-200 space-y-3">
+                <div class="space-y-1.5 text-xs text-gray-600">
+                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold">0 ر.س</span></div>
+                    <div class="flex justify-between"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
+                    <div class="flex justify-between text-base font-black text-burgundy-900 border-t pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2 pt-2">
+                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
+                        <i class="fab fa-whatsapp text-base"></i> إرسال للواتساب
+                    </button>
+                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
+                        <i class="fas fa-file-invoice text-base"></i> الفاتورة الرقمية
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+        <div class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-burgundy-700/10 text-right">
+            <div class="flex justify-between items-center border-b pb-3">
+                <h3 class="font-black text-burgundy-900 text-lg flex items-center gap-2">
+                    <i class="fas fa-ice-cream text-amber-500"></i>
+                    عن آيس هوم | Ice Home
+                </h3>
+                <button onclick="closeAboutModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <p class="text-xs text-gray-600 leading-relaxed">
+                عالم الفخامة والانتعاش.. نقدم أفاخر المشروبات الباردة والساخنة، الآيس كريم، الجيلاتو، والحلويات المصنوعة بأجود المكونات العالمية لتمنحكم تجربة لا تُنسى.
+            </p>
+            <div class="space-y-2.5 text-xs text-gray-700 pt-2 border-t">
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-clock text-burgundy-700 w-5 text-center"></i>
+                    <span>أوقات العمل: يومياً من 2:00 ظهراً وحتى 2:00 صباحاً</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-phone-alt text-burgundy-700 w-5 text-center"></i>
+                    <span dir="ltr">+966 50 000 0000</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i class="fas fa-map-marker-alt text-burgundy-700 w-5 text-center"></i>
+                    <span>المملكة العربية السعودية • الفرع الرئيسي</span>
+                </div>
+            </div>
+            <div class="pt-3 border-t flex justify-center gap-3">
+                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://snapchat.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-snapchat"></i>
+                </a>
+                <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+                <a href="https://whatsapp.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Liquid Glass Bottom Navigation Bar -->
+    <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-sm mx-auto">
+        <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-white">
+            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
+                <i class="fas fa-home text-amber-300 text-sm group-hover:scale-110 transition"></i>
+                <span class="text-[9px] font-bold tracking-wide">الرئيسية</span>
             </button>
-            <button onclick="toggleSidebarDrawer()" class="flex flex-col items-center gap-0.5 px-3 py-1">
-                <i class="fas fa-list-ul text-amber-300 text-sm"></i><span class="text-[9px] font-bold">المنيو</span>
-            </button>
-            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1">
-                <i class="fas fa-shopping-bag text-amber-300 text-sm"></i><span class="text-[9px] font-bold">السلة</span>
+            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
+                <i class="fas fa-shopping-bag text-amber-300 text-sm group-hover:scale-110 transition"></i>
+                <span class="text-[9px] font-bold tracking-wide">السلة</span>
                 <span id="bottomCartBadge" class="absolute top-0.5 right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+            </button>
+            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
+                <i class="fas fa-info-circle text-amber-300 text-sm group-hover:scale-110 transition"></i>
+                <span class="text-[9px] font-bold tracking-wide">معلوماتنا</span>
             </button>
         </div>
     </nav>
 
-    <!-- Sidebar Drawer & Cart Modals -->
-    <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between drawer-slide-in">
-            <div class="p-4 bg-burgundy-800 text-white flex justify-between items-center">
-                <h3 class="font-bold text-sm">أقسام المنيو</h3>
-                <button onclick="toggleSidebarDrawer()"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="sidebarCategoriesList" class="p-4 overflow-y-auto space-y-2"></div>
-        </div>
-    </div>
-
-    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleCartDrawer()"></div>
-        <div class="relative bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between drawer-slide-in z-10">
-            <div class="p-4 bg-burgundy-800 text-white flex justify-between items-center">
-                <h3 class="font-bold">سلة الطلبات</h3>
-                <button onclick="toggleCartDrawer()"><i class="fas fa-times"></i></button>
-            </div>
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 divide-y"></div>
-            <div class="p-4 bg-gray-50 border-t space-y-3">
-                <div class="flex justify-between font-black text-burgundy-900"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
-                <button onclick="sendOrderWhatsApp()" class="w-full bg-emerald-600 text-white py-3 rounded-xl font-bold flex items-center justify-center gap-2">
-                    <i class="fab fa-whatsapp"></i> إرسال الطلب للواتساب
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900 text-amber-200 px-5 py-3 rounded-2xl shadow-2xl text-xs font-bold">
-        <span id="notificationText">تمت العملية</span>
+    <!-- Custom Notification Box -->
+    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900 text-amber-200 px-5 py-3 rounded-2xl shadow-2xl border border-amber-400/40 text-xs font-bold flex items-center gap-3 backdrop-blur-md transition-all duration-300">
+        <i class="fas fa-check-circle text-amber-400 text-base"></i>
+        <span id="notificationText">تمت العملية بنجاح</span>
     </div>
 
     <script>
         const categories = [
             { id: 'iced-drinks', name: 'المشروبات البارده', icon: 'fa-glass-martini-alt' },
             { id: 'ice-cream', name: 'الآيس كريم والجيلاتو', icon: 'fa-ice-cream' },
+            { id: 'hot-drinks', name: 'المشروبات الساخنه', icon: 'fa-mug-hot' },
+            { id: 'mojitos', name: 'الموهيتو والانتعاش', icon: 'fa-cocktail' },
+            { id: 'waffles', name: 'الوافل والبان كيك', icon: 'fa-stroopwafel' },
             { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
         ];
 
         const menuItems = [
             {
-                id: 1, categoryId: 'iced-drinks', name: 'آيس شيكن وايت موكا', desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية', price: 24,
+                id: 1,
+                categoryId: 'iced-drinks',
+                name: 'آيس شيكن وايت موكا',
+                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية',
+                price: 24,
+                tag: 'الأكثر مبيعاً',
                 image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }],
-                extras: [{ name: 'إضافة صوص بستاشيو', price: 5 }, { name: 'جرعة اسبريسو إضافية', price: 4 }]
+                extras: [{ name: 'إضافة سيرب فانيلا', price: 3 }, { name: 'جرعة اسبريسو', price: 5 }]
             },
             {
-                id: 2, categoryId: 'ice-cream', name: 'آيس كريم هوم سبيشل', desc: 'جيلاتو الفانيلا والشوكلاتة مع الفستق', price: 28,
+                id: 2,
+                categoryId: 'ice-cream',
+                name: 'آيس كريم هوم سبيشل',
+                desc: 'جيلاتو الفانيلا والشوكلاتة والفيستق مع صوص التوت البري',
+                price: 28,
+                tag: 'مميز',
                 image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'كأس عادي', price: 0 }, { name: 'بسكويت وافل مضاعف', price: 6 }],
-                extras: [{ name: 'صوص نوتيلا دافئ', price: 3 }, { name: 'مكسرات محمصة', price: 4 }]
+                sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }],
+                extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا', price: 3 }]
+            },
+            {
+                id: 3,
+                categoryId: 'desserts',
+                name: 'كيكة السباستيان الفاخرة',
+                desc: 'تشيز كيك سان سيباستيان المخبوزة مع صوص الشوكلاتة',
+                price: 32,
+                tag: 'الأكثر مبيعاً',
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'شريحة', price: 0 }],
+                extras: [{ name: 'آيس كريم فانيلا', price: 6 }]
+            },
+            {
+                id: 4,
+                categoryId: 'waffles',
+                name: 'وافل نوتيلا بالآيس كريم',
+                desc: 'وافل ذهبي مقرمش مغطى بالنوتيلا مع كرة آيس كريم',
+                price: 29,
+                tag: 'جديد',
+                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }],
+                extras: [{ name: 'صوص بستاشيو', price: 5 }]
+            },
+            {
+                id: 5,
+                categoryId: 'iced-drinks',
+                name: 'بوبا ماتشا لاتيه',
+                desc: 'ماتشا يابانية مع حليب الشوفان وحبيبات البوبا الطازجة',
+                price: 26,
+                tag: 'صحي',
+                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
+                extras: [{ name: 'بوبا إضافية', price: 4 }]
+            },
+            {
+                id: 6,
+                categoryId: 'mojitos',
+                name: 'موهيتو ريد بل بلوبيري',
+                desc: 'توت أزرق، نعناع طازج، ليمون، ومشروب ريد بل',
+                price: 25,
+                tag: 'مميز',
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'كبير 500ml', price: 0 }],
+                extras: [{ name: 'نكهة إضافية', price: 3 }]
+            },
+            {
+                id: 7,
+                categoryId: 'hot-drinks',
+                name: 'سبانيش لاتيه ساخن',
+                desc: 'اسبريسو غنية مع الحليب المبخر والحليب المكثف',
+                price: 22,
+                tag: 'الأكثر مبيعاً',
+                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'كوب وسط', price: 0 }],
+                extras: [{ name: 'رغوة إضافية', price: 2 }]
+            },
+            {
+                id: 8,
+                categoryId: 'desserts',
+                name: 'سوفليه الشوكلاتة الداكنة',
+                desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة',
+                price: 27,
+                tag: 'جديد',
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'عادي', price: 0 }],
+                extras: []
             }
         ];
 
+        let currentSearchQuery = '';
+        let openCategoryId = null; // Currently open accordion
         let cart = [];
-        let selectedItem = null;
-        let builderConfig = { sizePrice: 0, sizeName: 'وسط', sugar: '50%', milk: 'كامل الدسم', milkPrice: 0, ice: 'ثلج معتدل', extras: [], qty: 1 };
+        let selectedItemForModal = null;
+        let selectedSizePrice = 0;
+        let selectedOptionName = '';
+        let selectedExtras = [];
+        let modalQuantity = 1;
 
         window.onload = function() {
             renderSidebarCategories();
-            renderAppCarousels();
+            renderAccordionMenu();
         };
 
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function renderSidebarCategories() {
-            document.getElementById('sidebarCategoriesList').innerHTML = categories.map(c => `
-                <div class="p-2.5 bg-gray-50 rounded-xl font-bold text-xs text-gray-700 flex items-center justify-between">
-                    <span>${c.name}</span><i class="fas ${c.icon}"></i>
-                </div>
-            `).join('');
-        }
-
-        function renderAppCarousels() {
-            document.getElementById('appMainContainer').innerHTML = categories.map(cat => {
-                const items = menuItems.filter(i => i.categoryId === cat.id);
-                return `
-                    <section class="space-y-3">
-                        <h2 class="text-base font-black text-burgundy-900 flex items-center gap-2">
-                            <i class="fas ${cat.icon} text-amber-500"></i> ${cat.name}
-                        </h2>
-                        <div class="flex gap-3 overflow-x-auto no-scrollbar py-2">
-                            ${items.map(item => `
-                                <div class="glass-panel rounded-2xl p-2.5 w-44 flex-shrink-0 flex flex-col justify-between">
-                                    <div onclick="openBuilder(${item.id})" class="cursor-pointer">
-                                        <img src="${item.image}" class="w-full h-32 object-cover rounded-xl mb-2">
-                                        <h3 class="font-bold text-xs text-burgundy-900 truncate">${item.name}</h3>
-                                        <span class="text-amber-600 font-black text-xs block mt-1">${item.price} ر.س</span>
-                                    </div>
-                                    <button onclick="openBuilder(${item.id})" class="mt-2 w-full bg-burgundy-800 text-white rounded-lg py-1.5 text-[10px] font-bold flex items-center justify-center gap-1">
-                                        <i class="fas fa-sliders-h"></i> تخصيص
-                                    </button>
-                                </div>
-                            `).join('')}
+            const list = document.getElementById('sidebarCategoriesList');
+            list.innerHTML = categories.map(cat => `
+                <button onclick="toggleAccordion('${cat.id}'); toggleSidebarDrawer();" 
+                   class="w-full text-right flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center">
+                            <i class="fas ${cat.icon} text-xs"></i>
                         </div>
-                    </section>
-                `;
-            }).join('');
-        }
-
-        /* Open Interactive Visual Builder */
-        function openBuilder(id) {
-            selectedItem = menuItems.find(i => i.id === id);
-            if (!selectedItem) return;
-
-            builderConfig = { sizePrice: 0, sizeName: selectedItem.sizes[0]?.name || 'عادي', sugar: '50%', milk: 'كامل الدسم', milkPrice: 0, ice: 'ثلج معتدل', extras: [], qty: 1 };
-
-            document.getElementById('builderVisualImg').src = selectedItem.image;
-            document.getElementById('builderHeaderTitle').innerText = `تخصيص: ${selectedItem.name}`;
-            document.getElementById('builderItemTitle').innerText = selectedItem.name;
-            document.getElementById('builderItemDesc').innerText = selectedItem.desc;
-            document.getElementById('builderBasePrice').innerText = `${selectedItem.price} ر.س`;
-            document.getElementById('builderQtyText').innerText = 1;
-
-            // Render Sizes
-            document.getElementById('builderSizesGrid').innerHTML = selectedItem.sizes.map((s, idx) => `
-                <button onclick="selectSize('${s.name}', ${s.price}, this)" class="size-btn border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-burgundy-700 bg-burgundy-50 font-bold' : 'border-gray-200'}">
-                    <span>${s.name}</span>
-                    <span class="text-gray-500">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
+                        <span>${cat.name}</span>
+                    </div>
+                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
                 </button>
             `).join('');
-
-            // Render Extras
-            document.getElementById('builderExtrasList').innerHTML = selectedItem.extras.map(e => `
-                <label class="border border-gray-200 rounded-xl p-2.5 flex items-center justify-between text-xs cursor-pointer hover:bg-gray-50">
-                    <div class="flex items-center gap-2">
-                        <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-burgundy-700 w-4 h-4">
-                        <span class="font-bold">${e.name}</span>
-                    </div>
-                    <span class="text-burgundy-700 font-bold">+${e.price} ر.س</span>
-                </label>
-            `).join('');
-
-            updateBuilderUI();
-            document.getElementById('builderScreen').classList.remove('hidden');
         }
 
-        function closeBuilder() { document.getElementById('builderScreen').classList.add('hidden'); }
+        /* Render Accordion Buttons matching Image Style */
+        function renderAccordionMenu() {
+            const container = document.getElementById('accordionContainer');
 
-        function selectSize(name, price, btn) {
-            builderConfig.sizeName = name;
-            builderConfig.sizePrice = price;
+            container.innerHTML = categories.map(cat => {
+                const items = menuItems.filter(item => {
+                    const matchesCat = item.categoryId === cat.id;
+                    const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
+                    return matchesCat && matchesSearch;
+                });
 
-            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'font-bold'));
-            btn.classList.add('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
+                if (items.length === 0 && currentSearchQuery) return '';
 
-            // Interactive Visual Effect: Scale Up Image
-            const img = document.getElementById('builderVisualImg');
-            if (price > 0 || name.includes('كبير') || name.includes('مضاعف')) {
-                img.classList.add('scale-large');
+                const isOpen = cat.id === openCategoryId || (currentSearchQuery !== '' && items.length > 0);
+
+                return `
+                    <div class="accordion-item" id="accordion-${cat.id}">
+                        <!-- Category Button Pill -->
+                        <button onclick="toggleAccordion('${cat.id}')" 
+                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'is-active' : ''}">
+                            <div class="w-6"></div> <!-- Spacer to center title -->
+                            <h2 class="text-lg sm:text-xl font-black text-burgundy-900 tracking-wide">
+                                ${cat.name}
+                            </h2>
+                            <i class="fas fa-chevron-down text-burgundy-800 text-sm transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
+                        </button>
+
+                        <!-- Expandable Items Container -->
+                        <div id="content-${cat.id}" class="accordion-content ${isOpen ? 'is-open' : ''}">
+                            <div class="pt-4 pb-2">
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    ${items.map(item => renderDishCard(item)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Adjust heights smoothly
+            categories.forEach(cat => {
+                const content = document.getElementById(`content-${cat.id}`);
+                if (content && content.classList.contains('is-open')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        }
+
+        function renderDishCard(item) {
+            const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
+            const qtyInCart = cartItem ? cartItem.qty : 0;
+
+            return `
+                <div class="glass-panel rounded-2xl p-2.5 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02] flex flex-col justify-between group">
+                    <div>
+                        <!-- Dish Image -->
+                        <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            ${item.tag ? `
+                                <span class="absolute top-1.5 right-1.5 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">
+                                    ${item.tag}
+                                </span>
+                            ` : ''}
+                            <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
+                                ${item.price} ر.س
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="pt-2">
+                            <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
+                            <p class="text-gray-500 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
+                        </div>
+                    </div>
+
+                    <!-- Controls (+ / -) -->
+                    <div class="pt-2 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
+                        <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline">
+                            تخصيص
+                        </button>
+
+                        <div class="flex items-center">
+                            ${qtyInCart > 0 ? `
+                                <div class="flex items-center border border-burgundy-700 rounded-lg bg-burgundy-50 px-1 py-0.5 shadow-sm">
+                                    <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
+                                    <span class="w-6 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
+                                    <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
+                                </div>
+                            ` : `
+                                <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-1.5 px-2.5 rounded-lg text-[10px] transition flex items-center gap-1 shadow active:scale-95">
+                                    <i class="fas fa-plus text-[9px]"></i>
+                                    <span>إضافة</span>
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* Toggle Accordions with Smooth Height Shift & Downward Displacement */
+        function toggleAccordion(catId) {
+            const isSame = openCategoryId === catId;
+            openCategoryId = isSame ? null : catId;
+
+            categories.forEach(c => {
+                const content = document.getElementById(`content-${c.id}`);
+                const pill = document.querySelector(`#accordion-${c.id} .category-pill-btn`);
+                const icon = document.querySelector(`#accordion-${c.id} .fa-chevron-down`);
+
+                if (content) {
+                    if (c.id === openCategoryId) {
+                        content.classList.add('is-open');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        pill?.classList.add('is-active');
+                        icon?.classList.add('rotate-180');
+                    } else {
+                        content.classList.remove('is-open');
+                        content.style.maxHeight = '0px';
+                        pill?.classList.remove('is-active');
+                        icon?.classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            if (openCategoryId) {
+                setTimeout(() => {
+                    const activeElem = document.getElementById(`accordion-${openCategoryId}`);
+                    if (activeElem) {
+                        activeElem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 200);
+            }
+        }
+
+        function handleSearch() {
+            currentSearchQuery = document.getElementById('searchInput').value.trim();
+            renderAccordionMenu();
+        }
+
+        function toggleSidebarDrawer() {
+            const drawer = document.getElementById('sidebarDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function openAboutModal() {
+            document.getElementById('aboutModal').classList.remove('hidden');
+        }
+
+        function closeAboutModal() {
+            document.getElementById('aboutModal').classList.add('hidden');
+        }
+
+        function openDishModal(id) {
+            selectedItemForModal = menuItems.find(i => i.id === id);
+            if (!selectedItemForModal) return;
+
+            modalQuantity = 1;
+            selectedSizePrice = 0;
+            selectedOptionName = selectedItemForModal.sizes[0]?.name || '';
+            selectedExtras = [];
+
+            document.getElementById('modalImage').src = selectedItemForModal.image;
+            document.getElementById('modalTitle').innerText = selectedItemForModal.name;
+            document.getElementById('modalDesc').innerText = selectedItemForModal.desc;
+            document.getElementById('modalPrice').innerText = `${selectedItemForModal.price} ر.س`;
+            document.getElementById('modalQty').innerText = modalQuantity;
+            document.getElementById('specialNote').value = '';
+
+            const sizeContainer = document.getElementById('sizeOptionsGrid');
+            if (selectedItemForModal.sizes && selectedItemForModal.sizes.length > 0) {
+                document.getElementById('optionsContainer').classList.remove('hidden');
+                sizeContainer.innerHTML = selectedItemForModal.sizes.map((s, idx) => `
+                    <label class="cursor-pointer border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-burgundy-700 bg-burgundy-50 font-bold' : 'border-gray-200'}" onclick="selectSize(${s.price}, '${s.name}', this)">
+                        <span>${s.name}</span>
+                        <span class="text-gray-500">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
+                    </label>
+                `).join('');
             } else {
-                img.classList.remove('scale-large');
+                document.getElementById('optionsContainer').classList.add('hidden');
             }
 
-            updateBuilderUI();
+            const extrasContainer = document.getElementById('extrasGrid');
+            if (selectedItemForModal.extras && selectedItemForModal.extras.length > 0) {
+                document.getElementById('extrasContainer').classList.remove('hidden');
+                extrasContainer.innerHTML = selectedItemForModal.extras.map(e => `
+                    <label class="cursor-pointer border border-gray-200 rounded-xl p-2 flex items-center justify-between text-xs hover:bg-gray-50">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-burgundy-700 w-4 h-4 rounded">
+                            <span>${e.name}</span>
+                        </div>
+                        <span class="text-burgundy-700 font-bold">+${e.price} ر.س</span>
+                    </label>
+                `).join('');
+            } else {
+                document.getElementById('extrasContainer').classList.add('hidden');
+            }
+
+            updateModalTotalPrice();
+            document.getElementById('dishModal').classList.remove('hidden');
         }
 
-        function setSugar(percent, btn) {
-            builderConfig.sugar = `${percent}%`;
-            document.querySelectorAll('.sugar-btn').forEach(b => b.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'text-burgundy-900'));
-            btn.classList.add('border-burgundy-700', 'bg-burgundy-50', 'text-burgundy-900');
-            updateBuilderUI();
+        function closeDishModal() {
+            document.getElementById('dishModal').classList.add('hidden');
         }
 
-        function selectMilk(name, price, el) {
-            builderConfig.milk = name;
-            builderConfig.milkPrice = price;
-            const parent = el.parentElement;
-            for (let child of parent.children) {
+        function selectSize(price, name, el) {
+            selectedSizePrice = price;
+            selectedOptionName = name;
+            const siblings = el.parentElement.children;
+            for (let child of siblings) {
                 child.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
+                child.classList.add('border-gray-200');
             }
             el.classList.add('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
-            updateBuilderUI();
+            updateModalTotalPrice();
         }
 
-        function setIce(level, btn) {
-            builderConfig.ice = level;
-            document.querySelectorAll('.ice-btn').forEach(b => b.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'text-burgundy-900'));
-            btn.classList.add('border-burgundy-700', 'bg-burgundy-50', 'text-burgundy-900');
-            updateBuilderUI();
-        }
-
-        function toggleExtra(name, price, chk) {
-            if (chk.checked) {
-                builderConfig.extras.push({ name, price });
+        function toggleExtra(name, price, checkbox) {
+            if (checkbox.checked) {
+                selectedExtras.push({ name, price });
             } else {
-                builderConfig.extras = builderConfig.extras.filter(e => e.name !== name);
+                selectedExtras = selectedExtras.filter(e => e.name !== name);
             }
-            updateBuilderUI();
+            updateModalTotalPrice();
         }
 
-        function changeBuilderQty(delta) {
-            builderConfig.qty = Math.max(1, builderConfig.qty + delta);
-            document.getElementById('builderQtyText').innerText = builderConfig.qty;
-            updateBuilderUI();
+        function changeModalQty(delta) {
+            modalQuantity = Math.max(1, modalQuantity + delta);
+            document.getElementById('modalQty').innerText = modalQuantity;
+            updateModalTotalPrice();
         }
 
-        function updateBuilderUI() {
-            const extrasTotal = builderConfig.extras.reduce((s, e) => s + e.price, 0);
-            const unitPrice = selectedItem.price + builderConfig.sizePrice + builderConfig.milkPrice + extrasTotal;
-            const total = unitPrice * builderConfig.qty;
-
-            document.getElementById('builderTotalPriceText').innerText = `${total} ر.س`;
-            document.getElementById('badgeSize').innerText = `حجم ${builderConfig.sizeName}`;
-
-            // Render Badges Overlay
-            const badgesContainer = document.getElementById('badgeAddonsList');
-            let badgesHTML = `<span class="bg-white/80 text-burgundy-900 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">سكر: ${builderConfig.sugar}</span>`;
-            if (builderConfig.milk !== 'كامل الدسم') badgesHTML += `<span class="bg-amber-400 text-burgundy-950 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">${builderConfig.milk}</span>`;
-            builderConfig.extras.forEach(e => {
-                badgesHTML += `<span class="bg-emerald-600 text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow">+ ${e.name}</span>`;
-            });
-            badgesContainer.innerHTML = badgesHTML;
+        function updateModalTotalPrice() {
+            if (!selectedItemForModal) return;
+            const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
+            const unitPrice = selectedItemForModal.price + selectedSizePrice + extrasTotal;
+            const total = unitPrice * modalQuantity;
+            document.getElementById('modalTotalPrice').innerText = `${total} ر.س`;
         }
 
-        function confirmBuilderAddToCart() {
-            const extrasTotal = builderConfig.extras.reduce((s, e) => s + e.price, 0);
-            const unitPrice = selectedItem.price + builderConfig.sizePrice + builderConfig.milkPrice + extrasTotal;
+        function addDirectToCart(id) {
+            const item = menuItems.find(i => i.id === id);
+            if (!item) return;
 
-            cart.push({
-                cartId: Date.now(),
-                name: selectedItem.name,
-                details: `حجم ${builderConfig.sizeName} | سكر ${builderConfig.sugar} | ${builderConfig.milk} | ${builderConfig.ice} ${builderConfig.extras.map(e => e.name).join(', ')}`,
-                unitPrice: unitPrice,
-                qty: builderConfig.qty,
-                totalPrice: unitPrice * builderConfig.qty
-            });
-
-            closeBuilder();
+            const existing = cart.find(ci => ci.itemId === id && !ci.option && !ci.extras && !ci.note);
+            if (existing) {
+                existing.qty += 1;
+                existing.totalPrice = existing.unitPrice * existing.qty;
+            } else {
+                cart.push({
+                    cartId: Date.now(),
+                    itemId: item.id,
+                    name: item.name,
+                    option: item.sizes[0]?.name || '',
+                    extras: '',
+                    note: '',
+                    unitPrice: item.price,
+                    qty: 1,
+                    totalPrice: item.price
+                });
+            }
             updateCartUI();
-            showNotification(`تمت إضافة المزيج إلى السلة بنجاح ✨`);
+            showNotification(`تمت إضافة ${item.name} للسلة ✨`);
+        }
+
+        function updateDirectQty(id, delta) {
+            const existing = cart.find(ci => ci.itemId === id && !ci.option && !ci.extras && !ci.note);
+            if (!existing) return;
+
+            existing.qty += delta;
+            if (existing.qty <= 0) {
+                cart = cart.filter(ci => ci !== existing);
+            } else {
+                existing.totalPrice = existing.unitPrice * existing.qty;
+            }
+            updateCartUI();
+        }
+
+        function confirmAddToCart() {
+            const note = document.getElementById('specialNote').value.trim();
+            const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
+            const unitPrice = selectedItemForModal.price + selectedSizePrice + extrasTotal;
+
+            const cartItem = {
+                cartId: Date.now(),
+                itemId: selectedItemForModal.id,
+                name: selectedItemForModal.name,
+                option: selectedOptionName,
+                extras: selectedExtras.map(e => e.name).join(', '),
+                note: note,
+                unitPrice: unitPrice,
+                qty: modalQuantity,
+                totalPrice: unitPrice * modalQuantity
+            };
+
+            cart.push(cartItem);
+            closeDishModal();
+            updateCartUI();
+            showNotification('تمت إضافة الطلب للسلة بنجاح ✨');
         }
 
         function updateCartUI() {
-            document.getElementById('bottomCartBadge').innerText = cart.reduce((s, i) => s + i.qty, 0);
-            const container = document.getElementById('cartItemsContainer');
-            const total = cart.reduce((s, i) => s + i.totalPrice, 0);
+            const bottomBadge = document.getElementById('bottomCartBadge');
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            bottomBadge.innerText = totalItems;
+            renderCartDrawerItems();
+            renderAccordionMenu();
+        }
 
-            document.getElementById('grandTotalText').innerText = `${total} ر.س`;
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function renderCartDrawerItems() {
+            const container = document.getElementById('cartItemsContainer');
+            const subTotalText = document.getElementById('subTotalText');
+            const grandTotalText = document.getElementById('grandTotalText');
+
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-xs text-gray-400 py-8">السلة فارغة</p>`;
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-400">
+                        <i class="fas fa-shopping-basket text-4xl mb-3 text-burgundy-200"></i>
+                        <p class="text-xs font-bold text-gray-500">سلتك فارغة حالياً</p>
+                    </div>
+                `;
+                subTotalText.innerText = '0 ر.س';
+                grandTotalText.innerText = '0 ر.س';
                 return;
             }
 
-            container.innerHTML = cart.map(i => `
-                <div class="py-2 flex justify-between text-xs">
-                    <div>
-                        <h4 class="font-bold text-burgundy-900">${i.name}</h4>
-                        <p class="text-[10px] text-gray-500">${i.details}</p>
-                        <span class="font-bold text-burgundy-700">${i.totalPrice} ر.س</span>
+            const grandTotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            subTotalText.innerText = `${grandTotal} ر.س`;
+            grandTotalText.innerText = `${grandTotal} ر.س`;
+
+            container.innerHTML = cart.map(item => `
+                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2">
+                    <div class="flex-1">
+                        <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
+                        <div class="text-[10px] text-gray-500 mt-0.5">
+                            ${item.option ? `<span>الخيار: ${item.option}</span>` : ''}
+                            ${item.extras ? `<span class="block">إضافات: ${item.extras}</span>` : ''}
+                            ${item.note ? `<span class="block text-amber-700">ملاحظة: ${item.note}</span>` : ''}
+                        </div>
+                        <span class="font-black text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
                     </div>
-                    <span class="font-black text-gray-700">x${i.qty}</span>
+
+                    <div class="flex items-center gap-2">
+                        <div class="flex items-center border border-gray-200 rounded-lg bg-gray-50">
+                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">-</button>
+                            <span class="text-xs font-bold w-5 text-center">${item.qty}</span>
+                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
+                        </div>
+                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-600 p-1 transition hover:scale-110">
+                            <i class="fas fa-trash-alt text-xs"></i>
+                        </button>
+                    </div>
                 </div>
             `).join('');
         }
 
-        function toggleCartDrawer() { document.getElementById('cartDrawer').classList.toggle('hidden'); }
-        function toggleSidebarDrawer() { document.getElementById('sidebarDrawer').classList.toggle('hidden'); }
+        function updateCartItemQty(cartId, delta) {
+            const item = cart.find(i => i.cartId === cartId);
+            if (!item) return;
+            item.qty += delta;
+            if (item.qty <= 0) {
+                cart = cart.filter(i => i.cartId !== cartId);
+            } else {
+                item.totalPrice = item.unitPrice * item.qty;
+            }
+            updateCartUI();
+        }
+
+        function removeCartItem(cartId) {
+            cart = cart.filter(i => i.cartId !== cartId);
+            updateCartUI();
+        }
 
         function sendOrderWhatsApp() {
             if (cart.length === 0) return;
-            let msg = `*طلب جديد من آيس هوم 🍦*\n\n`;
-            cart.forEach((i, idx) => {
-                msg += `${idx + 1}. *${i.name}* (العدد: ${i.qty})\n   • التفاصيل: ${i.details}\n   • السعر: ${i.totalPrice} ر.س\n\n`;
+
+            let msg = `*طلب جديد من منيو ايس هوم 🍦☕*\n\n`;
+            cart.forEach((item, index) => {
+                msg += `${index + 1}. *${item.name}* (العدد: ${item.qty})\n`;
+                if (item.option) msg += `   • الحجم: ${item.option}\n`;
+                if (item.extras) msg += `   • الإضافات: ${item.extras}\n`;
+                if (item.note) msg += `   • ملاحظة: ${item.note}\n`;
+                msg += `   • السعر: ${item.totalPrice} ر.س\n\n`;
             });
+
             const total = cart.reduce((s, i) => s + i.totalPrice, 0);
-            msg += `*الإجمالي:* ${total} ر.س`;
-            window.open(`https://wa.me/966500000000?text=${encodeURIComponent(msg)}`, '_blank');
+            msg += `*إجمالي الطلب:* ${total} ر.س\n`;
+            msg += `شكراً لاختياركم ايس هوم! ❤️`;
+
+            const encoded = encodeURIComponent(msg);
+            window.open(`https://wa.me/966500000000?text=${encoded}`, '_blank');
+        }
+
+        function showReceiptModal() {
+            if (cart.length === 0) return;
+            const total = cart.reduce((s, i) => s + i.totalPrice, 0);
+            showNotification(`إجمالي الفاتورة الرقمية: ${total} ر.س — جاهزة للطلب`);
         }
 
         function showNotification(text) {
             const notif = document.getElementById('customNotification');
             document.getElementById('notificationText').innerText = text;
-            notif.classList.remove('hidden');
-            setTimeout(() => notif.classList.add('hidden'), 3000);
+            notif.classList.remove('hidden', 'opacity-0');
+            setTimeout(() => {
+                notif.classList.add('opacity-0');
+                setTimeout(() => notif.classList.add('hidden'), 300);
+            }, 3000);
         }
     </script>
 </body>
