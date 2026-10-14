@@ -93,7 +93,7 @@
 
         /* Category Pill Button (Accordion Header) */
         .category-pill-btn {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 2px solid rgba(107, 29, 47, 0.22);
@@ -102,20 +102,14 @@
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .category-pill-btn:hover {
-            border-color: rgba(107, 29, 47, 0.5);
-            transform: scale(1.01);
-            box-shadow: 0 6px 22px rgba(107, 29, 47, 0.12);
-        }
-
-        /* Expanded Box Container (Matching Image Style) */
+        /* Expanded Box Container */
         .expanded-category-box {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 2px solid rgba(107, 29, 47, 0.25);
             border-radius: 2.5rem;
-            box-shadow: 0 12px 35px rgba(107, 29, 47, 0.1);
+            box-shadow: 0 12px 35px rgba(107, 29, 47, 0.08);
             max-height: 0;
             overflow: hidden;
             opacity: 0;
@@ -126,42 +120,57 @@
 
         .expanded-category-box.is-open {
             opacity: 1;
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
+            padding-top: 1.8rem;
+            padding-bottom: 1.8rem;
             margin-top: 0.75rem;
             margin-bottom: 0.75rem;
         }
 
-        /* Horizontal Carousel for Dishes Inside Expanded Box */
-        .dish-carousel {
+        /* Horizontal Carousel with 3D Depth View */
+        .3d-carousel-wrapper {
+            position: relative;
+            width: 100%;
+            perspective: 1000px;
+        }
+
+        .carousel-track {
             display: flex;
-            gap: 1rem;
+            align-items: center;
             overflow-x: auto;
             scroll-behavior: smooth;
-            padding: 0.5rem 1rem 1rem 1rem;
-            scrollbar-width: none; /* Firefox */
+            scroll-snap-type: x mandatory;
+            padding: 1.5rem 0;
+            gap: 0;
+            scrollbar-width: none;
         }
-        .dish-carousel::-webkit-scrollbar {
-            display: none; /* Safari & Chrome */
-        }
-
-        /* Horizontal Dish Card (Matching Image Style) */
-        .horizontal-dish-card {
-            flex: 0 0 130px;
-            background: #FFFFFF;
-            border-radius: 1.5rem;
-            border: 1px solid rgba(107, 29, 47, 0.12);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            text-align: center;
-            overflow: hidden;
-            cursor: pointer;
+        .carousel-track::-webkit-scrollbar {
+            display: none;
         }
 
-        .horizontal-dish-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 22px rgba(107, 29, 47, 0.15);
-            border-color: rgba(107, 29, 47, 0.3);
+        /* Dish Card with Center Focus Effect */
+        .dish-card-3d {
+            flex: 0 0 145px;
+            scroll-snap-align: center;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            transform-origin: center center;
+            opacity: 0.65;
+            transform: scale(0.82) translateY(12px);
+            filter: blur(0.5px) brightness(0.88);
+            z-index: 1;
+        }
+
+        /* Active Center Card Highlight */
+        .dish-card-3d.is-center {
+            opacity: 1;
+            transform: scale(1.15) translateY(-10px);
+            filter: blur(0px) brightness(1);
+            z-index: 20;
+        }
+
+        .dish-card-3d.is-center .card-inner {
+            border-color: #d97706;
+            box-shadow: 0 14px 30px rgba(107, 29, 47, 0.25), 0 0 15px rgba(245, 158, 11, 0.3);
+            background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%);
         }
 
         /* Liquid Glass Bottom Navigation */
@@ -319,7 +328,7 @@
         </div>
     </div>
 
-    <!-- Main Categories & Accordion Container -->
+    <!-- Main Categories Container -->
     <main class="max-w-3xl mx-auto px-4 py-8 relative z-10 space-y-4" id="accordionContainer">
         <!-- Injected via JS -->
     </main>
@@ -493,88 +502,47 @@
             { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
         ];
 
+        // 4 Items per category
         const menuItems = [
-            {
-                id: 1,
-                categoryId: 'iced-drinks',
-                name: 'آيس شيكن وايت موكا',
-                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد',
-                price: 24,
-                tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }],
-                extras: [{ name: 'إضافة سيرب فانيلا', price: 3 }, { name: 'جرعة اسبريسو', price: 5 }]
-            },
-            {
-                id: 2,
-                categoryId: 'iced-drinks',
-                name: 'ماتشا لاتيه بارد',
-                desc: 'ماتشا يابانية أصلية مع حليب بارد منعش',
-                price: 26,
-                tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
-                extras: [{ name: 'صوص إضافي', price: 3 }]
-            },
-            {
-                id: 3,
-                categoryId: 'ice-cream',
-                name: 'آيس كريم هوم سبيشل',
-                desc: 'جيلاتو الفانيلا والشوكلاتة مع صوص التوت البري',
-                price: 28,
-                tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }],
-                extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا', price: 3 }]
-            },
-            {
-                id: 4,
-                categoryId: 'desserts',
-                name: 'كيكة السباستيان الفاخرة',
-                desc: 'تشيز كيك سان سيباستيان المخبوزة مع صوص الشوكلاتة',
-                price: 32,
-                tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'شريحة', price: 0 }],
-                extras: [{ name: 'آيس كريم فانيلا', price: 6 }]
-            },
-            {
-                id: 5,
-                categoryId: 'waffles',
-                name: 'وافل نوتيلا بالآيس كريم',
-                desc: 'وافل ذهبي مقرمش مغطى بالنوتيلا مع كرة آيس كريم',
-                price: 29,
-                tag: 'جديد',
-                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }],
-                extras: [{ name: 'صوص بستاشيو', price: 5 }]
-            },
-            {
-                id: 6,
-                categoryId: 'mojitos',
-                name: 'موهيتو ريد بل بلوبيري',
-                desc: 'توت أزرق، نعناع طازج، ليمون، ومشروب ريد بل',
-                price: 25,
-                tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'كبير 500ml', price: 0 }],
-                extras: [{ name: 'نكهة إضافية', price: 3 }]
-            },
-            {
-                id: 7,
-                categoryId: 'hot-drinks',
-                name: 'سبانيش لاتيه ساخن',
-                desc: 'اسبريسو غنية مع الحليب المبخر والحليب المكثف',
-                price: 22,
-                tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'كوب وسط', price: 0 }],
-                extras: [{ name: 'رغوة إضافية', price: 2 }]
-            }
+            // iced-drinks (4)
+            { id: 1, categoryId: 'iced-drinks', name: 'آيس شيكن وايت موكا', desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد', price: 24, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }], extras: [{ name: 'سيرب فانيلا', price: 3 }] },
+            { id: 2, categoryId: 'iced-drinks', name: 'ماتشا لاتيه بارد', desc: 'ماتشا يابانية فاخرة مع حليب الشوفان البارد', price: 26, tag: 'صحّي', image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }], extras: [] },
+            { id: 3, categoryId: 'iced-drinks', name: 'آيس سبانيش لاتيه', desc: 'قهوة اسبريسو مكثفة مع حليب بارد محلى', price: 25, tag: 'مميز', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كبير', price: 0 }], extras: [] },
+            { id: 4, categoryId: 'iced-drinks', name: 'آيس أسطوري كراميل', desc: 'قهوة مع كراميل غني ورغوة كريمة ذهبية', price: 27, tag: 'جديد', image: 'https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }], extras: [] },
+
+            // ice-cream (4)
+            { id: 5, categoryId: 'ice-cream', name: 'آيس كريم هوم سبيشل', desc: 'جيلاتو فانيلا وشوكلاتة مع صوص التوت البري', price: 28, tag: 'مميز', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }], extras: [{ name: 'مكسرات', price: 4 }] },
+            { id: 6, categoryId: 'ice-cream', name: 'جيلاتو بستاشيو الفاخر', desc: 'فستق حلبي طازج مع كريمة الآيس كريم غنية', price: 30, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب', price: 0 }], extras: [] },
+            { id: 7, categoryId: 'ice-cream', name: 'ساندويش آيس كريم مانجو', desc: 'شرائح مانجو مع جيلاتو المانجو الطبيعي', price: 24, tag: 'منعش', image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'قطعة', price: 0 }], extras: [] },
+            { id: 8, categoryId: 'ice-cream', name: 'بركان الشوكولاتة والجيلاتو', desc: 'كرة جيلاتو فانيلا فوق صوص شوكولاتة ساحن', price: 32, tag: 'فاخر', image: 'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
+
+            // hot-drinks (4)
+            { id: 9, categoryId: 'hot-drinks', name: 'سبانيش لاتيه ساخن', desc: 'اسبريسو غنية مع الحليب المبخر والمكثف', price: 22, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب وسط', price: 0 }], extras: [] },
+            { id: 10, categoryId: 'hot-drinks', name: 'كابتشينو إيطالي', desc: 'رغوة غنية مع قهوة اسبريسو فاخرة', price: 20, tag: 'كلاسيك', image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب', price: 0 }], extras: [] },
+            { id: 11, categoryId: 'hot-drinks', name: 'هوت شوت شوكولا', desc: 'شوكولاتة بلجيكية ذائبة مع حليب مبخر', price: 24, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }], extras: [] },
+            { id: 12, categoryId: 'hot-drinks', name: 'قهوة بيريستا أمريكانو', desc: 'جرعة اسبريسو مزدوجة مع ماء ساخن', price: 18, tag: 'نقي', image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'عادي', price: 0 }], extras: [] },
+
+            // mojitos (4)
+            { id: 13, categoryId: 'mojitos', name: 'موهيتو ريد بل بلوبيري', desc: 'توت أزرق، نعناع، ليمون، ومشروب ريد بل', price: 25, tag: 'مميز', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كبير 500ml', price: 0 }], extras: [] },
+            { id: 14, categoryId: 'mojitos', name: 'موهيتو الفراولة والنعناع', desc: 'قطع فراولة طازجة مع نعناع وليمون وسودا', price: 23, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80', sizes: [{ name: '500ml', price: 0 }], extras: [] },
+            { id: 15, categoryId: 'mojitos', name: 'موهيتو كودرد البطيخ', desc: 'نكهة البطيخ المنعشة مع كودرد وليمون', price: 24, tag: 'منعش', image: 'https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كبير', price: 0 }], extras: [] },
+            { id: 16, categoryId: 'mojitos', name: 'موهيتو هاواي الأزرق', desc: 'نكهة بلوعرساو مع ليمون ونعناع مثلج', price: 22, tag: 'جديد', image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }], extras: [] },
+
+            // waffles (4)
+            { id: 17, categoryId: 'waffles', name: 'وافل نوتيلا بالآيس كريم', desc: 'وافل ذهبي مقرمش مع نوتيلا وكرة آيس كريم', price: 29, tag: 'جديد', image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }], extras: [] },
+            { id: 18, categoryId: 'waffles', name: 'بان كيك بستاشيو وفراولة', desc: 'طبقات بان كيك هشة مع صوص بستاشيو وفراولة', price: 31, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
+            { id: 19, categoryId: 'waffles', name: 'ميني بان كيك مشكل', desc: '12 قطعة ميني بان كيك مع 3 أنواع صوص', price: 26, tag: 'عائلي', image: 'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=400&q=80', sizes: [{ name: '12 قطعة', price: 0 }], extras: [] },
+            { id: 20, categoryId: 'waffles', name: 'كريبل وافل لوتس', desc: 'وافل مقرمش مع زبدة اللوتس وبسكويت مطحون', price: 28, tag: 'مقرمش', image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
+
+            // desserts (4)
+            { id: 21, categoryId: 'desserts', name: 'كيكة السباستيان الفاخرة', desc: 'سان سيباستيان المخبوزة مع صوص الشوكلاتة', price: 32, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'شريحة', price: 0 }], extras: [] },
+            { id: 22, categoryId: 'desserts', name: 'سوفليه الشوكلاتة الداكنة', desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة', price: 27, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
+            { id: 23, categoryId: 'desserts', name: 'تيراميسو إيطالي أصلي', desc: 'طبقات التيراميسو بنكهة الاسبريسو والكاكاو', price: 29, tag: 'فاخر', image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب', price: 0 }], extras: [] },
+            { id: 24, categoryId: 'desserts', name: 'تشيز كيك التوت الأزرق', desc: 'قاعدة بسكويت هشة مع كريمة التوت', price: 28, tag: 'مميز', image: 'https://images.unsplash.com/photo-1524351199678-941a58a3df50?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'قطعة', price: 0 }], extras: [] }
         ];
 
         let currentSearchQuery = '';
-        let openCategoryId = 'iced-drinks'; // Open first category by default
+        let openCategoryId = 'iced-drinks'; // First open by default
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -607,7 +575,7 @@
             `).join('');
         }
 
-        /* Render Accordion Menu with Smooth Slow Expansion & Horizontal Dish Cards */
+        /* Render Menu with 3D Center Highlight Scroll */
         function renderAccordionMenu() {
             const container = document.getElementById('accordionContainer');
 
@@ -626,7 +594,7 @@
                     <div class="transition-all duration-500" id="accordion-${cat.id}">
                         <!-- Category Button Pill -->
                         <button onclick="toggleAccordion('${cat.id}')" 
-                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'bg-burgundy-50/80 border-burgundy-700' : ''}">
+                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'bg-burgundy-50/90 border-burgundy-700 shadow-lg' : ''}">
                             <div class="w-6"></div>
                             <h2 class="text-base sm:text-xl font-black text-burgundy-900 tracking-wide">
                                 ${cat.name}
@@ -634,40 +602,79 @@
                             <i class="fas fa-chevron-down text-burgundy-800 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
                         </button>
 
-                        <!-- Expanded Container Box with Slow Motion Effect -->
+                        <!-- Expanded Container Box -->
                         <div id="content-${cat.id}" class="expanded-category-box ${isOpen ? 'is-open' : ''}">
-                            <div class="dish-carousel">
-                                ${items.length > 0 ? items.map(item => renderHorizontalDishCard(item)).join('') : '<p class="text-xs text-gray-400 text-center w-full py-2">لا توجد أطباق حالياً في هذا القسم</p>'}
+                            <div class="3d-carousel-wrapper">
+                                <div class="carousel-track" id="track-${cat.id}" onscroll="updateCenterHighlight('${cat.id}')">
+                                    <!-- Padding elements for proper centering -->
+                                    <div class="flex-shrink-0 w-28"></div>
+                                    ${items.map(item => render3DDishCard(item)).join('')}
+                                    <div class="flex-shrink-0 w-28"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
 
-            // Apply smooth max-height expansion
+            // Set dynamic max-heights and initialize active center items
             categories.forEach(cat => {
                 const content = document.getElementById(`content-${cat.id}`);
                 if (content && content.classList.contains('is-open')) {
-                    content.style.maxHeight = content.scrollHeight + 100 + 'px';
+                    content.style.maxHeight = content.scrollHeight + 120 + 'px';
+                    setTimeout(() => updateCenterHighlight(cat.id), 100);
                 }
             });
         }
 
-        function renderHorizontalDishCard(item) {
+        /* Render 3D Card Item */
+        function render3DDishCard(item) {
             return `
-                <div class="horizontal-dish-card p-2 flex flex-col justify-between" onclick="openDishModal(${item.id})">
-                    <div class="relative w-full h-24 rounded-xl overflow-hidden bg-gray-100 mb-2 border border-burgundy-900/10 shadow-inner">
-                        <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
-                    </div>
-                    <div>
-                        <h4 class="font-extrabold text-burgundy-900 text-[11px] truncate leading-tight">${item.name}</h4>
-                        <span class="font-black text-burgundy-700 text-[11px] mt-1 block">${item.price} ر.س</span>
+                <div class="dish-card-3d" data-id="${item.id}" onclick="openDishModal(${item.id})">
+                    <div class="card-inner rounded-3xl p-2.5 border border-burgundy-900/15 bg-white flex flex-col items-center text-center transition duration-300">
+                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-gray-100 mb-2 shadow-inner">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover">
+                            ${item.tag ? `<span class="absolute top-1 right-1 bg-burgundy-900/90 text-amber-300 text-[8px] font-bold px-1.5 py-0.5 rounded-full backdrop-blur-md">${item.tag}</span>` : ''}
+                        </div>
+                        <h4 class="font-extrabold text-burgundy-900 text-[11px] truncate w-full leading-tight">${item.name}</h4>
+                        <span class="font-black text-amber-600 text-[11px] mt-1 block">${item.price} ر.س</span>
                     </div>
                 </div>
             `;
         }
 
-        /* Toggle Accordion with Slow Motion & Downward Push */
+        /* Calculate Center Focus for Cards in Scroll Track */
+        function updateCenterHighlight(catId) {
+            const track = document.getElementById(`track-${catId}`);
+            if (!track) return;
+
+            const cards = track.querySelectorAll('.dish-card-3d');
+            const trackCenter = track.getBoundingClientRect().left + track.offsetWidth / 2;
+
+            let closestCard = null;
+            let minDistance = Infinity;
+
+            cards.forEach(card => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.left + cardRect.width / 2;
+                const distance = Math.abs(trackCenter - cardCenter);
+
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestCard = card;
+                }
+            });
+
+            cards.forEach(card => {
+                if (card === closestCard) {
+                    card.classList.add('is-center');
+                } else {
+                    card.classList.remove('is-center');
+                }
+            });
+        }
+
+        /* Toggle Accordion with Smooth Displacement */
         function toggleAccordion(catId) {
             const isSame = openCategoryId === catId;
             openCategoryId = isSame ? null : catId;
@@ -680,13 +687,14 @@
                 if (content) {
                     if (c.id === openCategoryId) {
                         content.classList.add('is-open');
-                        content.style.maxHeight = content.scrollHeight + 100 + 'px';
-                        pill?.classList.add('bg-burgundy-50/80', 'border-burgundy-700');
+                        content.style.maxHeight = content.scrollHeight + 120 + 'px';
+                        pill?.classList.add('bg-burgundy-50/90', 'border-burgundy-700', 'shadow-lg');
                         icon?.classList.add('rotate-180');
+                        setTimeout(() => updateCenterHighlight(c.id), 200);
                     } else {
                         content.classList.remove('is-open');
                         content.style.maxHeight = '0px';
-                        pill?.classList.remove('bg-burgundy-50/80', 'border-burgundy-700');
+                        pill?.classList.remove('bg-burgundy-50/90', 'border-burgundy-700', 'shadow-lg');
                         icon?.classList.remove('rotate-180');
                     }
                 }
