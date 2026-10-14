@@ -94,9 +94,9 @@
         }
 
         .glass-panel:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px -5px rgba(107, 29, 47, 0.15);
-            border-color: rgba(107, 29, 47, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px -4px rgba(107, 29, 47, 0.14);
+            border-color: rgba(107, 29, 47, 0.25);
         }
 
         /* Ultra-Transparent Liquid Glass Bottom Navigation */
@@ -276,7 +276,7 @@
     <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
         <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/10">
             
-            <div class="relative h-52 sm:h-60 overflow-hidden bg-burgundy-900">
+            <div class="relative h-48 sm:h-56 overflow-hidden bg-burgundy-900">
                 <img id="modalImage" src="" alt="Dish Detail" class="w-full h-full object-cover">
                 <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition transform active:scale-95">
                     <i class="fas fa-times"></i>
@@ -580,7 +580,7 @@
                 let html = `
                     <section id="section-${cat.id}" class="scroll-mt-24">
                         <!-- Section Header Title -->
-                        <div class="flex items-center justify-between mb-4 border-r-4 border-burgundy-700 pr-3">
+                        <div class="flex items-center justify-between mb-3 border-r-4 border-burgundy-700 pr-3">
                             <h2 class="text-base sm:text-lg font-black text-burgundy-900 flex items-center gap-2">
                                 <i class="fas ${cat.icon} text-burgundy-600 text-sm"></i>
                                 ${cat.name}
@@ -590,55 +590,54 @@
                             </span>
                         </div>
 
-                        <!-- Enlarged Side-by-Side Dishes Grid -->
-                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                        <!-- Medium-Sized Side-by-Side Dishes Grid (2 cols on mobile, 3-4 on desktop) -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
                 `;
 
                 items.forEach(item => {
-                    // Check if item is already in cart (basic version without extra options)
                     const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
                     const qtyInCart = cartItem ? cartItem.qty : 0;
 
                     html += `
-                        <div class="glass-panel rounded-2xl p-3 shadow-sm hover:shadow-xl transition transform hover:scale-[1.02] border border-burgundy-900/10 flex flex-col justify-between group">
+                        <div class="glass-panel rounded-2xl p-2.5 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02] border border-burgundy-900/10 flex flex-col justify-between group">
                             <div>
-                                <!-- Enlarged Dish Image -->
-                                <div class="relative h-36 sm:h-40 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
+                                <!-- Medium Dish Thumbnail -->
+                                <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
                                     <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                                     ${item.tag ? `
-                                        <span class="absolute top-2 right-2 bg-burgundy-800 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">
+                                        <span class="absolute top-1.5 right-1.5 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">
                                             ${item.tag}
                                         </span>
                                     ` : ''}
-                                    <div class="absolute bottom-2 right-2 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-xl text-xs font-black shadow">
+                                    <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
                                         ${item.price} ر.س
                                     </div>
                                 </div>
 
                                 <!-- Card Title & Description -->
-                                <div class="pt-3">
-                                    <h3 onclick="openDishModal(${item.id})" class="font-extrabold text-burgundy-900 text-sm cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
-                                    <p class="text-gray-600 text-xs mt-1 line-clamp-2 leading-relaxed">${item.desc}</p>
+                                <div class="pt-2">
+                                    <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
+                                    <p class="text-gray-500 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
                                 </div>
                             </div>
 
-                            <!-- Controls: +/- and Add -->
-                            <div class="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between gap-2">
-                                <button onclick="openDishModal(${item.id})" class="text-[11px] text-burgundy-700 font-bold hover:underline">
-                                    تخصيص <i class="fas fa-sliders-h text-[10px] mr-0.5"></i>
+                            <!-- Controls: Add Button transforms into (+ / -) when clicked -->
+                            <div class="pt-2 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
+                                <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline">
+                                    تخصيص
                                 </button>
 
                                 <div class="flex items-center">
                                     ${qtyInCart > 0 ? `
-                                        <div class="flex items-center border border-burgundy-700 rounded-xl bg-burgundy-50 px-1 py-0.5 shadow-sm">
-                                            <button onclick="updateDirectQty(${item.id}, -1)" class="w-7 h-7 rounded-lg text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
-                                            <span class="w-7 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
-                                            <button onclick="updateDirectQty(${item.id}, 1)" class="w-7 h-7 rounded-lg text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
+                                        <div class="flex items-center border border-burgundy-700 rounded-lg bg-burgundy-50 px-1 py-0.5 shadow-sm">
+                                            <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
+                                            <span class="w-6 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
+                                            <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
                                         </div>
                                     ` : `
-                                        <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-2 px-3 rounded-xl text-xs transition flex items-center gap-1.5 shadow active:scale-95">
-                                            <i class="fas fa-plus text-[10px]"></i>
-                                            <span>إضافة للسلة</span>
+                                        <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-1.5 px-2.5 rounded-lg text-[10px] transition flex items-center gap-1 shadow active:scale-95">
+                                            <i class="fas fa-plus text-[9px]"></i>
+                                            <span>إضافة</span>
                                         </button>
                                     `}
                                 </div>
@@ -652,7 +651,7 @@
                 // Divider Between Sections
                 if (index < categories.length - 1) {
                     html += `
-                        <div class="my-10 flex items-center justify-center gap-4">
+                        <div class="my-8 flex items-center justify-center gap-4">
                             <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
                             <div class="w-2.5 h-2.5 rounded-full bg-gray-400/60 animate-ping"></div>
                             <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
@@ -836,7 +835,7 @@
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             bottomBadge.innerText = totalItems;
             renderCartDrawerItems();
-            renderMenuSections(); // Re-render to update direct +/- buttons on cards
+            renderMenuSections();
         }
 
         function toggleCartDrawer() {
