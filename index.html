@@ -21,8 +21,8 @@
                             100: '#f6dbe0',
                             200: '#ebaac2',
                             600: '#8c1a35',
-                            700: '#6b1d2f', // Rich Burgundy Primary
-                            800: '#58111a', // Deep Wine
+                            700: '#6b1d2f',
+                            800: '#58111a',
                             900: '#3d0a11',
                         },
                         ivory: {
@@ -86,26 +86,26 @@
 
         /* Glassmorphism Card Effect */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(107, 29, 47, 0.08);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-panel:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px -4px rgba(107, 29, 47, 0.14);
-            border-color: rgba(107, 29, 47, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px -5px rgba(107, 29, 47, 0.15);
+            border-color: rgba(107, 29, 47, 0.3);
         }
 
-        /* Liquid Glass Bottom Navigation */
+        /* Ultra-Transparent Liquid Glass Bottom Navigation */
         .liquid-glass-nav {
-            background: rgba(88, 17, 26, 0.82);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 215, 0, 0.25);
-            box-shadow: 0 10px 30px -5px rgba(61, 10, 17, 0.5);
+            background: rgba(88, 17, 26, 0.45);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
         }
 
         /* Custom Scrollbar */
@@ -122,7 +122,7 @@
         }
 
         .hero-gradient-overlay {
-            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.82) 70%, rgba(107, 29, 47, 1) 100%);
+            background: linear-gradient(180deg, rgba(61, 10, 17, 0.45) 0%, rgba(88, 17, 26, 0.8) 70%, rgba(107, 29, 47, 0.95) 100%);
         }
 
         @keyframes customPulse {
@@ -150,7 +150,7 @@
         }
     </style>
 </head>
-<body class="relative min-h-screen pb-36 select-none">
+<body class="relative min-h-screen pb-32 select-none">
 
     <div class="pattern-bg"></div>
 
@@ -162,7 +162,7 @@
         <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="1.5"/>
     </svg>
 
-    <header class="relative w-full h-72 sm:h-88 overflow-hidden shadow-2xl">
+    <header class="relative w-full h-64 sm:h-80 overflow-hidden shadow-2xl">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" 
              alt="Ice Home Cover" 
              class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 hover:scale-100">
@@ -186,38 +186,36 @@
                 </div>
             </div>
 
-            <!-- Header Content -->
-            <div class="relative z-10 flex flex-col sm:flex-row items-center sm:items-end justify-between gap-4 mt-auto mb-1">
-                <div class="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-right w-full">
-                    
-                    <!-- Circular Logo Badge -->
-                    <div class="relative group flex-shrink-0 order-1 sm:order-2">
-                        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
-                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
-                            <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
-                                <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-custom-pulse"></i>
-                                <span class="font-extrabold text-sm sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
-                                <span class="text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
-                            </div>
+            <!-- Header Content (Logo on Right, Info Beside It) -->
+            <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right">
+                
+                <!-- Circular Logo Badge (Right) -->
+                <div class="relative group flex-shrink-0">
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
+                    <div class="relative w-22 h-22 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
+                        <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
+                            <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-custom-pulse"></i>
+                            <span class="font-extrabold text-xs sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
+                            <span class="text-[8px] sm:text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
                         </div>
                     </div>
-
-                    <!-- Title & Tagline -->
-                    <div class="text-white order-2 sm:order-1 flex-1">
-                        <h1 class="text-2xl sm:text-4xl font-black text-amber-100 tracking-wide drop-shadow-md">
-                            آيس هوم <span class="text-lg font-normal text-amber-300/90">| Ice Home</span>
-                        </h1>
-                        <p class="text-xs sm:text-sm text-gray-200 mt-1 max-w-md">
-                            عالم الفخامة والانتعاش.. أجود أنواع المشروبات والحلويات الفاخرة
-                        </p>
-                        <div class="flex items-center justify-center sm:justify-start gap-3 text-xs text-amber-200/90 mt-2">
-                            <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
-                            <span>•</span>
-                            <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- Title & Tagline (Beside Logo) -->
+                <div class="text-white flex-1">
+                    <h1 class="text-xl sm:text-3xl font-black text-amber-100 tracking-wide drop-shadow-md">
+                        آيس هوم <span class="text-sm sm:text-base font-normal text-amber-300/90">| Ice Home</span>
+                    </h1>
+                    <p class="text-[11px] sm:text-sm text-gray-200 mt-1 max-w-md line-clamp-2">
+                        عالم الفخامة والانتعاش.. أجود أنواع المشروبات والحلويات الفاخرة
+                    </p>
+                    <div class="flex items-center gap-3 text-[10px] sm:text-xs text-amber-200/90 mt-2">
+                        <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
+                        <span>•</span>
+                        <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
+                    </div>
+                </div>
+
             </div>
 
         </div>
@@ -274,7 +272,7 @@
         <!-- Rendered dynamically -->
     </main>
 
-    <!-- Dish Customization Modal -->
+    <!-- Dish Customization Modal (For Sizes & Extras) -->
     <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
         <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/10">
             
@@ -408,21 +406,21 @@
         </div>
     </div>
 
-    <!-- Liquid Glass Bottom Navigation Bar -->
-    <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-md mx-auto">
-        <div class="liquid-glass-nav rounded-2xl p-2.5 flex items-center justify-around text-white">
-            <button onclick="scrollToTop()" class="flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl hover:bg-white/15 transition active:scale-95 group">
-                <i class="fas fa-home text-amber-300 text-base group-hover:scale-110 transition"></i>
-                <span class="text-[10px] font-bold tracking-wide">الرئيسية</span>
+    <!-- Ultra-Transparent Liquid Glass Bottom Navigation Bar -->
+    <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-sm mx-auto">
+        <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-white">
+            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
+                <i class="fas fa-home text-amber-300 text-sm group-hover:scale-110 transition"></i>
+                <span class="text-[9px] font-bold tracking-wide">الرئيسية</span>
             </button>
-            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl hover:bg-white/15 transition active:scale-95 group">
-                <i class="fas fa-shopping-bag text-amber-300 text-base group-hover:scale-110 transition"></i>
-                <span class="text-[10px] font-bold tracking-wide">السلة</span>
-                <span id="bottomCartBadge" class="absolute top-1 right-3 bg-red-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
+                <i class="fas fa-shopping-bag text-amber-300 text-sm group-hover:scale-110 transition"></i>
+                <span class="text-[9px] font-bold tracking-wide">السلة</span>
+                <span id="bottomCartBadge" class="absolute top-0.5 right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
             </button>
-            <button onclick="openAboutModal()" class="flex flex-col items-center gap-1 px-4 py-1.5 rounded-xl hover:bg-white/15 transition active:scale-95 group">
-                <i class="fas fa-info-circle text-amber-300 text-base group-hover:scale-110 transition"></i>
-                <span class="text-[10px] font-bold tracking-wide">معلوماتنا</span>
+            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
+                <i class="fas fa-info-circle text-amber-300 text-sm group-hover:scale-110 transition"></i>
+                <span class="text-[9px] font-bold tracking-wide">معلوماتنا</span>
             </button>
         </div>
     </nav>
@@ -451,7 +449,7 @@
                 desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية',
                 price: 24,
                 tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }],
                 extras: [{ name: 'إضافة سيرب فانيلا', price: 3 }, { name: 'جرعة اسبريسو', price: 5 }]
             },
@@ -462,7 +460,7 @@
                 desc: 'جيلاتو الفانيلا والشوكلاتة والفيستق مع صوص التوت البري',
                 price: 28,
                 tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }],
                 extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا', price: 3 }]
             },
@@ -473,7 +471,7 @@
                 desc: 'تشيز كيك سان سيباستيان المخبوزة مع صوص الشوكلاتة',
                 price: 32,
                 tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'شريحة', price: 0 }],
                 extras: [{ name: 'آيس كريم فانيلا', price: 6 }]
             },
@@ -484,7 +482,7 @@
                 desc: 'وافل ذهبي مقرمش مغطى بالنوتيلا مع كرة آيس كريم',
                 price: 29,
                 tag: 'جديد',
-                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }],
                 extras: [{ name: 'صوص بستاشيو', price: 5 }]
             },
@@ -495,7 +493,7 @@
                 desc: 'ماتشا يابانية مع حليب الشوفان وحبيبات البوبا الطازجة',
                 price: 26,
                 tag: 'صحي',
-                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
                 extras: [{ name: 'بوبا إضافية', price: 4 }]
             },
@@ -506,7 +504,7 @@
                 desc: 'توت أزرق، نعناع طازج، ليمون، ومشروب ريد بل',
                 price: 25,
                 tag: 'مميز',
-                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'كبير 500ml', price: 0 }],
                 extras: [{ name: 'نكهة إضافية', price: 3 }]
             },
@@ -517,7 +515,7 @@
                 desc: 'اسبريسو غنية مع الحليب المبخر والحليب المكثف',
                 price: 22,
                 tag: 'الأكثر مبيعاً',
-                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'كوب وسط', price: 0 }],
                 extras: [{ name: 'رغوة إضافية', price: 2 }]
             },
@@ -528,7 +526,7 @@
                 desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة',
                 price: 27,
                 tag: 'جديد',
-                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=300&q=80',
+                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'عادي', price: 0 }],
                 extras: []
             }
@@ -582,50 +580,68 @@
                 let html = `
                     <section id="section-${cat.id}" class="scroll-mt-24">
                         <!-- Section Header Title -->
-                        <div class="flex items-center justify-between mb-3 border-r-4 border-burgundy-700 pr-3">
+                        <div class="flex items-center justify-between mb-4 border-r-4 border-burgundy-700 pr-3">
                             <h2 class="text-base sm:text-lg font-black text-burgundy-900 flex items-center gap-2">
                                 <i class="fas ${cat.icon} text-burgundy-600 text-sm"></i>
                                 ${cat.name}
                             </h2>
-                            <span class="bg-burgundy-100 text-burgundy-800 text-[10px] font-bold px-2.5 py-0.5 rounded-full">
+                            <span class="bg-burgundy-100 text-burgundy-800 text-[10px] font-bold px-3 py-1 rounded-full">
                                 ${items.length} أصناف
                             </span>
                         </div>
 
-                        <!-- Ultra-Compact Responsive Dishes Grid -->
-                        <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2 sm:gap-2.5">
+                        <!-- Enlarged Side-by-Side Dishes Grid -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 `;
 
                 items.forEach(item => {
+                    // Check if item is already in cart (basic version without extra options)
+                    const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
+                    const qtyInCart = cartItem ? cartItem.qty : 0;
+
                     html += `
-                        <div class="glass-panel rounded-xl p-1.5 sm:p-2 shadow-sm hover:shadow-lg transition transform hover:scale-[1.03] border border-burgundy-900/10 flex flex-col justify-between group">
+                        <div class="glass-panel rounded-2xl p-3 shadow-sm hover:shadow-xl transition transform hover:scale-[1.02] border border-burgundy-900/10 flex flex-col justify-between group">
                             <div>
-                                <!-- Tiny Thumbnail -->
-                                <div class="relative h-16 sm:h-20 rounded-lg overflow-hidden bg-gray-100">
+                                <!-- Enlarged Dish Image -->
+                                <div class="relative h-36 sm:h-40 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
                                     <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                                     ${item.tag ? `
-                                        <span class="absolute top-1 right-1 bg-burgundy-800 text-amber-300 text-[8px] font-bold px-1.5 py-0.2 rounded shadow">
+                                        <span class="absolute top-2 right-2 bg-burgundy-800 text-amber-300 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow">
                                             ${item.tag}
                                         </span>
                                     ` : ''}
-                                    <div class="absolute bottom-1 right-1 bg-black/60 backdrop-blur-md text-amber-300 px-1.5 py-0.2 rounded text-[9px] font-black">
+                                    <div class="absolute bottom-2 right-2 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-xl text-xs font-black shadow">
                                         ${item.price} ر.س
                                     </div>
                                 </div>
 
-                                <!-- Card Mini Info -->
-                                <div class="pt-1.5">
-                                    <h3 class="font-bold text-burgundy-900 text-[10px] sm:text-[11px] truncate group-hover:text-burgundy-700 transition">${item.name}</h3>
-                                    <p class="text-gray-500 text-[8px] sm:text-[9px] mt-0.5 line-clamp-1">${item.desc}</p>
+                                <!-- Card Title & Description -->
+                                <div class="pt-3">
+                                    <h3 onclick="openDishModal(${item.id})" class="font-extrabold text-burgundy-900 text-sm cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
+                                    <p class="text-gray-600 text-xs mt-1 line-clamp-2 leading-relaxed">${item.desc}</p>
                                 </div>
                             </div>
 
-                            <!-- Quick Add Button with Animation -->
-                            <div class="pt-1.5 mt-1">
-                                <button onclick="openDishModal(${item.id})" class="w-full bg-burgundy-50 hover:bg-burgundy-700 text-burgundy-800 hover:text-white font-bold py-1 rounded-md text-[9px] sm:text-[10px] transition flex items-center justify-center gap-1 border border-burgundy-200 active:scale-90">
-                                    <i class="fas fa-plus"></i>
-                                    <span>إضافة</span>
+                            <!-- Controls: +/- and Add -->
+                            <div class="pt-3 mt-3 border-t border-gray-100 flex items-center justify-between gap-2">
+                                <button onclick="openDishModal(${item.id})" class="text-[11px] text-burgundy-700 font-bold hover:underline">
+                                    تخصيص <i class="fas fa-sliders-h text-[10px] mr-0.5"></i>
                                 </button>
+
+                                <div class="flex items-center">
+                                    ${qtyInCart > 0 ? `
+                                        <div class="flex items-center border border-burgundy-700 rounded-xl bg-burgundy-50 px-1 py-0.5 shadow-sm">
+                                            <button onclick="updateDirectQty(${item.id}, -1)" class="w-7 h-7 rounded-lg text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
+                                            <span class="w-7 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
+                                            <button onclick="updateDirectQty(${item.id}, 1)" class="w-7 h-7 rounded-lg text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
+                                        </div>
+                                    ` : `
+                                        <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-2 px-3 rounded-xl text-xs transition flex items-center gap-1.5 shadow active:scale-95">
+                                            <i class="fas fa-plus text-[10px]"></i>
+                                            <span>إضافة للسلة</span>
+                                        </button>
+                                    `}
+                                </div>
                             </div>
                         </div>
                     `;
@@ -633,10 +649,10 @@
 
                 html += `</div></section>`;
 
-                // Translucent Gray Animated Divider Between Sections
+                // Divider Between Sections
                 if (index < categories.length - 1) {
                     html += `
-                        <div class="my-8 flex items-center justify-center gap-4">
+                        <div class="my-10 flex items-center justify-center gap-4">
                             <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
                             <div class="w-2.5 h-2.5 rounded-full bg-gray-400/60 animate-ping"></div>
                             <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
@@ -754,6 +770,44 @@
             document.getElementById('modalTotalPrice').innerText = `${total} ر.س`;
         }
 
+        function addDirectToCart(id) {
+            const item = menuItems.find(i => i.id === id);
+            if (!item) return;
+
+            const existing = cart.find(ci => ci.itemId === id && !ci.option && !ci.extras && !ci.note);
+            if (existing) {
+                existing.qty += 1;
+                existing.totalPrice = existing.unitPrice * existing.qty;
+            } else {
+                cart.push({
+                    cartId: Date.now(),
+                    itemId: item.id,
+                    name: item.name,
+                    option: item.sizes[0]?.name || '',
+                    extras: '',
+                    note: '',
+                    unitPrice: item.price,
+                    qty: 1,
+                    totalPrice: item.price
+                });
+            }
+            updateCartUI();
+            showNotification(`تمت إضافة ${item.name} للسلة ✨`);
+        }
+
+        function updateDirectQty(id, delta) {
+            const existing = cart.find(ci => ci.itemId === id && !ci.option && !ci.extras && !ci.note);
+            if (!existing) return;
+
+            existing.qty += delta;
+            if (existing.qty <= 0) {
+                cart = cart.filter(ci => ci !== existing);
+            } else {
+                existing.totalPrice = existing.unitPrice * existing.qty;
+            }
+            updateCartUI();
+        }
+
         function confirmAddToCart() {
             const note = document.getElementById('specialNote').value.trim();
             const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
@@ -761,6 +815,7 @@
 
             const cartItem = {
                 cartId: Date.now(),
+                itemId: selectedItemForModal.id,
                 name: selectedItemForModal.name,
                 option: selectedOptionName,
                 extras: selectedExtras.map(e => e.name).join(', '),
@@ -781,6 +836,7 @@
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             bottomBadge.innerText = totalItems;
             renderCartDrawerItems();
+            renderMenuSections(); // Re-render to update direct +/- buttons on cards
         }
 
         function toggleCartDrawer() {
