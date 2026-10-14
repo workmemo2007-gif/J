@@ -148,6 +148,14 @@
             from { transform: translateX(100%); }
             to { transform: translateX(0); }
         }
+
+        .section-expand {
+            animation: expandSection 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes expandSection {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="relative min-h-screen pb-32 select-none">
@@ -221,7 +229,7 @@
         </div>
     </header>
 
-    <!-- Search Bar & Category Jump -->
+    <!-- Search Bar & Sticky Header -->
     <div class="sticky top-0 z-30 bg-burgundy-800/95 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
             <div class="relative flex-1">
@@ -233,8 +241,15 @@
             
             <button onclick="toggleSidebarDrawer()" class="flex items-center gap-2 bg-amber-400 text-burgundy-900 px-4 py-2.5 rounded-full text-xs font-bold hover:bg-amber-300 transition shadow active:scale-95">
                 <i class="fas fa-list-ul"></i>
-                <span class="hidden sm:inline">الأقسام</span>
+                <span class="hidden sm:inline">القائمة</span>
             </button>
+        </div>
+    </div>
+
+    <!-- Horizontal Categories Navigation Bar -->
+    <div class="sticky top-[57px] z-20 bg-burgundy-900/95 backdrop-blur-md border-b border-amber-500/20 py-2.5 overflow-x-auto whitespace-nowrap px-4 shadow-md">
+        <div id="horizontalCategoriesBar" class="max-w-6xl mx-auto flex items-center gap-2">
+            <!-- Rendered dynamically via JS -->
         </div>
     </div>
 
@@ -249,7 +264,7 @@
                     </div>
                     <div>
                         <h3 class="font-black text-sm">قائمة الأقسام</h3>
-                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال السريع</p>
+                        <p class="text-[10px] text-amber-200">اختر القسم للاستعراض الفوري</p>
                     </div>
                 </div>
                 <button onclick="toggleSidebarDrawer()" class="text-white/80 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition hover:rotate-90">
@@ -267,8 +282,8 @@
         </div>
     </div>
 
-    <!-- Main Menu Container -->
-    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-6 relative z-10 space-y-10" id="menuMainContainer">
+    <!-- Main Menu Container (Displays only active category dishes) -->
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-8 relative z-10" id="menuMainContainer">
         <!-- Rendered dynamically -->
     </main>
 
@@ -533,6 +548,7 @@
         ];
 
         let currentSearchQuery = '';
+        let activeCategoryId = categories[0].id; // Default active category
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -541,19 +557,40 @@
         let modalQuantity = 1;
 
         window.onload = function() {
+            renderHorizontalCategories();
             renderSidebarCategories();
-            renderMenuSections();
+            renderActiveCategoryContent();
         };
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
+        function renderHorizontalCategories() {
+            const bar = document.getElementById('horizontalCategoriesBar');
+            bar.innerHTML = categories.map(cat => {
+                const isActive = cat.id === activeCategoryId;
+                return `
+                    <button onclick="selectCategory('${cat.id}')" 
+                            class="flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold transition whitespace-nowrap shadow-sm ${isActive ? 'bg-amber-400 text-burgundy-900 shadow-md scale-105' : 'bg-white/10 text-white hover:bg-white/20'}">
+                        <i class="fas ${cat.icon} text-xs"></i>
+                        <span>${cat.name}</span>
+                    </button>
+                `;
+            }).join('');
+        }
+
+        function selectCategory(catId) {
+            activeCategoryId = catId;
+            renderHorizontalCategories();
+            renderActiveCategoryContent();
+        }
+
         function renderSidebarCategories() {
             const list = document.getElementById('sidebarCategoriesList');
             list.innerHTML = categories.map(cat => `
-                <a href="#section-${cat.id}" onclick="toggleSidebarDrawer()" 
-                   class="flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
+                <button onclick="selectCategory('${cat.id}'); toggleSidebarDrawer();" 
+                   class="w-full text-right flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center">
                             <i class="fas ${cat.icon} text-xs"></i>
@@ -561,68 +598,74 @@
                         <span>${cat.name}</span>
                     </div>
                     <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
-                </a>
+                </button>
             `).join('');
         }
 
-        function renderMenuSections() {
+        function renderActiveCategoryContent() {
             const container = document.getElementById('menuMainContainer');
-            
-            container.innerHTML = categories.map((cat, index) => {
-                const items = menuItems.filter(item => {
-                    const matchesCat = item.categoryId === cat.id;
-                    const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
-                    return matchesCat && matchesSearch;
-                });
+            const cat = categories.find(c => c.id === activeCategoryId);
+            if (!cat) return;
 
-                if (items.length === 0 && currentSearchQuery) return '';
+            const items = menuItems.filter(item => {
+                const matchesCat = item.categoryId === cat.id;
+                const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
+                return matchesCat && matchesSearch;
+            });
 
-                let html = `
-                    <section id="section-${cat.id}" class="scroll-mt-24">
-                        <!-- Section Header Title -->
-                        <div class="flex items-center justify-between mb-3 border-r-4 border-burgundy-700 pr-3">
-                            <h2 class="text-base sm:text-lg font-black text-burgundy-900 flex items-center gap-2">
-                                <i class="fas ${cat.icon} text-burgundy-600 text-sm"></i>
-                                ${cat.name}
-                            </h2>
-                            <span class="bg-burgundy-100 text-burgundy-800 text-[10px] font-bold px-3 py-1 rounded-full">
-                                ${items.length} أصناف
-                            </span>
-                        </div>
+            let html = `
+                <div class="section-expand space-y-6">
+                    <!-- Category Title Header -->
+                    <div class="flex items-center justify-between pb-3 border-b-2 border-burgundy-700/20">
+                        <h2 class="text-lg sm:text-xl font-black text-burgundy-900 flex items-center gap-2.5">
+                            <i class="fas ${cat.icon} text-burgundy-700"></i>
+                            ${cat.name}
+                        </h2>
+                        <span class="bg-burgundy-100 text-burgundy-800 text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                            ${items.length} أصناف متاحة
+                        </span>
+                    </div>
+            `;
 
-                        <!-- Medium-Sized Side-by-Side Dishes Grid (2 cols on mobile, 3-4 on desktop) -->
-                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+            if (items.length === 0) {
+                html += `
+                    <div class="text-center py-16 text-gray-400">
+                        <i class="fas fa-utensils text-4xl mb-3 text-burgundy-200"></i>
+                        <p class="text-xs font-bold text-gray-500">لا توجد أصناف مطابقة للبحث في هذا القسم</p>
+                    </div>
                 `;
+            } else {
+                html += `<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">`;
 
                 items.forEach(item => {
                     const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
                     const qtyInCart = cartItem ? cartItem.qty : 0;
 
                     html += `
-                        <div class="glass-panel rounded-2xl p-2.5 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02] border border-burgundy-900/10 flex flex-col justify-between group">
+                        <div class="glass-panel rounded-2xl p-2.5 sm:p-3 shadow-sm hover:shadow-xl transition transform hover:scale-[1.02] border border-burgundy-900/10 flex flex-col justify-between group">
                             <div>
-                                <!-- Medium Dish Thumbnail -->
-                                <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
+                                <!-- Dish Thumbnail -->
+                                <div class="relative h-32 sm:h-36 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
                                     <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
                                     ${item.tag ? `
                                         <span class="absolute top-1.5 right-1.5 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">
                                             ${item.tag}
                                         </span>
                                     ` : ''}
-                                    <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
+                                    <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2.5 py-0.5 rounded-lg text-[10px] font-black shadow">
                                         ${item.price} ر.س
                                     </div>
                                 </div>
 
                                 <!-- Card Title & Description -->
-                                <div class="pt-2">
-                                    <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
-                                    <p class="text-gray-500 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
+                                <div class="pt-2.5">
+                                    <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs sm:text-sm cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
+                                    <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5 line-clamp-1">${item.desc}</p>
                                 </div>
                             </div>
 
-                            <!-- Controls: Add Button transforms into (+ / -) when clicked -->
-                            <div class="pt-2 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
+                            <!-- Controls: Add or (+ / -) -->
+                            <div class="pt-2.5 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
                                 <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline">
                                     تخصيص
                                 </button>
@@ -646,26 +689,16 @@
                     `;
                 });
 
-                html += `</div></section>`;
+                html += `</div>`;
+            }
 
-                // Divider Between Sections
-                if (index < categories.length - 1) {
-                    html += `
-                        <div class="my-8 flex items-center justify-center gap-4">
-                            <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-gray-400/60 animate-ping"></div>
-                            <div class="h-[1px] flex-1 bg-gradient-to-r from-transparent via-gray-400/50 to-transparent"></div>
-                        </div>
-                    `;
-                }
-
-                return html;
-            }).join('');
+            html += `</div>`;
+            container.innerHTML = html;
         }
 
         function handleSearch() {
             currentSearchQuery = document.getElementById('searchInput').value.trim();
-            renderMenuSections();
+            renderActiveCategoryContent();
         }
 
         function toggleSidebarDrawer() {
@@ -835,7 +868,7 @@
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             bottomBadge.innerText = totalItems;
             renderCartDrawerItems();
-            renderMenuSections();
+            renderActiveCategoryContent();
         }
 
         function toggleCartDrawer() {
