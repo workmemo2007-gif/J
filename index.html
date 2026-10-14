@@ -91,47 +91,41 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Category Pill Button (Accordion Header) */
-        .category-pill-btn {
+        /* Integrated Accordion Container (Category Box + Expandable Dishes Slider) */
+        .category-integrated-card {
             background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 2px solid rgba(107, 29, 47, 0.22);
-            border-radius: 9999px;
-            box-shadow: 0 4px 20px rgba(107, 29, 47, 0.06);
-            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-
-        /* Expanded Box Container */
-        .expanded-category-box {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             border: 2px solid rgba(107, 29, 47, 0.25);
-            border-radius: 2.5rem;
-            box-shadow: 0 12px 35px rgba(107, 29, 47, 0.08);
-            max-height: 0;
+            border-radius: 9999px;
+            box-shadow: 0 4px 18px rgba(107, 29, 47, 0.05);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
+        }
+
+        .category-integrated-card.is-open {
+            border-radius: 2.2rem;
+            border-color: #6b1d2f;
+            box-shadow: 0 12px 32px rgba(107, 29, 47, 0.15);
+            background: rgba(255, 255, 255, 0.97);
+        }
+
+        /* Accordion Expansion Container */
+        .expanded-dishes-wrapper {
+            max-height: 0;
             opacity: 0;
-            transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out, padding 0.5s ease;
-            padding-top: 0;
-            padding-bottom: 0;
+            transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease;
         }
 
-        .expanded-category-box.is-open {
+        .category-integrated-card.is-open .expanded-dishes-wrapper {
             opacity: 1;
-            padding-top: 2rem;
-            padding-bottom: 2rem;
-            margin-top: 0.75rem;
-            margin-bottom: 0.75rem;
         }
 
-        /* 3D Cylindrical Carousel Wrapper */
+        /* Horizontal Carousel Wrapper for Mobile Devices */
         .carousel-wrapper-3d {
             position: relative;
             width: 100%;
-            perspective: 1000px;
-            perspective-origin: 50% 50%;
+            perspective: 800px;
         }
 
         .carousel-track-3d {
@@ -140,76 +134,92 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 2.5rem 0;
+            padding: 1.8rem 0;
             gap: 0px;
             scrollbar-width: none;
-            transform-style: preserve-3d;
+            -webkit-overflow-scrolling: touch;
         }
 
         .carousel-track-3d::-webkit-scrollbar {
             display: none;
         }
 
-        /* 3D Dish Card Base Style */
-        .dish-card-3d {
-            flex: 0 0 135px;
+        /* Compact Image-Only Curved Dish Card */
+        .dish-card-compact {
+            flex: 0 0 108px; /* Compact width for mobile screens */
             scroll-snap-align: center;
-            transition: all 0.45s cubic-bezier(0.25, 1, 0.35, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
             transform-style: preserve-3d;
             cursor: pointer;
             z-index: 1;
+            padding: 0 4px;
         }
 
-        .card-inner-3d {
-            border-radius: 2rem;
-            padding: 0.6rem;
-            border: 1px solid rgba(107, 29, 47, 0.15);
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(8px);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .dish-image-box {
+            position: relative;
+            width: 100px;
+            height: 108px;
+            border-radius: 1.25rem;
+            overflow: hidden;
+            border: 1.5 solid rgba(107, 29, 47, 0.15);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
+            background-color: #f3ece6;
+        }
+
+        .dish-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Bottom Burgundy Label Strip */
+        .dish-burgundy-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(180deg, rgba(61, 10, 17, 0.85) 0%, rgba(88, 17, 26, 0.98) 100%);
+            border-top: 1px solid rgba(245, 158, 11, 0.5);
+            padding: 4px 2px;
             text-align: center;
-            transition: all 0.45s cubic-bezier(0.25, 1, 0.35, 1);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+            backdrop-filter: blur(4px);
         }
 
-        /* Center Active Card (Highlighted with Golden Glow) */
-        .dish-card-3d.is-center {
+        /* Highlighted Center Card with Prominent Golden Frame & Glow */
+        .dish-card-compact.is-center {
             z-index: 30 !important;
-            transform: scale(1.28) translateY(-16px) translateZ(50px) rotateY(0deg) !important;
+            transform: scale(1.3) translateY(-10px) translateZ(40px) !important;
             opacity: 1 !important;
             filter: blur(0px) brightness(1) !important;
         }
 
-        .dish-card-3d.is-center .card-inner-3d {
-            background: linear-gradient(180deg, #FFFFFF 0%, #FFFDF9 100%);
-            border: 2px solid #f59e0b;
-            box-shadow: 0 16px 35px rgba(107, 29, 47, 0.28), 
-                        0 0 25px rgba(245, 158, 11, 0.45),
-                        inset 0 0 10px rgba(254, 240, 138, 0.5);
+        .dish-card-compact.is-center .dish-image-box {
+            border: 3.5px solid #f59e0b !important; /* Prominent Golden Border */
+            box-shadow: 0 12px 28px rgba(107, 29, 47, 0.35), 
+                        0 0 20px rgba(245, 158, 11, 0.7), /* Bright Golden Glow */
+                        inset 0 0 10px rgba(254, 240, 138, 0.6);
+            border-radius: 1.4rem;
         }
 
-        /* Side Cards (Left & Right 3D Perspective Curves) */
-        .dish-card-3d.is-left-1 {
+        .dish-card-compact.is-center .dish-burgundy-label {
+            background: linear-gradient(180deg, #58111a 0%, #3d0a11 100%);
+            border-top-color: #fef08a;
+        }
+
+        /* Side Cards (Depth & Fade Effects) */
+        .dish-card-compact.is-side-1 {
             z-index: 10;
-            transform: scale(0.9) translateY(6px) rotateY(-22deg) translateZ(-30px);
-            opacity: 0.72;
-            filter: blur(0.4px) brightness(0.9);
+            transform: scale(0.88) translateY(4px) translateZ(-20px);
+            opacity: 0.75;
+            filter: blur(0.3px) brightness(0.9);
         }
 
-        .dish-card-3d.is-right-1 {
-            z-index: 10;
-            transform: scale(0.9) translateY(6px) rotateY(22deg) translateZ(-30px);
-            opacity: 0.72;
-            filter: blur(0.4px) brightness(0.9);
-        }
-
-        .dish-card-3d.is-far {
+        .dish-card-compact.is-far {
             z-index: 1;
-            transform: scale(0.72) translateY(18px) translateZ(-80px);
+            transform: scale(0.72) translateY(12px) translateZ(-60px);
             opacity: 0.35;
-            filter: blur(1.5px) brightness(0.75);
+            filter: blur(1.2px) brightness(0.75);
         }
 
         /* Liquid Glass Bottom Navigation */
@@ -614,7 +624,7 @@
             `).join('');
         }
 
-        /* Render Menu with Enhanced 3D Perspective Cylindrical Carousel */
+        /* Integrated Accordion Card Renderer (Category Pill + Embedded Horizontal Slider) */
         function renderAccordionMenu() {
             const container = document.getElementById('accordionContainer');
 
@@ -630,10 +640,12 @@
                 const isOpen = cat.id === openCategoryId || (currentSearchQuery !== '' && items.length > 0);
 
                 return `
-                    <div class="transition-all duration-500" id="accordion-${cat.id}">
-                        <!-- Category Button Pill -->
+                    <!-- Integrated Category Card (Expands Vertically to Show Dishes) -->
+                    <div class="category-integrated-card ${isOpen ? 'is-open' : ''}" id="accordion-${cat.id}">
+                        
+                        <!-- Main Category Header Button -->
                         <button onclick="toggleAccordion('${cat.id}')" 
-                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'bg-burgundy-50/90 border-burgundy-700 shadow-lg' : ''}">
+                                class="w-full py-4 px-6 flex items-center justify-between text-center transition">
                             <div class="w-6"></div>
                             <h2 class="text-base sm:text-xl font-black text-burgundy-900 tracking-wide">
                                 ${cat.name}
@@ -641,59 +653,61 @@
                             <i class="fas fa-chevron-down text-burgundy-800 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
                         </button>
 
-                        <!-- Expanded Container Box -->
-                        <div id="content-${cat.id}" class="expanded-category-box ${isOpen ? 'is-open' : ''}">
+                        <!-- Expanded Internal Carousel Section -->
+                        <div id="content-${cat.id}" class="expanded-dishes-wrapper">
                             <div class="carousel-wrapper-3d">
                                 <div class="carousel-track-3d" id="track-${cat.id}" onscroll="update3DPerspective('${cat.id}')">
-                                    <!-- Padding elements for exact screen center snap -->
-                                    <div class="flex-shrink-0 w-[38vw]"></div>
-                                    ${items.map(item => render3DDishCard(item)).join('')}
-                                    <div class="flex-shrink-0 w-[38vw]"></div>
+                                    <!-- Padding to center side items properly on mobile -->
+                                    <div class="flex-shrink-0 w-[42vw]"></div>
+                                    ${items.map(item => renderCompactImageDishCard(item)).join('')}
+                                    <div class="flex-shrink-0 w-[42vw]"></div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 `;
             }).join('');
 
-            // Apply dynamic height expansion and trigger initial 3D calculation
+            // Dynamically calculate and expand heights
             categories.forEach(cat => {
+                const card = document.getElementById(`accordion-${cat.id}`);
                 const content = document.getElementById(`content-${cat.id}`);
-                if (content && content.classList.contains('is-open')) {
-                    content.style.maxHeight = content.scrollHeight + 140 + 'px';
+                if (card && content && card.classList.contains('is-open')) {
+                    content.style.maxHeight = '230px';
                     setTimeout(() => update3DPerspective(cat.id), 120);
                 }
             });
         }
 
-        /* Render Individual 3D Dish Card */
-        function render3DDishCard(item) {
+        /* Render Image-Only Dish Card with Curved Corners and Bottom Burgundy Label */
+        function renderCompactImageDishCard(item) {
             return `
-                <div class="dish-card-3d" data-id="${item.id}" onclick="openDishModal(${item.id})">
-                    <div class="card-inner-3d">
-                        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden bg-gray-100 mb-2 shadow-inner">
-                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover">
-                            ${item.tag ? `<span class="absolute top-1 right-1 bg-burgundy-900/90 text-amber-300 text-[8px] font-bold px-1.5 py-0.5 rounded-full backdrop-blur-md">${item.tag}</span>` : ''}
+                <div class="dish-card-compact" data-id="${item.id}" onclick="openDishModal(${item.id})">
+                    <div class="dish-image-box">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy">
+                        
+                        <!-- Bottom Burgundy Label Strip with Dish Name -->
+                        <div class="dish-burgundy-label">
+                            <h4 class="font-extrabold text-amber-200 text-[9px] truncate px-1">${item.name}</h4>
+                            <span class="text-[8px] font-bold text-white block leading-none mt-0.5">${item.price} ر.س</span>
                         </div>
-                        <h4 class="font-extrabold text-burgundy-900 text-[11px] truncate w-full leading-tight">${item.name}</h4>
-                        <span class="font-black text-amber-600 text-[11px] mt-1 block">${item.price} ر.س</span>
                     </div>
                 </div>
             `;
         }
 
-        /* Continuous 3D Cylindrical Perspective Logic on Scroll */
+        /* Realtime 3D Perspective Calculations for Mobile Scrolling */
         function update3DPerspective(catId) {
             const track = document.getElementById(`track-${catId}`);
             if (!track) return;
 
-            const cards = Array.from(track.querySelectorAll('.dish-card-3d'));
+            const cards = Array.from(track.querySelectorAll('.dish-card-compact'));
             const trackCenter = track.getBoundingClientRect().left + track.offsetWidth / 2;
 
             let closestCard = null;
             let minDistance = Infinity;
 
-            // Find closest card to viewport center
             cards.forEach(card => {
                 const cardCenter = card.getBoundingClientRect().left + card.getBoundingClientRect().width / 2;
                 const distance = Math.abs(trackCenter - cardCenter);
@@ -706,41 +720,37 @@
             const centerIndex = cards.indexOf(closestCard);
 
             cards.forEach((card, index) => {
-                card.classList.remove('is-center', 'is-left-1', 'is-right-1', 'is-far');
+                card.classList.remove('is-center', 'is-side-1', 'is-far');
 
                 if (index === centerIndex) {
                     card.classList.add('is-center');
-                } else if (index === centerIndex - 1) {
-                    card.classList.add('is-left-1');
-                } else if (index === centerIndex + 1) {
-                    card.classList.add('is-right-1');
+                } else if (Math.abs(index - centerIndex) === 1) {
+                    card.classList.add('is-side-1');
                 } else {
                     card.classList.add('is-far');
                 }
             });
         }
 
-        /* Toggle Accordion with Smooth Displacement */
+        /* Toggle Accordion with Smooth Integrated Expansion */
         function toggleAccordion(catId) {
             const isSame = openCategoryId === catId;
             openCategoryId = isSame ? null : catId;
 
             categories.forEach(c => {
+                const card = document.getElementById(`accordion-${c.id}`);
                 const content = document.getElementById(`content-${c.id}`);
-                const pill = document.querySelector(`#accordion-${c.id} .category-pill-btn`);
-                const icon = document.querySelector(`#accordion-${c.id} .fa-chevron-down`);
+                const icon = card?.querySelector('.fa-chevron-down');
 
-                if (content) {
+                if (card && content) {
                     if (c.id === openCategoryId) {
-                        content.classList.add('is-open');
-                        content.style.maxHeight = content.scrollHeight + 140 + 'px';
-                        pill?.classList.add('bg-burgundy-50/90', 'border-burgundy-700', 'shadow-lg');
+                        card.classList.add('is-open');
+                        content.style.maxHeight = '230px';
                         icon?.classList.add('rotate-180');
                         setTimeout(() => update3DPerspective(c.id), 200);
                     } else {
-                        content.classList.remove('is-open');
+                        card.classList.remove('is-open');
                         content.style.maxHeight = '0px';
-                        pill?.classList.remove('bg-burgundy-50/90', 'border-burgundy-700', 'shadow-lg');
                         icon?.classList.remove('rotate-180');
                     }
                 }
