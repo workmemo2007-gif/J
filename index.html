@@ -84,92 +84,73 @@
             100% { transform: translateY(20px) rotate(-10deg) scale(0.95); }
         }
 
-        /* Vibrant Gradient Text Effect */
+        /* Gradient Text */
         .gradient-text-gold {
             background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .gradient-text-burgundy {
-            background: linear-gradient(135deg, #8c1a35 0%, #58111a 60%, #3d0a11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        /* Rounded Pill Accordion Button (Matching Image Style) */
+        .category-pill-btn {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 2px solid rgba(107, 29, 47, 0.25);
+            border-radius: 9999px;
+            box-shadow: 0 4px 15px rgba(107, 29, 47, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Pure Glassmorphism Panel */
+        .category-pill-btn:hover {
+            border-color: rgba(107, 29, 47, 0.6);
+            transform: scale(1.01);
+            box-shadow: 0 6px 20px rgba(107, 29, 47, 0.12);
+        }
+
+        .category-pill-btn.is-active {
+            background: rgba(107, 29, 47, 0.06);
+            border-color: #6b1d2f;
+            box-shadow: 0 6px 22px rgba(107, 29, 47, 0.18);
+        }
+
+        /* Accordion Smooth Expand Container */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out, padding 0.5s ease;
+            opacity: 0;
+        }
+
+        .accordion-content.is-open {
+            opacity: 1;
+        }
+
+        /* Glass Panel for Dish Card */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            box-shadow: 0 8px 32px 0 rgba(107, 29, 47, 0.08);
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(107, 29, 47, 0.1);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .glass-panel:hover {
-            transform: translateY(-4px) scale(1.015);
-            box-shadow: 0 16px 36px -6px rgba(107, 29, 47, 0.18);
-            border-color: rgba(245, 158, 11, 0.4);
-            background: rgba(255, 255, 255, 0.88);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -4px rgba(107, 29, 47, 0.15);
+            border-color: rgba(107, 29, 47, 0.3);
         }
 
-        /* Ultra-Transparent Liquid Glass Bottom Navigation */
+        /* Liquid Glass Bottom Navigation */
         .liquid-glass-nav {
-            background: rgba(61, 10, 17, 0.55);
+            background: rgba(61, 10, 17, 0.6);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Fade-In Scroll Animation Classes */
-        .fade-in-element {
-            opacity: 0;
-            transform: translateY(24px);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-            will-change: opacity, transform;
-        }
-
-        .fade-in-element.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hide Scrollbar for Horizontal Card Row while allowing touch scrolling */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 5px;
-            height: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #FAF8f5;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #6b1d2f;
-            border-radius: 10px;
-        }
-
-        .hero-gradient-overlay {
-            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.8) 70%, rgba(107, 29, 47, 0.95) 100%);
-        }
-
-        @keyframes customPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-        .animate-custom-pulse {
-            animation: customPulse 2s infinite;
-        }
-
+        /* Modal & Drawer Animations */
         .modal-fade-in {
             animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -184,6 +165,18 @@
         @keyframes drawerSlideIn {
             from { transform: translateX(100%); }
             to { transform: translateX(0); }
+        }
+
+        .hero-gradient-overlay {
+            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.8) 70%, rgba(107, 29, 47, 0.95) 100%);
+        }
+
+        @keyframes customPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+        .animate-custom-pulse {
+            animation: customPulse 2s infinite;
         }
     </style>
 </head>
@@ -209,7 +202,7 @@
             
             <!-- Top Bar -->
             <div class="flex justify-between items-center z-10">
-                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white backdrop-blur-md border border-white/25 transition-all duration-300 transform hover:scale-110 active:scale-95 shadow">
+                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white backdrop-blur-md border border-white/25 transition transform hover:scale-110 active:scale-95 shadow">
                     <i class="fas fa-bars text-amber-300 text-lg"></i>
                 </button>
 
@@ -218,14 +211,14 @@
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                         مفتوح الآن
                     </span>
-                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition-all duration-300 transform hover:scale-110 border border-white/25">
+                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition border border-white/25 transform hover:scale-110">
                         <i class="fas fa-phone text-xs"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Header Content (Logo Right + Gradient Titles) -->
-            <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right fade-in-element">
+            <!-- Header Content (Right Logo + Info) -->
+            <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right">
                 
                 <!-- Circular Logo Badge -->
                 <div class="relative group flex-shrink-0">
@@ -239,7 +232,7 @@
                     </div>
                 </div>
 
-                <!-- Title & Tagline -->
+                <!-- Title & Details -->
                 <div class="text-white flex-1">
                     <h1 class="text-2xl sm:text-4xl font-black tracking-wide drop-shadow-md gradient-text-gold">
                         آيس هوم <span class="text-sm sm:text-base font-normal text-amber-200/90">| Ice Home</span>
@@ -261,22 +254,21 @@
 
     <!-- Search Bar Bar -->
     <div class="sticky top-0 z-30 bg-burgundy-800/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
-        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center gap-3">
+        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+            <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold transition transform active:scale-95 shadow">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            
             <div class="relative flex-1">
                 <input type="text" id="searchInput" oninput="handleSearch()" 
                        placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
                        class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
                 <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
             </div>
-            
-            <button onclick="toggleSidebarDrawer()" class="flex items-center gap-2 bg-gradient-to-r from-amber-400 to-amber-500 text-burgundy-900 px-4 py-2.5 rounded-full text-xs font-extrabold hover:from-amber-300 hover:to-amber-400 transition-all duration-300 transform hover:scale-105 shadow-md active:scale-95">
-                <i class="fas fa-list-ul"></i>
-                <span class="hidden sm:inline">الأقسام</span>
-            </button>
         </div>
     </div>
 
-    <!-- Sidebar Drawer for Categories -->
+    <!-- Sidebar Drawer for Quick Navigation -->
     <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
         <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between transform drawer-slide-in">
@@ -287,7 +279,7 @@
                     </div>
                     <div>
                         <h3 class="font-black text-sm">قائمة الأقسام</h3>
-                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال السريع</p>
+                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال المباشر</p>
                     </div>
                 </div>
                 <button onclick="toggleSidebarDrawer()" class="text-white/80 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition hover:rotate-90">
@@ -305,9 +297,9 @@
         </div>
     </div>
 
-    <!-- Main Menu Container: Stacked Categories with Horizontal Glass Panels -->
-    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-8 relative z-10 space-y-12" id="menuMainContainer">
-        <!-- Rendered dynamically -->
+    <!-- Main Accordion Container (Exact Style from Image) -->
+    <main class="max-w-3xl mx-auto px-4 py-8 relative z-10 space-y-4" id="accordionContainer">
+        <!-- Injected via JS -->
     </main>
 
     <!-- Dish Customization Modal -->
@@ -356,7 +348,7 @@
                     <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">+</button>
                 </div>
 
-                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition transform hover:scale-[1.02] active:scale-95">
+                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition transform active:scale-95">
                     <i class="fas fa-shopping-bag"></i>
                     <span>إضافة للسلة • </span>
                     <span id="modalTotalPrice">0 ر.س</span>
@@ -387,10 +379,10 @@
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-2">
-                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition transform hover:scale-105 active:scale-95">
+                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
                         <i class="fab fa-whatsapp text-base"></i> إرسال للواتساب
                     </button>
-                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition transform hover:scale-105 active:scale-95">
+                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
                         <i class="fas fa-file-invoice text-base"></i> الفاتورة الرقمية
                     </button>
                 </div>
@@ -402,7 +394,7 @@
     <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
         <div class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-burgundy-700/10 text-right">
             <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-black text-lg flex items-center gap-2 gradient-text-burgundy">
+                <h3 class="font-black text-burgundy-900 text-lg flex items-center gap-2">
                     <i class="fas fa-ice-cream text-amber-500"></i>
                     عن آيس هوم | Ice Home
                 </h3>
@@ -428,16 +420,16 @@
                 </div>
             </div>
             <div class="pt-3 border-t flex justify-center gap-3">
-                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition transform hover:scale-110">
+                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://snapchat.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition transform hover:scale-110">
+                <a href="https://snapchat.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
                     <i class="fab fa-snapchat"></i>
                 </a>
-                <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition transform hover:scale-110">
+                <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
                     <i class="fab fa-tiktok"></i>
                 </a>
-                <a href="https://whatsapp.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition transform hover:scale-110">
+                <a href="https://whatsapp.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
@@ -447,16 +439,16 @@
     <!-- Liquid Glass Bottom Navigation Bar -->
     <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-sm mx-auto">
         <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-white">
-            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-110 active:scale-95 group">
+            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
                 <i class="fas fa-home text-amber-300 text-sm group-hover:scale-110 transition"></i>
                 <span class="text-[9px] font-bold tracking-wide">الرئيسية</span>
             </button>
-            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-110 active:scale-95 group">
+            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
                 <i class="fas fa-shopping-bag text-amber-300 text-sm group-hover:scale-110 transition"></i>
                 <span class="text-[9px] font-bold tracking-wide">السلة</span>
-                <span id="bottomCartBadge" class="absolute top-0.5 right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold shadow">0</span>
+                <span id="bottomCartBadge" class="absolute top-0.5 right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
             </button>
-            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition-all duration-300 transform hover:scale-110 active:scale-95 group">
+            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
                 <i class="fas fa-info-circle text-amber-300 text-sm group-hover:scale-110 transition"></i>
                 <span class="text-[9px] font-bold tracking-wide">معلوماتنا</span>
             </button>
@@ -471,12 +463,12 @@
 
     <script>
         const categories = [
-            { id: 'iced-drinks', name: 'المشروبات الباردة والآيس', icon: 'fa-glass-martini-alt' },
+            { id: 'iced-drinks', name: 'المشروبات البارده', icon: 'fa-glass-martini-alt' },
             { id: 'ice-cream', name: 'الآيس كريم والجيلاتو', icon: 'fa-ice-cream' },
-            { id: 'hot-drinks', name: 'المشروبات الساخنة', icon: 'fa-mug-hot' },
-            { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' },
+            { id: 'hot-drinks', name: 'المشروبات الساخنه', icon: 'fa-mug-hot' },
+            { id: 'mojitos', name: 'الموهيتو والانتعاش', icon: 'fa-cocktail' },
             { id: 'waffles', name: 'الوافل والبان كيك', icon: 'fa-stroopwafel' },
-            { id: 'mojitos', name: 'الموهيتو والانتعاش', icon: 'fa-cocktail' }
+            { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
         ];
 
         const menuItems = [
@@ -571,6 +563,7 @@
         ];
 
         let currentSearchQuery = '';
+        let openCategoryId = null; // Currently open accordion
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -580,32 +573,18 @@
 
         window.onload = function() {
             renderSidebarCategories();
-            renderStackedSections();
-            initScrollObserver();
+            renderAccordionMenu();
         };
 
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        /* Scroll Observer for Smooth Fade-In Animations */
-        function initScrollObserver() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.fade-in-element').forEach(el => observer.observe(el));
-        }
-
         function renderSidebarCategories() {
             const list = document.getElementById('sidebarCategoriesList');
             list.innerHTML = categories.map(cat => `
-                <a href="#section-${cat.id}" onclick="toggleSidebarDrawer()" 
-                   class="flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
+                <button onclick="toggleAccordion('${cat.id}'); toggleSidebarDrawer();" 
+                   class="w-full text-right flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
                     <div class="flex items-center gap-3">
                         <div class="w-8 h-8 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center">
                             <i class="fas ${cat.icon} text-xs"></i>
@@ -613,15 +592,15 @@
                         <span>${cat.name}</span>
                     </div>
                     <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
-                </a>
+                </button>
             `).join('');
         }
 
-        /* Render Categories Stacked Vertically with Horizontal Alignments & Glassmorphism Effect */
-        function renderStackedSections() {
-            const container = document.getElementById('menuMainContainer');
-            
-            container.innerHTML = categories.map((cat, index) => {
+        /* Render Accordion Buttons matching Image Style */
+        function renderAccordionMenu() {
+            const container = document.getElementById('accordionContainer');
+
+            container.innerHTML = categories.map(cat => {
                 const items = menuItems.filter(item => {
                     const matchesCat = item.categoryId === cat.id;
                     const matchesSearch = item.name.includes(currentSearchQuery) || item.desc.includes(currentSearchQuery);
@@ -630,85 +609,131 @@
 
                 if (items.length === 0 && currentSearchQuery) return '';
 
-                let html = `
-                    <section id="section-${cat.id}" class="scroll-mt-24 fade-in-element">
-                        <!-- Category Header with Vibrant Gradient Text -->
-                        <div class="flex items-center justify-between mb-4 border-r-4 border-burgundy-700 pr-3">
-                            <h2 class="text-lg sm:text-2xl font-black gradient-text-burgundy flex items-center gap-2">
-                                <i class="fas ${cat.icon} text-burgundy-700 text-base sm:text-lg"></i>
+                const isOpen = cat.id === openCategoryId || (currentSearchQuery !== '' && items.length > 0);
+
+                return `
+                    <div class="accordion-item" id="accordion-${cat.id}">
+                        <!-- Category Button Pill -->
+                        <button onclick="toggleAccordion('${cat.id}')" 
+                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'is-active' : ''}">
+                            <div class="w-6"></div> <!-- Spacer to center title -->
+                            <h2 class="text-lg sm:text-xl font-black text-burgundy-900 tracking-wide">
                                 ${cat.name}
                             </h2>
-                            <span class="bg-burgundy-100 text-burgundy-800 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full shadow-sm">
-                                ${items.length} أصناف
-                            </span>
-                        </div>
+                            <i class="fas fa-chevron-down text-burgundy-800 text-sm transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
+                        </button>
 
-                        <!-- Horizontal Scrollable Row for Dishes with Glassmorphism Panels -->
-                        <div class="flex items-center gap-4 overflow-x-auto pb-4 pt-1 px-1 no-scrollbar scroll-smooth">
+                        <!-- Expandable Items Container -->
+                        <div id="content-${cat.id}" class="accordion-content ${isOpen ? 'is-open' : ''}">
+                            <div class="pt-4 pb-2">
+                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                                    ${items.map(item => renderDishCard(item)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 `;
-
-                items.forEach(item => {
-                    const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
-                    const qtyInCart = cartItem ? cartItem.qty : 0;
-
-                    html += `
-                        <div class="glass-panel min-w-[210px] max-w-[210px] sm:min-w-[240px] sm:max-w-[240px] rounded-2xl p-3 flex flex-col justify-between group flex-shrink-0">
-                            <div>
-                                <!-- Dish Image -->
-                                <div class="relative h-32 sm:h-36 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
-                                    <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                                    ${item.tag ? `
-                                        <span class="absolute top-2 right-2 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full shadow">
-                                            ${item.tag}
-                                        </span>
-                                    ` : ''}
-                                    <div class="absolute bottom-2 right-2 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2.5 py-0.5 rounded-lg text-xs font-black shadow">
-                                        ${item.price} ر.س
-                                    </div>
-                                </div>
-
-                                <!-- Card Details -->
-                                <div class="pt-2.5">
-                                    <h3 onclick="openDishModal(${item.id})" class="font-extrabold text-burgundy-900 text-xs sm:text-sm cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
-                                    <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5 line-clamp-1">${item.desc}</p>
-                                </div>
-                            </div>
-
-                            <!-- Dynamic Quantity Control Buttons -->
-                            <div class="pt-2.5 mt-2 border-t border-gray-100/60 flex items-center justify-between gap-1">
-                                <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline transition">
-                                    تخصيص
-                                </button>
-
-                                <div class="flex items-center">
-                                    ${qtyInCart > 0 ? `
-                                        <div class="flex items-center border border-burgundy-700 rounded-lg bg-burgundy-50/90 px-1 py-0.5 shadow-sm">
-                                            <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
-                                            <span class="w-6 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
-                                            <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
-                                        </div>
-                                    ` : `
-                                        <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-1.5 px-3 rounded-lg text-[10px] sm:text-xs transition-all duration-300 transform hover:scale-105 active:scale-95 flex items-center gap-1 shadow">
-                                            <i class="fas fa-plus text-[9px]"></i>
-                                            <span>إضافة</span>
-                                        </button>
-                                    `}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-
-                html += `</div></section>`;
-                return html;
             }).join('');
 
-            initScrollObserver();
+            // Adjust heights smoothly
+            categories.forEach(cat => {
+                const content = document.getElementById(`content-${cat.id}`);
+                if (content && content.classList.contains('is-open')) {
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                }
+            });
+        }
+
+        function renderDishCard(item) {
+            const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
+            const qtyInCart = cartItem ? cartItem.qty : 0;
+
+            return `
+                <div class="glass-panel rounded-2xl p-2.5 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02] flex flex-col justify-between group">
+                    <div>
+                        <!-- Dish Image -->
+                        <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                            ${item.tag ? `
+                                <span class="absolute top-1.5 right-1.5 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">
+                                    ${item.tag}
+                                </span>
+                            ` : ''}
+                            <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
+                                ${item.price} ر.س
+                            </div>
+                        </div>
+
+                        <!-- Details -->
+                        <div class="pt-2">
+                            <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
+                            <p class="text-gray-500 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
+                        </div>
+                    </div>
+
+                    <!-- Controls (+ / -) -->
+                    <div class="pt-2 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
+                        <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline">
+                            تخصيص
+                        </button>
+
+                        <div class="flex items-center">
+                            ${qtyInCart > 0 ? `
+                                <div class="flex items-center border border-burgundy-700 rounded-lg bg-burgundy-50 px-1 py-0.5 shadow-sm">
+                                    <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
+                                    <span class="w-6 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
+                                    <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
+                                </div>
+                            ` : `
+                                <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-1.5 px-2.5 rounded-lg text-[10px] transition flex items-center gap-1 shadow active:scale-95">
+                                    <i class="fas fa-plus text-[9px]"></i>
+                                    <span>إضافة</span>
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        /* Toggle Accordions with Smooth Height Shift & Downward Displacement */
+        function toggleAccordion(catId) {
+            const isSame = openCategoryId === catId;
+            openCategoryId = isSame ? null : catId;
+
+            categories.forEach(c => {
+                const content = document.getElementById(`content-${c.id}`);
+                const pill = document.querySelector(`#accordion-${c.id} .category-pill-btn`);
+                const icon = document.querySelector(`#accordion-${c.id} .fa-chevron-down`);
+
+                if (content) {
+                    if (c.id === openCategoryId) {
+                        content.classList.add('is-open');
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        pill?.classList.add('is-active');
+                        icon?.classList.add('rotate-180');
+                    } else {
+                        content.classList.remove('is-open');
+                        content.style.maxHeight = '0px';
+                        pill?.classList.remove('is-active');
+                        icon?.classList.remove('rotate-180');
+                    }
+                }
+            });
+
+            if (openCategoryId) {
+                setTimeout(() => {
+                    const activeElem = document.getElementById(`accordion-${openCategoryId}`);
+                    if (activeElem) {
+                        activeElem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }, 200);
+            }
         }
 
         function handleSearch() {
             currentSearchQuery = document.getElementById('searchInput').value.trim();
-            renderStackedSections();
+            renderAccordionMenu();
         }
 
         function toggleSidebarDrawer() {
@@ -878,7 +903,7 @@
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             bottomBadge.innerText = totalItems;
             renderCartDrawerItems();
-            renderStackedSections();
+            renderAccordionMenu();
         }
 
         function toggleCartDrawer() {
