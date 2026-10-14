@@ -91,66 +91,88 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Rounded Pill Accordion Button (Matching Image Style) */
+        /* Category Pill Button (Accordion Header) */
         .category-pill-btn {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 2px solid rgba(107, 29, 47, 0.25);
+            border: 2px solid rgba(107, 29, 47, 0.22);
             border-radius: 9999px;
-            box-shadow: 0 4px 15px rgba(107, 29, 47, 0.05);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 4px 20px rgba(107, 29, 47, 0.06);
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .category-pill-btn:hover {
-            border-color: rgba(107, 29, 47, 0.6);
+            border-color: rgba(107, 29, 47, 0.5);
             transform: scale(1.01);
-            box-shadow: 0 6px 20px rgba(107, 29, 47, 0.12);
+            box-shadow: 0 6px 22px rgba(107, 29, 47, 0.12);
         }
 
-        .category-pill-btn.is-active {
-            background: rgba(107, 29, 47, 0.06);
-            border-color: #6b1d2f;
-            box-shadow: 0 6px 22px rgba(107, 29, 47, 0.18);
-        }
-
-        /* Accordion Smooth Expand Container */
-        .accordion-content {
+        /* Expanded Box Container (Matching Image Style) */
+        .expanded-category-box {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(107, 29, 47, 0.25);
+            border-radius: 2.5rem;
+            box-shadow: 0 12px 35px rgba(107, 29, 47, 0.1);
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out, padding 0.5s ease;
             opacity: 0;
+            transition: max-height 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out, padding 0.5s ease;
+            padding-top: 0;
+            padding-bottom: 0;
         }
 
-        .accordion-content.is-open {
+        .expanded-category-box.is-open {
             opacity: 1;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 0.75rem;
         }
 
-        /* Glass Panel for Dish Card */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(107, 29, 47, 0.1);
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        /* Horizontal Carousel for Dishes Inside Expanded Box */
+        .dish-carousel {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            padding: 0.5rem 1rem 1rem 1rem;
+            scrollbar-width: none; /* Firefox */
+        }
+        .dish-carousel::-webkit-scrollbar {
+            display: none; /* Safari & Chrome */
         }
 
-        .glass-panel:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px -4px rgba(107, 29, 47, 0.15);
+        /* Horizontal Dish Card (Matching Image Style) */
+        .horizontal-dish-card {
+            flex: 0 0 130px;
+            background: #FFFFFF;
+            border-radius: 1.5rem;
+            border: 1px solid rgba(107, 29, 47, 0.12);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            text-align: center;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .horizontal-dish-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 22px rgba(107, 29, 47, 0.15);
             border-color: rgba(107, 29, 47, 0.3);
         }
 
         /* Liquid Glass Bottom Navigation */
         .liquid-glass-nav {
-            background: rgba(61, 10, 17, 0.6);
+            background: rgba(61, 10, 17, 0.65);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
         }
 
-        /* Modal & Drawer Animations */
         .modal-fade-in {
             animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -217,7 +239,7 @@
                 </div>
             </div>
 
-            <!-- Header Content (Right Logo + Info) -->
+            <!-- Header Content -->
             <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right">
                 
                 <!-- Circular Logo Badge -->
@@ -252,7 +274,7 @@
         </div>
     </header>
 
-    <!-- Search Bar Bar -->
+    <!-- Search Bar -->
     <div class="sticky top-0 z-30 bg-burgundy-800/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
         <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
             <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold transition transform active:scale-95 shadow">
@@ -268,7 +290,7 @@
         </div>
     </div>
 
-    <!-- Sidebar Drawer for Quick Navigation -->
+    <!-- Sidebar Drawer -->
     <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
         <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
         <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between transform drawer-slide-in">
@@ -297,7 +319,7 @@
         </div>
     </div>
 
-    <!-- Main Accordion Container (Exact Style from Image) -->
+    <!-- Main Categories & Accordion Container -->
     <main class="max-w-3xl mx-auto px-4 py-8 relative z-10 space-y-4" id="accordionContainer">
         <!-- Injected via JS -->
     </main>
@@ -476,7 +498,7 @@
                 id: 1,
                 categoryId: 'iced-drinks',
                 name: 'آيس شيكن وايت موكا',
-                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد ورغوة غنية',
+                desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد',
                 price: 24,
                 tag: 'الأكثر مبيعاً',
                 image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80',
@@ -485,9 +507,20 @@
             },
             {
                 id: 2,
+                categoryId: 'iced-drinks',
+                name: 'ماتشا لاتيه بارد',
+                desc: 'ماتشا يابانية أصلية مع حليب بارد منعش',
+                price: 26,
+                tag: 'مميز',
+                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80',
+                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
+                extras: [{ name: 'صوص إضافي', price: 3 }]
+            },
+            {
+                id: 3,
                 categoryId: 'ice-cream',
                 name: 'آيس كريم هوم سبيشل',
-                desc: 'جيلاتو الفانيلا والشوكلاتة والفيستق مع صوص التوت البري',
+                desc: 'جيلاتو الفانيلا والشوكلاتة مع صوص التوت البري',
                 price: 28,
                 tag: 'مميز',
                 image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=400&q=80',
@@ -495,7 +528,7 @@
                 extras: [{ name: 'مكسرات محمصة', price: 4 }, { name: 'صوص نوتيلا', price: 3 }]
             },
             {
-                id: 3,
+                id: 4,
                 categoryId: 'desserts',
                 name: 'كيكة السباستيان الفاخرة',
                 desc: 'تشيز كيك سان سيباستيان المخبوزة مع صوص الشوكلاتة',
@@ -506,7 +539,7 @@
                 extras: [{ name: 'آيس كريم فانيلا', price: 6 }]
             },
             {
-                id: 4,
+                id: 5,
                 categoryId: 'waffles',
                 name: 'وافل نوتيلا بالآيس كريم',
                 desc: 'وافل ذهبي مقرمش مغطى بالنوتيلا مع كرة آيس كريم',
@@ -515,17 +548,6 @@
                 image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }],
                 extras: [{ name: 'صوص بستاشيو', price: 5 }]
-            },
-            {
-                id: 5,
-                categoryId: 'iced-drinks',
-                name: 'بوبا ماتشا لاتيه',
-                desc: 'ماتشا يابانية مع حليب الشوفان وحبيبات البوبا الطازجة',
-                price: 26,
-                tag: 'صحي',
-                image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }],
-                extras: [{ name: 'بوبا إضافية', price: 4 }]
             },
             {
                 id: 6,
@@ -548,22 +570,11 @@
                 image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80',
                 sizes: [{ name: 'كوب وسط', price: 0 }],
                 extras: [{ name: 'رغوة إضافية', price: 2 }]
-            },
-            {
-                id: 8,
-                categoryId: 'desserts',
-                name: 'سوفليه الشوكلاتة الداكنة',
-                desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة',
-                price: 27,
-                tag: 'جديد',
-                image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80',
-                sizes: [{ name: 'عادي', price: 0 }],
-                extras: []
             }
         ];
 
         let currentSearchQuery = '';
-        let openCategoryId = null; // Currently open accordion
+        let openCategoryId = 'iced-drinks'; // Open first category by default
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -596,7 +607,7 @@
             `).join('');
         }
 
-        /* Render Accordion Buttons matching Image Style */
+        /* Render Accordion Menu with Smooth Slow Expansion & Horizontal Dish Cards */
         function renderAccordionMenu() {
             const container = document.getElementById('accordionContainer');
 
@@ -612,91 +623,51 @@
                 const isOpen = cat.id === openCategoryId || (currentSearchQuery !== '' && items.length > 0);
 
                 return `
-                    <div class="accordion-item" id="accordion-${cat.id}">
+                    <div class="transition-all duration-500" id="accordion-${cat.id}">
                         <!-- Category Button Pill -->
                         <button onclick="toggleAccordion('${cat.id}')" 
-                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'is-active' : ''}">
-                            <div class="w-6"></div> <!-- Spacer to center title -->
-                            <h2 class="text-lg sm:text-xl font-black text-burgundy-900 tracking-wide">
+                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'bg-burgundy-50/80 border-burgundy-700' : ''}">
+                            <div class="w-6"></div>
+                            <h2 class="text-base sm:text-xl font-black text-burgundy-900 tracking-wide">
                                 ${cat.name}
                             </h2>
-                            <i class="fas fa-chevron-down text-burgundy-800 text-sm transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
+                            <i class="fas fa-chevron-down text-burgundy-800 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
                         </button>
 
-                        <!-- Expandable Items Container -->
-                        <div id="content-${cat.id}" class="accordion-content ${isOpen ? 'is-open' : ''}">
-                            <div class="pt-4 pb-2">
-                                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                                    ${items.map(item => renderDishCard(item)).join('')}
-                                </div>
+                        <!-- Expanded Container Box with Slow Motion Effect -->
+                        <div id="content-${cat.id}" class="expanded-category-box ${isOpen ? 'is-open' : ''}">
+                            <div class="dish-carousel">
+                                ${items.length > 0 ? items.map(item => renderHorizontalDishCard(item)).join('') : '<p class="text-xs text-gray-400 text-center w-full py-2">لا توجد أطباق حالياً في هذا القسم</p>'}
                             </div>
                         </div>
                     </div>
                 `;
             }).join('');
 
-            // Adjust heights smoothly
+            // Apply smooth max-height expansion
             categories.forEach(cat => {
                 const content = document.getElementById(`content-${cat.id}`);
                 if (content && content.classList.contains('is-open')) {
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.maxHeight = content.scrollHeight + 100 + 'px';
                 }
             });
         }
 
-        function renderDishCard(item) {
-            const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
-            const qtyInCart = cartItem ? cartItem.qty : 0;
-
+        function renderHorizontalDishCard(item) {
             return `
-                <div class="glass-panel rounded-2xl p-2.5 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02] flex flex-col justify-between group">
-                    <div>
-                        <!-- Dish Image -->
-                        <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
-                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
-                            ${item.tag ? `
-                                <span class="absolute top-1.5 right-1.5 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">
-                                    ${item.tag}
-                                </span>
-                            ` : ''}
-                            <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
-                                ${item.price} ر.س
-                            </div>
-                        </div>
-
-                        <!-- Details -->
-                        <div class="pt-2">
-                            <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
-                            <p class="text-gray-500 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
-                        </div>
+                <div class="horizontal-dish-card p-2 flex flex-col justify-between" onclick="openDishModal(${item.id})">
+                    <div class="relative w-full h-24 rounded-xl overflow-hidden bg-gray-100 mb-2 border border-burgundy-900/10 shadow-inner">
+                        <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover transform hover:scale-110 transition duration-500">
                     </div>
-
-                    <!-- Controls (+ / -) -->
-                    <div class="pt-2 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
-                        <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline">
-                            تخصيص
-                        </button>
-
-                        <div class="flex items-center">
-                            ${qtyInCart > 0 ? `
-                                <div class="flex items-center border border-burgundy-700 rounded-lg bg-burgundy-50 px-1 py-0.5 shadow-sm">
-                                    <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
-                                    <span class="w-6 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
-                                    <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
-                                </div>
-                            ` : `
-                                <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-1.5 px-2.5 rounded-lg text-[10px] transition flex items-center gap-1 shadow active:scale-95">
-                                    <i class="fas fa-plus text-[9px]"></i>
-                                    <span>إضافة</span>
-                                </button>
-                            `}
-                        </div>
+                    <div>
+                        <h4 class="font-extrabold text-burgundy-900 text-[11px] truncate leading-tight">${item.name}</h4>
+                        <span class="font-black text-burgundy-700 text-[11px] mt-1 block">${item.price} ر.س</span>
                     </div>
                 </div>
             `;
         }
 
-        /* Toggle Accordions with Smooth Height Shift & Downward Displacement */
+        /* Toggle Accordion with Slow Motion & Downward Push */
         function toggleAccordion(catId) {
             const isSame = openCategoryId === catId;
             openCategoryId = isSame ? null : catId;
@@ -709,13 +680,13 @@
                 if (content) {
                     if (c.id === openCategoryId) {
                         content.classList.add('is-open');
-                        content.style.maxHeight = content.scrollHeight + 'px';
-                        pill?.classList.add('is-active');
+                        content.style.maxHeight = content.scrollHeight + 100 + 'px';
+                        pill?.classList.add('bg-burgundy-50/80', 'border-burgundy-700');
                         icon?.classList.add('rotate-180');
                     } else {
                         content.classList.remove('is-open');
                         content.style.maxHeight = '0px';
-                        pill?.classList.remove('is-active');
+                        pill?.classList.remove('bg-burgundy-50/80', 'border-burgundy-700');
                         icon?.classList.remove('rotate-180');
                     }
                 }
@@ -727,7 +698,7 @@
                     if (activeElem) {
                         activeElem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
-                }, 200);
+                }, 250);
             }
         }
 
@@ -837,44 +808,6 @@
             document.getElementById('modalTotalPrice').innerText = `${total} ر.س`;
         }
 
-        function addDirectToCart(id) {
-            const item = menuItems.find(i => i.id === id);
-            if (!item) return;
-
-            const existing = cart.find(ci => ci.itemId === id && !ci.option && !ci.extras && !ci.note);
-            if (existing) {
-                existing.qty += 1;
-                existing.totalPrice = existing.unitPrice * existing.qty;
-            } else {
-                cart.push({
-                    cartId: Date.now(),
-                    itemId: item.id,
-                    name: item.name,
-                    option: item.sizes[0]?.name || '',
-                    extras: '',
-                    note: '',
-                    unitPrice: item.price,
-                    qty: 1,
-                    totalPrice: item.price
-                });
-            }
-            updateCartUI();
-            showNotification(`تمت إضافة ${item.name} للسلة ✨`);
-        }
-
-        function updateDirectQty(id, delta) {
-            const existing = cart.find(ci => ci.itemId === id && !ci.option && !ci.extras && !ci.note);
-            if (!existing) return;
-
-            existing.qty += delta;
-            if (existing.qty <= 0) {
-                cart = cart.filter(ci => ci !== existing);
-            } else {
-                existing.totalPrice = existing.unitPrice * existing.qty;
-            }
-            updateCartUI();
-        }
-
         function confirmAddToCart() {
             const note = document.getElementById('specialNote').value.trim();
             const extrasTotal = selectedExtras.reduce((sum, e) => sum + e.price, 0);
@@ -903,7 +836,6 @@
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
             bottomBadge.innerText = totalItems;
             renderCartDrawerItems();
-            renderAccordionMenu();
         }
 
         function toggleCartDrawer() {
