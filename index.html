@@ -16,19 +16,20 @@
             theme: {
                 extend: {
                     colors: {
-                        burgundy: {
-                            50: '#fcf2f4',
-                            100: '#f6dbe0',
-                            200: '#ebaac2',
-                            600: '#8c1a35',
-                            700: '#6b1d2f',
-                            800: '#58111a',
-                            900: '#3d0a11',
+                        neon: {
+                            pink: '#ff007f',
+                            crimson: '#e6005c',
+                            purple: '#9d00ff',
+                            gold: '#ffd700',
+                            amber: '#ffaa00'
                         },
-                        ivory: {
-                            DEFAULT: '#FAF8f5',
-                            card: '#FFFFFF',
-                            soft: '#F4EFEA',
+                        burgundy: {
+                            50: '#fff0f3',
+                            100: '#ffe1e6',
+                            600: '#cc0044',
+                            700: '#990033',
+                            800: '#660022',
+                            900: '#330011',
                         }
                     },
                     fontFamily: {
@@ -42,13 +43,13 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #FAF8f5;
-            color: #2D2D2D;
+            background: linear-gradient(135deg, #18030a 0%, #2b0512 50%, #150208 100%);
+            color: #ffffff;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Animated Translucent Pattern Background */
+        /* Animated Translucent Vibrant Pattern */
         .pattern-bg {
             position: fixed;
             top: 0;
@@ -57,68 +58,57 @@
             height: 100vh;
             pointer-events: none;
             z-index: 0;
-            opacity: 0.16;
-            background-image: radial-gradient(rgba(107, 29, 47, 0.28) 1px, transparent 1px), radial-gradient(rgba(120, 120, 120, 0.22) 1px, #FAF8f5 1px);
-            background-size: 30px 30px;
-            background-position: 0 0, 15px 15px;
-            animation: movePattern 40s linear infinite;
+            opacity: 0.25;
+            background-image: radial-gradient(#ff007f 1.2px, transparent 1.2px), radial-gradient(#ffd700 1.2px, transparent 1.2px);
+            background-size: 32px 32px;
+            background-position: 0 0, 16px 16px;
+            animation: movePattern 30s linear infinite;
         }
 
         @keyframes movePattern {
-            0% { background-position: 0 0, 15px 15px; }
-            100% { background-position: 300px 300px, 315px 315px; }
+            0% { background-position: 0 0, 16px 16px; }
+            100% { background-position: 320px 320px, 336px 336px; }
         }
 
-        /* Animated Floating Gray Ornaments */
-        .ornament-float {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.12;
-            animation: floatAnim 18s ease-in-out infinite alternate;
+        /* Glowing Text Styles */
+        .neon-glow-text {
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 0, 127, 0.8), 0 0 20px rgba(255, 0, 127, 0.5), 0 0 30px rgba(255, 215, 0, 0.4);
         }
 
-        @keyframes floatAnim {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-25px) rotate(15deg) scale(1.05); }
-            100% { transform: translateY(20px) rotate(-10deg) scale(0.95); }
+        .gold-glow-text {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.7), 0 0 22px rgba(255, 170, 0, 0.5);
         }
 
-        /* Gradient Text */
-        .gradient-text-gold {
-            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Rounded Pill Accordion Button (Matching Image Style) */
-        .category-pill-btn {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 2px solid rgba(107, 29, 47, 0.25);
+        /* Glassmorphism Accordion Pill Buttons with Vibrant Neon Border */
+        .glass-accordion-btn {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1.5px solid rgba(255, 0, 127, 0.35);
             border-radius: 9999px;
-            box-shadow: 0 4px 15px rgba(107, 29, 47, 0.05);
-            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 8px 32px 0 rgba(255, 0, 127, 0.15), inset 0 0 12px rgba(255, 255, 255, 0.05);
+            transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .category-pill-btn:hover {
-            border-color: rgba(107, 29, 47, 0.6);
-            transform: scale(1.01);
-            box-shadow: 0 6px 20px rgba(107, 29, 47, 0.12);
+        .glass-accordion-btn:hover {
+            border-color: rgba(255, 0, 127, 0.8);
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.4), inset 0 0 15px rgba(255, 0, 127, 0.2);
+            transform: translateY(-2px) scale(1.01);
         }
 
-        .category-pill-btn.is-active {
-            background: rgba(107, 29, 47, 0.06);
-            border-color: #6b1d2f;
-            box-shadow: 0 6px 22px rgba(107, 29, 47, 0.18);
+        .glass-accordion-btn.is-active {
+            background: linear-gradient(135deg, rgba(255, 0, 127, 0.25) 0%, rgba(157, 0, 255, 0.25) 100%);
+            border-color: #ff007f;
+            box-shadow: 0 0 30px rgba(255, 0, 127, 0.5), inset 0 0 20px rgba(255, 0, 127, 0.3);
         }
 
-        /* Accordion Smooth Expand Container */
+        /* Accordion Content Container */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease-in-out, padding 0.5s ease;
+            transition: max-height 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
             opacity: 0;
         }
 
@@ -126,160 +116,143 @@
             opacity: 1;
         }
 
-        /* Glass Panel for Dish Card */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.92);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(107, 29, 47, 0.1);
+        /* Glass Panel Card for Dish */
+        .glass-card {
+            background: rgba(40, 6, 20, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 0, 127, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .glass-panel:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px -4px rgba(107, 29, 47, 0.15);
-            border-color: rgba(107, 29, 47, 0.3);
+        .glass-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(255, 215, 0, 0.6);
+            box-shadow: 0 12px 30px rgba(255, 0, 127, 0.25);
         }
 
-        /* Liquid Glass Bottom Navigation */
+        /* Bottom Glass Nav */
         .liquid-glass-nav {
-            background: rgba(61, 10, 17, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            background: rgba(35, 3, 15, 0.75);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 0, 127, 0.4);
+            box-shadow: 0 10px 40px rgba(255, 0, 127, 0.25);
         }
 
-        /* Modal & Drawer Animations */
-        .modal-fade-in {
-            animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.92) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+        .horizontal-category-chip {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
 
-        .drawer-slide-in {
-            animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-        @keyframes drawerSlideIn {
-            from { transform: translateX(100%); }
-            to { transform: translateX(0); }
+        .horizontal-category-chip.active-chip {
+            background: linear-gradient(135deg, #ff007f, #9d00ff);
+            border-color: #ffd700;
+            box-shadow: 0 0 15px rgba(255, 0, 127, 0.6);
         }
 
-        .hero-gradient-overlay {
-            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.8) 70%, rgba(107, 29, 47, 0.95) 100%);
-        }
-
-        @keyframes customPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-        .animate-custom-pulse {
-            animation: customPulse 2s infinite;
-        }
+        /* Hide Scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
 <body class="relative min-h-screen pb-32 select-none">
 
     <div class="pattern-bg"></div>
 
-    <svg class="ornament-float top-10 right-12 w-32 h-32 text-gray-500" viewBox="0 0 100 100" fill="currentColor">
-        <path d="M50 0 C60 25, 75 40, 100 50 C75 60, 60 75, 50 100 C40 75, 25 60, 0 50 C25 40, 40 25, 50 0 Z" />
-    </svg>
-    <svg class="ornament-float bottom-1/3 left-6 w-44 h-44 text-gray-600" style="animation-delay: -3s;" viewBox="0 0 100 100" fill="currentColor">
-        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
-
     <!-- Hero Header -->
-    <header class="relative w-full h-64 sm:h-80 overflow-hidden shadow-2xl">
+    <header class="relative w-full h-64 sm:h-80 overflow-hidden shadow-2xl border-b border-neon-pink/30">
         <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" 
              alt="Ice Home Cover" 
-             class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 hover:scale-100">
+             class="w-full h-full object-cover object-center transform scale-105 transition duration-1000">
         
-        <div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-between p-4 sm:p-6">
+        <div class="absolute inset-0 bg-gradient-to-t from-[#18030a] via-[#2b0512]/70 to-black/60 flex flex-col justify-between p-4 sm:p-6">
             
             <!-- Top Bar -->
             <div class="flex justify-between items-center z-10">
-                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white backdrop-blur-md border border-white/25 transition transform hover:scale-110 active:scale-95 shadow">
-                    <i class="fas fa-bars text-amber-300 text-lg"></i>
+                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-black/40 hover:bg-neon-pink/30 flex items-center justify-center text-white backdrop-blur-md border border-neon-pink/40 transition transform active:scale-95 shadow-lg">
+                    <i class="fas fa-bars text-neon-gold text-lg"></i>
                 </button>
 
                 <div class="flex items-center gap-3">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
+                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/50 backdrop-blur-md shadow-[0_0_12px_rgba(52,211,153,0.3)]">
                         <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
                         مفتوح الآن
                     </span>
-                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition border border-white/25 transform hover:scale-110">
-                        <i class="fas fa-phone text-xs"></i>
+                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-black/40 hover:bg-neon-pink/30 flex items-center justify-center text-white transition border border-white/20 transform active:scale-95">
+                        <i class="fas fa-phone text-xs text-neon-gold"></i>
                     </a>
                 </div>
             </div>
 
-            <!-- Header Content (Right Logo + Info) -->
+            <!-- Header Content -->
             <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right">
-                
-                <!-- Circular Logo Badge -->
                 <div class="relative group flex-shrink-0">
-                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
-                    <div class="relative w-22 h-22 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
-                        <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
-                            <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-custom-pulse"></i>
-                            <span class="font-extrabold text-xs sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
-                            <span class="text-[8px] sm:text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
+                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-neon-pink via-neon-gold to-neon-purple opacity-90 blur animate-pulse"></div>
+                    <div class="relative w-20 h-20 sm:w-28 sm:h-28 rounded-full bg-[#1e030c] border-2 border-neon-gold shadow-2xl p-1 flex flex-col items-center justify-center text-center overflow-hidden">
+                        <div class="w-full h-full rounded-full border border-neon-pink/40 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-900 to-black text-white p-2">
+                            <i class="fas fa-ice-cream text-2xl sm:text-3xl text-neon-gold mb-0.5 drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
+                            <span class="font-extrabold text-xs sm:text-base tracking-wider text-white gold-glow-text leading-none">آيس هوم</span>
+                            <span class="text-[7px] sm:text-[8px] text-neon-pink tracking-widest font-bold mt-0.5">ICE HOME</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Title & Details -->
                 <div class="text-white flex-1">
-                    <h1 class="text-2xl sm:text-4xl font-black tracking-wide drop-shadow-md gradient-text-gold">
-                        آيس هوم <span class="text-sm sm:text-base font-normal text-amber-200/90">| Ice Home</span>
+                    <h1 class="text-2xl sm:text-4xl font-black tracking-wide neon-glow-text">
+                        آيس هوم <span class="text-sm sm:text-base font-normal text-neon-gold">| Ice Home</span>
                     </h1>
-                    <p class="text-[11px] sm:text-sm text-gray-200 mt-1 max-w-md line-clamp-2">
+                    <p class="text-[11px] sm:text-sm text-gray-200 mt-1 max-w-md line-clamp-2 drop-shadow">
                         عالم الفخامة والانتعاش.. أجود أنواع المشروبات والحلويات الفاخرة
                     </p>
-                    <div class="flex items-center gap-3 text-[10px] sm:text-xs text-amber-200/90 mt-2">
-                        <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
+                    <div class="flex items-center gap-3 text-[10px] sm:text-xs text-neon-gold/90 mt-2 font-bold">
+                        <span><i class="fas fa-star text-neon-gold ml-1"></i> 4.9 (1.2k+ تقييم)</span>
                         <span>•</span>
                         <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
                     </div>
                 </div>
-
             </div>
 
         </div>
     </header>
 
-    <!-- Search Bar Bar -->
-    <div class="sticky top-0 z-30 bg-burgundy-800/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
-        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-            <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold transition transform active:scale-95 shadow">
+    <!-- Sticky Navigation & Search Bar Bar -->
+    <div class="sticky top-0 z-30 bg-[#18030a]/90 backdrop-blur-xl border-b border-neon-pink/30 shadow-[0_4px_20px_rgba(0,0,0,0.5)]">
+        <!-- Horizontal Quick Categories Bar -->
+        <div class="flex items-center gap-2 px-4 py-2.5 overflow-x-auto no-scrollbar max-w-3xl mx-auto" id="quickCategoriesBar">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- Search Bar -->
+        <div class="max-w-3xl mx-auto px-4 pb-3 pt-1 flex items-center gap-3">
+            <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-gradient-to-r from-neon-pink to-neon-purple text-white flex items-center justify-center font-bold shadow-[0_0_15px_rgba(255,0,127,0.5)] active:scale-95 transition">
                 <i class="fas fa-list-ul"></i>
             </button>
             
             <div class="relative flex-1">
                 <input type="text" id="searchInput" oninput="handleSearch()" 
-                       placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
-                       class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
-                <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
+                       placeholder="ابحث بسرعة عن مشروبك أو تحليتك..." 
+                       class="w-full bg-white/10 border border-neon-pink/40 text-white placeholder-gray-400 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-neon-gold focus:bg-burgundy-900/90 transition shadow-inner">
+                <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-neon-gold text-sm"></i>
             </div>
         </div>
     </div>
 
-    <!-- Sidebar Drawer for Quick Navigation -->
+    <!-- Sidebar Drawer -->
     <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
-        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-80 bg-white shadow-2xl flex flex-col justify-between transform drawer-slide-in">
-            <div class="p-5 bg-burgundy-800 text-white flex items-center justify-between">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleSidebarDrawer()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-80 bg-[#1f030d] border-l border-neon-pink/40 shadow-2xl flex flex-col justify-between transform drawer-slide-in">
+            <div class="p-5 bg-gradient-to-r from-burgundy-900 to-black text-white flex items-center justify-between border-b border-neon-pink/30">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold">
+                    <div class="w-10 h-10 rounded-full bg-neon-pink text-white flex items-center justify-center font-bold shadow-[0_0_10px_#ff007f]">
                         <i class="fas fa-ice-cream"></i>
                     </div>
                     <div>
-                        <h3 class="font-black text-sm">قائمة الأقسام</h3>
-                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال المباشر</p>
+                        <h3 class="font-black text-sm neon-glow-text">قائمة الأقسام</h3>
+                        <p class="text-[10px] text-neon-gold">الانتقال المباشر للقسم</p>
                     </div>
                 </div>
                 <button onclick="toggleSidebarDrawer()" class="text-white/80 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition hover:rotate-90">
@@ -291,27 +264,27 @@
                 <!-- Injected via JS -->
             </div>
 
-            <div class="p-4 bg-gray-50 border-t text-center text-xs text-gray-500">
-                <span>ايس هوم • جميع الحقوق محفوظة</span>
+            <div class="p-4 bg-black/40 border-t border-white/10 text-center text-xs text-gray-400">
+                <span>آيس هوم • جميع الحقوق محفوظة</span>
             </div>
         </div>
     </div>
 
-    <!-- Main Accordion Container (Exact Style from Image) -->
-    <main class="max-w-3xl mx-auto px-4 py-8 relative z-10 space-y-4" id="accordionContainer">
+    <!-- Main Accordion Container -->
+    <main class="max-w-3xl mx-auto px-4 py-6 relative z-10 space-y-4" id="accordionContainer">
         <!-- Injected via JS -->
     </main>
 
     <!-- Dish Customization Modal -->
-    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
-        <div class="bg-ivory-card w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/10">
+    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
+        <div class="bg-[#240410] w-full max-w-lg rounded-3xl overflow-hidden shadow-[0_0_40px_rgba(255,0,127,0.3)] modal-fade-in max-h-[92vh] flex flex-col border border-neon-pink/40 text-white">
             
-            <div class="relative h-48 sm:h-56 overflow-hidden bg-burgundy-900">
+            <div class="relative h-48 sm:h-56 overflow-hidden bg-black">
                 <img id="modalImage" src="" alt="Dish Detail" class="w-full h-full object-cover">
-                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition transform active:scale-95">
+                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-neon-pink transition transform active:scale-95">
                     <i class="fas fa-times"></i>
                 </button>
-                <div class="absolute bottom-3 right-3 bg-burgundy-900/80 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold" id="modalCategoryBadge">
+                <div class="absolute bottom-3 right-3 bg-neon-pink/90 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-bold shadow-[0_0_10px_#ff007f]" id="modalCategoryBadge">
                     قسم المشروبات
                 </div>
             </div>
@@ -319,39 +292,39 @@
             <div class="p-5 overflow-y-auto flex-1 space-y-4">
                 <div class="flex justify-between items-start gap-2">
                     <div>
-                        <h3 id="modalTitle" class="text-xl font-extrabold text-burgundy-900"></h3>
-                        <p id="modalDesc" class="text-xs text-gray-600 mt-1 leading-relaxed"></p>
+                        <h3 id="modalTitle" class="text-xl font-extrabold neon-glow-text"></h3>
+                        <p id="modalDesc" class="text-xs text-gray-300 mt-1 leading-relaxed"></p>
                     </div>
-                    <span id="modalPrice" class="text-lg font-black text-burgundy-700 whitespace-nowrap bg-burgundy-50 px-3 py-1 rounded-xl"></span>
+                    <span id="modalPrice" class="text-lg font-black text-neon-gold whitespace-nowrap bg-black/50 border border-neon-gold/40 px-3 py-1 rounded-xl"></span>
                 </div>
 
-                <div id="optionsContainer" class="space-y-2 pt-2 border-t border-gray-100">
-                    <label class="block text-xs font-bold text-gray-800">الحجم / الخيار:</label>
+                <div id="optionsContainer" class="space-y-2 pt-2 border-t border-white/10">
+                    <label class="block text-xs font-bold text-neon-gold">الحجم / الخيار:</label>
                     <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2"></div>
                 </div>
 
-                <div id="extrasContainer" class="space-y-2 pt-2 border-t border-gray-100">
-                    <label class="block text-xs font-bold text-gray-800">إضافات اختيارية:</label>
+                <div id="extrasContainer" class="space-y-2 pt-2 border-t border-white/10">
+                    <label class="block text-xs font-bold text-neon-gold">إضافات اختيارية:</label>
                     <div id="extrasGrid" class="space-y-1.5"></div>
                 </div>
 
-                <div class="pt-2 border-t border-gray-100">
-                    <label for="specialNote" class="block text-xs font-bold text-gray-800 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
-                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-gray-50/50"></textarea>
+                <div class="pt-2 border-t border-white/10">
+                    <label for="specialNote" class="block text-xs font-bold text-neon-gold mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج...):</label>
+                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-white/20 focus:outline-none focus:ring-1 focus:ring-neon-pink bg-black/40 text-white placeholder-gray-500"></textarea>
                 </div>
             </div>
 
-            <div class="p-4 bg-gray-50 border-t border-gray-100 flex items-center justify-between gap-4">
-                <div class="flex items-center border border-gray-300 rounded-full bg-white px-2 py-1">
-                    <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">-</button>
-                    <span id="modalQty" class="w-8 text-center font-bold text-sm">1</span>
-                    <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-burgundy-800 font-bold hover:bg-gray-100 transition">+</button>
+            <div class="p-4 bg-black/40 border-t border-white/10 flex items-center justify-between gap-4">
+                <div class="flex items-center border border-neon-pink/50 rounded-full bg-black/50 px-2 py-1">
+                    <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-full text-neon-pink font-extrabold hover:bg-white/10 transition">-</button>
+                    <span id="modalQty" class="w-8 text-center font-bold text-sm text-white">1</span>
+                    <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-neon-pink font-extrabold hover:bg-white/10 transition">+</button>
                 </div>
 
-                <button onclick="confirmAddToCart()" class="flex-1 bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition transform active:scale-95">
+                <button onclick="confirmAddToCart()" class="flex-1 bg-gradient-to-r from-neon-pink to-neon-purple hover:opacity-95 text-white font-bold py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-[0_0_20px_rgba(255,0,127,0.5)] transition transform active:scale-95">
                     <i class="fas fa-shopping-bag"></i>
                     <span>إضافة للسلة • </span>
-                    <span id="modalTotalPrice">0 ر.س</span>
+                    <span id="modalTotalPrice" class="text-neon-gold">0 ر.س</span>
                 </button>
             </div>
 
@@ -359,30 +332,30 @@
     </div>
 
     <!-- Cart Drawer -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/60 backdrop-blur-sm transition-opacity">
-        <div class="bg-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in">
-            <div class="p-4 bg-burgundy-800 text-white flex items-center justify-between">
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/80 backdrop-blur-md transition-opacity">
+        <div class="bg-[#1f030d] text-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in border-r border-neon-pink/40">
+            <div class="p-4 bg-gradient-to-r from-burgundy-900 to-black text-white flex items-center justify-between border-b border-neon-pink/30">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-shopping-basket text-amber-300 text-lg"></i>
-                    <h3 class="font-extrabold text-base">سلة الطلبات - ايس هوم</h3>
+                    <i class="fas fa-shopping-basket text-neon-gold text-lg"></i>
+                    <h3 class="font-extrabold text-base neon-glow-text">سلة الطلبات - ايس هوم</h3>
                 </div>
                 <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white transition hover:rotate-90"><i class="fas fa-times text-lg"></i></button>
             </div>
 
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-gray-100"></div>
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-white/10"></div>
 
-            <div class="p-4 bg-ivory border-t border-gray-200 space-y-3">
-                <div class="space-y-1.5 text-xs text-gray-600">
-                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold">0 ر.س</span></div>
-                    <div class="flex justify-between"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
-                    <div class="flex justify-between text-base font-black text-burgundy-900 border-t pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
+            <div class="p-4 bg-black/60 border-t border-white/10 space-y-3">
+                <div class="space-y-1.5 text-xs text-gray-300">
+                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-white">0 ر.س</span></div>
+                    <div class="flex justify-between"><span>ضريبة القيمة المضافة (15%):</span><span class="text-emerald-400">شاملة</span></div>
+                    <div class="flex justify-between text-base font-black text-neon-gold border-t border-white/10 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-2">
-                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
+                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-500 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(16,185,129,0.4)] transition active:scale-95">
                         <i class="fab fa-whatsapp text-base"></i> إرسال للواتساب
                     </button>
-                    <button onclick="showReceiptModal()" class="bg-burgundy-800 hover:bg-burgundy-900 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
+                    <button onclick="showReceiptModal()" class="bg-gradient-to-r from-neon-pink to-neon-purple text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow-[0_0_15px_rgba(255,0,127,0.4)] transition active:scale-95">
                         <i class="fas fa-file-invoice text-base"></i> الفاتورة الرقمية
                     </button>
                 </div>
@@ -391,81 +364,78 @@
     </div>
 
     <!-- About Modal -->
-    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
-        <div class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-burgundy-700/10 text-right">
-            <div class="flex justify-between items-center border-b pb-3">
-                <h3 class="font-black text-burgundy-900 text-lg flex items-center gap-2">
-                    <i class="fas fa-ice-cream text-amber-500"></i>
+    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md transition-opacity">
+        <div class="bg-[#240410] text-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl p-6 space-y-4 border border-neon-pink/40 text-right">
+            <div class="flex justify-between items-center border-b border-white/10 pb-3">
+                <h3 class="font-black neon-glow-text text-lg flex items-center gap-2">
+                    <i class="fas fa-ice-cream text-neon-gold"></i>
                     عن آيس هوم | Ice Home
                 </h3>
-                <button onclick="closeAboutModal()" class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-gray-200 transition">
+                <button onclick="closeAboutModal()" class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center text-gray-300 hover:bg-neon-pink transition">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
-            <p class="text-xs text-gray-600 leading-relaxed">
+            <p class="text-xs text-gray-300 leading-relaxed">
                 عالم الفخامة والانتعاش.. نقدم أفاخر المشروبات الباردة والساخنة، الآيس كريم، الجيلاتو، والحلويات المصنوعة بأجود المكونات العالمية لتمنحكم تجربة لا تُنسى.
             </p>
-            <div class="space-y-2.5 text-xs text-gray-700 pt-2 border-t">
+            <div class="space-y-2.5 text-xs text-gray-200 pt-2 border-t border-white/10">
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-clock text-burgundy-700 w-5 text-center"></i>
+                    <i class="fas fa-clock text-neon-pink w-5 text-center"></i>
                     <span>أوقات العمل: يومياً من 2:00 ظهراً وحتى 2:00 صباحاً</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-phone-alt text-burgundy-700 w-5 text-center"></i>
+                    <i class="fas fa-phone-alt text-neon-pink w-5 text-center"></i>
                     <span dir="ltr">+966 50 000 0000</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-map-marker-alt text-burgundy-700 w-5 text-center"></i>
+                    <i class="fas fa-map-marker-alt text-neon-pink w-5 text-center"></i>
                     <span>المملكة العربية السعودية • الفرع الرئيسي</span>
                 </div>
             </div>
-            <div class="pt-3 border-t flex justify-center gap-3">
-                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+            <div class="pt-3 border-t border-white/10 flex justify-center gap-3">
+                <a href="https://instagram.com" target="_blank" class="w-9 h-9 rounded-full bg-white/10 text-neon-pink flex items-center justify-center hover:bg-neon-pink hover:text-white transition shadow">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://snapchat.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                <a href="https://snapchat.com" target="_blank" class="w-9 h-9 rounded-full bg-white/10 text-neon-pink flex items-center justify-center hover:bg-neon-pink hover:text-white transition shadow">
                     <i class="fab fa-snapchat"></i>
                 </a>
-                <a href="https://tiktok.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
-                    <i class="fab fa-tiktok"></i>
-                </a>
-                <a href="https://whatsapp.com" target="_blank" class="w-9 h-9 rounded-full bg-burgundy-50 text-burgundy-800 flex items-center justify-center hover:bg-burgundy-700 hover:text-white transition">
+                <a href="https://whatsapp.com" target="_blank" class="w-9 h-9 rounded-full bg-white/10 text-neon-pink flex items-center justify-center hover:bg-neon-pink hover:text-white transition shadow">
                     <i class="fab fa-whatsapp"></i>
                 </a>
             </div>
         </div>
-    </div>
+    </nav>
 
     <!-- Liquid Glass Bottom Navigation Bar -->
     <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-sm mx-auto">
-        <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-white">
-            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
-                <i class="fas fa-home text-amber-300 text-sm group-hover:scale-110 transition"></i>
+        <div class="liquid-glass-nav rounded-2xl py-2.5 px-4 flex items-center justify-around text-white">
+            <button onclick="scrollToTop()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/10 transition active:scale-95 group">
+                <i class="fas fa-home text-neon-gold text-base group-hover:scale-110 transition drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
                 <span class="text-[9px] font-bold tracking-wide">الرئيسية</span>
             </button>
-            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
-                <i class="fas fa-shopping-bag text-amber-300 text-sm group-hover:scale-110 transition"></i>
+            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/10 transition active:scale-95 group">
+                <i class="fas fa-shopping-bag text-neon-gold text-base group-hover:scale-110 transition drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
                 <span class="text-[9px] font-bold tracking-wide">السلة</span>
-                <span id="bottomCartBadge" class="absolute top-0.5 right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                <span id="bottomCartBadge" class="absolute -top-1 -right-1 bg-neon-pink text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-black shadow-[0_0_8px_#ff007f]">0</span>
             </button>
-            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
-                <i class="fas fa-info-circle text-amber-300 text-sm group-hover:scale-110 transition"></i>
+            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/10 transition active:scale-95 group">
+                <i class="fas fa-info-circle text-neon-gold text-base group-hover:scale-110 transition drop-shadow-[0_0_8px_rgba(255,215,0,0.8)]"></i>
                 <span class="text-[9px] font-bold tracking-wide">معلوماتنا</span>
             </button>
         </div>
     </nav>
 
     <!-- Custom Notification Box -->
-    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900 text-amber-200 px-5 py-3 rounded-2xl shadow-2xl border border-amber-400/40 text-xs font-bold flex items-center gap-3 backdrop-blur-md transition-all duration-300">
-        <i class="fas fa-check-circle text-amber-400 text-base"></i>
+    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-[#2b0413] text-white px-5 py-3 rounded-2xl shadow-[0_0_25px_rgba(255,0,127,0.6)] border border-neon-pink text-xs font-bold flex items-center gap-3 backdrop-blur-md transition-all duration-300">
+        <i class="fas fa-check-circle text-neon-gold text-base"></i>
         <span id="notificationText">تمت العملية بنجاح</span>
     </div>
 
     <script>
         const categories = [
-            { id: 'iced-drinks', name: 'المشروبات البارده', icon: 'fa-glass-martini-alt' },
+            { id: 'iced-drinks', name: 'المشروبات الباردة', icon: 'fa-glass-martini-alt' },
             { id: 'ice-cream', name: 'الآيس كريم والجيلاتو', icon: 'fa-ice-cream' },
-            { id: 'hot-drinks', name: 'المشروبات الساخنه', icon: 'fa-mug-hot' },
+            { id: 'hot-drinks', name: 'المشروبات الساخنة', icon: 'fa-mug-hot' },
             { id: 'mojitos', name: 'الموهيتو والانتعاش', icon: 'fa-cocktail' },
             { id: 'waffles', name: 'الوافل والبان كيك', icon: 'fa-stroopwafel' },
             { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
@@ -563,7 +533,7 @@
         ];
 
         let currentSearchQuery = '';
-        let openCategoryId = null; // Currently open accordion
+        let openCategoryId = null;
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -572,6 +542,7 @@
         let modalQuantity = 1;
 
         window.onload = function() {
+            renderQuickCategoryChips();
             renderSidebarCategories();
             renderAccordionMenu();
         };
@@ -580,23 +551,36 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function renderSidebarCategories() {
-            const list = document.getElementById('sidebarCategoriesList');
-            list.innerHTML = categories.map(cat => `
-                <button onclick="toggleAccordion('${cat.id}'); toggleSidebarDrawer();" 
-                   class="w-full text-right flex items-center justify-between p-3 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-gray-700">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center">
-                            <i class="fas ${cat.icon} text-xs"></i>
-                        </div>
-                        <span>${cat.name}</span>
-                    </div>
-                    <i class="fas fa-chevron-left text-gray-300 text-xs"></i>
+        /* Fast Horizontal Chips Bar */
+        function renderQuickCategoryChips() {
+            const bar = document.getElementById('quickCategoriesBar');
+            bar.innerHTML = categories.map(cat => `
+                <button onclick="toggleAccordion('${cat.id}')" 
+                        id="chip-${cat.id}"
+                        class="horizontal-category-chip px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap flex items-center gap-2 text-white active:scale-95">
+                    <i class="fas ${cat.icon} text-neon-gold text-xs"></i>
+                    <span>${cat.name}</span>
                 </button>
             `).join('');
         }
 
-        /* Render Accordion Buttons matching Image Style */
+        function renderSidebarCategories() {
+            const list = document.getElementById('sidebarCategoriesList');
+            list.innerHTML = categories.map(cat => `
+                <button onclick="toggleAccordion('${cat.id}'); toggleSidebarDrawer();" 
+                   class="w-full text-right flex items-center justify-between p-3 rounded-xl hover:bg-neon-pink/20 transition text-xs font-bold text-gray-200 border border-white/10">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-neon-pink/20 text-neon-pink flex items-center justify-center border border-neon-pink/40 shadow-[0_0_8px_rgba(255,0,127,0.3)]">
+                            <i class="fas ${cat.icon} text-xs"></i>
+                        </div>
+                        <span>${cat.name}</span>
+                    </div>
+                    <i class="fas fa-chevron-left text-gray-500 text-xs"></i>
+                </button>
+            `).join('');
+        }
+
+        /* Render Accordions with Glassmorphism & Glowing Neon Titles */
         function renderAccordionMenu() {
             const container = document.getElementById('accordionContainer');
 
@@ -615,17 +599,25 @@
                     <div class="accordion-item" id="accordion-${cat.id}">
                         <!-- Category Button Pill -->
                         <button onclick="toggleAccordion('${cat.id}')" 
-                                class="category-pill-btn w-full py-4 px-6 flex items-center justify-between text-center transition ${isOpen ? 'is-active' : ''}">
-                            <div class="w-6"></div> <!-- Spacer to center title -->
-                            <h2 class="text-lg sm:text-xl font-black text-burgundy-900 tracking-wide">
+                                class="glass-accordion-btn w-full py-3.5 px-5 flex items-center justify-between text-center transition ${isOpen ? 'is-active' : ''}">
+                            
+                            <!-- Neon Icon Badge -->
+                            <div class="w-9 h-9 rounded-full bg-black/40 border border-neon-pink/60 flex items-center justify-center text-neon-gold text-sm shadow-[0_0_10px_rgba(255,0,127,0.4)]">
+                                <i class="fas ${cat.icon}"></i>
+                            </div>
+
+                            <!-- Glowing Glowing Title -->
+                            <h2 class="text-base sm:text-lg font-extrabold neon-glow-text tracking-wide px-2">
                                 ${cat.name}
                             </h2>
-                            <i class="fas fa-chevron-down text-burgundy-800 text-sm transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
+
+                            <!-- Arrow -->
+                            <i class="fas fa-chevron-down text-neon-gold text-sm transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
                         </button>
 
-                        <!-- Expandable Items Container -->
+                        <!-- Expandable Container -->
                         <div id="content-${cat.id}" class="accordion-content ${isOpen ? 'is-open' : ''}">
-                            <div class="pt-4 pb-2">
+                            <div class="pt-3 pb-2">
                                 <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                                     ${items.map(item => renderDishCard(item)).join('')}
                                 </div>
@@ -638,54 +630,59 @@
             // Adjust heights smoothly
             categories.forEach(cat => {
                 const content = document.getElementById(`content-${cat.id}`);
+                const chip = document.getElementById(`chip-${cat.id}`);
                 if (content && content.classList.contains('is-open')) {
                     content.style.maxHeight = content.scrollHeight + 'px';
+                    chip?.classList.add('active-chip');
+                } else {
+                    chip?.classList.remove('active-chip');
                 }
             });
         }
 
+        /* Render Card with Direct Quantity Control (+ / -) */
         function renderDishCard(item) {
             const cartItem = cart.find(ci => ci.itemId === item.id && !ci.option && !ci.extras && !ci.note);
             const qtyInCart = cartItem ? cartItem.qty : 0;
 
             return `
-                <div class="glass-panel rounded-2xl p-2.5 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02] flex flex-col justify-between group">
+                <div class="glass-card rounded-2xl p-2.5 flex flex-col justify-between group">
                     <div>
                         <!-- Dish Image -->
-                        <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-gray-100 cursor-pointer" onclick="openDishModal(${item.id})">
-                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-700">
+                        <div class="relative h-28 sm:h-32 rounded-xl overflow-hidden bg-black/40 cursor-pointer" onclick="openDishModal(${item.id})">
+                            <img src="${item.image}" alt="${item.name}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
                             ${item.tag ? `
-                                <span class="absolute top-1.5 right-1.5 bg-burgundy-800 text-amber-300 text-[9px] font-bold px-2 py-0.5 rounded-full shadow">
+                                <span class="absolute top-1.5 right-1.5 bg-neon-pink text-white text-[9px] font-bold px-2 py-0.5 rounded-full shadow-[0_0_8px_#ff007f]">
                                     ${item.tag}
                                 </span>
                             ` : ''}
-                            <div class="absolute bottom-1.5 right-1.5 bg-burgundy-900/90 backdrop-blur-md text-amber-300 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
+                            <div class="absolute bottom-1.5 right-1.5 bg-black/80 backdrop-blur-md text-neon-gold border border-neon-gold/30 px-2 py-0.5 rounded-lg text-[10px] font-black shadow">
                                 ${item.price} ر.س
                             </div>
                         </div>
 
                         <!-- Details -->
                         <div class="pt-2">
-                            <h3 onclick="openDishModal(${item.id})" class="font-bold text-burgundy-900 text-xs cursor-pointer hover:text-burgundy-700 transition truncate">${item.name}</h3>
-                            <p class="text-gray-500 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
+                            <h3 onclick="openDishModal(${item.id})" class="font-bold text-white text-xs cursor-pointer hover:text-neon-pink transition truncate">${item.name}</h3>
+                            <p class="text-gray-400 text-[10px] mt-0.5 line-clamp-1">${item.desc}</p>
                         </div>
                     </div>
 
-                    <!-- Controls (+ / -) -->
-                    <div class="pt-2 mt-2 border-t border-gray-100 flex items-center justify-between gap-1">
-                        <button onclick="openDishModal(${item.id})" class="text-[10px] text-burgundy-700 font-bold hover:underline">
+                    <!-- Dynamic Bottom Quantity Controls (+ / -) -->
+                    <div class="pt-2 mt-2 border-t border-white/10 flex items-center justify-between gap-1">
+                        <button onclick="openDishModal(${item.id})" class="text-[10px] text-neon-gold font-bold hover:underline">
                             تخصيص
                         </button>
 
                         <div class="flex items-center">
                             ${qtyInCart > 0 ? `
-                                <div class="flex items-center border border-burgundy-700 rounded-lg bg-burgundy-50 px-1 py-0.5 shadow-sm">
-                                    <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">-</button>
-                                    <span class="w-6 text-center font-black text-burgundy-900 text-xs">${qtyInCart}</span>
-                                    <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded text-burgundy-800 font-extrabold hover:bg-burgundy-200 transition flex items-center justify-center text-xs">+</button>
+                                <div class="flex items-center border border-neon-pink rounded-xl bg-black/60 px-1 py-0.5 shadow-[0_0_10px_rgba(255,0,127,0.4)]">
+                                    <button onclick="updateDirectQty(${item.id}, -1)" class="w-6 h-6 rounded-lg text-neon-pink font-black hover:bg-white/10 transition flex items-center justify-center text-xs active:scale-95">-</button>
+                                    <span class="w-6 text-center font-black text-white text-xs">${qtyInCart}</span>
+                                    <button onclick="updateDirectQty(${item.id}, 1)" class="w-6 h-6 rounded-lg text-neon-pink font-black hover:bg-white/10 transition flex items-center justify-center text-xs active:scale-95">+</button>
                                 </div>
                             ` : `
-                                <button onclick="addDirectToCart(${item.id})" class="bg-burgundy-700 hover:bg-burgundy-800 text-white font-bold py-1.5 px-2.5 rounded-lg text-[10px] transition flex items-center gap-1 shadow active:scale-95">
+                                <button onclick="addDirectToCart(${item.id})" class="bg-gradient-to-r from-neon-pink to-neon-purple hover:opacity-90 text-white font-bold py-1.5 px-3 rounded-xl text-[10px] transition flex items-center gap-1 shadow-[0_0_10px_rgba(255,0,127,0.4)] active:scale-95">
                                     <i class="fas fa-plus text-[9px]"></i>
                                     <span>إضافة</span>
                                 </button>
@@ -696,15 +693,16 @@
             `;
         }
 
-        /* Toggle Accordions with Smooth Height Shift & Downward Displacement */
+        /* Toggle Accordion with Auto Scroll Acceleration */
         function toggleAccordion(catId) {
             const isSame = openCategoryId === catId;
             openCategoryId = isSame ? null : catId;
 
             categories.forEach(c => {
                 const content = document.getElementById(`content-${c.id}`);
-                const pill = document.querySelector(`#accordion-${c.id} .category-pill-btn`);
+                const pill = document.querySelector(`#accordion-${c.id} .glass-accordion-btn`);
                 const icon = document.querySelector(`#accordion-${c.id} .fa-chevron-down`);
+                const chip = document.getElementById(`chip-${c.id}`);
 
                 if (content) {
                     if (c.id === openCategoryId) {
@@ -712,11 +710,13 @@
                         content.style.maxHeight = content.scrollHeight + 'px';
                         pill?.classList.add('is-active');
                         icon?.classList.add('rotate-180');
+                        chip?.classList.add('active-chip');
                     } else {
                         content.classList.remove('is-open');
                         content.style.maxHeight = '0px';
                         pill?.classList.remove('is-active');
                         icon?.classList.remove('rotate-180');
+                        chip?.classList.remove('active-chip');
                     }
                 }
             });
@@ -725,9 +725,9 @@
                 setTimeout(() => {
                     const activeElem = document.getElementById(`accordion-${openCategoryId}`);
                     if (activeElem) {
-                        activeElem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                        activeElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
-                }, 200);
+                }, 150);
             }
         }
 
@@ -769,9 +769,9 @@
             if (selectedItemForModal.sizes && selectedItemForModal.sizes.length > 0) {
                 document.getElementById('optionsContainer').classList.remove('hidden');
                 sizeContainer.innerHTML = selectedItemForModal.sizes.map((s, idx) => `
-                    <label class="cursor-pointer border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-burgundy-700 bg-burgundy-50 font-bold' : 'border-gray-200'}" onclick="selectSize(${s.price}, '${s.name}', this)">
+                    <label class="cursor-pointer border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-neon-pink bg-neon-pink/20 font-bold' : 'border-white/20'}" onclick="selectSize(${s.price}, '${s.name}', this)">
                         <span>${s.name}</span>
-                        <span class="text-gray-500">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
+                        <span class="text-neon-gold">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
                     </label>
                 `).join('');
             } else {
@@ -782,12 +782,12 @@
             if (selectedItemForModal.extras && selectedItemForModal.extras.length > 0) {
                 document.getElementById('extrasContainer').classList.remove('hidden');
                 extrasContainer.innerHTML = selectedItemForModal.extras.map(e => `
-                    <label class="cursor-pointer border border-gray-200 rounded-xl p-2 flex items-center justify-between text-xs hover:bg-gray-50">
+                    <label class="cursor-pointer border border-white/10 rounded-xl p-2 flex items-center justify-between text-xs hover:bg-white/5">
                         <div class="flex items-center gap-2">
-                            <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-burgundy-700 w-4 h-4 rounded">
+                            <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-neon-pink w-4 h-4 rounded">
                             <span>${e.name}</span>
                         </div>
-                        <span class="text-burgundy-700 font-bold">+${e.price} ر.س</span>
+                        <span class="text-neon-gold font-bold">+${e.price} ر.س</span>
                     </label>
                 `).join('');
             } else {
@@ -807,10 +807,10 @@
             selectedOptionName = name;
             const siblings = el.parentElement.children;
             for (let child of siblings) {
-                child.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
-                child.classList.add('border-gray-200');
+                child.classList.remove('border-neon-pink', 'bg-neon-pink/20', 'font-bold');
+                child.classList.add('border-white/20');
             }
-            el.classList.add('border-burgundy-700', 'bg-burgundy-50', 'font-bold');
+            el.classList.add('border-neon-pink', 'bg-neon-pink/20', 'font-bold');
             updateModalTotalPrice();
         }
 
@@ -837,6 +837,7 @@
             document.getElementById('modalTotalPrice').innerText = `${total} ر.س`;
         }
 
+        /* Fast Direct Addition to Cart with (+/-) */
         function addDirectToCart(id) {
             const item = menuItems.find(i => i.id === id);
             if (!item) return;
@@ -859,7 +860,7 @@
                 });
             }
             updateCartUI();
-            showNotification(`تمت إضافة ${item.name} للسلة ✨`);
+            showNotification(`تمت إضافة ${item.name} ✨`);
         }
 
         function updateDirectQty(id, delta) {
@@ -918,9 +919,9 @@
 
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 text-gray-400">
-                        <i class="fas fa-shopping-basket text-4xl mb-3 text-burgundy-200"></i>
-                        <p class="text-xs font-bold text-gray-500">سلتك فارغة حالياً</p>
+                    <div class="text-center py-12 text-gray-500">
+                        <i class="fas fa-shopping-basket text-4xl mb-3 text-neon-pink/40"></i>
+                        <p class="text-xs font-bold text-gray-400">سلتك فارغة حالياً</p>
                     </div>
                 `;
                 subTotalText.innerText = '0 ر.س';
@@ -935,22 +936,22 @@
             container.innerHTML = cart.map(item => `
                 <div class="pt-3 first:pt-0 flex items-center justify-between gap-2">
                     <div class="flex-1">
-                        <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
-                        <div class="text-[10px] text-gray-500 mt-0.5">
+                        <h4 class="font-bold text-white text-xs">${item.name}</h4>
+                        <div class="text-[10px] text-gray-400 mt-0.5">
                             ${item.option ? `<span>الخيار: ${item.option}</span>` : ''}
-                            ${item.extras ? `<span class="block">إضافات: ${item.extras}</span>` : ''}
-                            ${item.note ? `<span class="block text-amber-700">ملاحظة: ${item.note}</span>` : ''}
+                            ${item.extras ? `<span class="block text-neon-gold">إضافات: ${item.extras}</span>` : ''}
+                            ${item.note ? `<span class="block text-neon-pink">ملاحظة: ${item.note}</span>` : ''}
                         </div>
-                        <span class="font-black text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
+                        <span class="font-black text-neon-gold text-xs mt-1 block">${item.totalPrice} ر.س</span>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <div class="flex items-center border border-gray-200 rounded-lg bg-gray-50">
-                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">-</button>
-                            <span class="text-xs font-bold w-5 text-center">${item.qty}</span>
-                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
+                        <div class="flex items-center border border-white/20 rounded-lg bg-black/40">
+                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-neon-pink">-</button>
+                            <span class="text-xs font-bold w-5 text-center text-white">${item.qty}</span>
+                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-neon-pink">+</button>
                         </div>
-                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-600 p-1 transition hover:scale-110">
+                        <button onclick="removeCartItem(${item.cartId})" class="text-red-400 hover:text-red-500 p-1 transition hover:scale-110">
                             <i class="fas fa-trash-alt text-xs"></i>
                         </button>
                     </div>
@@ -1008,7 +1009,7 @@
             setTimeout(() => {
                 notif.classList.add('opacity-0');
                 setTimeout(() => notif.classList.add('hidden'), 300);
-            }, 3000);
+            }, 2500);
         }
     </script>
 </body>
