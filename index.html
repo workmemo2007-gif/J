@@ -222,7 +222,7 @@
     <header class="relative w-full max-w-5xl mx-auto my-3 px-3">
         <div class="relative w-full rounded-2xl overflow-hidden burgundy-light-glass px-5 py-2.5 sm:py-3">
             <div class="flex items-center justify-between gap-3">
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="goToHomeView()">
                     <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl burgundy-light-glass flex items-center justify-center text-center flex-shrink-0 border border-amber-300/40">
                         <i class="fas fa-ice-cream text-lg text-amber-300"></i>
                     </div>
@@ -252,10 +252,10 @@
         </div>
     </header>
 
-    <!-- شريط البحث وزر الكود الشفاف -->
+    <!-- شريط البحث وزر الأقسام -->
     <div class="sticky top-2 z-30 max-w-5xl mx-auto px-3 transition-all duration-300">
         <div class="burgundy-light-glass rounded-2xl p-2 flex items-center gap-2 shadow-lg">
-            <button onclick="toggleRightGlassMenu()" id="menuToggleButton" class="burgundy-light-glass font-extrabold px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap hover:scale-105">
+            <button onclick="toggleRightGlassMenu()" class="burgundy-light-glass font-extrabold px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap hover:scale-105">
                 <i class="fas fa-th-large text-xs text-amber-300"></i>
                 <span>الأقسام الرئيسية</span>
             </button>
@@ -269,23 +269,24 @@
         </div>
     </div>
 
-    <!-- قسم الترحيب بآلة الكتابة -->
-    <div id="homeContentSection" class="max-w-3xl mx-auto px-4 py-12 relative z-10 text-center flex flex-col items-center justify-center min-h-[40vh]">
+    <!-- واجهة الاستقبال الرئيسية (Home View) -->
+    <div id="homeViewSection" class="max-w-3xl mx-auto px-4 py-16 relative z-10 text-center flex flex-col items-center justify-center min-h-[55vh]">
         <div class="space-y-4">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
+            <p class="text-xs text-offwhite/80 pt-4">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
         </div>
     </div>
 
-    <!-- الحاوية الرئيسية للأقسام المنفصلة بالكامل -->
-    <main class="max-w-4xl mx-auto px-3 py-4 relative z-10 space-y-8" id="singleCategoryViewContainer">
-        <!-- يتم محاكاة القسم المنفصل ديناميكياً هنا عبر JS -->
+    <!-- واجهة القسم المنفصل (Category View - مخفية افتراضياً حتى اختيار قسم) -->
+    <main class="max-w-4xl mx-auto px-3 py-4 relative z-10 space-y-6 hidden" id="categoryViewSection">
+        <!-- يتم توليد واجهة القسم هنا -->
     </main>
 
     <!-- تغبيش وضبابية الخلفية فقط عند فتح الأقسام العائمة -->
     <div id="blurOnlyOverlay" class="blur-only-overlay" onclick="toggleRightGlassMenu()"></div>
 
-    <!-- دوائر الأقسام العائمة مرتبة رأسيًا فوق الزر الدائري -->
+    <!-- دوائر الأقسام العائمة رأسيًا فوق الزر الدائري -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
     <!-- زر المنيو الدائري الكبير الشفاف جهة اليمين -->
@@ -367,7 +368,7 @@
             { id: 22, categoryId: 'desserts', name: 'سوفليه الشوكلاتة الداكنة', desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة', price: 27, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] }
         ];
 
-        let activeCategoryId = 'iced-drinks';
+        let activeCategoryId = null;
         let currentSearchQuery = '';
         let cart = [];
         let isRightMenuOpen = false;
@@ -375,12 +376,11 @@
 
         window.onload = function() {
             renderVerticalCategoriesStack();
-            renderSingleActiveCategoryView(activeCategoryId);
             startTypewriterEffect();
         };
 
         function startTypewriterEffect() {
-            const text1 = "أهلاً وسهلاً لكم";
+            const text1 = "أهلاً وسهلاً بكم";
             const text2 = "Ice Home";
             typeWriterText("typewriterTitle", text1, 100, () => {
                 setTimeout(() => {
@@ -420,16 +420,23 @@
             }
         }
 
+        function goToHomeView() {
+            activeCategoryId = null;
+            document.getElementById('homeViewSection').classList.remove('hidden');
+            document.getElementById('categoryViewSection').classList.add('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function selectCategory(catId) {
             activeCategoryId = catId;
             if (isRightMenuOpen) toggleRightGlassMenu();
-            renderSingleActiveCategoryView(catId);
             
-            // تمرير سلس نحو الواجهة المفتوحة
-            const target = document.getElementById('singleCategoryViewContainer');
-            if (target) {
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            document.getElementById('homeViewSection').classList.add('hidden');
+            const catSection = document.getElementById('categoryViewSection');
+            catSection.classList.remove('hidden');
+
+            renderSeparateCategoryView(catId);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function renderVerticalCategoriesStack() {
@@ -452,9 +459,9 @@
             `).join('');
         }
 
-        /* عرض واجهة القسم المنفصلة بناءً على صورة التخطيط */
-        function renderSingleActiveCategoryView(catId) {
-            const container = document.getElementById('singleCategoryViewContainer');
+        /* عرض واجهة القسم المستقلة بالكامل */
+        function renderSeparateCategoryView(catId) {
+            const container = document.getElementById('categoryViewSection');
             const currentCat = categories.find(c => c.id === catId) || categories[0];
             
             const filteredItems = menuItems.filter(item => {
@@ -464,6 +471,15 @@
             });
 
             container.innerHTML = `
+                <!-- زر العودة للرئيسية -->
+                <div class="flex items-center justify-between mb-2">
+                    <button onclick="goToHomeView()" class="burgundy-light-glass px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 hover:scale-105 transition">
+                        <i class="fas fa-arrow-right text-amber-300"></i>
+                        <span>العودة للرئيسية</span>
+                    </button>
+                    <span class="text-xs text-amber-300/80 font-bold">${currentCat.name}</span>
+                </div>
+
                 <!-- 1. كارت رفيع بحجم الهيدر يحمل اسم القسم المفتوح -->
                 <div class="w-full burgundy-light-glass rounded-2xl py-2.5 px-6 text-center border border-amber-300/30 shadow-xl modal-fade-in">
                     <h2 class="text-base sm:text-lg font-black text-amber-200 tracking-wider flex items-center justify-center gap-2">
@@ -476,20 +492,20 @@
                 <div class="w-full burgundy-light-glass rounded-2xl p-4 shadow-xl border border-offwhite/20 modal-fade-in space-y-2">
                     <h3 class="text-xs font-bold text-amber-300/90 border-b border-offwhite/15 pb-2 mb-2 flex items-center justify-between">
                         <span>قائمة أطباق ${currentCat.name}</span>
-                        <span class="text-[10px] text-offwhite/70">اضغط للانتقال للطبق</span>
+                        <span class="text-[10px] text-offwhite/70">انقر للتمرير للطبق</span>
                     </h3>
                     
                     <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
-                        ${filteredItems.map(item => `
+                        ${filteredItems.length > 0 ? filteredItems.map(item => `
                             <div onclick="scrollToDishCard(${item.id})" class="flex items-center justify-between py-1.5 px-3 rounded-xl bg-offwhite/5 hover:bg-offwhite/20 transition cursor-pointer text-xs font-bold text-offwhite">
                                 <span class="truncate pl-2">${item.name}</span>
                                 <span class="text-amber-300 whitespace-nowrap">${item.price} ر.س</span>
                             </div>
-                        `).join('')}
+                        `).join('') : '<p class="text-center text-xs text-offwhite/60 py-2">لا توجد أطباق مطابقة للبحث</p>'}
                     </div>
                 </div>
 
-                <!-- 3. كارتات عمودية كبيرة تمثل الاطباق (صورة، اعدادات الاختيار، زر الاضافة) وتمرير افقي بحس عمق بصري -->
+                <!-- 3. كارتات عمودية كبيرة للتموضع الأفقي (3D Carousel) -->
                 <div class="vertical-cards-perspective-wrapper modal-fade-in">
                     <div class="vertical-cards-carousel-track" id="verticalCardsTrack" onscroll="updateVerticalCardsPerspective()">
                         <div class="flex-shrink-0 w-[20vw]"></div>
@@ -506,7 +522,7 @@
             }, 100);
         }
 
-        /* كارت عمودي كبير للطبق مفصل مع جميع الخيارات وأزرار الإضافة */
+        /* كارت عمودي كبير للطبق مع تفعيل نظام أزرار (- / +) عند الإضافة */
         function renderLargeVerticalDishCard(item) {
             const hasSizes = item.sizes && item.sizes.length > 0;
             const hasExtras = item.extras && item.extras.length > 0;
@@ -516,16 +532,18 @@
                     sizePrice: 0,
                     sizeName: hasSizes ? item.sizes[0].name : '',
                     extras: [],
-                    qty: 1
+                    qty: 0
                 };
             }
+
+            const state = selectedOptionsState[item.id];
 
             return `
                 <div class="large-vertical-dish-card burgundy-light-glass rounded-3xl p-4 flex flex-col justify-between border border-offwhite/30 shadow-2xl relative overflow-hidden" 
                      id="dish-card-${item.id}" data-id="${item.id}">
                     
-                    <!-- صورة الطبق العلوية المرتفعة -->
-                    <div class="relative w-full h-44 rounded-2xl overflow-hidden mb-3 border border-offwhite/20 bg-burgundy-950/60 flex-shrink-0">
+                    <!-- صورة الطبق العلوية -->
+                    <div class="relative w-full h-40 rounded-2xl overflow-hidden mb-3 border border-offwhite/20 bg-burgundy-950/60 flex-shrink-0">
                         <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
                         <span class="absolute top-2 right-2 bg-burgundy-900/90 text-amber-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-amber-300/30">
                             ${item.tag || 'فاخر'}
@@ -533,54 +551,131 @@
                     </div>
 
                     <!-- تفاصيل واسم الطبق -->
-                    <div class="text-right space-y-1 mb-3">
+                    <div class="text-right space-y-1 mb-2">
                         <h4 class="font-extrabold text-sm text-amber-200">${item.name}</h4>
                         <p class="text-[10px] text-offwhite/80 line-clamp-2 leading-tight">${item.desc}</p>
-                        <span class="text-sm font-black text-amber-300 block pt-1">${item.price} ر.س</span>
+                        <span class="text-sm font-black text-amber-300 block pt-0.5">${item.price} ر.س</span>
                     </div>
 
-                    <!-- إعدادات الاختيار (الحجم و الشكل والاضافات) -->
-                    <div class="space-y-2 border-t border-offwhite/15 pt-2 mb-3 text-right text-[10px]">
+                    <!-- إعدادات الاختيار (الحجم والإضافات) -->
+                    <div class="space-y-1.5 border-t border-offwhite/15 pt-2 mb-3 text-right text-[10px]">
                         ${hasSizes ? `
                             <div>
                                 <label class="block font-bold text-amber-200 mb-1">اختر الحجم:</label>
                                 <div class="grid grid-cols-2 gap-1">
                                     ${item.sizes.map((s, idx) => `
                                         <button onclick="cardSelectSize(${item.id}, ${s.price}, '${s.name}', this)" 
-                                                class="py-1 px-1.5 rounded-lg border text-[9px] font-bold text-center transition ${idx === 0 ? 'border-amber-300 bg-amber-300/20 text-amber-200' : 'border-offwhite/20 text-offwhite/80'}">
+                                                class="py-1 px-1 rounded-lg border text-[9px] font-bold text-center transition ${state.sizeName === s.name ? 'border-amber-300 bg-amber-300/20 text-amber-200' : 'border-offwhite/20 text-offwhite/80'}">
                                             ${s.name} ${s.price > 0 ? `(+${s.price})` : ''}
                                         </button>
                                     `).join('')}
                                 </div>
                             </div>
                         ` : ''}
-
-                        ${hasExtras ? `
-                            <div>
-                                <label class="block font-bold text-amber-200 mb-1">إضافات خفيفة:</label>
-                                ${item.extras.map(e => `
-                                    <label class="flex items-center justify-between py-0.5 px-1 rounded bg-offwhite/5 cursor-pointer text-[9px]">
-                                        <div class="flex items-center gap-1">
-                                            <input type="checkbox" onchange="cardToggleExtra(${item.id}, '${e.name}', ${e.price}, this)" class="accent-amber-400 w-3 h-3 rounded">
-                                            <span>${e.name}</span>
-                                        </div>
-                                        <span class="text-amber-300">+${e.price}</span>
-                                    </label>
-                                `).join('')}
-                            </div>
-                        ` : ''}
                     </div>
 
-                    <!-- زر الإضافة المباشرة للسلة -->
-                    <button onclick="addCardToCartDirect(${item.id})" class="w-full py-2 px-3 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-extrabold text-xs flex items-center justify-center gap-2 border border-amber-300/40 shadow-lg transition active:scale-95">
-                        <i class="fas fa-shopping-bag text-amber-300 text-xs"></i>
-                        <span>إضافة للسلة</span>
-                    </button>
+                    <!-- أزرار الإضافة أو لوحة (- / +) عند الجانب -->
+                    <div id="action-area-${item.id}" class="mt-auto pt-2">
+                        ${state.qty === 0 ? `
+                            <button onclick="initialAddDish(${item.id})" class="w-full py-2 px-3 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-extrabold text-xs flex items-center justify-center gap-2 border border-amber-300/40 shadow-lg transition active:scale-95">
+                                <i class="fas fa-shopping-bag text-amber-300 text-xs"></i>
+                                <span>إضافة للسلة</span>
+                            </button>
+                        ` : `
+                            <div class="flex items-center justify-between bg-burgundy-900/60 rounded-xl p-1.5 border border-amber-300/40 shadow-lg">
+                                <button onclick="updateDishCardQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                                    <i class="fas fa-minus text-xs"></i>
+                                </button>
+                                <span class="font-bold text-offwhite text-sm px-2">${state.qty}</span>
+                                <button onclick="updateDishCardQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                                    <i class="fas fa-plus text-xs"></i>
+                                </button>
+                            </div>
+                        `}
+                    </div>
                 </div>
             `;
         }
 
-        /* تحديث تأثير العمق البصري والتمرير الأفقي بين الكروت العمودية */
+        function initialAddDish(dishId) {
+            if (!selectedOptionsState[dishId]) return;
+            selectedOptionsState[dishId].qty = 1;
+            syncCartWithDishState(dishId);
+            refreshDishCardActionArea(dishId);
+            showNotification('تمت الإضافة للسلة ✨');
+        }
+
+        function updateDishCardQty(dishId, delta) {
+            if (!selectedOptionsState[dishId]) return;
+            selectedOptionsState[dishId].qty += delta;
+            if (selectedOptionsState[dishId].qty < 0) {
+                selectedOptionsState[dishId].qty = 0;
+            }
+            syncCartWithDishState(dishId);
+            refreshDishCardActionArea(dishId);
+        }
+
+        function refreshDishCardActionArea(dishId) {
+            const area = document.getElementById(`action-area-${dishId}`);
+            const item = menuItems.find(i => i.id === dishId);
+            const state = selectedOptionsState[dishId];
+            if (!area || !item) return;
+
+            if (state.qty === 0) {
+                area.innerHTML = `
+                    <button onclick="initialAddDish(${item.id})" class="w-full py-2 px-3 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-extrabold text-xs flex items-center justify-center gap-2 border border-amber-300/40 shadow-lg transition active:scale-95">
+                        <i class="fas fa-shopping-bag text-amber-300 text-xs"></i>
+                        <span>إضافة للسلة</span>
+                    </button>
+                `;
+            } else {
+                area.innerHTML = `
+                    <div class="flex items-center justify-between bg-burgundy-900/60 rounded-xl p-1.5 border border-amber-300/40 shadow-lg">
+                        <button onclick="updateDishCardQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                            <i class="fas fa-minus text-xs"></i>
+                        </button>
+                        <span class="font-bold text-offwhite text-sm px-2">${state.qty}</span>
+                        <button onclick="updateDishCardQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                            <i class="fas fa-plus text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function syncCartWithDishState(dishId) {
+            const item = menuItems.find(i => i.id === dishId);
+            const state = selectedOptionsState[dishId];
+            if (!item) return;
+
+            // البحث عما إذا كان الطبق موجوداً مسبقاً في السلة
+            let cartIndex = cart.findIndex(c => c.itemId === dishId && c.option === state.sizeName);
+
+            if (state.qty === 0) {
+                if (cartIndex !== -1) {
+                    cart.splice(cartIndex, 1);
+                }
+            } else {
+                const unitPrice = item.price + state.sizePrice;
+                if (cartIndex !== -1) {
+                    cart[cartIndex].qty = state.qty;
+                    cart[cartIndex].totalPrice = unitPrice * state.qty;
+                } else {
+                    cart.push({
+                        cartId: Date.now(),
+                        itemId: item.id,
+                        name: item.name,
+                        option: state.sizeName,
+                        extras: '',
+                        unitPrice: unitPrice,
+                        qty: state.qty,
+                        totalPrice: unitPrice * state.qty
+                    });
+                }
+            }
+            updateCartUI();
+        }
+
         function updateVerticalCardsPerspective() {
             const track = document.getElementById('verticalCardsTrack');
             if (!track) return;
@@ -628,45 +723,15 @@
             });
             btn.classList.add('border-amber-300', 'bg-amber-300/20', 'text-amber-200');
             btn.classList.remove('border-offwhite/20', 'text-offwhite/80');
-        }
 
-        function cardToggleExtra(dishId, extraName, price, checkbox) {
-            if (!selectedOptionsState[dishId]) return;
-            if (checkbox.checked) {
-                selectedOptionsState[dishId].extras.push({ name: extraName, price });
-            } else {
-                selectedOptionsState[dishId].extras = selectedOptionsState[dishId].extras.filter(e => e.name !== extraName);
-            }
-        }
-
-        function addCardToCartDirect(dishId) {
-            const item = menuItems.find(i => i.id === dishId);
-            if (!item) return;
-
-            const state = selectedOptionsState[dishId] || { sizePrice: 0, sizeName: '', extras: [], qty: 1 };
-            const extrasTotal = state.extras.reduce((s, e) => s + e.price, 0);
-            const unitPrice = item.price + state.sizePrice + extrasTotal;
-
-            const cartItem = {
-                cartId: Date.now(),
-                itemId: item.id,
-                name: item.name,
-                option: state.sizeName,
-                extras: state.extras.map(e => e.name).join(', '),
-                note: '',
-                unitPrice: unitPrice,
-                qty: 1,
-                totalPrice: unitPrice
-            };
-
-            cart.push(cartItem);
-            updateCartUI();
-            showNotification(`تمت إضافة (${item.name}) للسلة بنجاح ✨`);
+            syncCartWithDishState(dishId);
         }
 
         function handleSearch() {
             currentSearchQuery = document.getElementById('searchInput').value.trim();
-            renderSingleActiveCategoryView(activeCategoryId);
+            if (activeCategoryId) {
+                renderSeparateCategoryView(activeCategoryId);
+            }
         }
 
         function updateCartUI() {
@@ -706,19 +771,14 @@
                     <div class="flex-1">
                         <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
                         <div class="text-[10px] text-burgundy-600 mt-0.5">
-                            ${item.option ? `<span>الخيار: ${item.option}</span>` : ''}
-                            ${item.extras ? `<span class="block">إضافات: ${item.extras}</span>` : ''}
+                            ${item.option ? `<span>الحجم: ${item.option}</span>` : ''}
                         </div>
                         <span class="font-bold text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <div class="flex items-center border border-burgundy-200 rounded-lg bg-burgundy-50">
-                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">-</button>
-                            <span class="text-xs font-bold w-5 text-center text-burgundy-900">${item.qty}</span>
-                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
-                        </div>
-                        <button onclick="removeCartItem(${item.cartId})" class="text-rose-500 hover:text-rose-700 p-1 transition">
+                        <span class="text-xs font-bold px-2 py-1 bg-burgundy-100 rounded-lg">الكمية: ${item.qty}</span>
+                        <button onclick="removeCartItemDirect(${item.itemId})" class="text-rose-500 hover:text-rose-700 p-1 transition">
                             <i class="fas fa-trash-alt text-xs"></i>
                         </button>
                     </div>
@@ -726,20 +786,12 @@
             `).join('');
         }
 
-        function updateCartItemQty(cartId, delta) {
-            const item = cart.find(i => i.cartId === cartId);
-            if (!item) return;
-            item.qty += delta;
-            if (item.qty <= 0) {
-                cart = cart.filter(i => i.cartId !== cartId);
-            } else {
-                item.totalPrice = item.unitPrice * item.qty;
+        function removeCartItemDirect(dishId) {
+            if (selectedOptionsState[dishId]) {
+                selectedOptionsState[dishId].qty = 0;
+                refreshDishCardActionArea(dishId);
             }
-            updateCartUI();
-        }
-
-        function removeCartItem(cartId) {
-            cart = cart.filter(i => i.cartId !== cartId);
+            cart = cart.filter(i => i.itemId !== dishId);
             updateCartUI();
         }
 
@@ -750,7 +802,6 @@
             cart.forEach((item, index) => {
                 msg += `${index + 1}. *${item.name}* (العدد: ${item.qty})\n`;
                 if (item.option) msg += `   • الحجم: ${item.option}\n`;
-                if (item.extras) msg += `   • الإضافات: ${item.extras}\n`;
                 msg += `   • السعر: ${item.totalPrice} ر.س\n\n`;
             });
 
@@ -780,3 +831,4 @@
     </script>
 </body>
 </html>
+
