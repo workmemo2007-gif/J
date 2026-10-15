@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts - Cairo -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Amiri, Cairo, Fredoka -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -25,14 +25,16 @@
                             800: '#58111a',
                             900: '#3d0a11',
                         },
-                        ivory: {
+                        offwhite: {
                             DEFAULT: '#FAF8f5',
-                            card: '#FFFFFF',
+                            card: '#FFFDF9',
                             soft: '#F4EFEA',
                         }
                     },
                     fontFamily: {
                         cairo: ['Cairo', 'sans-serif'],
+                        ruqah: ['Amiri', 'serif'],
+                        english: ['Fredoka', 'sans-serif'],
                     }
                 }
             }
@@ -42,13 +44,13 @@
     <style>
         body {
             font-family: 'Cairo', sans-serif;
-            background-color: #3d0a11;
+            background-color: #FAF8f5;
             color: #FAF8f5;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* خلفية الصورة المخصصة مع تأثيرات التعتيم والدمج الفاخر */
+        /* خلفية الصورة المستوردة مع طبقة داكنة بنسبة 0.5 */
         .custom-bg-image {
             position: fixed;
             top: 0;
@@ -57,48 +59,84 @@
             height: 100vh;
             pointer-events: none;
             z-index: 0;
-            background-image: linear-gradient(to bottom, rgba(61, 10, 17, 0.88), rgba(88, 17, 26, 0.92)), url('https://raw.githubusercontent.com/workmemo2007-gif/J/d40a2080aeb7b9c4ff515579cf26f7fed990e385/IMG_2730.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://raw.githubusercontent.com/workmemo2007-gif/J/d40a2080aeb7b9c4ff515579cf26f7fed990e385/IMG_2730.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
         }
 
-        .ornament-float {
-            position: fixed;
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.12;
-            animation: floatAnim 18s ease-in-out infinite alternate;
+        /* تأثير الزجاج الشفاف جداً بنسبة 80% (Glassmorphism 80% Transparency) */
+        .glass-btn-ultra {
+            background: rgba(250, 248, 245, 0.20) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(250, 248, 245, 0.35) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+            color: #FAF8f5 !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
-        @keyframes floatAnim {
-            0% { transform: translateY(0px) rotate(0deg) scale(1); }
-            50% { transform: translateY(-25px) rotate(15deg) scale(1.05); }
-            100% { transform: translateY(20px) rotate(-10deg) scale(0.95); }
+        .glass-btn-ultra:hover {
+            background: rgba(250, 248, 245, 0.32) !important;
+            border-color: rgba(250, 248, 245, 0.6) !important;
+            transform: translateY(-1px);
         }
 
-        .gradient-text-gold {
-            background: linear-gradient(135deg, #fef08a 0%, #f59e0b 50%, #d97706 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .glass-btn-ultra:active {
+            transform: scale(0.96);
+        }
+
+        /* أزرار زجاجية بلون برغندي شفاف */
+        .glass-btn-burgundy {
+            background: rgba(88, 17, 26, 0.20) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            border: 1px solid rgba(250, 248, 245, 0.3) !important;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25) !important;
+            color: #FAF8f5 !important;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
+
+        .glass-btn-burgundy:hover {
+            background: rgba(88, 17, 26, 0.35) !important;
+            border-color: rgba(250, 248, 245, 0.5) !important;
+        }
+
+        /* خط الرقعة غير مفرغ ومشع بلون الأوف وايت */
+        .glowing-ruqah-text {
+            font-family: 'Amiri', serif;
+            color: #FAF8f5;
+            text-shadow: 0 0 10px rgba(250, 248, 245, 0.9), 
+                         0 0 20px rgba(250, 248, 245, 0.6), 
+                         0 0 35px rgba(245, 158, 11, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .glowing-english-text {
+            font-family: 'Fredoka', sans-serif;
+            color: #FAF8f5;
+            text-shadow: 0 0 8px rgba(250, 248, 245, 0.8), 
+                         0 0 18px rgba(245, 158, 11, 0.5);
+            letter-spacing: 2px;
         }
 
         .category-integrated-card {
-            background: rgba(61, 10, 17, 0.82);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 2px solid rgba(245, 158, 11, 0.35);
+            background: rgba(250, 248, 245, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(107, 29, 47, 0.25);
             border-radius: 9999px;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
+            color: #3d0a11;
         }
 
         .category-integrated-card.is-open {
-            border-radius: 2.2rem;
-            border-color: #f59e0b;
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
-            background: rgba(61, 10, 17, 0.94);
+            border-radius: 2rem;
+            border-color: #6b1d2f;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+            background: rgba(255, 253, 249, 0.97);
         }
 
         .expanded-dishes-wrapper {
@@ -123,7 +161,7 @@
             overflow-x: auto;
             scroll-behavior: smooth;
             scroll-snap-type: x mandatory;
-            padding: 1.8rem 0;
+            padding: 1.5rem 0;
             gap: 0px;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
@@ -149,10 +187,10 @@
             height: 108px;
             border-radius: 1.25rem;
             overflow: hidden;
-            border: 1.5px solid rgba(245, 158, 11, 0.3);
-            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(107, 29, 47, 0.2);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
             transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
-            background-color: #3d0a11;
+            background-color: #F4EFEA;
         }
 
         .dish-image-box img {
@@ -166,8 +204,8 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(180deg, rgba(61, 10, 17, 0.85) 0%, rgba(88, 17, 26, 0.98) 100%);
-            border-top: 1px solid rgba(245, 158, 11, 0.5);
+            background: linear-gradient(180deg, rgba(61, 10, 17, 0.88) 0%, rgba(88, 17, 26, 0.98) 100%);
+            border-top: 1px solid rgba(250, 248, 245, 0.4);
             padding: 4px 2px;
             text-align: center;
             backdrop-filter: blur(4px);
@@ -175,44 +213,24 @@
 
         .dish-card-compact.is-center {
             z-index: 30 !important;
-            transform: scale(1.3) translateY(-10px) translateZ(40px) !important;
+            transform: scale(1.3) translateY(-8px) translateZ(40px) !important;
             opacity: 1 !important;
             filter: blur(0px) brightness(1) !important;
         }
 
         .dish-card-compact.is-center .dish-image-box {
-            border: 3.5px solid #f59e0b !important;
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 
-                        0 0 20px rgba(245, 158, 11, 0.7),
-                        inset 0 0 10px rgba(254, 240, 138, 0.6);
+            border: 3px solid #8c1a35 !important;
+            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5), 
+                        0 0 15px rgba(245, 158, 11, 0.5);
             border-radius: 1.4rem;
         }
 
-        .dish-card-compact.is-center .dish-burgundy-label {
-            background: linear-gradient(180deg, #58111a 0%, #3d0a11 100%);
-            border-top-color: #fef08a;
-        }
-
-        .dish-card-compact.is-side-1 {
-            z-index: 10;
-            transform: scale(0.88) translateY(4px) translateZ(-20px);
-            opacity: 0.75;
-            filter: blur(0.3px) brightness(0.9);
-        }
-
-        .dish-card-compact.is-far {
-            z-index: 1;
-            transform: scale(0.72) translateY(12px) translateZ(-60px);
-            opacity: 0.35;
-            filter: blur(1.2px) brightness(0.75);
-        }
-
         .liquid-glass-nav {
-            background: rgba(61, 10, 17, 0.85);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            background: rgba(61, 10, 17, 0.30);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 253, 249, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         .modal-fade-in {
@@ -230,81 +248,52 @@
             from { transform: translateX(100%); }
             to { transform: translateX(0); }
         }
-
-        .hero-gradient-overlay {
-            background: linear-gradient(180deg, rgba(61, 10, 17, 0.5) 0%, rgba(88, 17, 26, 0.8) 70%, rgba(61, 10, 17, 0.95) 100%);
-        }
-
-        @keyframes customPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.06); }
-        }
-        .animate-custom-pulse {
-            animation: customPulse 2s infinite;
-        }
     </style>
 </head>
-<body class="relative min-h-screen pb-32 select-none">
+<body class="relative min-h-screen pb-28 select-none">
 
+    <!-- خلفية الصورة المستوردة مع التظليل الداكن بنسبة 0.5 -->
     <div class="custom-bg-image"></div>
 
-    <svg class="ornament-float top-10 right-12 w-32 h-32 text-amber-500" viewBox="0 0 100 100" fill="currentColor">
-        <path d="M50 0 C60 25, 75 40, 100 50 C75 60, 60 75, 50 100 C40 75, 25 60, 0 50 C25 40, 40 25, 50 0 Z" />
-    </svg>
-    <svg class="ornament-float bottom-1/3 left-6 w-44 h-44 text-amber-600" style="animation-delay: -3s;" viewBox="0 0 100 100" fill="currentColor">
-        <circle cx="50" cy="50" r="45" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M50 5 L50 95 M5 50 L95 50 M18 18 L82 82 M18 82 L82 18" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
-
-    <!-- Hero Header -->
-    <header class="relative w-full h-64 sm:h-80 overflow-hidden shadow-2xl">
-        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80" 
-             alt="Ice Home Cover" 
-             class="w-full h-full object-cover object-center transform scale-105 transition-transform duration-1000 hover:scale-100">
-        
-        <div class="absolute inset-0 hero-gradient-overlay flex flex-col justify-between p-4 sm:p-6">
+    <!-- الهيدر المستطيل الأفقـي المصغر بدون صورة غلاف بتصميم زجاجي برغندي شفاف -->
+    <header class="relative w-full max-w-3xl mx-auto my-2 px-3">
+        <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-offwhite/20 bg-burgundy-900/40 backdrop-blur-md p-2.5 sm:p-3">
             
-            <div class="flex justify-between items-center z-10">
-                <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white backdrop-blur-md border border-white/25 transition transform hover:scale-110 active:scale-95 shadow">
-                    <i class="fas fa-bars text-amber-300 text-lg"></i>
-                </button>
-
-                <div class="flex items-center gap-3">
-                    <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
-                        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-                        مفتوح الآن
-                    </span>
-                    <a href="tel:+966500000000" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/30 flex items-center justify-center text-white transition border border-white/25 transform hover:scale-110">
-                        <i class="fas fa-phone text-xs"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="relative z-10 flex items-center gap-4 sm:gap-6 mt-auto mb-2 w-full text-right">
+            <!-- الشريط العلوي والمحتوى الأفقـي المدمج -->
+            <div class="flex items-center justify-between gap-2">
                 
-                <div class="relative group flex-shrink-0">
-                    <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-amber-300 via-rose-300 to-amber-500 opacity-80 blur group-hover:opacity-100 transition duration-500"></div>
-                    <div class="relative w-22 h-22 sm:w-28 sm:h-28 rounded-full bg-burgundy-900 border-2 border-amber-300/90 shadow-2xl p-1.5 flex flex-col items-center justify-center text-center overflow-hidden">
-                        <div class="w-full h-full rounded-full border border-amber-200/30 flex flex-col items-center justify-center bg-gradient-to-b from-burgundy-800 to-burgundy-950 text-white p-2">
-                            <i class="fas fa-ice-cream text-2xl sm:text-3xl text-amber-300 mb-0.5 animate-custom-pulse"></i>
-                            <span class="font-extrabold text-xs sm:text-base tracking-wider text-amber-200 leading-none">آيس هوم</span>
-                            <span class="text-[8px] sm:text-[9px] text-gray-300 tracking-widest font-light mt-0.5">ICE HOME</span>
-                        </div>
+                <!-- اليمين: زر القائمة والشعار واسم المطعم -->
+                <div class="flex items-center gap-2.5">
+                    <button onclick="toggleSidebarDrawer()" class="w-8 h-8 rounded-xl glass-btn-ultra flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-bars text-amber-300 text-xs"></i>
+                    </button>
+
+                    <!-- اللوجو (الشعار) المصغّر -->
+                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-burgundy-950/60 border border-amber-300/60 flex items-center justify-center text-center backdrop-blur-md flex-shrink-0">
+                        <i class="fas fa-ice-cream text-base text-amber-300"></i>
+                    </div>
+
+                    <!-- اسم المطعم -->
+                    <div class="text-right text-offwhite">
+                        <h1 class="text-sm sm:text-base font-black tracking-wide text-amber-200 leading-tight">
+                            آيس هوم <span class="text-[10px] sm:text-xs font-normal text-offwhite/80">| Ice Home</span>
+                        </h1>
+                        <p class="text-[9px] sm:text-[10px] text-gray-200/90 leading-tight">
+                            عالم الفخامة والانتعاش
+                        </p>
                     </div>
                 </div>
 
-                <div class="text-white flex-1">
-                    <h1 class="text-2xl sm:text-4xl font-black tracking-wide drop-shadow-md gradient-text-gold">
-                        آيس هوم <span class="text-sm sm:text-base font-normal text-amber-200/90">| Ice Home</span>
-                    </h1>
-                    <p class="text-[11px] sm:text-sm text-gray-200 mt-1 max-w-md line-clamp-2">
-                        عالم الفخامة والانتعاش.. أجود أنواع المشروبات والحلويات الفاخرة
-                    </p>
-                    <div class="flex items-center gap-3 text-[10px] sm:text-xs text-amber-200/90 mt-2">
-                        <span><i class="fas fa-star text-amber-400 ml-1"></i> 4.9 (1.2k+ تقييم)</span>
-                        <span>•</span>
-                        <span><i class="fas fa-clock ml-1"></i> 2:00 م - 2:00 ص</span>
+                <!-- اليسار: حالة العمل والتقييم -->
+                <div class="flex items-center gap-2">
+                    <div class="hidden sm:flex flex-col text-left text-[9px] text-amber-200/90 leading-tight">
+                        <span><i class="fas fa-star text-amber-300 ml-0.5"></i> 4.9 (1.2k+)</span>
+                        <span><i class="fas fa-clock ml-0.5"></i> 2م - 2ص</span>
                     </div>
+                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                        مفتوح
+                    </span>
                 </div>
 
             </div>
@@ -312,234 +301,78 @@
         </div>
     </header>
 
-    <!-- Search Bar & Categories Toggle Button -->
-    <div class="sticky top-0 z-30 bg-burgundy-900/95 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
-        <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-            <button onclick="toggleMenuView()" id="menuToggleButton" class="bg-amber-400 hover:bg-amber-300 text-burgundy-900 font-extrabold px-3.5 py-2.5 rounded-full text-xs flex items-center gap-2 shadow-md transition transform active:scale-95 whitespace-nowrap">
-                <i class="fas fa-th-large text-sm" id="menuToggleIcon"></i>
-                <span id="menuToggleText">الأقسام والمنيو</span>
+    <!-- شريط البحث وزر عرض الأقسام بأزرار زجاجية شفافة بنسبة 80% -->
+    <div class="sticky top-2 z-30 max-w-3xl mx-auto px-3 transition-all duration-300">
+        <div class="bg-burgundy-900/30 backdrop-blur-md rounded-2xl p-2 flex items-center gap-2 shadow-lg border border-offwhite/20">
+            <button onclick="toggleMenuView()" id="menuToggleButton" class="glass-btn-ultra font-extrabold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap">
+                <i class="fas fa-th-large text-xs" id="menuToggleIcon"></i>
+                <span id="menuToggleText">عرض الأقسام</span>
             </button>
             
             <div class="relative flex-1">
                 <input type="text" id="searchInput" oninput="handleSearch()" 
-                       placeholder="ابحث عن مشروبك أو تحليتك المفضلة..." 
-                       class="w-full bg-white/10 border border-white/20 text-white placeholder-gray-300 text-xs sm:text-sm rounded-full py-2.5 pr-10 pl-4 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:bg-burgundy-900 transition">
-                <i class="fas fa-search absolute right-3.5 top-1/2 -translate-y-1/2 text-amber-300/80 text-sm"></i>
+                       placeholder="ابحث عن مشروبك أو تحليتك..." 
+                       class="w-full bg-offwhite/15 border border-offwhite/25 text-offwhite placeholder-offwhite/70 text-xs rounded-xl py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-amber-300 transition">
+                <i class="fas fa-search absolute right-2.5 top-1/2 -translate-y-1/2 text-amber-300 text-xs"></i>
             </div>
         </div>
     </div>
 
-    <!-- Dynamic Home / Ads & Instagram Feed Section (Visible by Default) -->
-    <div id="homeContentSection" class="max-w-3xl mx-auto px-4 py-6 space-y-6 relative z-10">
-        
-        <!-- 1. شاشة إعلانات متحركة تلقائياً (Auto Slider) -->
-        <div class="relative w-full h-48 sm:h-60 rounded-3xl overflow-hidden shadow-xl border border-amber-500/30 bg-burgundy-900">
-            <div id="autoSliderTrack" class="w-full h-full flex transition-transform duration-700 ease-in-out">
-                <!-- Slide 1 -->
-                <div class="min-w-full h-full relative cursor-pointer" onclick="openAdModal('عروض الصيف الكبرى', 'خصم 20% على جميع مشروبات الموهيتو والآيس كريم طوال أيام الأسبوع!', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1000&q=80')">
-                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-5 text-white text-right">
-                        <span class="bg-rose-600 text-white text-[10px] px-2.5 py-0.5 rounded-full font-bold w-fit mb-1">عرض خاص</span>
-                        <h3 class="text-base sm:text-xl font-black text-amber-300">عروض الصيف الكبرى 🍹</h3>
-                        <p class="text-xs text-gray-200 line-clamp-1">خصم 20% على جميع مشروبات الموهيتو والآيس كريم..</p>
-                    </div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="min-w-full h-full relative cursor-pointer" onclick="openAdModal('نكهة الماتشا الجديدة', 'جرب الآن ماتشا لاتيه اليابانية الفاخرة المصنوعة بأجود المكونات المستوردة.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1000&q=80')">
-                    <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-5 text-white text-right">
-                        <span class="bg-amber-500 text-burgundy-900 text-[10px] px-2.5 py-0.5 rounded-full font-bold w-fit mb-1">وصل حديثاً</span>
-                        <h3 class="text-base sm:text-xl font-black text-amber-300">ماتشا لاتيه الفاخرة 🍃</h3>
-                        <p class="text-xs text-gray-200 line-clamp-1">جرب الآن ماتشا لاتيه اليابانية الفاخرة المصنوعة بأجود المكونات..</p>
-                    </div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="min-w-full h-full relative cursor-pointer" onclick="openAdModal('مهرجان الوافل والبان كيك', 'اطلب أي طبق وافل واحصل على الصوص الثاني مجاناً لفترة محدودة.', 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=1000&q=80')">
-                    <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-5 text-white text-right">
-                        <span class="bg-burgundy-700 text-amber-200 text-[10px] px-2.5 py-0.5 rounded-full font-bold w-fit mb-1">مهرجان الحلا</span>
-                        <h3 class="text-base sm:text-xl font-black text-amber-300">مهرجان الوافل والبان كيك 🧇</h3>
-                        <p class="text-xs text-gray-200 line-clamp-1">اطلب أي طبق وافل واحصل على الصوص الثاني مجاناً..</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Slider Dots -->
-            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20" id="sliderDots">
-                <span class="w-2.5 h-2.5 rounded-full bg-white/60 cursor-pointer transition" onclick="currentSlide(0)"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-white/60 cursor-pointer transition" onclick="currentSlide(1)"></span>
-                <span class="w-2.5 h-2.5 rounded-full bg-white/60 cursor-pointer transition" onclick="currentSlide(2)"></span>
-            </div>
-        </div>
-
-        <!-- 2. بوستات إنستغرام -->
+    <!-- قسم الترحيب بآلة الكتابة بخط الرقعة والمستلهم باللون الأبيض المشع (غير مفرغ) -->
+    <div id="homeContentSection" class="max-w-3xl mx-auto px-4 py-16 relative z-10 text-center flex flex-col items-center justify-center min-h-[50vh]">
         <div class="space-y-4">
-            <div class="flex items-center justify-between">
-                <h3 class="font-extrabold text-amber-300 text-sm sm:text-base flex items-center gap-2">
-                    <i class="fab fa-instagram text-rose-500 text-lg"></i>
-                    <span>منشورات إنستغرام</span>
-                </h3>
-                <a href="https://instagram.com" target="_blank" class="text-[11px] font-bold text-amber-200 hover:underline flex items-center gap-1">
-                    <span>زيارة الصفحة</span>
-                    <i class="fas fa-external-link-alt text-[9px]"></i>
-                </a>
-            </div>
-
-            <!-- Post 1 -->
-            <div class="bg-burgundy-900/90 rounded-2xl shadow-md border border-amber-500/20 overflow-hidden backdrop-blur-md">
-                <div class="flex items-center justify-between p-3 border-b border-amber-500/10">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-400 to-rose-600 p-[2px]">
-                            <div class="w-full h-full bg-burgundy-900 rounded-full p-0.5">
-                                <div class="w-full h-full bg-burgundy-950 rounded-full flex items-center justify-center text-amber-300 font-bold text-xs">
-                                    <i class="fas fa-ice-cream"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-xs text-white">icehome.sa</h4>
-                            <p class="text-[9px] text-gray-300">المملكة العربية السعودية</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-ellipsis-h text-gray-400 text-xs cursor-pointer"></i>
-                </div>
-
-                <div class="relative h-72 sm:h-80 bg-black/40 cursor-pointer" onclick="openAdModal('عروض الصيف الكبرى', 'خصم 20% على جميع مشروبات الموهيتو والآيس كريم طوال أيام الأسبوع!', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80')">
-                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
-                </div>
-
-                <div class="p-3 space-y-2 text-white">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3 text-lg text-amber-300">
-                            <i class="far fa-heart hover:text-rose-500 cursor-pointer transition active:scale-125" onclick="toggleLike(this)"></i>
-                            <i class="far fa-comment hover:text-amber-200 cursor-pointer transition"></i>
-                            <i class="far fa-paper-plane hover:text-amber-200 cursor-pointer transition"></i>
-                        </div>
-                        <i class="far fa-bookmark hover:text-amber-200 cursor-pointer transition text-base"></i>
-                    </div>
-                    <div class="text-xs font-bold text-gray-200">
-                        <span>إعجاب بواسطة </span> <span class="text-amber-300">sami_sami</span> و <span class="font-normal text-gray-400">آخرين</span>
-                    </div>
-                    <p class="text-xs text-gray-300 leading-relaxed">
-                        <strong class="text-amber-300 ml-1">icehome.sa</strong>عروض الصيف الكبرى 🍹 خصم 20% على جميع مشروبات الموهيتو والآيس كريم طوال أيام الأسبوع! حياكم الله جميعاً.. ✨
-                    </p>
-                    <span class="text-[10px] text-gray-400 block pt-1">منذ ساعتين</span>
-                </div>
-            </div>
-
-            <!-- Post 2 -->
-            <div class="bg-burgundy-900/90 rounded-2xl shadow-md border border-amber-500/20 overflow-hidden backdrop-blur-md">
-                <div class="flex items-center justify-between p-3 border-b border-amber-500/10">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-400 to-rose-600 p-[2px]">
-                            <div class="w-full h-full bg-burgundy-900 rounded-full p-0.5">
-                                <div class="w-full h-full bg-burgundy-950 rounded-full flex items-center justify-center text-amber-300 font-bold text-xs">
-                                    <i class="fas fa-ice-cream"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h4 class="font-bold text-xs text-white">icehome.sa</h4>
-                            <p class="text-[9px] text-gray-300">الفرع الرئيسي</p>
-                        </div>
-                    </div>
-                    <i class="fas fa-ellipsis-h text-gray-400 text-xs cursor-pointer"></i>
-                </div>
-
-                <div class="relative h-72 sm:h-80 bg-black/40 cursor-pointer" onclick="openAdModal('نكهة الماتشا الجديدة', 'جرب الآن ماتشا لاتيه اليابانية الفاخرة.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80')">
-                    <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover">
-                </div>
-
-                <div class="p-3 space-y-2 text-white">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3 text-lg text-amber-300">
-                            <i class="far fa-heart hover:text-rose-500 cursor-pointer transition active:scale-125" onclick="toggleLike(this)"></i>
-                            <i class="far fa-comment hover:text-amber-200 cursor-pointer transition"></i>
-                            <i class="far fa-paper-plane hover:text-amber-200 cursor-pointer transition"></i>
-                        </div>
-                        <i class="far fa-bookmark hover:text-amber-200 cursor-pointer transition text-base"></i>
-                    </div>
-                    <div class="text-xs font-bold text-gray-200">
-                        <span>إعجاب بواسطة </span> <span class="text-amber-300">reun_art</span> و <span class="font-normal text-gray-400">1,420 آخرين</span>
-                    </div>
-                    <p class="text-xs text-gray-300 leading-relaxed">
-                        <strong class="text-amber-300 ml-1">icehome.sa</strong>ماتشا لاتيه الفاخرة 🍃 جرب الانتعاش الحقيقي والمذاق الفريد المستورد خصيصاً لكم.
-                    </p>
-                    <span class="text-[10px] text-gray-400 block pt-1">منذ 5 ساعات</span>
-                </div>
-            </div>
-
+            <!-- النص الأول بآلة الكتابة غير مفرغ ومشع بالأوف وايت -->
+            <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold glowing-ruqah-text"></h2>
+            
+            <!-- النص الثاني بآلة الكتابة -->
+            <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold glowing-english-text"></h1>
         </div>
-
     </div>
 
-    <!-- Sidebar Drawer -->
+    <!-- Sidebar Drawer (القائمة الجانبية) -->
     <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-80 bg-burgundy-900 text-white shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-amber-500/20">
-            <div class="p-5 bg-burgundy-950 text-white flex items-center justify-between border-b border-amber-500/20">
+        <div class="absolute inset-0 bg-burgundy-950/70 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
+        <div class="absolute right-0 top-0 bottom-0 w-80 bg-offwhite text-burgundy-900 shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-burgundy-700/20">
+            <div class="p-4 bg-burgundy-800 text-offwhite flex items-center justify-between border-b border-burgundy-700">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold">
-                        <i class="fas fa-ice-cream"></i>
+                    <div class="w-9 h-9 rounded-full bg-offwhite text-burgundy-900 flex items-center justify-center font-bold shadow">
+                        <i class="fas fa-ice-cream text-sm"></i>
                     </div>
                     <div>
-                        <h3 class="font-black text-sm">قائمة الأقسام</h3>
-                        <p class="text-[10px] text-amber-200">اختر القسم للانتقال المباشر</p>
+                        <h3 class="font-black text-xs">قائمة الأقسام</h3>
+                        <p class="text-[9px] text-amber-200">اختر القسم للانتقال المباشر</p>
                     </div>
                 </div>
-                <button onclick="toggleSidebarDrawer()" class="text-white/80 hover:text-white w-8 h-8 rounded-full bg-white/10 flex items-center justify-center transition hover:rotate-90">
-                    <i class="fas fa-times"></i>
+                <button onclick="toggleSidebarDrawer()" class="w-7 h-7 rounded-full glass-btn-ultra flex items-center justify-center">
+                    <i class="fas fa-times text-xs"></i>
                 </button>
             </div>
 
-            <div id="sidebarCategoriesList" class="p-4 overflow-y-auto flex-1 space-y-2">
+            <div id="sidebarCategoriesList" class="p-3 overflow-y-auto flex-1 space-y-1.5">
                 <!-- Injected via JS -->
             </div>
 
-            <div class="p-4 bg-burgundy-950 border-t border-amber-500/20 text-center text-xs text-amber-200/80">
+            <div class="p-3 bg-burgundy-50 border-t border-burgundy-100 text-center text-[10px] text-burgundy-800 font-bold">
                 <span>ايس هوم • جميع الحقوق محفوظة</span>
             </div>
         </div>
     </div>
 
-    <!-- Main Categories Container (Hidden by Default, shows when menu button is clicked) -->
+    <!-- Main Categories Container (الأقسام المفتوحة) -->
     <main class="max-w-3xl mx-auto px-4 py-6 relative z-10 space-y-4 hidden" id="accordionContainer">
         <!-- Injected via JS -->
     </main>
 
-    <!-- Ad / Instagram Post Modal -->
-    <div id="adModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm transition-opacity">
-        <div class="bg-burgundy-900 text-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in flex flex-col border border-amber-500/30">
-            <div class="relative h-64 bg-burgundy-950">
-                <img id="adModalImage" src="" alt="Ad Image" class="w-full h-full object-cover">
-                <button onclick="closeAdModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black transition">
-                    <i class="fas fa-times"></i>
-                </button>
-                <div class="absolute bottom-3 right-3 bg-burgundy-950/90 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold flex items-center gap-1.5 border border-amber-500/30">
-                    <i class="fab fa-instagram"></i> منشور إنستغرام
-                </div>
-            </div>
-            <div class="p-5 space-y-3 text-right">
-                <h3 id="adModalTitle" class="text-base font-black text-amber-300"></h3>
-                <p id="adModalDesc" class="text-xs text-gray-200 leading-relaxed"></p>
-                <div class="pt-3 border-t border-amber-500/20 flex justify-end">
-                    <a href="https://instagram.com" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow">
-                        <i class="fab fa-instagram"></i> عرض على إنستغرام
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Dish Customization Modal -->
-    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm transition-opacity">
-        <div class="bg-burgundy-900 text-white w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-amber-500/30">
+    <!-- Dish Customization Modal (نافذة تفاصيل الوجبة) -->
+    <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-burgundy-950/75 backdrop-blur-sm transition-opacity">
+        <div class="bg-offwhite text-burgundy-900 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl modal-fade-in max-h-[92vh] flex flex-col border border-burgundy-700/20">
             
-            <div class="relative h-48 sm:h-56 overflow-hidden bg-burgundy-950">
+            <div class="relative h-48 sm:h-56 overflow-hidden bg-burgundy-900">
                 <img id="modalImage" src="" alt="Dish Detail" class="w-full h-full object-cover">
-                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/60 text-white flex items-center justify-center hover:bg-black transition transform active:scale-95">
-                    <i class="fas fa-times"></i>
+                <button onclick="closeDishModal()" class="absolute top-3 left-3 w-8 h-8 rounded-full glass-btn-ultra flex items-center justify-center">
+                    <i class="fas fa-times text-xs"></i>
                 </button>
-                <div class="absolute bottom-3 right-3 bg-burgundy-950/90 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold border border-amber-500/30" id="modalCategoryBadge">
+                <div class="absolute bottom-3 right-3 bg-burgundy-900/90 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold border border-amber-300/30" id="modalCategoryBadge">
                     قسم المشروبات
                 </div>
             </div>
@@ -547,37 +380,37 @@
             <div class="p-5 overflow-y-auto flex-1 space-y-4">
                 <div class="flex justify-between items-start gap-2">
                     <div>
-                        <h3 id="modalTitle" class="text-xl font-extrabold text-amber-300"></h3>
-                        <p id="modalDesc" class="text-xs text-gray-300 mt-1 leading-relaxed"></p>
+                        <h3 id="modalTitle" class="text-lg font-black text-burgundy-900"></h3>
+                        <p id="modalDesc" class="text-xs text-burgundy-800/80 mt-1 leading-relaxed"></p>
                     </div>
-                    <span id="modalPrice" class="text-lg font-black text-amber-300 whitespace-nowrap bg-burgundy-950 border border-amber-500/30 px-3 py-1 rounded-xl"></span>
+                    <span id="modalPrice" class="text-base font-black text-burgundy-700 whitespace-nowrap bg-burgundy-50 border border-burgundy-200 px-3 py-1 rounded-xl"></span>
                 </div>
 
-                <div id="optionsContainer" class="space-y-2 pt-2 border-t border-amber-500/20">
-                    <label class="block text-xs font-bold text-amber-200">الحجم / الخيار:</label>
+                <div id="optionsContainer" class="space-y-2 pt-2 border-t border-burgundy-100">
+                    <label class="block text-xs font-bold text-burgundy-900">الحجم / الخيار:</label>
                     <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2"></div>
                 </div>
 
-                <div id="extrasContainer" class="space-y-2 pt-2 border-t border-amber-500/20">
-                    <label class="block text-xs font-bold text-amber-200">إضافات اختيارية:</label>
+                <div id="extrasContainer" class="space-y-2 pt-2 border-t border-burgundy-100">
+                    <label class="block text-xs font-bold text-burgundy-900">إضافات اختيارية:</label>
                     <div id="extrasGrid" class="space-y-1.5"></div>
                 </div>
 
-                <div class="pt-2 border-t border-amber-500/20">
-                    <label for="specialNote" class="block text-xs font-bold text-amber-200 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
-                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-amber-500/30 focus:outline-none focus:ring-1 focus:ring-amber-400 bg-burgundy-950 text-white placeholder-gray-400"></textarea>
+                <div class="pt-2 border-t border-burgundy-100">
+                    <label for="specialNote" class="block text-xs font-bold text-burgundy-900 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
+                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-burgundy-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-white text-burgundy-900 placeholder-burgundy-300"></textarea>
                 </div>
             </div>
 
-            <div class="p-4 bg-burgundy-950 border-t border-amber-500/20 flex items-center justify-between gap-4">
-                <div class="flex items-center border border-amber-500/30 rounded-full bg-burgundy-900 px-2 py-1">
-                    <button onclick="changeModalQty(-1)" class="w-8 h-8 rounded-full text-amber-300 font-bold hover:bg-white/10 transition">-</button>
-                    <span id="modalQty" class="w-8 text-center font-bold text-sm text-white">1</span>
-                    <button onclick="changeModalQty(1)" class="w-8 h-8 rounded-full text-amber-300 font-bold hover:bg-white/10 transition">+</button>
+            <div class="p-4 bg-burgundy-50 border-t border-burgundy-100 flex items-center justify-between gap-4">
+                <div class="flex items-center border border-burgundy-200 rounded-full bg-white px-2 py-1">
+                    <button onclick="changeModalQty(-1)" class="w-7 h-7 rounded-full text-burgundy-800 font-bold hover:bg-burgundy-100 transition">-</button>
+                    <span id="modalQty" class="w-7 text-center font-bold text-xs text-burgundy-900">1</span>
+                    <button onclick="changeModalQty(1)" class="w-7 h-7 rounded-full text-burgundy-800 font-bold hover:bg-burgundy-100 transition">+</button>
                 </div>
 
-                <button onclick="confirmAddToCart()" class="flex-1 bg-amber-500 hover:bg-amber-400 text-burgundy-950 font-black py-3 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg transition transform active:scale-95">
-                    <i class="fas fa-shopping-bag"></i>
+                <button onclick="confirmAddToCart()" class="flex-1 glass-btn-burgundy bg-burgundy-800 font-bold py-2.5 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg">
+                    <i class="fas fa-shopping-bag text-amber-300"></i>
                     <span>إضافة للسلة • </span>
                     <span id="modalTotalPrice">0 ر.س</span>
                 </button>
@@ -586,32 +419,32 @@
         </div>
     </div>
 
-    <!-- Cart Drawer -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-black/75 backdrop-blur-sm transition-opacity">
-        <div class="bg-burgundy-900 text-white w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-amber-500/20">
-            <div class="p-4 bg-burgundy-950 text-white flex items-center justify-between border-b border-amber-500/20">
+    <!-- Cart Drawer (سلة الطلبات) -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-burgundy-950/75 backdrop-blur-sm transition-opacity">
+        <div class="bg-offwhite text-burgundy-900 w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-burgundy-200">
+            <div class="p-4 bg-burgundy-800 text-offwhite flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-shopping-basket text-amber-300 text-lg"></i>
-                    <h3 class="font-extrabold text-base">سلة الطلبات - ايس هوم</h3>
+                    <i class="fas fa-shopping-basket text-amber-300 text-base"></i>
+                    <h3 class="font-extrabold text-sm">سلة الطلبات - ايس هوم</h3>
                 </div>
-                <button onclick="toggleCartDrawer()" class="text-white/80 hover:text-white transition hover:rotate-90"><i class="fas fa-times text-lg"></i></button>
+                <button onclick="toggleCartDrawer()" class="w-7 h-7 rounded-full glass-btn-ultra flex items-center justify-center"><i class="fas fa-times text-xs"></i></button>
             </div>
 
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-amber-500/10"></div>
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-burgundy-100"></div>
 
-            <div class="p-4 bg-burgundy-950 border-t border-amber-500/20 space-y-3">
-                <div class="space-y-1.5 text-xs text-gray-300">
-                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-amber-300">0 ر.س</span></div>
-                    <div class="flex justify-between"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
-                    <div class="flex justify-between text-base font-black text-amber-300 border-t border-amber-500/20 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
+            <div class="p-4 bg-burgundy-50 border-t border-burgundy-200 space-y-3">
+                <div class="space-y-1 text-xs text-burgundy-900">
+                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-burgundy-800">0 ر.س</span></div>
+                    <div class="flex justify-between text-[10px] text-burgundy-600"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
+                    <div class="flex justify-between text-sm font-black text-burgundy-900 border-t border-burgundy-200 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
                 </div>
 
-                <div class="grid grid-cols-2 gap-2 pt-2">
-                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 shadow transition active:scale-95">
-                        <i class="fab fa-whatsapp text-base"></i> إرسال للواتساب
+                <div class="grid grid-cols-2 gap-2 pt-1">
+                    <button onclick="sendOrderWhatsApp()" class="glass-btn-ultra bg-emerald-600/30 text-emerald-900 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border-emerald-500/40">
+                        <i class="fab fa-whatsapp text-sm text-emerald-700"></i> <span class="text-burgundy-900">إرسال للواتساب</span>
                     </button>
-                    <button onclick="showReceiptModal()" class="bg-amber-500 hover:bg-amber-400 text-burgundy-950 py-3 rounded-xl text-xs font-black flex items-center justify-center gap-2 shadow transition active:scale-95">
-                        <i class="fas fa-file-invoice text-base"></i> الفاتورة الرقمية
+                    <button onclick="showReceiptModal()" class="glass-btn-burgundy font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-2">
+                        <i class="fas fa-file-invoice text-sm text-amber-300"></i> <span>الفاتورة الرقمية</span>
                     </button>
                 </div>
             </div>
@@ -619,59 +452,59 @@
     </div>
 
     <!-- About Modal -->
-    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/75 backdrop-blur-sm transition-opacity">
-        <div class="bg-burgundy-900 text-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-amber-500/30 text-right">
-            <div class="flex justify-between items-center border-b border-amber-500/20 pb-3">
-                <h3 class="font-black text-amber-300 text-lg flex items-center gap-2">
-                    <i class="fas fa-ice-cream text-amber-400"></i>
+    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-burgundy-950/75 backdrop-blur-sm transition-opacity">
+        <div class="bg-offwhite text-burgundy-900 w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-burgundy-200 text-right">
+            <div class="flex justify-between items-center border-b border-burgundy-100 pb-3">
+                <h3 class="font-black text-burgundy-900 text-base flex items-center gap-2">
+                    <i class="fas fa-ice-cream text-burgundy-700"></i>
                     عن آيس هوم | Ice Home
                 </h3>
-                <button onclick="closeAboutModal()" class="w-8 h-8 rounded-full bg-burgundy-950 flex items-center justify-center text-gray-300 hover:bg-black transition">
-                    <i class="fas fa-times"></i>
+                <button onclick="closeAboutModal()" class="w-7 h-7 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-700 hover:bg-burgundy-100 transition">
+                    <i class="fas fa-times text-xs"></i>
                 </button>
             </div>
-            <p class="text-xs text-gray-200 leading-relaxed">
+            <p class="text-xs text-burgundy-800 leading-relaxed">
                 عالم الفخامة والانتعاش.. نقدم أفاخر المشروبات الباردة والساخنة، الآيس كريم، الجيلاتو، والحلويات المصنوعة بأجود المكونات العالمية لتمنحكم تجربة لا تُنسى.
             </p>
-            <div class="space-y-2.5 text-xs text-gray-300 pt-2 border-t border-amber-500/20">
+            <div class="space-y-2 text-xs text-burgundy-800 pt-2 border-t border-burgundy-100">
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-clock text-amber-400 w-5 text-center"></i>
+                    <i class="fas fa-clock text-burgundy-700 w-4 text-center"></i>
                     <span>أوقات العمل: يومياً من 2:00 ظهراً وحتى 2:00 صباحاً</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-phone-alt text-amber-400 w-5 text-center"></i>
+                    <i class="fas fa-phone-alt text-burgundy-700 w-4 text-center"></i>
                     <span dir="ltr">+966 50 000 0000</span>
                 </div>
                 <div class="flex items-center gap-3">
-                    <i class="fas fa-map-marker-alt text-amber-400 w-5 text-center"></i>
+                    <i class="fas fa-map-marker-alt text-burgundy-700 w-4 text-center"></i>
                     <span>المملكة العربية السعودية • الفرع الرئيسي</span>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Liquid Glass Bottom Navigation Bar -->
+    <!-- Liquid Glass Bottom Navigation Bar (أزرار زجاجية شفافة بنسبة 80%) -->
     <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-sm mx-auto">
-        <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-white">
-            <button onclick="scrollToHome()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
-                <i class="fas fa-home text-amber-300 text-sm group-hover:scale-110 transition"></i>
+        <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-offwhite">
+            <button onclick="scrollToHome()" class="glass-btn-ultra flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl group">
+                <i class="fas fa-home text-amber-300 text-xs group-hover:scale-110 transition"></i>
                 <span class="text-[9px] font-bold tracking-wide">الرئيسية</span>
             </button>
-            <button onclick="toggleCartDrawer()" class="relative flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
-                <i class="fas fa-shopping-bag text-amber-300 text-sm group-hover:scale-110 transition"></i>
+            <button onclick="toggleCartDrawer()" class="relative glass-btn-ultra flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl group">
+                <i class="fas fa-shopping-bag text-amber-300 text-xs group-hover:scale-110 transition"></i>
                 <span class="text-[9px] font-bold tracking-wide">السلة</span>
-                <span id="bottomCartBadge" class="absolute top-0.5 right-2 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold">0</span>
+                <span id="bottomCartBadge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold border border-white">0</span>
             </button>
-            <button onclick="openAboutModal()" class="flex flex-col items-center gap-0.5 px-3 py-1 rounded-xl hover:bg-white/20 transition active:scale-95 group">
-                <i class="fas fa-info-circle text-amber-300 text-sm group-hover:scale-110 transition"></i>
+            <button onclick="openAboutModal()" class="glass-btn-ultra flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl group">
+                <i class="fas fa-info-circle text-amber-300 text-xs group-hover:scale-110 transition"></i>
                 <span class="text-[9px] font-bold tracking-wide">معلوماتنا</span>
             </button>
         </div>
     </nav>
 
     <!-- Custom Notification Box -->
-    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-950 text-amber-200 px-5 py-3 rounded-2xl shadow-2xl border border-amber-400/40 text-xs font-bold flex items-center gap-3 backdrop-blur-md transition-all duration-300">
-        <i class="fas fa-check-circle text-amber-400 text-base"></i>
+    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900/80 text-amber-200 px-5 py-2.5 rounded-2xl shadow-2xl border border-amber-300/30 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all duration-300">
+        <i class="fas fa-check-circle text-amber-300 text-sm"></i>
         <span id="notificationText">تمت العملية بنجاح</span>
     </div>
 
@@ -727,44 +560,39 @@
         let modalQuantity = 1;
         let isMenuVisible = false;
 
-        let currentSlideIndex = 0;
-        const totalSlides = 3;
-        let sliderInterval;
-
         window.onload = function() {
             renderSidebarCategories();
             renderAccordionMenu();
-            startAutoSlider();
+            startTypewriterEffect();
         };
 
-        function startAutoSlider() {
-            sliderInterval = setInterval(() => {
-                currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
-                updateSliderPosition();
-            }, 3500);
+        // تأثير آلة الكتابة (Typewriter Effect)
+        function startTypewriterEffect() {
+            const text1 = "أهلاً وسهلاً بكم";
+            const text2 = "Ice Home";
+            
+            typeWriterText("typewriterTitle", text1, 100, () => {
+                setTimeout(() => {
+                    typeWriterText("typewriterSubtitle", text2, 120, null);
+                }, 300);
+            });
         }
 
-        function currentSlide(index) {
-            currentSlideIndex = index;
-            updateSliderPosition();
-            clearInterval(sliderInterval);
-            startAutoSlider();
-        }
-
-        function updateSliderPosition() {
-            const track = document.getElementById('autoSliderTrack');
-            if (track) {
-                track.style.transform = `translateX(${currentSlideIndex * 100}%)`;
+        function typeWriterText(elementId, text, speed, callback) {
+            let i = 0;
+            const el = document.getElementById(elementId);
+            if (!el) return;
+            el.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else if (callback) {
+                    callback();
+                }
             }
-        }
-
-        function toggleLike(icon) {
-            icon.classList.toggle('far');
-            icon.classList.toggle('fas');
-            icon.classList.toggle('text-rose-500');
-            if (icon.classList.contains('fas')) {
-                showNotification('تم الإعجاب بالمنشور ❤️');
-            }
+            type();
         }
 
         function toggleMenuView() {
@@ -777,13 +605,13 @@
             if (isMenuVisible) {
                 homeSection.classList.add('hidden');
                 menuSection.classList.remove('hidden');
-                toggleText.innerText = 'الرئيسية والإعلانات';
+                toggleText.innerText = 'الرئيسية والترحيب';
                 toggleIcon.classList.remove('fa-th-large');
                 toggleIcon.classList.add('fa-home');
             } else {
                 homeSection.classList.remove('hidden');
                 menuSection.classList.add('hidden');
-                toggleText.innerText = 'الأقسام والمنيو';
+                toggleText.innerText = 'عرض الأقسام';
                 toggleIcon.classList.remove('fa-home');
                 toggleIcon.classList.add('fa-th-large');
             }
@@ -801,14 +629,14 @@
             const list = document.getElementById('sidebarCategoriesList');
             list.innerHTML = categories.map(cat => `
                 <button onclick="if(!isMenuVisible) { toggleMenuView(); } toggleAccordion('${cat.id}'); toggleSidebarDrawer();" 
-                   class="w-full text-right flex items-center justify-between p-3 rounded-xl hover:bg-white/10 hover:text-amber-300 transition text-xs font-bold text-gray-200">
-                    <div class="flex items-center gap-3">
-                        <div class="w-8 h-8 rounded-lg bg-burgundy-950 text-amber-300 flex items-center justify-center border border-amber-500/20">
+                   class="w-full text-right flex items-center justify-between p-2.5 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-burgundy-900">
+                    <div class="flex items-center gap-2.5">
+                        <div class="w-7 h-7 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center border border-burgundy-200">
                             <i class="fas ${cat.icon} text-xs"></i>
                         </div>
                         <span>${cat.name}</span>
                     </div>
-                    <i class="fas fa-chevron-left text-gray-400 text-xs"></i>
+                    <i class="fas fa-chevron-left text-burgundy-300 text-[10px]"></i>
                 </button>
             `).join('');
         }
@@ -830,12 +658,12 @@
                 return `
                     <div class="category-integrated-card ${isOpen ? 'is-open' : ''}" id="accordion-${cat.id}">
                         <button onclick="toggleAccordion('${cat.id}')" 
-                                class="w-full py-4 px-6 flex items-center justify-between text-center transition">
+                                class="w-full py-3.5 px-6 flex items-center justify-between text-center transition">
                             <div class="w-6"></div>
-                            <h2 class="text-base sm:text-xl font-black text-amber-200 tracking-wide">
+                            <h2 class="text-base sm:text-lg font-black text-burgundy-900 tracking-wide">
                                 ${cat.name}
                             </h2>
-                            <i class="fas fa-chevron-down text-amber-300 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
+                            <i class="fas fa-chevron-down text-burgundy-800 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
                         </button>
 
                         <div id="content-${cat.id}" class="expanded-dishes-wrapper">
@@ -959,17 +787,6 @@
             drawer.classList.toggle('hidden');
         }
 
-        function openAdModal(title, desc, image) {
-            document.getElementById('adModalTitle').innerText = title;
-            document.getElementById('adModalDesc').innerText = desc;
-            document.getElementById('adModalImage').src = image;
-            document.getElementById('adModal').classList.remove('hidden');
-        }
-
-        function closeAdModal() {
-            document.getElementById('adModal').classList.add('hidden');
-        }
-
         function openAboutModal() {
             document.getElementById('aboutModal').classList.remove('hidden');
         }
@@ -998,9 +815,9 @@
             if (selectedItemForModal.sizes && selectedItemForModal.sizes.length > 0) {
                 document.getElementById('optionsContainer').classList.remove('hidden');
                 sizeContainer.innerHTML = selectedItemForModal.sizes.map((s, idx) => `
-                    <label class="cursor-pointer border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-amber-400 bg-burgundy-950 font-bold text-amber-200' : 'border-amber-500/20 text-gray-300'}" onclick="selectSize(${s.price}, '${s.name}', this)">
+                    <label class="cursor-pointer border rounded-xl p-2.5 flex items-center justify-between text-xs transition ${idx === 0 ? 'border-burgundy-700 bg-burgundy-50 font-bold text-burgundy-900' : 'border-burgundy-200 text-burgundy-800'}" onclick="selectSize(${s.price}, '${s.name}', this)">
                         <span>${s.name}</span>
-                        <span class="text-gray-400">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
+                        <span class="text-burgundy-600">${s.price > 0 ? `+${s.price} ر.س` : 'أساسي'}</span>
                     </label>
                 `).join('');
             } else {
@@ -1011,12 +828,12 @@
             if (selectedItemForModal.extras && selectedItemForModal.extras.length > 0) {
                 document.getElementById('extrasContainer').classList.remove('hidden');
                 extrasContainer.innerHTML = selectedItemForModal.extras.map(e => `
-                    <label class="cursor-pointer border border-amber-500/20 rounded-xl p-2 flex items-center justify-between text-xs hover:bg-white/5 text-gray-200">
+                    <label class="cursor-pointer border border-burgundy-200 rounded-xl p-2 flex items-center justify-between text-xs hover:bg-burgundy-50 text-burgundy-900">
                         <div class="flex items-center gap-2">
-                            <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-amber-400 w-4 h-4 rounded">
+                            <input type="checkbox" onchange="toggleExtra('${e.name}', ${e.price}, this)" class="accent-burgundy-700 w-4 h-4 rounded">
                             <span>${e.name}</span>
                         </div>
-                        <span class="text-amber-300 font-bold">+${e.price} ر.س</span>
+                        <span class="text-burgundy-700 font-bold">+${e.price} ر.س</span>
                     </label>
                 `).join('');
             } else {
@@ -1036,11 +853,11 @@
             selectedOptionName = name;
             const siblings = el.parentElement.children;
             for (let child of siblings) {
-                child.classList.remove('border-amber-400', 'bg-burgundy-950', 'font-bold', 'text-amber-200');
-                child.classList.add('border-amber-500/20', 'text-gray-300');
+                child.classList.remove('border-burgundy-700', 'bg-burgundy-50', 'font-bold', 'text-burgundy-900');
+                child.classList.add('border-burgundy-200', 'text-burgundy-800');
             }
-            el.classList.add('border-amber-400', 'bg-burgundy-950', 'font-bold', 'text-amber-200');
-            el.classList.remove('text-gray-300');
+            el.classList.add('border-burgundy-700', 'bg-burgundy-50', 'font-bold', 'text-burgundy-900');
+            el.classList.remove('text-burgundy-800');
             updateModalTotalPrice();
         }
 
@@ -1109,9 +926,9 @@
 
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 text-gray-400">
-                        <i class="fas fa-shopping-basket text-4xl mb-3 text-amber-500/50"></i>
-                        <p class="text-xs font-bold text-gray-400">سلتك فارغة حالياً</p>
+                    <div class="text-center py-12 text-burgundy-300">
+                        <i class="fas fa-shopping-basket text-3xl mb-3 text-burgundy-200"></i>
+                        <p class="text-xs font-bold text-burgundy-700">سلتك فارغة حالياً</p>
                     </div>
                 `;
                 subTotalText.innerText = '0 ر.س';
@@ -1124,24 +941,24 @@
             grandTotalText.innerText = `${grandTotal} ر.س`;
 
             container.innerHTML = cart.map(item => `
-                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2 text-white">
+                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2 text-burgundy-900">
                     <div class="flex-1">
-                        <h4 class="font-bold text-amber-300 text-xs">${item.name}</h4>
-                        <div class="text-[10px] text-gray-300 mt-0.5">
+                        <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
+                        <div class="text-[10px] text-burgundy-600 mt-0.5">
                             ${item.option ? `<span>الخيار: ${item.option}</span>` : ''}
                             ${item.extras ? `<span class="block">إضافات: ${item.extras}</span>` : ''}
-                            ${item.note ? `<span class="block text-amber-400">ملاحظة: ${item.note}</span>` : ''}
+                            ${item.note ? `<span class="block text-amber-700">ملاحظة: ${item.note}</span>` : ''}
                         </div>
-                        <span class="font-black text-amber-300 text-xs mt-1 block">${item.totalPrice} ر.س</span>
+                        <span class="font-black text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <div class="flex items-center border border-amber-500/30 rounded-lg bg-burgundy-950">
-                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-amber-300">-</button>
-                            <span class="text-xs font-bold w-5 text-center text-white">${item.qty}</span>
-                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-amber-300">+</button>
+                        <div class="flex items-center border border-burgundy-200 rounded-lg bg-burgundy-50">
+                            <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">-</button>
+                            <span class="text-xs font-bold w-5 text-center text-burgundy-900">${item.qty}</span>
+                            <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
                         </div>
-                        <button onclick="removeCartItem(${item.cartId})" class="text-rose-400 hover:text-rose-600 p-1 transition hover:scale-110">
+                        <button onclick="removeCartItem(${item.cartId})" class="text-rose-500 hover:text-rose-700 p-1 transition">
                             <i class="fas fa-trash-alt text-xs"></i>
                         </button>
                     </div>
