@@ -146,7 +146,7 @@
 
         /* Compact Image-Only Curved Dish Card */
         .dish-card-compact {
-            flex: 0 0 108px; /* Compact width for mobile screens */
+            flex: 0 0 108px;
             scroll-snap-align: center;
             transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
             transform-style: preserve-3d;
@@ -161,7 +161,7 @@
             height: 108px;
             border-radius: 1.25rem;
             overflow: hidden;
-            border: 1.5 solid rgba(107, 29, 47, 0.15);
+            border: 1.5px solid rgba(107, 29, 47, 0.15);
             box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.25, 1, 0.35, 1);
             background-color: #f3ece6;
@@ -186,7 +186,7 @@
             backdrop-filter: blur(4px);
         }
 
-        /* Highlighted Center Card with Prominent Golden Frame & Glow */
+        /* Highlighted Center Card */
         .dish-card-compact.is-center {
             z-index: 30 !important;
             transform: scale(1.3) translateY(-10px) translateZ(40px) !important;
@@ -195,9 +195,9 @@
         }
 
         .dish-card-compact.is-center .dish-image-box {
-            border: 3.5px solid #f59e0b !important; /* Prominent Golden Border */
+            border: 3.5px solid #f59e0b !important;
             box-shadow: 0 12px 28px rgba(107, 29, 47, 0.35), 
-                        0 0 20px rgba(245, 158, 11, 0.7), /* Bright Golden Glow */
+                        0 0 20px rgba(245, 158, 11, 0.7),
                         inset 0 0 10px rgba(254, 240, 138, 0.6);
             border-radius: 1.4rem;
         }
@@ -207,7 +207,7 @@
             border-top-color: #fef08a;
         }
 
-        /* Side Cards (Depth & Fade Effects) */
+        /* Side Cards */
         .dish-card-compact.is-side-1 {
             z-index: 10;
             transform: scale(0.88) translateY(4px) translateZ(-20px);
@@ -332,11 +332,13 @@
         </div>
     </header>
 
-    <!-- Search Bar -->
-    <div class="sticky top-0 z-30 bg-burgundy-800/90 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
+    <!-- Search Bar & Categories Quick Access Button -->
+    <div class="sticky top-0 z-30 bg-burgundy-800/95 backdrop-blur-md border-b border-amber-500/20 shadow-lg transition-all duration-300">
         <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
-            <button onclick="toggleSidebarDrawer()" class="w-10 h-10 rounded-full bg-amber-400 text-burgundy-900 flex items-center justify-center font-bold transition transform active:scale-95 shadow">
-                <i class="fas fa-list-ul"></i>
+            <!-- زر فتح أقسام المنيو -->
+            <button onclick="toggleSidebarDrawer()" class="bg-amber-400 hover:bg-amber-300 text-burgundy-900 font-extrabold px-3.5 py-2.5 rounded-full text-xs flex items-center gap-2 shadow-md transition transform active:scale-95 whitespace-nowrap">
+                <i class="fas fa-th-large text-sm"></i>
+                <span>الأقسام</span>
             </button>
             
             <div class="relative flex-1">
@@ -347,6 +349,59 @@
             </div>
         </div>
     </div>
+
+    <!-- Instagram Announcements & Stories Section -->
+    <section class="max-w-3xl mx-auto px-4 pt-6 pb-2 relative z-10">
+        <div class="flex items-center justify-between mb-3">
+            <h3 class="font-extrabold text-burgundy-900 text-sm sm:text-base flex items-center gap-2">
+                <i class="fab fa-instagram text-rose-600 text-lg"></i>
+                <span>جديد آيس هوم والإعلانات</span>
+            </h3>
+            <a href="https://instagram.com" target="_blank" class="text-[11px] font-bold text-burgundy-700 hover:underline flex items-center gap-1">
+                <span>تابعنا على إنستغرام</span>
+                <i class="fas fa-external-link-alt text-[9px]"></i>
+            </a>
+        </div>
+
+        <!-- Stories / Horizontal Cards Slider -->
+        <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-none" style="scrollbar-width: none;">
+            <!-- Story 1 -->
+            <div class="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden shadow-md border border-burgundy-700/10 group cursor-pointer" onclick="openAdModal('عروض الصيف الكبرى', 'خصم 20% على جميع مشروبات الموهيتو والآيس كريم طوال أيام الأسبوع من الساعة 4 عصراً وحتى 7 مساءً!', 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80')">
+                <div class="relative h-32 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="عرض" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-2 right-2 bg-rose-600 text-white text-[9px] px-2 py-0.5 rounded-full font-bold">عرض خاص</span>
+                </div>
+                <div class="p-3">
+                    <h4 class="font-extrabold text-burgundy-900 text-xs truncate">عروض الصيف الكبرى 🍹</h4>
+                    <p class="text-[10px] text-gray-500 mt-0.5 line-clamp-1">خصم 20% على جميع مشروبات الموهيتو والآيس كريم..</p>
+                </div>
+            </div>
+
+            <!-- Story 2 -->
+            <div class="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden shadow-md border border-burgundy-700/10 group cursor-pointer" onclick="openAdModal('نكهة الماتشا الجديدة', 'جرب الآن ماتشا لاتيه اليابانية الفاخرة المصنوعة بأجود أنواع مسحوق الماتشا المستورد.', 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80')">
+                <div class="relative h-32 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80" alt="إعلان" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-2 right-2 bg-amber-500 text-burgundy-900 text-[9px] px-2 py-0.5 rounded-full font-bold">وصل حديثاً</span>
+                </div>
+                <div class="p-3">
+                    <h4 class="font-extrabold text-burgundy-900 text-xs truncate">ماتشا لاتيه الفاخرة 🍃</h4>
+                    <p class="text-[10px] text-gray-500 mt-0.5 line-clamp-1">جرب الآن ماتشا لاتيه اليابانية الفاخرة...</p>
+                </div>
+            </div>
+
+            <!-- Story 3 -->
+            <div class="flex-shrink-0 w-64 bg-white rounded-2xl overflow-hidden shadow-md border border-burgundy-700/10 group cursor-pointer" onclick="openAdModal('مهرجان الوافل والبان كيك', 'اطلب أي طبق وافل واحصل على الصوص الثاني مجاناً لفترة محدودة.', 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80')">
+                <div class="relative h-32 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80" alt="وافل" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                    <span class="absolute top-2 right-2 bg-burgundy-800 text-amber-200 text-[9px] px-2 py-0.5 rounded-full font-bold">مهرجان الحلا</span>
+                </div>
+                <div class="p-3">
+                    <h4 class="font-extrabold text-burgundy-900 text-xs truncate">مهرجان الوافل والبان كيك 🧇</h4>
+                    <p class="text-[10px] text-gray-500 mt-0.5 line-clamp-1">اطلب أي طبق وافل واحصل على الصوص الثاني مجاناً..</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Sidebar Drawer -->
     <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
@@ -378,9 +433,33 @@
     </div>
 
     <!-- Main Categories Container -->
-    <main class="max-w-3xl mx-auto px-4 py-8 relative z-10 space-y-4" id="accordionContainer">
+    <main class="max-w-3xl mx-auto px-4 py-6 relative z-10 space-y-4" id="accordionContainer">
         <!-- Injected via JS -->
     </main>
+
+    <!-- Ad / Instagram Post Modal -->
+    <div id="adModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity">
+        <div class="bg-white w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in flex flex-col border border-burgundy-700/10">
+            <div class="relative h-64 bg-burgundy-900">
+                <img id="adModalImage" src="" alt="Ad Image" class="w-full h-full object-cover">
+                <button onclick="closeAdModal()" class="absolute top-3 left-3 w-9 h-9 rounded-full bg-black/50 text-white flex items-center justify-center hover:bg-black transition">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="absolute bottom-3 right-3 bg-burgundy-900/90 backdrop-blur-md px-3 py-1 rounded-full text-amber-300 text-xs font-bold flex items-center gap-1.5">
+                    <i class="fab fa-instagram"></i> منشور إنستغرام
+                </div>
+            </div>
+            <div class="p-5 space-y-3 text-right">
+                <h3 id="adModalTitle" class="text-base font-black text-burgundy-900"></h3>
+                <p id="adModalDesc" class="text-xs text-gray-600 leading-relaxed"></p>
+                <div class="pt-3 border-t flex justify-end">
+                    <a href="https://instagram.com" target="_blank" class="bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 text-white font-bold px-4 py-2 rounded-xl text-xs flex items-center gap-2 shadow">
+                        <i class="fab fa-instagram"></i> عرض على إنستغرام
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Dish Customization Modal -->
     <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
@@ -551,39 +630,38 @@
             { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
         ];
 
-        // 4 Items per category
         const menuItems = [
-            // iced-drinks (4)
+            // iced-drinks
             { id: 1, categoryId: 'iced-drinks', name: 'آيس شيكن وايت موكا', desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد', price: 24, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }], extras: [{ name: 'سيرب فانيلا', price: 3 }] },
             { id: 2, categoryId: 'iced-drinks', name: 'ماتشا لاتيه بارد', desc: 'ماتشا يابانية فاخرة مع حليب الشوفان البارد', price: 26, tag: 'صحّي', image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }], extras: [] },
             { id: 3, categoryId: 'iced-drinks', name: 'آيس سبانيش لاتيه', desc: 'قهوة اسبريسو مكثفة مع حليب بارد محلى', price: 25, tag: 'مميز', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كبير', price: 0 }], extras: [] },
             { id: 4, categoryId: 'iced-drinks', name: 'آيس أسطوري كراميل', desc: 'قهوة مع كراميل غني ورغوة كريمة ذهبية', price: 27, tag: 'جديد', image: 'https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }], extras: [] },
 
-            // ice-cream (4)
+            // ice-cream
             { id: 5, categoryId: 'ice-cream', name: 'آيس كريم هوم سبيشل', desc: 'جيلاتو فانيلا وشوكلاتة مع صوص التوت البري', price: 28, tag: 'مميز', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }], extras: [{ name: 'مكسرات', price: 4 }] },
             { id: 6, categoryId: 'ice-cream', name: 'جيلاتو بستاشيو الفاخر', desc: 'فستق حلبي طازج مع كريمة الآيس كريم غنية', price: 30, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب', price: 0 }], extras: [] },
             { id: 7, categoryId: 'ice-cream', name: 'ساندويش آيس كريم مانجو', desc: 'شرائح مانجو مع جيلاتو المانجو الطبيعي', price: 24, tag: 'منعش', image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'قطعة', price: 0 }], extras: [] },
             { id: 8, categoryId: 'ice-cream', name: 'بركان الشوكولاتة والجيلاتو', desc: 'كرة جيلاتو فانيلا فوق صوص شوكولاتة ساحن', price: 32, tag: 'فاخر', image: 'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
 
-            // hot-drinks (4)
+            // hot-drinks
             { id: 9, categoryId: 'hot-drinks', name: 'سبانيش لاتيه ساخن', desc: 'اسبريسو غنية مع الحليب المبخر والمكثف', price: 22, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب وسط', price: 0 }], extras: [] },
             { id: 10, categoryId: 'hot-drinks', name: 'كابتشينو إيطالي', desc: 'رغوة غنية مع قهوة اسبريسو فاخرة', price: 20, tag: 'كلاسيك', image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب', price: 0 }], extras: [] },
             { id: 11, categoryId: 'hot-drinks', name: 'هوت شوت شوكولا', desc: 'شوكولاتة بلجيكية ذائبة مع حليب مبخر', price: 24, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }], extras: [] },
             { id: 12, categoryId: 'hot-drinks', name: 'قهوة بيريستا أمريكانو', desc: 'جرعة اسبريسو مزدوجة مع ماء ساخن', price: 18, tag: 'نقي', image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'عادي', price: 0 }], extras: [] },
 
-            // mojitos (4)
+            // mojitos
             { id: 13, categoryId: 'mojitos', name: 'موهيتو ريد بل بلوبيري', desc: 'توت أزرق، نعناع، ليمون، ومشروب ريد بل', price: 25, tag: 'مميز', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كبير 500ml', price: 0 }], extras: [] },
             { id: 14, categoryId: 'mojitos', name: 'موهيتو الفراولة والنعناع', desc: 'قطع فراولة طازجة مع نعناع وليمون وسودا', price: 23, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80', sizes: [{ name: '500ml', price: 0 }], extras: [] },
             { id: 15, categoryId: 'mojitos', name: 'موهيتو كودرد البطيخ', desc: 'نكهة البطيخ المنعشة مع كودرد وليمون', price: 24, tag: 'منعش', image: 'https://images.unsplash.com/photo-1621263764928-df1444c5e859?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كبير', price: 0 }], extras: [] },
             { id: 16, categoryId: 'mojitos', name: 'موهيتو هاواي الأزرق', desc: 'نكهة بلوعرساو مع ليمون ونعناع مثلج', price: 22, tag: 'جديد', image: 'https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'وسط', price: 0 }], extras: [] },
 
-            // waffles (4)
+            // waffles
             { id: 17, categoryId: 'waffles', name: 'وافل نوتيلا بالآيس كريم', desc: 'وافل ذهبي مقرمش مع نوتيلا وكرة آيس كريم', price: 29, tag: 'جديد', image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }], extras: [] },
             { id: 18, categoryId: 'waffles', name: 'بان كيك بستاشيو وفراولة', desc: 'طبقات بان كيك هشة مع صوص بستاشيو وفراولة', price: 31, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
             { id: 19, categoryId: 'waffles', name: 'ميني بان كيك مشكل', desc: '12 قطعة ميني بان كيك مع 3 أنواع صوص', price: 26, tag: 'عائلي', image: 'https://images.unsplash.com/photo-1506084868230-bb9d95c24759?auto=format&fit=crop&w=400&q=80', sizes: [{ name: '12 قطعة', price: 0 }], extras: [] },
             { id: 20, categoryId: 'waffles', name: 'كريبل وافل لوتس', desc: 'وافل مقرمش مع زبدة اللوتس وبسكويت مطحون', price: 28, tag: 'مقرمش', image: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
 
-            // desserts (4)
+            // desserts
             { id: 21, categoryId: 'desserts', name: 'كيكة السباستيان الفاخرة', desc: 'سان سيباستيان المخبوزة مع صوص الشوكلاتة', price: 32, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'شريحة', price: 0 }], extras: [] },
             { id: 22, categoryId: 'desserts', name: 'سوفليه الشوكلاتة الداكنة', desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة', price: 27, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'طبق', price: 0 }], extras: [] },
             { id: 23, categoryId: 'desserts', name: 'تيراميسو إيطالي أصلي', desc: 'طبقات التيراميسو بنكهة الاسبريسو والكاكاو', price: 29, tag: 'فاخر', image: 'https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=400&q=80', sizes: [{ name: 'كوب', price: 0 }], extras: [] },
@@ -591,7 +669,7 @@
         ];
 
         let currentSearchQuery = '';
-        let openCategoryId = 'iced-drinks'; // First open by default
+        let openCategoryId = 'iced-drinks';
         let cart = [];
         let selectedItemForModal = null;
         let selectedSizePrice = 0;
@@ -624,7 +702,6 @@
             `).join('');
         }
 
-        /* Integrated Accordion Card Renderer (Category Pill + Embedded Horizontal Slider) */
         function renderAccordionMenu() {
             const container = document.getElementById('accordionContainer');
 
@@ -640,10 +717,7 @@
                 const isOpen = cat.id === openCategoryId || (currentSearchQuery !== '' && items.length > 0);
 
                 return `
-                    <!-- Integrated Category Card (Expands Vertically to Show Dishes) -->
                     <div class="category-integrated-card ${isOpen ? 'is-open' : ''}" id="accordion-${cat.id}">
-                        
-                        <!-- Main Category Header Button -->
                         <button onclick="toggleAccordion('${cat.id}')" 
                                 class="w-full py-4 px-6 flex items-center justify-between text-center transition">
                             <div class="w-6"></div>
@@ -653,23 +727,19 @@
                             <i class="fas fa-chevron-down text-burgundy-800 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
                         </button>
 
-                        <!-- Expanded Internal Carousel Section -->
                         <div id="content-${cat.id}" class="expanded-dishes-wrapper">
                             <div class="carousel-wrapper-3d">
                                 <div class="carousel-track-3d" id="track-${cat.id}" onscroll="update3DPerspective('${cat.id}')">
-                                    <!-- Padding to center side items properly on mobile -->
                                     <div class="flex-shrink-0 w-[42vw]"></div>
                                     ${items.map(item => renderCompactImageDishCard(item)).join('')}
                                     <div class="flex-shrink-0 w-[42vw]"></div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 `;
             }).join('');
 
-            // Dynamically calculate and expand heights
             categories.forEach(cat => {
                 const card = document.getElementById(`accordion-${cat.id}`);
                 const content = document.getElementById(`content-${cat.id}`);
@@ -680,14 +750,11 @@
             });
         }
 
-        /* Render Image-Only Dish Card with Curved Corners and Bottom Burgundy Label */
         function renderCompactImageDishCard(item) {
             return `
                 <div class="dish-card-compact" data-id="${item.id}" onclick="openDishModal(${item.id})">
                     <div class="dish-image-box">
                         <img src="${item.image}" alt="${item.name}" loading="lazy">
-                        
-                        <!-- Bottom Burgundy Label Strip with Dish Name -->
                         <div class="dish-burgundy-label">
                             <h4 class="font-extrabold text-amber-200 text-[9px] truncate px-1">${item.name}</h4>
                             <span class="text-[8px] font-bold text-white block leading-none mt-0.5">${item.price} ر.س</span>
@@ -697,7 +764,6 @@
             `;
         }
 
-        /* Realtime 3D Perspective Calculations for Mobile Scrolling */
         function update3DPerspective(catId) {
             const track = document.getElementById(`track-${catId}`);
             if (!track) return;
@@ -732,7 +798,6 @@
             });
         }
 
-        /* Toggle Accordion with Smooth Integrated Expansion */
         function toggleAccordion(catId) {
             const isSame = openCategoryId === catId;
             openCategoryId = isSame ? null : catId;
@@ -774,6 +839,17 @@
         function toggleSidebarDrawer() {
             const drawer = document.getElementById('sidebarDrawer');
             drawer.classList.toggle('hidden');
+        }
+
+        function openAdModal(title, desc, image) {
+            document.getElementById('adModalTitle').innerText = title;
+            document.getElementById('adModalDesc').innerText = desc;
+            document.getElementById('adModalImage').src = image;
+            document.getElementById('adModal').classList.remove('hidden');
+        }
+
+        function closeAdModal() {
+            document.getElementById('adModal').classList.add('hidden');
         }
 
         function openAboutModal() {
