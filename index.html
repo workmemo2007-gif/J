@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts - Amiri, Cairo, Fredoka -->
-    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;700;900&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Aref Ruqaa (خط الرقعة العربي الفاخر) & Cairo -->
+    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;700;900&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -33,7 +33,7 @@
                     },
                     fontFamily: {
                         cairo: ['Cairo', 'sans-serif'],
-                        ruqah: ['Amiri', 'serif'],
+                        ruqaa: ['Aref Ruqaa', 'serif'],
                         english: ['Fredoka', 'sans-serif'],
                     }
                 }
@@ -43,14 +43,14 @@
     
     <style>
         body {
-            font-family: 'Cairo', sans-serif;
+            font-family: 'Aref Ruqaa', 'Cairo', serif;
             background-color: #FAF8f5;
             color: #FAF8f5;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* خلفية الصورة المستوردة مع طبقة داكنة بنسبة 0.5 */
+        /* خلفية الصورة مع التظليل الداكن 0.5 */
         .custom-bg-image {
             position: fixed;
             top: 0;
@@ -65,7 +65,25 @@
             background-repeat: no-repeat;
         }
 
-        /* تأثير الزجاج الشفاف جداً بنسبة 80% (Glassmorphism 80% Transparency) */
+        /* خط الرقعة غير مفرغ ومشع بلون الأوف وايت */
+        .ruqaa-title-arabic {
+            font-family: 'Aref Ruqaa', serif;
+            color: #FAF8f5;
+            text-shadow: 0 0 12px rgba(250, 248, 245, 0.9), 
+                         0 0 25px rgba(250, 248, 245, 0.6), 
+                         0 0 35px rgba(245, 158, 11, 0.4);
+            letter-spacing: 1px;
+        }
+
+        .ruqaa-title-english {
+            font-family: 'Fredoka', sans-serif;
+            color: #FAF8f5;
+            text-shadow: 0 0 10px rgba(250, 248, 245, 0.8), 
+                         0 0 20px rgba(245, 158, 11, 0.5);
+            letter-spacing: 2px;
+        }
+
+        /* تأثير الزجاج الشفاف بنسبة 80% */
         .glass-btn-ultra {
             background: rgba(250, 248, 245, 0.20) !important;
             backdrop-filter: blur(12px) !important;
@@ -79,16 +97,11 @@
         .glass-btn-ultra:hover {
             background: rgba(250, 248, 245, 0.32) !important;
             border-color: rgba(250, 248, 245, 0.6) !important;
-            transform: translateY(-1px);
+            transform: translateY(-2px);
         }
 
-        .glass-btn-ultra:active {
-            transform: scale(0.96);
-        }
-
-        /* أزرار زجاجية بلون برغندي شفاف */
         .glass-btn-burgundy {
-            background: rgba(88, 17, 26, 0.20) !important;
+            background: rgba(88, 17, 26, 0.25) !important;
             backdrop-filter: blur(12px) !important;
             -webkit-backdrop-filter: blur(12px) !important;
             border: 1px solid rgba(250, 248, 245, 0.3) !important;
@@ -97,29 +110,7 @@
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
-        .glass-btn-burgundy:hover {
-            background: rgba(88, 17, 26, 0.35) !important;
-            border-color: rgba(250, 248, 245, 0.5) !important;
-        }
-
-        /* خط الرقعة غير مفرغ ومشع بلون الأوف وايت */
-        .glowing-ruqah-text {
-            font-family: 'Amiri', serif;
-            color: #FAF8f5;
-            text-shadow: 0 0 10px rgba(250, 248, 245, 0.9), 
-                         0 0 20px rgba(250, 248, 245, 0.6), 
-                         0 0 35px rgba(245, 158, 11, 0.4);
-            letter-spacing: 1px;
-        }
-
-        .glowing-english-text {
-            font-family: 'Fredoka', sans-serif;
-            color: #FAF8f5;
-            text-shadow: 0 0 8px rgba(250, 248, 245, 0.8), 
-                         0 0 18px rgba(245, 158, 11, 0.5);
-            letter-spacing: 2px;
-        }
-
+        /* تصميم كروت الأقسام المغلقة والمفتوحة */
         .category-integrated-card {
             background: rgba(250, 248, 245, 0.92);
             backdrop-filter: blur(16px);
@@ -130,6 +121,7 @@
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
             overflow: hidden;
             color: #3d0a11;
+            font-family: 'Aref Ruqaa', serif;
         }
 
         .category-integrated-card.is-open {
@@ -225,12 +217,47 @@
             border-radius: 1.4rem;
         }
 
-        .liquid-glass-nav {
-            background: rgba(61, 10, 17, 0.30);
+        /* أنيميشن زر القائمة الدائري العائم (Circular Floating Menu Wheel) */
+        .floating-menu-trigger {
+            background: rgba(88, 17, 26, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 253, 249, 0.3);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(250, 248, 245, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .floating-menu-trigger.is-active {
+            transform: rotate(135deg) scale(1.1);
+            background: rgba(140, 26, 53, 0.95);
+        }
+
+        .menu-items-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 2, 4, 0.65);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            z-index: 45;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s ease;
+        }
+
+        .menu-items-overlay.is-active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .menu-item-bubble {
+            transform: translateY(30px) scale(0.7);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .menu-items-overlay.is-active .menu-item-bubble {
+            transform: translateY(0) scale(1);
+            opacity: 1;
         }
 
         .modal-fade-in {
@@ -250,61 +277,54 @@
         }
     </style>
 </head>
-<body class="relative min-h-screen pb-28 select-none">
+<body class="relative min-h-screen pb-20 select-none">
 
     <!-- خلفية الصورة المستوردة مع التظليل الداكن بنسبة 0.5 -->
     <div class="custom-bg-image"></div>
 
-    <!-- الهيدر المستطيل الأفقـي المصغر بدون صورة غلاف بتصميم زجاجي برغندي شفاف -->
-    <header class="relative w-full max-w-3xl mx-auto my-2 px-3">
-        <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-offwhite/20 bg-burgundy-900/40 backdrop-blur-md p-2.5 sm:p-3">
-            
-            <!-- الشريط العلوي والمحتوى الأفقـي المدمج -->
-            <div class="flex items-center justify-between gap-2">
+    <!-- الهيدر الأفقـي الممتد والمضغوط الارتفاع -->
+    <header class="relative w-full max-w-4xl mx-auto my-3 px-3">
+        <div class="relative w-full rounded-2xl overflow-hidden shadow-2xl border border-offwhite/20 bg-burgundy-900/40 backdrop-blur-md px-4 py-2 sm:py-2.5">
+            <div class="flex items-center justify-between gap-3">
                 
-                <!-- اليمين: زر القائمة والشعار واسم المطعم -->
-                <div class="flex items-center gap-2.5">
-                    <button onclick="toggleSidebarDrawer()" class="w-8 h-8 rounded-xl glass-btn-ultra flex items-center justify-center flex-shrink-0">
-                        <i class="fas fa-bars text-amber-300 text-xs"></i>
-                    </button>
-
-                    <!-- اللوجو (الشعار) المصغّر -->
-                    <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-burgundy-950/60 border border-amber-300/60 flex items-center justify-center text-center backdrop-blur-md flex-shrink-0">
+                <!-- اليمين: اللوجو + اسم المطعم والتفاصيل -->
+                <div class="flex items-center gap-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-burgundy-950/70 border border-amber-300/60 flex items-center justify-center text-center backdrop-blur-md flex-shrink-0">
                         <i class="fas fa-ice-cream text-base text-amber-300"></i>
                     </div>
 
-                    <!-- اسم المطعم -->
                     <div class="text-right text-offwhite">
-                        <h1 class="text-sm sm:text-base font-black tracking-wide text-amber-200 leading-tight">
-                            آيس هوم <span class="text-[10px] sm:text-xs font-normal text-offwhite/80">| Ice Home</span>
+                        <h1 class="text-base sm:text-xl font-bold tracking-wide text-amber-200 leading-none">
+                            آيس هوم <span class="text-xs font-normal text-offwhite/80">| Ice Home</span>
                         </h1>
-                        <p class="text-[9px] sm:text-[10px] text-gray-200/90 leading-tight">
+                        <p class="text-[11px] sm:text-xs text-gray-200/90 leading-tight mt-0.5">
                             عالم الفخامة والانتعاش
                         </p>
                     </div>
                 </div>
 
-                <!-- اليسار: حالة العمل والتقييم -->
+                <!-- اليسار: حالة العمل والسلة -->
                 <div class="flex items-center gap-2">
-                    <div class="hidden sm:flex flex-col text-left text-[9px] text-amber-200/90 leading-tight">
-                        <span><i class="fas fa-star text-amber-300 ml-0.5"></i> 4.9 (1.2k+)</span>
-                        <span><i class="fas fa-clock ml-0.5"></i> 2م - 2ص</span>
-                    </div>
-                    <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
+                    <button onclick="toggleCartDrawer()" class="relative glass-btn-ultra px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold">
+                        <i class="fas fa-shopping-bag text-amber-300"></i>
+                        <span class="hidden sm:inline">السلة</span>
+                        <span id="headerCartBadge" class="bg-red-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">0</span>
+                    </button>
+
+                    <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                         مفتوح
                     </span>
                 </div>
 
             </div>
-
         </div>
     </header>
 
-    <!-- شريط البحث وزر عرض الأقسام بأزرار زجاجية شفافة بنسبة 80% -->
-    <div class="sticky top-2 z-30 max-w-3xl mx-auto px-3 transition-all duration-300">
+    <!-- شريط البحث وزر الكود زجاجي 80% -->
+    <div class="sticky top-2 z-30 max-w-4xl mx-auto px-3 transition-all duration-300">
         <div class="bg-burgundy-900/30 backdrop-blur-md rounded-2xl p-2 flex items-center gap-2 shadow-lg border border-offwhite/20">
-            <button onclick="toggleMenuView()" id="menuToggleButton" class="glass-btn-ultra font-extrabold px-3 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap">
+            <button onclick="toggleMenuView()" id="menuToggleButton" class="glass-btn-ultra font-bold px-3.5 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap">
                 <i class="fas fa-th-large text-xs" id="menuToggleIcon"></i>
                 <span id="menuToggleText">عرض الأقسام</span>
             </button>
@@ -312,56 +332,43 @@
             <div class="relative flex-1">
                 <input type="text" id="searchInput" oninput="handleSearch()" 
                        placeholder="ابحث عن مشروبك أو تحليتك..." 
-                       class="w-full bg-offwhite/15 border border-offwhite/25 text-offwhite placeholder-offwhite/70 text-xs rounded-xl py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-amber-300 transition">
+                       class="w-full bg-offwhite/15 border border-offwhite/25 text-offwhite placeholder-offwhite/70 text-xs rounded-xl py-1.5 pr-8 pl-3 focus:outline-none focus:ring-2 focus:ring-amber-300 transition font-sans">
                 <i class="fas fa-search absolute right-2.5 top-1/2 -translate-y-1/2 text-amber-300 text-xs"></i>
             </div>
         </div>
     </div>
 
-    <!-- قسم الترحيب بآلة الكتابة بخط الرقعة والمستلهم باللون الأبيض المشع (غير مفرغ) -->
+    <!-- قسم الترحيب بآلة الكتابة بخط الرقعة -->
     <div id="homeContentSection" class="max-w-3xl mx-auto px-4 py-16 relative z-10 text-center flex flex-col items-center justify-center min-h-[50vh]">
         <div class="space-y-4">
-            <!-- النص الأول بآلة الكتابة غير مفرغ ومشع بالأوف وايت -->
-            <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold glowing-ruqah-text"></h2>
-            
-            <!-- النص الثاني بآلة الكتابة -->
-            <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold glowing-english-text"></h1>
-        </div>
-    </div>
-
-    <!-- Sidebar Drawer (القائمة الجانبية) -->
-    <div id="sidebarDrawer" class="fixed inset-0 z-50 hidden transition-opacity">
-        <div class="absolute inset-0 bg-burgundy-950/70 backdrop-blur-sm" onclick="toggleSidebarDrawer()"></div>
-        <div class="absolute right-0 top-0 bottom-0 w-80 bg-offwhite text-burgundy-900 shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-burgundy-700/20">
-            <div class="p-4 bg-burgundy-800 text-offwhite flex items-center justify-between border-b border-burgundy-700">
-                <div class="flex items-center gap-3">
-                    <div class="w-9 h-9 rounded-full bg-offwhite text-burgundy-900 flex items-center justify-center font-bold shadow">
-                        <i class="fas fa-ice-cream text-sm"></i>
-                    </div>
-                    <div>
-                        <h3 class="font-black text-xs">قائمة الأقسام</h3>
-                        <p class="text-[9px] text-amber-200">اختر القسم للانتقال المباشر</p>
-                    </div>
-                </div>
-                <button onclick="toggleSidebarDrawer()" class="w-7 h-7 rounded-full glass-btn-ultra flex items-center justify-center">
-                    <i class="fas fa-times text-xs"></i>
-                </button>
-            </div>
-
-            <div id="sidebarCategoriesList" class="p-3 overflow-y-auto flex-1 space-y-1.5">
-                <!-- Injected via JS -->
-            </div>
-
-            <div class="p-3 bg-burgundy-50 border-t border-burgundy-100 text-center text-[10px] text-burgundy-800 font-bold">
-                <span>ايس هوم • جميع الحقوق محفوظة</span>
-            </div>
+            <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-title-arabic"></h2>
+            <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-title-english"></h1>
         </div>
     </div>
 
     <!-- Main Categories Container (الأقسام المفتوحة) -->
-    <main class="max-w-3xl mx-auto px-4 py-6 relative z-10 space-y-4 hidden" id="accordionContainer">
+    <main class="max-w-4xl mx-auto px-3 py-6 relative z-10 space-y-4 hidden" id="accordionContainer">
         <!-- Injected via JS -->
     </main>
+
+    <!-- الطبقة المتغوشة وتصميم دوائر الأقسام التفاعلية (Floating Circle Menu) -->
+    <div id="menuItemsOverlay" class="menu-items-overlay flex flex-col items-center justify-center p-4">
+        <div class="text-center mb-6">
+            <h3 class="text-2xl font-bold text-amber-200 tracking-wider">قائمة الأقسام الرئيسية</h3>
+            <p class="text-xs text-offwhite/80 mt-1">اختر القسم للتصفح المباشر</p>
+        </div>
+
+        <div id="circleMenuGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-5 max-w-lg w-full px-4">
+            <!-- Injected via JS -->
+        </div>
+    </div>
+
+    <!-- الزر الدائري العائم المخصص للمنيو في الأسفل (Floating Circle Menu Trigger) -->
+    <div class="fixed bottom-5 left-1/2 -translate-x-1/2 z-50">
+        <button id="floatingMenuTrigger" onclick="toggleCircleMenuWheel()" class="floating-menu-trigger w-14 h-14 rounded-full text-amber-300 flex items-center justify-center text-xl transition transform active:scale-90">
+            <i class="fas fa-utensils"></i>
+        </button>
+    </div>
 
     <!-- Dish Customization Modal (نافذة تفاصيل الوجبة) -->
     <div id="dishModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-burgundy-950/75 backdrop-blur-sm transition-opacity">
@@ -377,42 +384,42 @@
                 </div>
             </div>
 
-            <div class="p-5 overflow-y-auto flex-1 space-y-4">
+            <div class="p-5 overflow-y-auto flex-1 space-y-4 text-right">
                 <div class="flex justify-between items-start gap-2">
                     <div>
-                        <h3 id="modalTitle" class="text-lg font-black text-burgundy-900"></h3>
-                        <p id="modalDesc" class="text-xs text-burgundy-800/80 mt-1 leading-relaxed"></p>
+                        <h3 id="modalTitle" class="text-xl font-bold text-burgundy-900"></h3>
+                        <p id="modalDesc" class="text-xs text-burgundy-800/80 mt-1 leading-relaxed font-sans"></p>
                     </div>
-                    <span id="modalPrice" class="text-base font-black text-burgundy-700 whitespace-nowrap bg-burgundy-50 border border-burgundy-200 px-3 py-1 rounded-xl"></span>
+                    <span id="modalPrice" class="text-base font-bold text-burgundy-700 whitespace-nowrap bg-burgundy-50 border border-burgundy-200 px-3 py-1 rounded-xl font-sans"></span>
                 </div>
 
                 <div id="optionsContainer" class="space-y-2 pt-2 border-t border-burgundy-100">
                     <label class="block text-xs font-bold text-burgundy-900">الحجم / الخيار:</label>
-                    <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2"></div>
+                    <div id="sizeOptionsGrid" class="grid grid-cols-2 gap-2 font-sans"></div>
                 </div>
 
                 <div id="extrasContainer" class="space-y-2 pt-2 border-t border-burgundy-100">
                     <label class="block text-xs font-bold text-burgundy-900">إضافات اختيارية:</label>
-                    <div id="extrasGrid" class="space-y-1.5"></div>
+                    <div id="extrasGrid" class="space-y-1.5 font-sans"></div>
                 </div>
 
                 <div class="pt-2 border-t border-burgundy-100">
                     <label for="specialNote" class="block text-xs font-bold text-burgundy-900 mb-1">ملاحظات خاصة (سكر أقل، بدون ثلج، إلخ):</label>
-                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-burgundy-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-white text-burgundy-900 placeholder-burgundy-300"></textarea>
+                    <textarea id="specialNote" rows="2" placeholder="اكتب تفضيلاتك..." class="w-full text-xs p-3 rounded-xl border border-burgundy-200 focus:outline-none focus:ring-1 focus:ring-burgundy-700 bg-white text-burgundy-900 placeholder-burgundy-300 font-sans"></textarea>
                 </div>
             </div>
 
             <div class="p-4 bg-burgundy-50 border-t border-burgundy-100 flex items-center justify-between gap-4">
                 <div class="flex items-center border border-burgundy-200 rounded-full bg-white px-2 py-1">
-                    <button onclick="changeModalQty(-1)" class="w-7 h-7 rounded-full text-burgundy-800 font-bold hover:bg-burgundy-100 transition">-</button>
-                    <span id="modalQty" class="w-7 text-center font-bold text-xs text-burgundy-900">1</span>
-                    <button onclick="changeModalQty(1)" class="w-7 h-7 rounded-full text-burgundy-800 font-bold hover:bg-burgundy-100 transition">+</button>
+                    <button onclick="changeModalQty(-1)" class="w-7 h-7 rounded-full text-burgundy-800 font-bold transition">-</button>
+                    <span id="modalQty" class="w-7 text-center font-bold text-xs text-burgundy-900 font-sans">1</span>
+                    <button onclick="changeModalQty(1)" class="w-7 h-7 rounded-full text-burgundy-800 font-bold transition">+</button>
                 </div>
 
                 <button onclick="confirmAddToCart()" class="flex-1 glass-btn-burgundy bg-burgundy-800 font-bold py-2.5 px-4 rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg">
                     <i class="fas fa-shopping-bag text-amber-300"></i>
                     <span>إضافة للسلة • </span>
-                    <span id="modalTotalPrice">0 ر.س</span>
+                    <span id="modalTotalPrice" class="font-sans">0 ر.س</span>
                 </button>
             </div>
 
@@ -425,25 +432,25 @@
             <div class="p-4 bg-burgundy-800 text-offwhite flex items-center justify-between">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-shopping-basket text-amber-300 text-base"></i>
-                    <h3 class="font-extrabold text-sm">سلة الطلبات - ايس هوم</h3>
+                    <h3 class="font-bold text-sm">سلة الطلبات - ايس هوم</h3>
                 </div>
                 <button onclick="toggleCartDrawer()" class="w-7 h-7 rounded-full glass-btn-ultra flex items-center justify-center"><i class="fas fa-times text-xs"></i></button>
             </div>
 
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-burgundy-100"></div>
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-burgundy-100 text-right"></div>
 
             <div class="p-4 bg-burgundy-50 border-t border-burgundy-200 space-y-3">
-                <div class="space-y-1 text-xs text-burgundy-900">
+                <div class="space-y-1 text-xs text-burgundy-900 font-sans">
                     <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-burgundy-800">0 ر.س</span></div>
                     <div class="flex justify-between text-[10px] text-burgundy-600"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
-                    <div class="flex justify-between text-sm font-black text-burgundy-900 border-t border-burgundy-200 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
+                    <div class="flex justify-between text-sm font-bold text-burgundy-900 border-t border-burgundy-200 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-1">
                     <button onclick="sendOrderWhatsApp()" class="glass-btn-ultra bg-emerald-600/30 text-emerald-900 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border-emerald-500/40">
                         <i class="fab fa-whatsapp text-sm text-emerald-700"></i> <span class="text-burgundy-900">إرسال للواتساب</span>
                     </button>
-                    <button onclick="showReceiptModal()" class="glass-btn-burgundy font-black py-2.5 rounded-xl text-xs flex items-center justify-center gap-2">
+                    <button onclick="showReceiptModal()" class="glass-btn-burgundy font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2">
                         <i class="fas fa-file-invoice text-sm text-amber-300"></i> <span>الفاتورة الرقمية</span>
                     </button>
                 </div>
@@ -451,59 +458,8 @@
         </div>
     </div>
 
-    <!-- About Modal -->
-    <div id="aboutModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-burgundy-950/75 backdrop-blur-sm transition-opacity">
-        <div class="bg-offwhite text-burgundy-900 w-full max-w-md rounded-3xl overflow-hidden shadow-2xl modal-fade-in p-6 space-y-4 border border-burgundy-200 text-right">
-            <div class="flex justify-between items-center border-b border-burgundy-100 pb-3">
-                <h3 class="font-black text-burgundy-900 text-base flex items-center gap-2">
-                    <i class="fas fa-ice-cream text-burgundy-700"></i>
-                    عن آيس هوم | Ice Home
-                </h3>
-                <button onclick="closeAboutModal()" class="w-7 h-7 rounded-full bg-burgundy-50 flex items-center justify-center text-burgundy-700 hover:bg-burgundy-100 transition">
-                    <i class="fas fa-times text-xs"></i>
-                </button>
-            </div>
-            <p class="text-xs text-burgundy-800 leading-relaxed">
-                عالم الفخامة والانتعاش.. نقدم أفاخر المشروبات الباردة والساخنة، الآيس كريم، الجيلاتو، والحلويات المصنوعة بأجود المكونات العالمية لتمنحكم تجربة لا تُنسى.
-            </p>
-            <div class="space-y-2 text-xs text-burgundy-800 pt-2 border-t border-burgundy-100">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-clock text-burgundy-700 w-4 text-center"></i>
-                    <span>أوقات العمل: يومياً من 2:00 ظهراً وحتى 2:00 صباحاً</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-phone-alt text-burgundy-700 w-4 text-center"></i>
-                    <span dir="ltr">+966 50 000 0000</span>
-                </div>
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-map-marker-alt text-burgundy-700 w-4 text-center"></i>
-                    <span>المملكة العربية السعودية • الفرع الرئيسي</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Liquid Glass Bottom Navigation Bar (أزرار زجاجية شفافة بنسبة 80%) -->
-    <nav class="fixed bottom-3 left-4 right-4 z-40 max-w-sm mx-auto">
-        <div class="liquid-glass-nav rounded-2xl py-2 px-4 flex items-center justify-around text-offwhite">
-            <button onclick="scrollToHome()" class="glass-btn-ultra flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl group">
-                <i class="fas fa-home text-amber-300 text-xs group-hover:scale-110 transition"></i>
-                <span class="text-[9px] font-bold tracking-wide">الرئيسية</span>
-            </button>
-            <button onclick="toggleCartDrawer()" class="relative glass-btn-ultra flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl group">
-                <i class="fas fa-shopping-bag text-amber-300 text-xs group-hover:scale-110 transition"></i>
-                <span class="text-[9px] font-bold tracking-wide">السلة</span>
-                <span id="bottomCartBadge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] w-4 h-4 rounded-full flex items-center justify-center font-bold border border-white">0</span>
-            </button>
-            <button onclick="openAboutModal()" class="glass-btn-ultra flex flex-col items-center gap-0.5 px-4 py-1.5 rounded-xl group">
-                <i class="fas fa-info-circle text-amber-300 text-xs group-hover:scale-110 transition"></i>
-                <span class="text-[9px] font-bold tracking-wide">معلوماتنا</span>
-            </button>
-        </div>
-    </nav>
-
     <!-- Custom Notification Box -->
-    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900/80 text-amber-200 px-5 py-2.5 rounded-2xl shadow-2xl border border-amber-300/30 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all duration-300">
+    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900/90 text-amber-200 px-5 py-2.5 rounded-2xl shadow-2xl border border-amber-300/30 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all duration-300">
         <i class="fas fa-check-circle text-amber-300 text-sm"></i>
         <span id="notificationText">تمت العملية بنجاح</span>
     </div>
@@ -559,14 +515,15 @@
         let selectedExtras = [];
         let modalQuantity = 1;
         let isMenuVisible = false;
+        let isCircleMenuOpen = false;
 
         window.onload = function() {
-            renderSidebarCategories();
+            renderCircleMenuGrid();
             renderAccordionMenu();
             startTypewriterEffect();
         };
 
-        // تأثير آلة الكتابة (Typewriter Effect)
+        // تأثير آلة الكتابة بخط الرقعة
         function startTypewriterEffect() {
             const text1 = "أهلاً وسهلاً بكم";
             const text2 = "Ice Home";
@@ -595,6 +552,44 @@
             type();
         }
 
+        function toggleCircleMenuWheel() {
+            isCircleMenuOpen = !isCircleMenuOpen;
+            const trigger = document.getElementById('floatingMenuTrigger');
+            const overlay = document.getElementById('menuItemsOverlay');
+
+            if (isCircleMenuOpen) {
+                trigger.classList.add('is-active');
+                overlay.classList.add('is-active');
+            } else {
+                trigger.classList.remove('is-active');
+                overlay.classList.remove('is-active');
+            }
+        }
+
+        function selectCategoryFromWheel(catId) {
+            toggleCircleMenuWheel();
+            if (!isMenuVisible) {
+                toggleMenuView();
+            }
+            toggleAccordion(catId);
+        }
+
+        function renderCircleMenuGrid() {
+            const container = document.getElementById('circleMenuGrid');
+            container.innerHTML = categories.map((cat, index) => `
+                <div class="menu-item-bubble flex flex-col items-center gap-2 cursor-pointer group" 
+                     style="transition-delay: ${index * 60}ms;" 
+                     onclick="selectCategoryFromWheel('${cat.id}')">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-burgundy-900/80 border-2 border-amber-300/80 flex items-center justify-center text-amber-300 text-xl sm:text-2xl shadow-2xl group-hover:scale-110 group-hover:bg-burgundy-800 transition backdrop-blur-md">
+                        <i class="fas ${cat.icon}"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-bold text-offwhite text-center leading-tight tracking-wide group-hover:text-amber-200 transition">
+                        ${cat.name}
+                    </span>
+                </div>
+            `).join('');
+        }
+
         function toggleMenuView() {
             isMenuVisible = !isMenuVisible;
             const homeSection = document.getElementById('homeContentSection');
@@ -618,29 +613,6 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function scrollToHome() {
-            if (isMenuVisible) {
-                toggleMenuView();
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function renderSidebarCategories() {
-            const list = document.getElementById('sidebarCategoriesList');
-            list.innerHTML = categories.map(cat => `
-                <button onclick="if(!isMenuVisible) { toggleMenuView(); } toggleAccordion('${cat.id}'); toggleSidebarDrawer();" 
-                   class="w-full text-right flex items-center justify-between p-2.5 rounded-xl hover:bg-burgundy-50 hover:text-burgundy-700 transition text-xs font-bold text-burgundy-900">
-                    <div class="flex items-center gap-2.5">
-                        <div class="w-7 h-7 rounded-lg bg-burgundy-100 text-burgundy-800 flex items-center justify-center border border-burgundy-200">
-                            <i class="fas ${cat.icon} text-xs"></i>
-                        </div>
-                        <span>${cat.name}</span>
-                    </div>
-                    <i class="fas fa-chevron-left text-burgundy-300 text-[10px]"></i>
-                </button>
-            `).join('');
-        }
-
         function renderAccordionMenu() {
             const container = document.getElementById('accordionContainer');
 
@@ -660,7 +632,7 @@
                         <button onclick="toggleAccordion('${cat.id}')" 
                                 class="w-full py-3.5 px-6 flex items-center justify-between text-center transition">
                             <div class="w-6"></div>
-                            <h2 class="text-base sm:text-lg font-black text-burgundy-900 tracking-wide">
+                            <h2 class="text-base sm:text-lg font-bold text-burgundy-900 tracking-wide">
                                 ${cat.name}
                             </h2>
                             <i class="fas fa-chevron-down text-burgundy-800 text-xs transition-transform duration-500 ${isOpen ? 'rotate-180' : ''}"></i>
@@ -695,8 +667,8 @@
                     <div class="dish-image-box">
                         <img src="${item.image}" alt="${item.name}" loading="lazy">
                         <div class="dish-burgundy-label">
-                            <h4 class="font-extrabold text-amber-200 text-[9px] truncate px-1">${item.name}</h4>
-                            <span class="text-[8px] font-bold text-white block leading-none mt-0.5">${item.price} ر.س</span>
+                            <h4 class="font-bold text-amber-200 text-[9px] truncate px-1">${item.name}</h4>
+                            <span class="text-[8px] font-bold text-white block leading-none mt-0.5 font-sans">${item.price} ر.س</span>
                         </div>
                     </div>
                 </div>
@@ -780,19 +752,6 @@
             }
             currentSearchQuery = document.getElementById('searchInput').value.trim();
             renderAccordionMenu();
-        }
-
-        function toggleSidebarDrawer() {
-            const drawer = document.getElementById('sidebarDrawer');
-            drawer.classList.toggle('hidden');
-        }
-
-        function openAboutModal() {
-            document.getElementById('aboutModal').classList.remove('hidden');
-        }
-
-        function closeAboutModal() {
-            document.getElementById('aboutModal').classList.add('hidden');
         }
 
         function openDishModal(id) {
@@ -908,9 +867,8 @@
         }
 
         function updateCartUI() {
-            const bottomBadge = document.getElementById('bottomCartBadge');
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            bottomBadge.innerText = totalItems;
+            document.getElementById('headerCartBadge').innerText = totalItems;
             renderCartDrawerItems();
         }
 
@@ -944,16 +902,16 @@
                 <div class="pt-3 first:pt-0 flex items-center justify-between gap-2 text-burgundy-900">
                     <div class="flex-1">
                         <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
-                        <div class="text-[10px] text-burgundy-600 mt-0.5">
+                        <div class="text-[10px] text-burgundy-600 mt-0.5 font-sans">
                             ${item.option ? `<span>الخيار: ${item.option}</span>` : ''}
                             ${item.extras ? `<span class="block">إضافات: ${item.extras}</span>` : ''}
                             ${item.note ? `<span class="block text-amber-700">ملاحظة: ${item.note}</span>` : ''}
                         </div>
-                        <span class="font-black text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
+                        <span class="font-bold text-burgundy-700 text-xs mt-1 block font-sans">${item.totalPrice} ر.س</span>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <div class="flex items-center border border-burgundy-200 rounded-lg bg-burgundy-50">
+                        <div class="flex items-center border border-burgundy-200 rounded-lg bg-burgundy-50 font-sans">
                             <button onclick="updateCartItemQty(${item.cartId}, -1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">-</button>
                             <span class="text-xs font-bold w-5 text-center text-burgundy-900">${item.qty}</span>
                             <button onclick="updateCartItemQty(${item.cartId}, 1)" class="w-6 h-6 text-xs font-bold text-burgundy-800">+</button>
