@@ -190,6 +190,30 @@
             pointer-events: auto;
         }
 
+        /* أنيميشن التوهج المتحرك للمستطيل الزجاجي الرفيع لسلة الأطباق */
+        @keyframes glassGlowPulse {
+            0% {
+                box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(140, 26, 53, 0.3);
+                border-color: rgba(245, 158, 11, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 22px rgba(245, 158, 11, 0.8), 0 0 35px rgba(245, 158, 11, 0.4);
+                border-color: rgba(250, 248, 245, 0.9);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(140, 26, 53, 0.3);
+                border-color: rgba(245, 158, 11, 0.5);
+            }
+        }
+
+        .glowing-glass-cart-bar {
+            background: rgba(140, 26, 53, 0.35) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border: 1.5px solid rgba(245, 158, 11, 0.6);
+            animation: glassGlowPulse 2.5s infinite ease-in-out;
+        }
+
         .modal-fade-in {
             animation: modalFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
@@ -265,13 +289,11 @@
             
             <!-- أزرار التواصل والموقع أسفل أهلاً وسهلاً -->
             <div class="pt-6 space-y-3 w-full max-w-xs mx-auto">
-                <!-- 1. زر حساب الإنستغرام -->
                 <a href="https://instagram.com" target="_blank" class="w-full burgundy-light-glass py-2.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-105 transition shadow-lg group">
                     <i class="fab fa-instagram text-lg text-pink-400 group-hover:rotate-12 transition"></i>
                     <span>حسابنا على الانستغرام</span>
                 </a>
 
-                <!-- 2. زر موقعنا على الخريطة -->
                 <a href="https://maps.google.com" target="_blank" class="w-full burgundy-light-glass py-2.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-105 transition shadow-lg group">
                     <i class="fas fa-map-marker-alt text-base text-emerald-400 group-hover:bounce transition"></i>
                     <span>موقعنا الفرع الرئيسي</span>
@@ -293,16 +315,23 @@
     <!-- دوائر الأقسام العائمة رأسيًا فوق الزر الدائري -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
-    <!-- وحدة عائمة أسفل اليمين تجمع زر السلة (يظهر عند الإضافة) بجانب زر الأقسام الرئيسي -->
-    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex items-center gap-3 transition-all duration-300">
-        <!-- زر السلة الفرعي (تفاعلي: مخفي افتراضياً ويظهر بجانب دائرة الأقسام فور إضافة أول طبق) -->
-        <button id="floatingCartBtn" onclick="toggleCartDrawer()" class="hidden relative w-14 h-14 sm:w-16 sm:h-16 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-xl shadow-2xl border-2 border-amber-300/60 hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce">
-            <i class="fas fa-shopping-bag"></i>
-            <span id="floatingCartBadge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-extrabold border border-white shadow-md">0</span>
-        </button>
+    <!-- وحدة عائمة أسفل اليمين: تحتوي على تبويب السلة المستطيل الرفيع المتوهج بجانب زر الأقسام الرئيسي -->
+    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 transition-all duration-300">
+        <!-- تبويب السلة المستطيل الرفيع والزجاجي والمتوهج (مخفي افتراضياً ويظهر بجانب الأقسام مباشرة عند إضافة أطباق) -->
+        <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden cursor-pointer glowing-glass-cart-bar rounded-2xl py-2 px-3.5 flex items-center gap-2.5 text-amber-200 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+            <div class="relative flex items-center justify-center">
+                <i class="fas fa-shopping-bag text-amber-300 text-sm"></i>
+                <span id="floatingCartBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-extrabold border border-white">0</span>
+            </div>
+            <div class="text-right leading-none">
+                <span class="block text-[10px] font-bold text-amber-300">سلة الأطباق</span>
+                <span id="floatingCartTotal" class="block text-[11px] font-black text-offwhite mt-0.5">0 ر.س</span>
+            </div>
+            <i class="fas fa-chevron-left text-[10px] text-amber-300/80 pr-1"></i>
+        </div>
 
         <!-- زر الأقسام الدائري الرئيسي -->
-        <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90">
+        <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90 flex-shrink-0">
             <i class="fas fa-utensils"></i>
         </button>
     </div>
@@ -741,17 +770,20 @@
 
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             
             const cartBadge = document.getElementById('floatingCartBadge');
-            const cartBtn = document.getElementById('floatingCartBtn');
+            const cartTotal = document.getElementById('floatingCartTotal');
+            const cartTab = document.getElementById('floatingCartTab');
 
             if (cartBadge) cartBadge.innerText = totalItems;
+            if (cartTotal) cartTotal.innerText = `${totalPrice} ر.س`;
 
-            // عند الضغط على إضافة طبق وإضافته للسلة، يظهر زر السلة الجانبي مباشرة
+            // عند إضافة طبق للسلة، يظهر التبويب المستطيل الرفيع المتوهج بجانب الأقسام مباشرة
             if (totalItems > 0) {
-                cartBtn.classList.remove('hidden');
+                cartTab.classList.remove('hidden');
             } else {
-                cartBtn.classList.add('hidden');
+                cartTab.classList.add('hidden');
             }
 
             renderCartDrawerItems();
