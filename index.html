@@ -258,15 +258,31 @@
     </div>
 
     <!-- واجهة الاستقبال الرئيسية (Home View) -->
-    <div id="homeViewSection" class="max-w-3xl mx-auto px-4 py-16 relative z-10 text-center flex flex-col items-center justify-center min-h-[55vh]">
-        <div class="space-y-4">
+    <div id="homeViewSection" class="max-w-md mx-auto px-4 py-12 relative z-10 text-center flex flex-col items-center justify-center min-h-[55vh]">
+        <div class="space-y-4 w-full">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
-            <p class="text-xs text-offwhite/80 pt-4">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
+            
+            <!-- أزرار التواصل والموقع أسفل أهلاً وسهلاً -->
+            <div class="pt-6 space-y-3 w-full max-w-xs mx-auto">
+                <!-- 1. زر حساب الإنستغرام -->
+                <a href="https://instagram.com" target="_blank" class="w-full burgundy-light-glass py-2.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-105 transition shadow-lg group">
+                    <i class="fab fa-instagram text-lg text-pink-400 group-hover:rotate-12 transition"></i>
+                    <span>حسابنا على الانستغرام</span>
+                </a>
+
+                <!-- 2. زر موقعنا على الخريطة -->
+                <a href="https://maps.google.com" target="_blank" class="w-full burgundy-light-glass py-2.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-105 transition shadow-lg group">
+                    <i class="fas fa-map-marker-alt text-base text-emerald-400 group-hover:bounce transition"></i>
+                    <span>موقعنا الفرع الرئيسي</span>
+                </a>
+            </div>
+
+            <p class="text-[11px] text-offwhite/70 pt-4">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
         </div>
     </div>
 
-    <!-- واجهة القسم المنفصل (يظهر وحده دون الهيدر والبحث) -->
+    <!-- واجهة القسم المنفصل -->
     <main class="max-w-4xl mx-auto px-3 py-4 relative z-10 space-y-6 hidden" id="categoryViewSection">
         <!-- يتم توليد واجهة القسم هنا -->
     </main>
@@ -277,12 +293,12 @@
     <!-- دوائر الأقسام العائمة رأسيًا فوق الزر الدائري -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
-    <!-- وحدة عائمة متحدة أسفل اليمين تجمع زر السلة وزر الأقسام الدائري الرئيسي -->
-    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex flex-col items-center gap-2.5 transition-all duration-300">
-        <!-- زر السلة المتحد مع الدائرة -->
-        <button onclick="toggleCartDrawer()" class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-lg shadow-2xl border border-amber-300/40 hover:scale-110 active:scale-90 transition">
+    <!-- وحدة عائمة أسفل اليمين تجمع زر السلة (يظهر عند الإضافة) بجانب زر الأقسام الرئيسي -->
+    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex items-center gap-3 transition-all duration-300">
+        <!-- زر السلة الفرعي (تفاعلي: مخفي افتراضياً ويظهر بجانب دائرة الأقسام فور إضافة أول طبق) -->
+        <button id="floatingCartBtn" onclick="toggleCartDrawer()" class="hidden relative w-14 h-14 sm:w-16 sm:h-16 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-xl shadow-2xl border-2 border-amber-300/60 hover:scale-110 active:scale-95 transition-all duration-300 animate-bounce">
             <i class="fas fa-shopping-bag"></i>
-            <span id="floatingCartBadge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-extrabold shadow-md">0</span>
+            <span id="floatingCartBadge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-extrabold border border-white shadow-md">0</span>
         </button>
 
         <!-- زر الأقسام الدائري الرئيسي -->
@@ -420,7 +436,6 @@
             document.getElementById('homeViewSection').classList.remove('hidden');
             document.getElementById('categoryViewSection').classList.add('hidden');
             
-            // إظهار الهيدر والبحث عند العودة للرئيسية
             document.getElementById('mainHeader').classList.remove('hidden');
             document.getElementById('searchBarContainer').classList.remove('hidden');
 
@@ -431,7 +446,6 @@
             activeCategoryId = catId;
             if (isRightMenuOpen) toggleRightGlassMenu();
             
-            // إخفاء الهيدر وشريط البحث عند اختيار قسم
             document.getElementById('mainHeader').classList.add('hidden');
             document.getElementById('searchBarContainer').classList.add('hidden');
 
@@ -727,7 +741,19 @@
 
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            document.getElementById('floatingCartBadge').innerText = totalItems;
+            
+            const cartBadge = document.getElementById('floatingCartBadge');
+            const cartBtn = document.getElementById('floatingCartBtn');
+
+            if (cartBadge) cartBadge.innerText = totalItems;
+
+            // عند الضغط على إضافة طبق وإضافته للسلة، يظهر زر السلة الجانبي مباشرة
+            if (totalItems > 0) {
+                cartBtn.classList.remove('hidden');
+            } else {
+                cartBtn.classList.add('hidden');
+            }
+
             renderCartDrawerItems();
         }
 
