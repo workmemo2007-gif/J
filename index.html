@@ -282,25 +282,46 @@
     </div>
 
     <!-- واجهة الاستقبال الرئيسية (Home View) -->
-    <div id="homeViewSection" class="max-w-md mx-auto px-4 py-12 relative z-10 text-center flex flex-col items-center justify-center min-h-[55vh]">
-        <div class="space-y-4 w-full">
+    <div id="homeViewSection" class="max-w-md mx-auto px-4 pt-10 pb-28 relative z-10 text-center flex flex-col items-center justify-between min-h-[75vh]">
+        <!-- الترحيب العالي -->
+        <div class="space-y-3 w-full my-auto">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
-            
-            <!-- أزرار التواصل والموقع أسفل أهلاً وسهلاً -->
-            <div class="pt-6 space-y-3 w-full max-w-xs mx-auto">
-                <a href="https://instagram.com" target="_blank" class="w-full burgundy-light-glass py-2.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-105 transition shadow-lg group">
-                    <i class="fab fa-instagram text-lg text-pink-400 group-hover:rotate-12 transition"></i>
-                    <span>حسابنا على الانستغرام</span>
-                </a>
+            <p class="text-[11px] text-offwhite/70 pt-2">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
+        </div>
 
-                <a href="https://maps.google.com" target="_blank" class="w-full burgundy-light-glass py-2.5 px-4 rounded-2xl flex items-center justify-center gap-2.5 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-105 transition shadow-lg group">
-                    <i class="fas fa-map-marker-alt text-base text-emerald-400 group-hover:bounce transition"></i>
-                    <span>موقعنا الفرع الرئيسي</span>
-                </a>
+        <!-- أزرار الانستغرام والموقع وزر (من نحن) في أسفل الصفحة الرئيسية بلمسة منخفضة الارتفاع -->
+        <div class="w-full max-w-xs space-y-2 mt-auto pt-6">
+            
+            <!-- 1. زر "من نحن" التفاعلي والموسع -->
+            <div class="w-full burgundy-light-glass rounded-xl border border-amber-300/30 overflow-hidden transition-all duration-300 shadow-lg">
+                <button onclick="toggleAboutUs()" class="w-full py-1.5 px-3 flex items-center justify-between text-xs font-bold text-amber-200 hover:bg-amber-300/10 transition">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-info-circle text-amber-300 text-xs"></i>
+                        <span>من نحن</span>
+                    </div>
+                    <i id="aboutUsArrow" class="fas fa-chevron-down text-[10px] text-amber-300 transition-transform duration-300"></i>
+                </button>
+
+                <!-- نص وتفاصيل المحل القابلة للتوسع -->
+                <div id="aboutUsContent" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out px-3 text-right">
+                    <p class="text-[10px] text-offwhite/90 leading-relaxed py-2 border-t border-offwhite/10">
+                        مرحباً بكم في <strong class="text-amber-300">آيس هوم (Ice Home)</strong>! نقدّم لكم تجربة استثنائية من المشروبات الباردة والساخنة، والجيلاتو الفاخر، والحلويات المصنوعة بكل شغف بجودة عالية وأجواء مميزة.
+                    </p>
+                </div>
             </div>
 
-            <p class="text-[11px] text-offwhite/70 pt-4">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
+            <!-- 2. زر حساب الانستغرام (مخفض الارتفاع py-1.5) -->
+            <a href="https://instagram.com" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-102 transition shadow-md group">
+                <i class="fab fa-instagram text-sm text-pink-400 group-hover:rotate-12 transition"></i>
+                <span>حسابنا على الانستغرام</span>
+            </a>
+
+            <!-- 3. زر موقعنا (مخفض الارتفاع py-1.5) -->
+            <a href="https://maps.google.com" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-102 transition shadow-md group">
+                <i class="fas fa-map-marker-alt text-xs text-emerald-400"></i>
+                <span>موقعنا الفرع الرئيسي</span>
+            </a>
         </div>
     </div>
 
@@ -317,7 +338,7 @@
 
     <!-- وحدة عائمة أسفل اليمين: تحتوي على تبويب السلة المستطيل الرفيع المتوهج بجانب زر الأقسام الرئيسي -->
     <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 transition-all duration-300">
-        <!-- تبويب السلة المستطيل الرفيع والزجاجي والمتوهج (مخفي افتراضياً ويظهر بجانب الأقسام مباشرة عند إضافة أطباق) -->
+        <!-- تبويب السلة المستطيل الرفيع والزجاجي والمتوهج -->
         <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden cursor-pointer glowing-glass-cart-bar rounded-2xl py-2 px-3.5 flex items-center gap-2.5 text-amber-200 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300">
             <div class="relative flex items-center justify-center">
                 <i class="fas fa-shopping-bag text-amber-300 text-sm"></i>
@@ -413,11 +434,26 @@
         let cart = [];
         let isRightMenuOpen = false;
         let selectedOptionsState = {};
+        let isAboutUsExpanded = false;
 
         window.onload = function() {
             renderVerticalCategoriesStack();
             startTypewriterEffect();
         };
+
+        function toggleAboutUs() {
+            isAboutUsExpanded = !isAboutUsExpanded;
+            const content = document.getElementById('aboutUsContent');
+            const arrow = document.getElementById('aboutUsArrow');
+
+            if (isAboutUsExpanded) {
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.style.transform = "rotate(180deg)";
+            } else {
+                content.style.maxHeight = "0px";
+                arrow.style.transform = "rotate(0deg)";
+            }
+        }
 
         function startTypewriterEffect() {
             const text1 = "أهلاً وسهلاً بكم";
@@ -779,7 +815,6 @@
             if (cartBadge) cartBadge.innerText = totalItems;
             if (cartTotal) cartTotal.innerText = `${totalPrice} ر.س`;
 
-            // عند إضافة طبق للسلة، يظهر التبويب المستطيل الرفيع المتوهج بجانب الأقسام مباشرة
             if (totalItems > 0) {
                 cartTab.classList.remove('hidden');
             } else {
