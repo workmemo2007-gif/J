@@ -165,7 +165,7 @@
 
         .vertical-categories-stack {
             position: fixed;
-            bottom: 6rem;
+            bottom: 8.5rem;
             right: 1.5rem;
             z-index: 50;
             display: flex;
@@ -205,26 +205,6 @@
             from { transform: translateX(100%); }
             to { transform: translateX(0); }
         }
-
-        /* أنيميشن رسم السهم المتوهج ببطء نحو زر الأقسام */
-        @keyframes drawArrowPath {
-            0% {
-                stroke-dashoffset: 250;
-                opacity: 0.2;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                stroke-dashoffset: 0;
-                opacity: 0.9;
-            }
-        }
-        .animated-arrow-line {
-            stroke-dasharray: 250;
-            animation: drawArrowPath 3.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.9));
-        }
     </style>
 </head>
 <body class="relative min-h-screen pb-32 select-none">
@@ -251,12 +231,6 @@
                 </div>
 
                 <div class="flex items-center gap-2.5">
-                    <button onclick="toggleCartDrawer()" class="relative burgundy-light-glass px-3.5 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold hover:scale-105">
-                        <i class="fas fa-shopping-bag text-amber-300"></i>
-                        <span class="hidden sm:inline">السلة</span>
-                        <span id="headerCartBadge" class="bg-red-600 text-white text-[9px] px-1.5 py-0.2 rounded-full font-bold">0</span>
-                    </button>
-
                     <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-200 border border-emerald-400/30 backdrop-blur-md">
                         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
                         مفتوح
@@ -285,22 +259,14 @@
 
     <!-- واجهة الاستقبال الرئيسية (Home View) -->
     <div id="homeViewSection" class="max-w-3xl mx-auto px-4 py-16 relative z-10 text-center flex flex-col items-center justify-center min-h-[55vh]">
-        <div class="space-y-4 relative z-10">
+        <div class="space-y-4">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
             <p class="text-xs text-offwhite/80 pt-4">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
         </div>
-
-        <!-- سهم متحرك مرسوم ببطء يمتد من الترحيب إلى زر الأقسام الدائري السفلي -->
-        <svg id="homeArrowSvg" class="absolute inset-0 w-full h-full pointer-events-none z-0" viewBox="0 0 1000 600" preserveAspectRatio="none">
-            <!-- مسار من منتصف الشاشة نحو أسفل اليمين حيث الزر الدائري -->
-            <path class="animated-arrow-line" d="M 500 340 Q 750 420 900 520" fill="none" stroke="#F59E0B" stroke-width="4" stroke-linecap="round" />
-            <!-- رأس السهم -->
-            <polygon points="890,510 915,525 890,535" fill="#F59E0B" />
-        </svg>
     </div>
 
-    <!-- واجهة القسم المنفصل (يظهر وحده دون الهيدر والبحث وزر القائمة الرئيسي) -->
+    <!-- واجهة القسم المنفصل (يظهر وحده دون الهيدر والبحث) -->
     <main class="max-w-4xl mx-auto px-3 py-4 relative z-10 space-y-6 hidden" id="categoryViewSection">
         <!-- يتم توليد واجهة القسم هنا -->
     </main>
@@ -311,33 +277,18 @@
     <!-- دوائر الأقسام العائمة رأسيًا فوق الزر الدائري -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
-    <!-- زر المنيو الدائري الكبير الشفاف جهة اليمين (يختفي في القسم) -->
-    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 transition-all duration-300">
+    <!-- وحدة عائمة متحدة أسفل اليمين تجمع زر السلة وزر الأقسام الدائري الرئيسي -->
+    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex flex-col items-center gap-2.5 transition-all duration-300">
+        <!-- زر السلة المتحد مع الدائرة -->
+        <button onclick="toggleCartDrawer()" class="relative w-13 h-13 sm:w-14 sm:h-14 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-lg shadow-2xl border border-amber-300/40 hover:scale-110 active:scale-90 transition">
+            <i class="fas fa-shopping-bag"></i>
+            <span id="floatingCartBadge" class="absolute -top-1 -right-1 bg-red-600 text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-extrabold shadow-md">0</span>
+        </button>
+
+        <!-- زر الأقسام الدائري الرئيسي -->
         <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90">
             <i class="fas fa-utensils"></i>
         </button>
-    </div>
-
-    <!-- تبويب/شريط السلة السفلي الموحد والمنسق (يظهر بانسياقية عند النقر على أي طبق أو إضافة عناصر) -->
-    <div id="bottomCartBar" class="fixed bottom-0 left-0 right-0 z-40 transform translate-y-full transition-transform duration-300 px-3 pb-3">
-        <div class="max-w-3xl mx-auto burgundy-light-glass rounded-2xl p-3 sm:p-4 flex items-center justify-between border border-amber-300/40 shadow-2xl backdrop-blur-xl">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-amber-400/20 border border-amber-300/50 flex items-center justify-center text-amber-300 text-lg">
-                    <i class="fas fa-shopping-basket"></i>
-                </div>
-                <div>
-                    <h4 class="text-xs sm:text-sm font-extrabold text-amber-200">سلة الطلبات النشطة</h4>
-                    <p class="text-[10px] text-offwhite/80"><span id="bottomCartCount">0</span> منتجات • <span id="bottomCartPrice" class="font-bold text-amber-300">0 ر.س</span></p>
-                </div>
-            </div>
-
-            <div class="flex items-center gap-2">
-                <button onclick="toggleCartDrawer()" class="bg-amber-400 hover:bg-amber-500 text-burgundy-950 px-4 py-2 rounded-xl text-xs font-black shadow-lg transition flex items-center gap-1.5">
-                    <span>عرض السلة</span>
-                    <i class="fas fa-arrow-left text-[10px]"></i>
-                </button>
-            </div>
-        </div>
     </div>
 
     <!-- Cart Drawer (سلة الطلبات الجانبية) -->
@@ -469,10 +420,9 @@
             document.getElementById('homeViewSection').classList.remove('hidden');
             document.getElementById('categoryViewSection').classList.add('hidden');
             
-            // إظهار الهيدر والبحث وزر القائمة عند العودة للرئيسية
+            // إظهار الهيدر والبحث عند العودة للرئيسية
             document.getElementById('mainHeader').classList.remove('hidden');
             document.getElementById('searchBarContainer').classList.remove('hidden');
-            document.getElementById('floatingMenuContainer').classList.remove('hidden');
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -481,10 +431,9 @@
             activeCategoryId = catId;
             if (isRightMenuOpen) toggleRightGlassMenu();
             
-            // إخفاء الهيدر وشريط البحث وزر القائمة الرئيسي عند اختيار قسم
+            // إخفاء الهيدر وشريط البحث عند اختيار قسم
             document.getElementById('mainHeader').classList.add('hidden');
             document.getElementById('searchBarContainer').classList.add('hidden');
-            document.getElementById('floatingMenuContainer').classList.add('hidden');
 
             document.getElementById('homeViewSection').classList.add('hidden');
             const catSection = document.getElementById('categoryViewSection');
@@ -778,20 +727,7 @@
 
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-
-            document.getElementById('headerCartBadge').innerText = totalItems;
-            document.getElementById('bottomCartCount').innerText = totalItems;
-            document.getElementById('bottomCartPrice').innerText = `${totalPrice} ر.س`;
-
-            // إظهار أو إخفاء شريط السلة السفلي بناءً على وجود عناصر بالسلة
-            const bottomBar = document.getElementById('bottomCartBar');
-            if (totalItems > 0) {
-                bottomBar.classList.remove('translate-y-full');
-            } else {
-                bottomBar.classList.add('translate-y-full');
-            }
-
+            document.getElementById('floatingCartBadge').innerText = totalItems;
             renderCartDrawerItems();
         }
 
