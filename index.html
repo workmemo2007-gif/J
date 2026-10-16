@@ -165,7 +165,7 @@
         .vertical-categories-stack {
             position: fixed;
             bottom: 8.5rem;
-            left: 1.5rem;
+            right: 1.5rem;
             z-index: 50;
             display: flex;
             flex-direction: column;
@@ -191,25 +191,34 @@
 
         @keyframes glassGlowPulse {
             0% {
-                box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(140, 26, 53, 0.3);
-                border-color: rgba(245, 158, 11, 0.6);
+                box-shadow: 0 0 10px rgba(245, 158, 11, 0.3), 0 0 20px rgba(140, 26, 53, 0.3);
+                border-color: rgba(245, 158, 11, 0.5);
             }
             50% {
-                box-shadow: 0 0 25px rgba(245, 158, 11, 0.9), 0 0 40px rgba(245, 158, 11, 0.5);
-                border-color: rgba(250, 248, 245, 0.95);
+                box-shadow: 0 0 22px rgba(245, 158, 11, 0.7), 0 0 35px rgba(245, 158, 11, 0.4);
+                border-color: rgba(250, 248, 245, 0.85);
             }
             100% {
-                box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(140, 26, 53, 0.3);
-                border-color: rgba(245, 158, 11, 0.6);
+                box-shadow: 0 0 10px rgba(245, 158, 11, 0.3), 0 0 20px rgba(140, 26, 53, 0.3);
+                border-color: rgba(245, 158, 11, 0.5);
             }
         }
 
         .glowing-glass-cart-bar {
-            background: rgba(61, 10, 17, 0.85) !important;
+            background: rgba(61, 10, 17, 0.45) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            border: 1.5px solid rgba(245, 158, 11, 0.8);
+            border: 1.5px solid rgba(245, 158, 11, 0.7);
             animation: glassGlowPulse 2.5s infinite ease-in-out;
+        }
+
+        /* كارت سلة الجوال عائم وزجاجي عالي الشفافية */
+        .ultra-glass-floating-card {
+            background: rgba(45, 8, 15, 0.45) !important;
+            backdrop-filter: blur(28px) !important;
+            -webkit-backdrop-filter: blur(28px) !important;
+            border: 1.5px solid rgba(245, 158, 11, 0.5) !important;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
         }
 
         .modal-fade-in {
@@ -224,8 +233,8 @@
             animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes drawerSlideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
+            from { transform: translateY(30px) scale(0.95); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
         }
     </style>
 </head>
@@ -280,7 +289,7 @@
         <div class="space-y-3 w-full my-auto">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
-            <p class="text-[11px] text-offwhite/70 pt-2">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
+            <p class="text-[11px] text-offwhite/70 pt-2">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة[span_1](start_span)[span_1](end_span)</p>
         </div>
 
         <div class="w-full max-w-xs space-y-2 mt-auto pt-6">
@@ -300,13 +309,11 @@
                 </div>
             </div>
 
-            <!-- 1. زر حساب الانستغرام المحدث -->
             <a href="https://www.instagram.com/iceh_ome1?rpxt=MTNwM254MHh0d2ZxcQ==" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-102 transition shadow-md group">
                 <i class="fab fa-instagram text-sm text-pink-400 group-hover:rotate-12 transition"></i>
                 <span>حسابنا على الانستغرام</span>
             </a>
 
-            <!-- 2. زر الموقع المحدث -->
             <a href="https://maps.app.goo.gl/CJphgax5BLGCureLA" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-102 transition shadow-md group">
                 <i class="fas fa-map-marker-alt text-xs text-emerald-400"></i>
                 <span>موقعنا الفرع الرئيسي</span>
@@ -319,67 +326,74 @@
 
     <div id="blurOnlyOverlay" class="blur-only-overlay" onclick="toggleRightGlassMenu()"></div>
 
+    <!-- دوائر الأقسام العائمة على يمين الصفحة -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
-    <!-- 3. وحدة السلة وزر الأقسام العائمة على جهة اليسار -->
-    <div id="floatingMenuContainer" class="fixed bottom-5 left-5 z-50 flex items-center gap-2.5 transition-all duration-300">
-        <!-- زر الأقسام الدائري الرئيسي -->
-        <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90 flex-shrink-0">
-            <i class="fas fa-utensils"></i>
-        </button>
-
-        <!-- تبويب السلة المستطيل البيضوي الرفيع والمتوهج -->
-        <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden cursor-pointer glowing-glass-cart-bar rounded-full py-2.5 px-4 flex items-center gap-2.5 text-amber-200 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+    <!-- شريط السلة العائم الممتد الطويل من يسار الشاشة حتى أقصى اليمين بجانب دائرة الأقسام -->
+    <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden fixed bottom-5 left-5 right-24 z-50 cursor-pointer glowing-glass-cart-bar rounded-full py-3 px-5 flex items-center justify-between text-amber-200 shadow-2xl hover:scale-102 active:scale-98 transition-all duration-300">
+        <div class="flex items-center gap-3">
             <div class="relative flex items-center justify-center">
-                <i class="fas fa-shopping-bag text-amber-300 text-sm"></i>
-                <span id="floatingCartBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-extrabold border border-white">0</span>
+                <i class="fas fa-shopping-bag text-amber-300 text-base"></i>
+                <span id="floatingCartBadge" class="absolute -top-2.5 -right-2.5 bg-red-600 text-white text-[9px] w-4.5 h-4.5 rounded-full flex items-center justify-center font-extrabold border border-white">0</span>
             </div>
-            <div class="text-right leading-none">
-                <span class="block text-[10px] font-bold text-amber-300">سلة الأطباق</span>
-                <span id="floatingCartTotal" class="block text-[11px] font-black text-offwhite mt-0.5">0 د.ع</span>
-            </div>
-            <i class="fas fa-chevron-left text-[10px] text-amber-300/80 pr-1"></i>
+            <span class="text-xs font-bold text-amber-200">سلة الأطباق</span>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <span id="floatingCartTotal" class="text-xs font-black text-offwhite">0 د.ع</span>
+            <i class="fas fa-chevron-left text-xs text-amber-300/80 pr-1"></i>
         </div>
     </div>
 
-    <!-- 4. سلة الطلبات الجانبية بتصميم زجاجي داكن وإطارات ذهبية -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-burgundy-950/80 backdrop-blur-md transition-opacity">
-        <div class="burgundy-light-glass bg-burgundy-900/90 text-offwhite w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-amber-300/50">
-            <div class="p-4 bg-burgundy-950/90 text-amber-200 flex items-center justify-between border-b border-amber-300/30">
+    <!-- زر الأقسام الدائري الرئيسي في أسفل اليمين -->
+    <div class="fixed bottom-5 right-5 z-50 flex items-center">
+        <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90 flex-shrink-0">
+            <i class="fas fa-utensils"></i>
+        </button>
+    </div>
+
+    <!-- كارت سلة الطلبات العائم والزجاجي الشفاف كلياً مع خلفية شديدة التلطيف والضبابية -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xl transition-all duration-300">
+        <div class="ultra-glass-floating-card text-offwhite w-full max-w-sm rounded-3xl p-4 shadow-2xl flex flex-col justify-between transform drawer-slide-in relative overflow-hidden max-h-[85vh]">
+            
+            <!-- الهيدر -->
+            <div class="pb-3 border-b border-amber-300/30 flex items-center justify-between">
                 <div class="flex items-center gap-2">
-                    <i class="fas fa-shopping-basket text-amber-300 text-base"></i>
-                    <h3 class="font-bold text-sm">سلة الطلبات - ايس هوم</h3>
+                    <i class="fas fa-shopping-basket text-amber-300 text-sm"></i>
+                    <h3 class="font-bold text-xs text-amber-200">سلة الطلبات - ايس هوم</h3>
                 </div>
-                <button onclick="toggleCartDrawer()" class="w-7 h-7 rounded-full burgundy-light-glass border border-amber-300/40 flex items-center justify-center hover:scale-105 transition"><i class="fas fa-times text-xs text-amber-300"></i></button>
+                <button onclick="toggleCartDrawer()" class="w-6 h-6 rounded-full bg-amber-300/10 border border-amber-300/30 flex items-center justify-center hover:scale-105 transition"><i class="fas fa-times text-[10px] text-amber-300"></i></button>
             </div>
 
             <!-- خيار التوصيل في الدغارة -->
-            <div class="p-3 bg-burgundy-950/50 border-b border-amber-300/20 mx-4 mt-3 rounded-xl">
+            <div class="p-2.5 bg-burgundy-950/40 border border-amber-300/20 my-3 rounded-2xl">
                 <label class="flex items-center justify-between cursor-pointer">
-                    <div class="flex items-center gap-2.5">
-                        <input type="checkbox" id="deliveryCheckbox" onchange="updateCartUI()" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
-                        <span class="text-xs font-bold text-amber-200">توصيل الطلبات في الدغارة</span>
+                    <div class="flex items-center gap-2">
+                        <input type="checkbox" id="deliveryCheckbox" onchange="updateCartUI()" class="w-3.5 h-3.5 accent-amber-500 rounded cursor-pointer">
+                        <span class="text-[11px] font-bold text-amber-200">توصيل الطلبات في الدغارة</span>
                     </div>
-                    <span class="text-xs font-black text-amber-300">2,000 د.ع</span>
+                    <span class="text-[11px] font-black text-amber-300">2,000 د.ع</span>
                 </label>
             </div>
 
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-amber-300/10 text-right"></div>
+            <!-- قائمة العناصر -->
+            <div id="cartItemsContainer" class="my-2 overflow-y-auto max-h-52 space-y-2.5 divide-y divide-amber-300/10 text-right pr-1"></div>
 
-            <div class="p-4 bg-burgundy-950/80 border-t border-amber-300/30 space-y-3">
-                <div class="space-y-1.5 text-xs text-offwhite">
+            <!-- الفوتر والإجمالي -->
+            <div class="pt-3 border-t border-amber-300/30 space-y-2.5">
+                <div class="space-y-1 text-[11px] text-offwhite">
                     <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-amber-200">0 د.ع</span></div>
                     <div id="deliveryFeeRow" class="flex justify-between hidden text-amber-300/90"><span>رسوم التوصيل (الدغارة):</span><span>2,000 د.ع</span></div>
-                    <div class="flex justify-between text-[10px] text-offwhite/70"><span>ضريبة القيمة المضافة:</span><span>شاملة</span></div>
-                    <div class="flex justify-between text-sm font-black text-amber-300 border-t border-amber-300/30 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 د.ع</span></div>
+                    <div class="flex justify-between text-[9px] text-offwhite/70"><span>ضريبة القيمة المضافة:</span><span>شاملة</span></div>
+                    <div class="flex justify-between text-xs font-black text-amber-300 border-t border-amber-300/20 pt-1.5"><span>المجموع الكلي:</span><span id="grandTotalText">0 د.ع</span></div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="sendOrderWhatsApp()" class="burgundy-light-glass bg-emerald-600/30 text-emerald-200 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border border-emerald-400/40 hover:scale-102 transition">
-                        <i class="fab fa-whatsapp text-sm text-emerald-400"></i> <span>إرسال للواتساب</span>
+                    <button onclick="sendOrderWhatsApp()" class="bg-emerald-600/30 hover:bg-emerald-600/40 text-emerald-200 font-bold py-2 rounded-xl text-[11px] flex items-center justify-center gap-1.5 border border-emerald-400/40 hover:scale-102 transition shadow-lg">
+                        <i class="fab fa-whatsapp text-xs text-emerald-400"></i> <span>واتساب</span>
                     </button>
-                    <button onclick="showReceiptModal()" class="burgundy-light-glass font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border border-amber-300/40 hover:scale-102 transition">
-                        <i class="fas fa-file-invoice text-sm text-amber-300"></i> <span>الفاتورة الرقمية</span>
+                    <button onclick="showReceiptModal()" class="bg-amber-300/10 hover:bg-amber-300/20 text-amber-200 font-bold py-2 rounded-xl text-[11px] flex items-center justify-center gap-1.5 border border-amber-300/40 hover:scale-102 transition shadow-lg">
+                        <i class="fas fa-file-invoice text-xs text-amber-300"></i> <span>الفاتورة</span>
                     </button>
                 </div>
             </div>
@@ -401,7 +415,6 @@
             { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
         ];
 
-        /* 5. الأسعار بالدينار العراقي (د.ع) */
         const menuItems = [
             { id: 1, categoryId: 'iced-drinks', name: 'آيس شيكن وايت موكا', desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد', price: 4000, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 1000 }] },
             { id: 2, categoryId: 'iced-drinks', name: 'ماتشا لاتيه بارد', desc: 'ماتشا يابانية فاخرة مع حليب الشوفان البارد', price: 4500, tag: 'صحّي', image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 1000 }] },
@@ -524,17 +537,17 @@
             const reversedCats = [...categories].reverse();
 
             container.innerHTML = reversedCats.map((cat, index) => `
-                <div class="category-bubble-item flex items-center justify-start gap-3 cursor-pointer group" 
+                <div class="category-bubble-item flex items-center justify-end gap-3 cursor-pointer group" 
                      style="transition-delay: ${index * 50}ms;" 
                      onclick="selectCategory('${cat.id}')">
                     
-                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-base sm:text-lg shadow-xl group-hover:scale-110 transition flex-shrink-0 border border-amber-300/40">
-                        <i class="fas ${cat.icon}"></i>
-                    </div>
-
                     <span class="text-xs sm:text-sm font-bold text-offwhite bg-burgundy-900/70 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-amber-300/30 shadow-lg group-hover:bg-burgundy-800/90 transition whitespace-nowrap">
                         ${cat.name}
                     </span>
+
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-base sm:text-lg shadow-xl group-hover:scale-110 transition flex-shrink-0 border border-amber-300/40">
+                        <i class="fas ${cat.icon}"></i>
+                    </div>
                 </div>
             `).join('');
         }
@@ -841,28 +854,28 @@
 
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 text-amber-300/60">
-                        <i class="fas fa-shopping-basket text-3xl mb-3 text-amber-300/40"></i>
-                        <p class="text-xs font-bold text-amber-200/80">سلتك فارغة حالياً</p>
+                    <div class="text-center py-8 text-amber-300/60">
+                        <i class="fas fa-shopping-basket text-2xl mb-2 text-amber-300/40"></i>
+                        <p class="text-[11px] font-bold text-amber-200/80">سلتك فارغة حالياً</p>
                     </div>
                 `;
                 return;
             }
 
             container.innerHTML = cart.map(item => `
-                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2 text-offwhite">
+                <div class="pt-2.5 first:pt-0 flex items-center justify-between gap-2 text-offwhite">
                     <div class="flex-1">
-                        <h4 class="font-bold text-amber-200 text-xs">${item.name}</h4>
-                        <div class="text-[10px] text-offwhite/70 mt-0.5">
+                        <h4 class="font-bold text-amber-200 text-[11px]">${item.name}</h4>
+                        <div class="text-[9px] text-offwhite/70 mt-0.5">
                             ${item.option ? `<span>الحجم: ${item.option}</span>` : ''}
                         </div>
-                        <span class="font-bold text-amber-300 text-xs mt-1 block">${item.totalPrice.toLocaleString()} د.ع</span>
+                        <span class="font-bold text-amber-300 text-[11px] mt-0.5 block">${item.totalPrice.toLocaleString()} د.ع</span>
                     </div>
 
-                    <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold px-2 py-1 bg-burgundy-950/60 rounded-lg border border-amber-300/20 text-amber-200">الكمية: ${item.qty}</span>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-[10px] font-bold px-1.5 py-0.5 bg-burgundy-950/60 rounded-lg border border-amber-300/20 text-amber-200">العدد: ${item.qty}</span>
                         <button onclick="removeCartItemDirect(${item.itemId})" class="text-rose-400 hover:text-rose-300 p-1 transition">
-                            <i class="fas fa-trash-alt text-xs"></i>
+                            <i class="fas fa-trash-alt text-[10px]"></i>
                         </button>
                     </div>
                 </div>
@@ -903,7 +916,7 @@
             msg += `شكراً لاختياركم ايس هوم! ❤️`;
 
             const encoded = encodeURIComponent(msg);
-            window.open(`https://wa.me/966500000000?text=${encoded}`, '_blank');
+            window.open(`https://wa.me/9647893035416?text=${encoded}`, '_blank');
         }
 
         function showReceiptModal() {
