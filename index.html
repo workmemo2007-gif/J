@@ -24,6 +24,7 @@
                             700: '#6b1d2f',
                             800: '#58111a',
                             900: '#3d0a11',
+                            950: '#26040a',
                         },
                         offwhite: {
                             DEFAULT: '#FAF8f5',
@@ -50,7 +51,6 @@
             scroll-behavior: smooth;
         }
 
-        /* خلفية الصورة المستوردة مع طبقة داكنة */
         .custom-bg-image {
             position: fixed;
             top: 0;
@@ -59,7 +59,7 @@
             height: 100vh;
             pointer-events: none;
             z-index: 0;
-            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://raw.githubusercontent.com/workmemo2007-gif/J/d40a2080aeb7b9c4ff515579cf26f7fed990e385/IMG_2730.png');
+            background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://raw.githubusercontent.com/workmemo2007-gif/J/d40a2080aeb7b9c4ff515579cf26f7fed990e385/IMG_2730.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -82,9 +82,8 @@
             letter-spacing: 2px;
         }
 
-        /* زجاج برغندي ناصع الشفافية */
         .burgundy-light-glass {
-            background: rgba(140, 26, 53, 0.12) !important;
+            background: rgba(140, 26, 53, 0.15) !important;
             backdrop-filter: blur(16px) !important;
             -webkit-backdrop-filter: blur(16px) !important;
             border: 1px solid rgba(250, 248, 245, 0.35) !important;
@@ -133,18 +132,18 @@
         }
 
         .right-glass-menu-trigger {
-            background: rgba(140, 26, 53, 0.25);
+            background: rgba(140, 26, 53, 0.35);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 2px solid rgba(250, 248, 245, 0.4);
+            border: 2px solid rgba(245, 158, 11, 0.6);
             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .right-glass-menu-trigger.is-active {
             transform: rotate(135deg) scale(1.1);
-            background: rgba(140, 26, 53, 0.55);
-            border-color: rgba(245, 158, 11, 0.8);
+            background: rgba(140, 26, 53, 0.65);
+            border-color: rgba(245, 158, 11, 0.9);
         }
 
         .blur-only-overlay {
@@ -166,7 +165,7 @@
         .vertical-categories-stack {
             position: fixed;
             bottom: 8.5rem;
-            right: 1.5rem;
+            left: 1.5rem;
             z-index: 50;
             display: flex;
             flex-direction: column;
@@ -190,27 +189,26 @@
             pointer-events: auto;
         }
 
-        /* أنيميشن التوهج المتحرك للمستطيل الزجاجي الرفيع لسلة الأطباق */
         @keyframes glassGlowPulse {
             0% {
                 box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(140, 26, 53, 0.3);
-                border-color: rgba(245, 158, 11, 0.5);
+                border-color: rgba(245, 158, 11, 0.6);
             }
             50% {
-                box-shadow: 0 0 22px rgba(245, 158, 11, 0.8), 0 0 35px rgba(245, 158, 11, 0.4);
-                border-color: rgba(250, 248, 245, 0.9);
+                box-shadow: 0 0 25px rgba(245, 158, 11, 0.9), 0 0 40px rgba(245, 158, 11, 0.5);
+                border-color: rgba(250, 248, 245, 0.95);
             }
             100% {
                 box-shadow: 0 0 10px rgba(245, 158, 11, 0.4), 0 0 20px rgba(140, 26, 53, 0.3);
-                border-color: rgba(245, 158, 11, 0.5);
+                border-color: rgba(245, 158, 11, 0.6);
             }
         }
 
         .glowing-glass-cart-bar {
-            background: rgba(140, 26, 53, 0.35) !important;
+            background: rgba(61, 10, 17, 0.85) !important;
             backdrop-filter: blur(20px) !important;
             -webkit-backdrop-filter: blur(20px) !important;
-            border: 1.5px solid rgba(245, 158, 11, 0.6);
+            border: 1.5px solid rgba(245, 158, 11, 0.8);
             animation: glassGlowPulse 2.5s infinite ease-in-out;
         }
 
@@ -226,17 +224,15 @@
             animation: drawerSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         @keyframes drawerSlideIn {
-            from { transform: translateX(100%); }
+            from { transform: translateX(-100%); }
             to { transform: translateX(0); }
         }
     </style>
 </head>
 <body class="relative min-h-screen pb-32 select-none">
 
-    <!-- خلفية الصورة المستوردة -->
     <div class="custom-bg-image"></div>
 
-    <!-- الهيدر الأفقـي (يختفي عند فتح أي قسم) -->
     <header id="mainHeader" class="relative w-full max-w-5xl mx-auto my-3 px-3 transition-all duration-300">
         <div class="relative w-full rounded-2xl overflow-hidden burgundy-light-glass px-5 py-2.5 sm:py-3">
             <div class="flex items-center justify-between gap-3">
@@ -264,10 +260,9 @@
         </div>
     </header>
 
-    <!-- شريط البحث (يختفي عند فتح أي قسم) -->
     <div id="searchBarContainer" class="sticky top-2 z-30 max-w-5xl mx-auto px-3 transition-all duration-300">
         <div class="burgundy-light-glass rounded-2xl p-2 flex items-center gap-2 shadow-lg">
-            <button onclick="toggleRightGlassMenu()" class="burgundy-light-glass font-extrabold px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap hover:scale-105">
+            <button onclick="toggleRightGlassMenu()" class="burgundy-light-glass font-extrabold px-4 py-1.5 rounded-xl text-xs flex items-center gap-1.5 whitespace-nowrap hover:scale-105 border border-amber-300/40">
                 <i class="fas fa-th-large text-xs text-amber-300"></i>
                 <span>الأقسام الرئيسية</span>
             </button>
@@ -281,19 +276,14 @@
         </div>
     </div>
 
-    <!-- واجهة الاستقبال الرئيسية (Home View) -->
     <div id="homeViewSection" class="max-w-md mx-auto px-4 pt-10 pb-28 relative z-10 text-center flex flex-col items-center justify-between min-h-[75vh]">
-        <!-- الترحيب العالي -->
         <div class="space-y-3 w-full my-auto">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
             <p class="text-[11px] text-offwhite/70 pt-2">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
         </div>
 
-        <!-- أزرار الانستغرام والموقع وزر (من نحن) في أسفل الصفحة الرئيسية بلمسة منخفضة الارتفاع -->
         <div class="w-full max-w-xs space-y-2 mt-auto pt-6">
-            
-            <!-- 1. زر "من نحن" التفاعلي والموسع -->
             <div class="w-full burgundy-light-glass rounded-xl border border-amber-300/30 overflow-hidden transition-all duration-300 shadow-lg">
                 <button onclick="toggleAboutUs()" class="w-full py-1.5 px-3 flex items-center justify-between text-xs font-bold text-amber-200 hover:bg-amber-300/10 transition">
                     <div class="flex items-center gap-2">
@@ -303,7 +293,6 @@
                     <i id="aboutUsArrow" class="fas fa-chevron-down text-[10px] text-amber-300 transition-transform duration-300"></i>
                 </button>
 
-                <!-- نص وتفاصيل المحل القابلة للتوسع -->
                 <div id="aboutUsContent" class="max-h-0 overflow-hidden transition-all duration-500 ease-in-out px-3 text-right">
                     <p class="text-[10px] text-offwhite/90 leading-relaxed py-2 border-t border-offwhite/10">
                         مرحباً بكم في <strong class="text-amber-300">آيس هوم (Ice Home)</strong>! نقدّم لكم تجربة استثنائية من المشروبات الباردة والساخنة، والجيلاتو الفاخر، والحلويات المصنوعة بكل شغف بجودة عالية وأجواء مميزة.
@@ -311,77 +300,85 @@
                 </div>
             </div>
 
-            <!-- 2. زر حساب الانستغرام (مخفض الارتفاع py-1.5) -->
-            <a href="https://instagram.com" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-102 transition shadow-md group">
+            <!-- 1. زر حساب الانستغرام المحدث -->
+            <a href="https://www.instagram.com/iceh_ome1?rpxt=MTNwM254MHh0d2ZxcQ==" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-pink-500/30 hover:scale-102 transition shadow-md group">
                 <i class="fab fa-instagram text-sm text-pink-400 group-hover:rotate-12 transition"></i>
                 <span>حسابنا على الانستغرام</span>
             </a>
 
-            <!-- 3. زر موقعنا (مخفض الارتفاع py-1.5) -->
-            <a href="https://maps.google.com" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-102 transition shadow-md group">
+            <!-- 2. زر الموقع المحدث -->
+            <a href="https://maps.app.goo.gl/CJphgax5BLGCureLA" target="_blank" class="w-full burgundy-light-glass py-1.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs font-extrabold text-amber-200 border border-emerald-500/30 hover:scale-102 transition shadow-md group">
                 <i class="fas fa-map-marker-alt text-xs text-emerald-400"></i>
                 <span>موقعنا الفرع الرئيسي</span>
             </a>
         </div>
     </div>
 
-    <!-- واجهة القسم المنفصل -->
     <main class="max-w-4xl mx-auto px-3 py-4 relative z-10 space-y-6 hidden" id="categoryViewSection">
-        <!-- يتم توليد واجهة القسم هنا -->
     </main>
 
-    <!-- تغبيش وضبابية الخلفية فقط عند فتح الأقسام العائمة -->
     <div id="blurOnlyOverlay" class="blur-only-overlay" onclick="toggleRightGlassMenu()"></div>
 
-    <!-- دوائر الأقسام العائمة رأسيًا فوق الزر الدائري -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
-    <!-- وحدة عائمة أسفل اليمين: تحتوي على تبويب السلة المستطيل الرفيع المتوهج بجانب زر الأقسام الرئيسي -->
-    <div id="floatingMenuContainer" class="fixed bottom-5 right-5 z-50 flex items-center gap-2.5 transition-all duration-300">
-        <!-- تبويب السلة المستطيل الرفيع والزجاجي والمتوهج -->
-        <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden cursor-pointer glowing-glass-cart-bar rounded-2xl py-2 px-3.5 flex items-center gap-2.5 text-amber-200 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300">
+    <!-- 3. وحدة السلة وزر الأقسام العائمة على جهة اليسار -->
+    <div id="floatingMenuContainer" class="fixed bottom-5 left-5 z-50 flex items-center gap-2.5 transition-all duration-300">
+        <!-- زر الأقسام الدائري الرئيسي -->
+        <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90 flex-shrink-0">
+            <i class="fas fa-utensils"></i>
+        </button>
+
+        <!-- تبويب السلة المستطيل البيضوي الرفيع والمتوهج -->
+        <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden cursor-pointer glowing-glass-cart-bar rounded-full py-2.5 px-4 flex items-center gap-2.5 text-amber-200 shadow-2xl hover:scale-105 active:scale-95 transition-all duration-300">
             <div class="relative flex items-center justify-center">
                 <i class="fas fa-shopping-bag text-amber-300 text-sm"></i>
                 <span id="floatingCartBadge" class="absolute -top-2 -right-2 bg-red-600 text-white text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-extrabold border border-white">0</span>
             </div>
             <div class="text-right leading-none">
                 <span class="block text-[10px] font-bold text-amber-300">سلة الأطباق</span>
-                <span id="floatingCartTotal" class="block text-[11px] font-black text-offwhite mt-0.5">0 ر.س</span>
+                <span id="floatingCartTotal" class="block text-[11px] font-black text-offwhite mt-0.5">0 د.ع</span>
             </div>
             <i class="fas fa-chevron-left text-[10px] text-amber-300/80 pr-1"></i>
         </div>
-
-        <!-- زر الأقسام الدائري الرئيسي -->
-        <button id="rightGlassMenuTrigger" onclick="toggleRightGlassMenu()" class="right-glass-menu-trigger w-16 h-16 sm:w-18 sm:h-18 rounded-full text-amber-300 flex items-center justify-center text-2xl shadow-2xl transition transform active:scale-90 flex-shrink-0">
-            <i class="fas fa-utensils"></i>
-        </button>
     </div>
 
-    <!-- Cart Drawer (سلة الطلبات الجانبية) -->
-    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-burgundy-950/75 backdrop-blur-sm transition-opacity">
-        <div class="bg-offwhite text-burgundy-900 w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-burgundy-200">
-            <div class="p-4 bg-burgundy-800 text-offwhite flex items-center justify-between">
+    <!-- 4. سلة الطلبات الجانبية بتصميم زجاجي داكن وإطارات ذهبية -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex justify-end bg-burgundy-950/80 backdrop-blur-md transition-opacity">
+        <div class="burgundy-light-glass bg-burgundy-900/90 text-offwhite w-full max-w-md h-full shadow-2xl flex flex-col justify-between transform drawer-slide-in border-l border-amber-300/50">
+            <div class="p-4 bg-burgundy-950/90 text-amber-200 flex items-center justify-between border-b border-amber-300/30">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-shopping-basket text-amber-300 text-base"></i>
                     <h3 class="font-bold text-sm">سلة الطلبات - ايس هوم</h3>
                 </div>
-                <button onclick="toggleCartDrawer()" class="w-7 h-7 rounded-full burgundy-light-glass flex items-center justify-center"><i class="fas fa-times text-xs"></i></button>
+                <button onclick="toggleCartDrawer()" class="w-7 h-7 rounded-full burgundy-light-glass border border-amber-300/40 flex items-center justify-center hover:scale-105 transition"><i class="fas fa-times text-xs text-amber-300"></i></button>
             </div>
 
-            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-burgundy-100 text-right"></div>
+            <!-- خيار التوصيل في الدغارة -->
+            <div class="p-3 bg-burgundy-950/50 border-b border-amber-300/20 mx-4 mt-3 rounded-xl">
+                <label class="flex items-center justify-between cursor-pointer">
+                    <div class="flex items-center gap-2.5">
+                        <input type="checkbox" id="deliveryCheckbox" onchange="updateCartUI()" class="w-4 h-4 accent-amber-500 rounded cursor-pointer">
+                        <span class="text-xs font-bold text-amber-200">توصيل الطلبات في الدغارة</span>
+                    </div>
+                    <span class="text-xs font-black text-amber-300">2,000 د.ع</span>
+                </label>
+            </div>
 
-            <div class="p-4 bg-burgundy-50 border-t border-burgundy-200 space-y-3">
-                <div class="space-y-1 text-xs text-burgundy-900">
-                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-burgundy-800">0 ر.س</span></div>
-                    <div class="flex justify-between text-[10px] text-burgundy-600"><span>ضريبة القيمة المضافة (15%):</span><span>شاملة</span></div>
-                    <div class="flex justify-between text-sm font-bold text-burgundy-900 border-t border-burgundy-200 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 ر.س</span></div>
+            <div id="cartItemsContainer" class="p-4 overflow-y-auto flex-1 space-y-3 divide-y divide-amber-300/10 text-right"></div>
+
+            <div class="p-4 bg-burgundy-950/80 border-t border-amber-300/30 space-y-3">
+                <div class="space-y-1.5 text-xs text-offwhite">
+                    <div class="flex justify-between"><span>المجموع الفرعي:</span><span id="subTotalText" class="font-bold text-amber-200">0 د.ع</span></div>
+                    <div id="deliveryFeeRow" class="flex justify-between hidden text-amber-300/90"><span>رسوم التوصيل (الدغارة):</span><span>2,000 د.ع</span></div>
+                    <div class="flex justify-between text-[10px] text-offwhite/70"><span>ضريبة القيمة المضافة:</span><span>شاملة</span></div>
+                    <div class="flex justify-between text-sm font-black text-amber-300 border-t border-amber-300/30 pt-2"><span>المجموع الكلي:</span><span id="grandTotalText">0 د.ع</span></div>
                 </div>
 
                 <div class="grid grid-cols-2 gap-2 pt-1">
-                    <button onclick="sendOrderWhatsApp()" class="burgundy-light-glass bg-emerald-600/30 text-emerald-900 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border-emerald-500/40">
-                        <i class="fab fa-whatsapp text-sm text-emerald-700"></i> <span class="text-burgundy-900">إرسال للواتساب</span>
+                    <button onclick="sendOrderWhatsApp()" class="burgundy-light-glass bg-emerald-600/30 text-emerald-200 font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border border-emerald-400/40 hover:scale-102 transition">
+                        <i class="fab fa-whatsapp text-sm text-emerald-400"></i> <span>إرسال للواتساب</span>
                     </button>
-                    <button onclick="showReceiptModal()" class="burgundy-light-glass font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2">
+                    <button onclick="showReceiptModal()" class="burgundy-light-glass font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-2 border border-amber-300/40 hover:scale-102 transition">
                         <i class="fas fa-file-invoice text-sm text-amber-300"></i> <span>الفاتورة الرقمية</span>
                     </button>
                 </div>
@@ -389,8 +386,7 @@
         </div>
     </div>
 
-    <!-- Custom Notification Box -->
-    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900/90 text-amber-200 px-5 py-2.5 rounded-2xl shadow-2xl border border-amber-300/30 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all duration-300">
+    <div id="customNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden bg-burgundy-900/95 text-amber-200 px-5 py-2.5 rounded-2xl shadow-2xl border border-amber-300/50 text-xs font-bold flex items-center gap-2.5 backdrop-blur-md transition-all duration-300">
         <i class="fas fa-check-circle text-amber-300 text-sm"></i>
         <span id="notificationText">تمت العملية بنجاح</span>
     </div>
@@ -405,28 +401,29 @@
             { id: 'desserts', name: 'الحلويات الفاخرة', icon: 'fa-cheese' }
         ];
 
+        /* 5. الأسعار بالدينار العراقي (د.ع) */
         const menuItems = [
-            { id: 1, categoryId: 'iced-drinks', name: 'آيس شيكن وايت موكا', desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد', price: 24, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 4 }] },
-            { id: 2, categoryId: 'iced-drinks', name: 'ماتشا لاتيه بارد', desc: 'ماتشا يابانية فاخرة مع حليب الشوفان البارد', price: 26, tag: 'صحّي', image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 5 }] },
-            { id: 3, categoryId: 'iced-drinks', name: 'آيس سبانيش لاتيه', desc: 'قهوة اسبريسو مكثفة مع حليب بارد محلى', price: 25, tag: 'مميز', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كبير', price: 0 }] },
-            { id: 4, categoryId: 'iced-drinks', name: 'آيس أسطوري كراميل', desc: 'قهوة مع كراميل غني ورغوة كريمة ذهبية', price: 27, tag: 'جديد', image: 'https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }] },
+            { id: 1, categoryId: 'iced-drinks', name: 'آيس شيكن وايت موكا', desc: 'مزيج الموكا البيضاء مع اسبريسو فاخر وحليب بارد', price: 4000, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 1000 }] },
+            { id: 2, categoryId: 'iced-drinks', name: 'ماتشا لاتيه بارد', desc: 'ماتشا يابانية فاخرة مع حليب الشوفان البارد', price: 4500, tag: 'صحّي', image: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }, { name: 'كبير', price: 1000 }] },
+            { id: 3, categoryId: 'iced-drinks', name: 'آيس سبانيش لاتيه', desc: 'قهوة اسبريسو مكثفة مع حليب بارد محلى', price: 4000, tag: 'مميز', image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كبير', price: 0 }] },
+            { id: 4, categoryId: 'iced-drinks', name: 'آيس أسطوري كراميل', desc: 'قهوة مع كراميل غني ورغوة كريمة ذهبية', price: 4500, tag: 'جديد', image: 'https://images.unsplash.com/photo-1553909489-cd47e0907980?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'وسط', price: 0 }] },
 
-            { id: 5, categoryId: 'ice-cream', name: 'آيس كريم هوم سبيشل', desc: 'جيلاتو فانيلا وشوكلاتة مع صوص التوت البري', price: 28, tag: 'مميز', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 5 }] },
-            { id: 6, categoryId: 'ice-cream', name: 'جيلاتو بستاشيو الفاخر', desc: 'فستق حلبي طازج مع كريمة الآيس كريم غنية', price: 30, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كوب', price: 0 }] },
-            { id: 7, categoryId: 'ice-cream', name: 'ساندويش آيس كريم مانجو', desc: 'شرائح مانجو مع جيلاتو المانجو الطبيعي', price: 24, tag: 'منعش', image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'قطعة', price: 0 }] },
-            { id: 8, categoryId: 'ice-cream', name: 'بركان الشوكولاتة والجيلاتو', desc: 'كرة جيلاتو فانيلا فوق صوص شوكولاتة ساحن', price: 32, tag: 'فاخر', image: 'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }] },
+            { id: 5, categoryId: 'ice-cream', name: 'آيس كريم هوم سبيشل', desc: 'جيلاتو فانيلا وشوكلاتة مع صوص التوت البري', price: 5000, tag: 'مميز', image: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كاس عادي', price: 0 }, { name: 'بسكويت وافل', price: 1000 }] },
+            { id: 6, categoryId: 'ice-cream', name: 'جيلاتو بستاشيو الفاخر', desc: 'فستق حلبي طازج مع كريمة الآيس كريم غنية', price: 5500, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1570197788417-0e82375c9371?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كوب', price: 0 }] },
+            { id: 7, categoryId: 'ice-cream', name: 'ساندويش آيس كريم مانجو', desc: 'شرائح مانجو مع جيلاتو المانجو الطبيعي', price: 4000, tag: 'منعش', image: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'قطعة', price: 0 }] },
+            { id: 8, categoryId: 'ice-cream', name: 'بركان الشوكولاتة والجيلاتو', desc: 'كرة جيلاتو فانيلا فوق صوص شوكولاتة ساحن', price: 6000, tag: 'فاخر', image: 'https://images.unsplash.com/photo-1580915411954-282cb1b0d780?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }] },
 
-            { id: 9, categoryId: 'hot-drinks', name: 'سبانيش لاتيه ساخن', desc: 'اسبريسو غنية مع الحليب المبخر والمكثف', price: 22, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كوب وسط', price: 0 }] },
-            { id: 10, categoryId: 'hot-drinks', name: 'كابتشينو إيطالي', desc: 'رغوة غنية مع قهوة اسبريسو فاخرة', price: 20, tag: 'كلاسيك', image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كوب', price: 0 }] },
+            { id: 9, categoryId: 'hot-drinks', name: 'سبانيش لاتيه ساخن', desc: 'اسبريسو غنية مع الحليب المبخر والمكثف', price: 3500, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كوب وسط', price: 0 }] },
+            { id: 10, categoryId: 'hot-drinks', name: 'كابتشينو إيطالي', desc: 'رغوة غنية مع قهوة اسبريسو فاخرة', price: 3000, tag: 'كلاسيك', image: 'https://images.unsplash.com/photo-1534778101976-62847782c213?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كوب', price: 0 }] },
 
-            { id: 13, categoryId: 'mojitos', name: 'موهيتو ريد بل بلوبيري', desc: 'توت أزرق، نعناع، ليمون، ومشروب ريد بل', price: 25, tag: 'مميز', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كبير 500ml', price: 0 }] },
-            { id: 14, categoryId: 'mojitos', name: 'موهيتو الفراولة والنعناع', desc: 'قطع فراولة طازجة مع نعناع وليمون وسودا', price: 23, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80', sizes: [{ name: '500ml', price: 0 }] },
+            { id: 13, categoryId: 'mojitos', name: 'موهيتو ريد بل بلوبيري', desc: 'توت أزرق، نعناع، ليمون، ومشروب ريد بل', price: 4500, tag: 'مميز', image: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'كبير 500ml', price: 0 }] },
+            { id: 14, categoryId: 'mojitos', name: 'موهيتو الفراولة والنعناع', desc: 'قطع فراولة طازجة مع نعناع وليمون وسودا', price: 4000, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80', sizes: [{ name: '500ml', price: 0 }] },
 
-            { id: 17, categoryId: 'waffles', name: 'وافل نوتيلا بالآيس كريم', desc: 'وافل ذهبي مقرمش مع نوتيلا وكرة آيس كريم', price: 29, tag: 'جديد', image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 10 }] },
-            { id: 18, categoryId: 'waffles', name: 'بان كيك بستاشيو وفراولة', desc: 'طبقات بان كيك هشة مع صوص بستاشيو وفراولة', price: 31, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }] },
+            { id: 17, categoryId: 'waffles', name: 'وافل نوتيلا بالآيس كريم', desc: 'وافل ذهبي مقرمش مع نوتيلا وكرة آيس كريم', price: 5000, tag: 'جديد', image: 'https://images.unsplash.com/photo-1562376552-0d160a2f238d?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'عادي', price: 0 }, { name: 'مضاعف', price: 2000 }] },
+            { id: 18, categoryId: 'waffles', name: 'بان كيك بستاشيو وفراولة', desc: 'طبقات بان كيك هشة مع صوص بستاشيو وفراولة', price: 5500, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1528207776546-365bb710ee93?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }] },
 
-            { id: 21, categoryId: 'desserts', name: 'كيكة السباستيان الفاخرة', desc: 'سان سيباستيان المخبوزة مع صوص الشوكلاتة', price: 32, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'شريحة', price: 0 }] },
-            { id: 22, categoryId: 'desserts', name: 'سوفليه الشوكلاتة الداكنة', desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة', price: 27, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }] }
+            { id: 21, categoryId: 'desserts', name: 'كيكة السباستيان الفاخرة', desc: 'سان سيباستيان المخبوزة مع صوص الشوكلاتة', price: 5500, tag: 'الأكثر مبيعاً', image: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'شريحة', price: 0 }] },
+            { id: 22, categoryId: 'desserts', name: 'سوفليه الشوكلاتة الداكنة', desc: 'كيكة السوفليه الدافئة بقالب شوكلاتة ذائبة', price: 4500, tag: 'دافئ', image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=600&q=80', sizes: [{ name: 'طبق', price: 0 }] }
         ];
 
         let activeCategoryId = null;
@@ -527,17 +524,17 @@
             const reversedCats = [...categories].reverse();
 
             container.innerHTML = reversedCats.map((cat, index) => `
-                <div class="category-bubble-item flex items-center justify-end gap-3 cursor-pointer group" 
+                <div class="category-bubble-item flex items-center justify-start gap-3 cursor-pointer group" 
                      style="transition-delay: ${index * 50}ms;" 
                      onclick="selectCategory('${cat.id}')">
                     
-                    <span class="text-xs sm:text-sm font-bold text-offwhite bg-burgundy-900/50 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-offwhite/20 shadow-lg group-hover:bg-burgundy-800/80 transition whitespace-nowrap">
-                        ${cat.name}
-                    </span>
-
-                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-base sm:text-lg shadow-xl group-hover:scale-110 transition flex-shrink-0">
+                    <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-full burgundy-light-glass flex items-center justify-center text-amber-300 text-base sm:text-lg shadow-xl group-hover:scale-110 transition flex-shrink-0 border border-amber-300/40">
                         <i class="fas ${cat.icon}"></i>
                     </div>
+
+                    <span class="text-xs sm:text-sm font-bold text-offwhite bg-burgundy-900/70 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-amber-300/30 shadow-lg group-hover:bg-burgundy-800/90 transition whitespace-nowrap">
+                        ${cat.name}
+                    </span>
                 </div>
             `).join('');
         }
@@ -553,41 +550,37 @@
             });
 
             container.innerHTML = `
-                <!-- زر العودة للرئيسية -->
                 <div class="flex items-center justify-between mb-2">
-                    <button onclick="goToHomeView()" class="burgundy-light-glass px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 hover:scale-105 transition">
+                    <button onclick="goToHomeView()" class="burgundy-light-glass px-3 py-1.5 rounded-xl text-xs font-bold flex items-center gap-2 hover:scale-105 transition border border-amber-300/30">
                         <i class="fas fa-arrow-right text-amber-300"></i>
                         <span>العودة للرئيسية</span>
                     </button>
-                    <span class="text-xs text-amber-300/80 font-bold">${currentCat.name}</span>
+                    <span class="text-xs text-amber-300 font-bold">${currentCat.name}</span>
                 </div>
 
-                <!-- 1. كارت اسم القسم المفتوح -->
-                <div class="w-full burgundy-light-glass rounded-2xl py-2.5 px-6 text-center border border-amber-300/30 shadow-xl modal-fade-in">
+                <div class="w-full burgundy-light-glass rounded-2xl py-2.5 px-6 text-center border border-amber-300/40 shadow-xl modal-fade-in">
                     <h2 class="text-base sm:text-lg font-black text-amber-200 tracking-wider flex items-center justify-center gap-2">
                         <i class="fas ${currentCat.icon} text-amber-300"></i>
                         <span>قسم: ${currentCat.name}</span>
                     </h2>
                 </div>
 
-                <!-- 2. قائمة أسماء الأطباق وأسعارها -->
-                <div class="w-full burgundy-light-glass rounded-2xl p-4 shadow-xl border border-offwhite/20 modal-fade-in space-y-2">
-                    <h3 class="text-xs font-bold text-amber-300/90 border-b border-offwhite/15 pb-2 mb-2 flex items-center justify-between">
+                <div class="w-full burgundy-light-glass rounded-2xl p-4 shadow-xl border border-amber-300/30 modal-fade-in space-y-2">
+                    <h3 class="text-xs font-bold text-amber-300 border-b border-offwhite/15 pb-2 mb-2 flex items-center justify-between">
                         <span>قائمة أطباق ${currentCat.name}</span>
                         <span class="text-[10px] text-offwhite/70">انقر للتمرير للطبق</span>
                     </h3>
                     
                     <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
                         ${filteredItems.length > 0 ? filteredItems.map(item => `
-                            <div onclick="scrollToDishCard(${item.id})" class="flex items-center justify-between py-1.5 px-3 rounded-xl bg-offwhite/5 hover:bg-offwhite/20 transition cursor-pointer text-xs font-bold text-offwhite">
+                            <div onclick="scrollToDishCard(${item.id})" class="flex items-center justify-between py-1.5 px-3 rounded-xl bg-offwhite/5 hover:bg-offwhite/20 transition cursor-pointer text-xs font-bold text-offwhite border border-transparent hover:border-amber-300/30">
                                 <span class="truncate pl-2">${item.name}</span>
-                                <span class="text-amber-300 whitespace-nowrap">${item.price} ر.س</span>
+                                <span class="text-amber-300 whitespace-nowrap">${item.price.toLocaleString()} د.ع</span>
                             </div>
                         `).join('') : '<p class="text-center text-xs text-offwhite/60 py-2">لا توجد أطباق مطابقة للبحث</p>'}
                     </div>
                 </div>
 
-                <!-- 3. كارتات عمودية كبيرة 3D Carousel -->
                 <div class="vertical-cards-perspective-wrapper modal-fade-in">
                     <div class="vertical-cards-carousel-track" id="verticalCardsTrack" onscroll="updateVerticalCardsPerspective()">
                         <div class="flex-shrink-0 w-[20vw]"></div>
@@ -616,12 +609,12 @@
             const state = selectedOptionsState[item.id];
 
             return `
-                <div class="large-vertical-dish-card burgundy-light-glass rounded-3xl p-4 flex flex-col justify-between border border-offwhite/30 shadow-2xl relative overflow-hidden" 
+                <div class="large-vertical-dish-card burgundy-light-glass rounded-3xl p-4 flex flex-col justify-between border border-amber-300/30 shadow-2xl relative overflow-hidden" 
                      id="dish-card-${item.id}" data-id="${item.id}">
                     
                     <div class="relative w-full h-40 rounded-2xl overflow-hidden mb-3 border border-offwhite/20 bg-burgundy-950/60 flex-shrink-0">
                         <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover">
-                        <span class="absolute top-2 right-2 bg-burgundy-900/90 text-amber-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-amber-300/30">
+                        <span class="absolute top-2 right-2 bg-burgundy-950/90 text-amber-300 text-[9px] font-bold px-2.5 py-0.5 rounded-full border border-amber-300/40">
                             ${item.tag || 'فاخر'}
                         </span>
                     </div>
@@ -629,7 +622,7 @@
                     <div class="text-right space-y-1 mb-2">
                         <h4 class="font-extrabold text-sm text-amber-200">${item.name}</h4>
                         <p class="text-[10px] text-offwhite/80 line-clamp-2 leading-tight">${item.desc}</p>
-                        <span class="text-sm font-black text-amber-300 block pt-0.5">${item.price} ر.س</span>
+                        <span class="text-sm font-black text-amber-300 block pt-0.5">${item.price.toLocaleString()} د.ع</span>
                     </div>
 
                     <div class="space-y-1.5 border-t border-offwhite/15 pt-2 mb-3 text-right text-[10px]">
@@ -639,8 +632,8 @@
                                 <div class="grid grid-cols-2 gap-1">
                                     ${item.sizes.map((s) => `
                                         <button onclick="cardSelectSize(${item.id}, ${s.price}, '${s.name}', this)" 
-                                                class="py-1 px-1 rounded-lg border text-[9px] font-bold text-center transition ${state.sizeName === s.name ? 'border-amber-300 bg-amber-300/20 text-amber-200' : 'border-offwhite/20 text-offwhite/80'}">
-                                            ${s.name} ${s.price > 0 ? `(+${s.price})` : ''}
+                                                class="py-1 px-1 rounded-lg border text-[9px] font-bold text-center transition ${state.sizeName === s.name ? 'border-amber-300 bg-amber-300/25 text-amber-200 shadow-sm' : 'border-offwhite/20 text-offwhite/80'}">
+                                            ${s.name} ${s.price > 0 ? `(+${s.price.toLocaleString()})` : ''}
                                         </button>
                                     `).join('')}
                                 </div>
@@ -655,12 +648,12 @@
                                 <span>إضافة للسلة</span>
                             </button>
                         ` : `
-                            <div class="flex items-center justify-between bg-burgundy-900/60 rounded-xl p-1.5 border border-amber-300/40 shadow-lg">
-                                <button onclick="updateDishCardQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                            <div class="flex items-center justify-between bg-burgundy-950/70 rounded-xl p-1.5 border border-amber-300/40 shadow-lg">
+                                <button onclick="updateDishCardQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-burgundy-900 hover:bg-burgundy-800 text-amber-300 font-bold flex items-center justify-center transition">
                                     <i class="fas fa-minus text-xs"></i>
                                 </button>
                                 <span class="font-bold text-offwhite text-sm px-2">${state.qty}</span>
-                                <button onclick="updateDishCardQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                                <button onclick="updateDishCardQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-burgundy-900 hover:bg-burgundy-800 text-amber-300 font-bold flex items-center justify-center transition">
                                     <i class="fas fa-plus text-xs"></i>
                                 </button>
                             </div>
@@ -703,12 +696,12 @@
                 `;
             } else {
                 area.innerHTML = `
-                    <div class="flex items-center justify-between bg-burgundy-900/60 rounded-xl p-1.5 border border-amber-300/40 shadow-lg">
-                        <button onclick="updateDishCardQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                    <div class="flex items-center justify-between bg-burgundy-950/70 rounded-xl p-1.5 border border-amber-300/40 shadow-lg">
+                        <button onclick="updateDishCardQty(${item.id}, -1)" class="w-8 h-8 rounded-lg bg-burgundy-900 hover:bg-burgundy-800 text-amber-300 font-bold flex items-center justify-center transition">
                             <i class="fas fa-minus text-xs"></i>
                         </button>
                         <span class="font-bold text-offwhite text-sm px-2">${state.qty}</span>
-                        <button onclick="updateDishCardQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-burgundy-800 hover:bg-burgundy-700 text-amber-300 font-bold flex items-center justify-center transition">
+                        <button onclick="updateDishCardQty(${item.id}, 1)" class="w-8 h-8 rounded-lg bg-burgundy-900 hover:bg-burgundy-800 text-amber-300 font-bold flex items-center justify-center transition">
                             <i class="fas fa-plus text-xs"></i>
                         </button>
                     </div>
@@ -788,10 +781,10 @@
 
             const parent = btn.parentElement;
             Array.from(parent.children).forEach(c => {
-                c.classList.remove('border-amber-300', 'bg-amber-300/20', 'text-amber-200');
+                c.classList.remove('border-amber-300', 'bg-amber-300/25', 'text-amber-200');
                 c.classList.add('border-offwhite/20', 'text-offwhite/80');
             });
-            btn.classList.add('border-amber-300', 'bg-amber-300/20', 'text-amber-200');
+            btn.classList.add('border-amber-300', 'bg-amber-300/25', 'text-amber-200');
             btn.classList.remove('border-offwhite/20', 'text-offwhite/80');
 
             syncCartWithDishState(dishId);
@@ -806,20 +799,34 @@
 
         function updateCartUI() {
             const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
-            const totalPrice = cart.reduce((sum, item) => sum + item.totalPrice, 0);
+            const subtotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
             
+            const isDeliveryChecked = document.getElementById('deliveryCheckbox').checked;
+            const deliveryFee = isDeliveryChecked ? 2000 : 0;
+            const grandTotal = subtotal + deliveryFee;
+
             const cartBadge = document.getElementById('floatingCartBadge');
             const cartTotal = document.getElementById('floatingCartTotal');
             const cartTab = document.getElementById('floatingCartTab');
 
             if (cartBadge) cartBadge.innerText = totalItems;
-            if (cartTotal) cartTotal.innerText = `${totalPrice} ر.س`;
+            if (cartTotal) cartTotal.innerText = `${grandTotal.toLocaleString()} د.ع`;
 
             if (totalItems > 0) {
                 cartTab.classList.remove('hidden');
             } else {
                 cartTab.classList.add('hidden');
             }
+
+            const deliveryFeeRow = document.getElementById('deliveryFeeRow');
+            if (isDeliveryChecked) {
+                deliveryFeeRow.classList.remove('hidden');
+            } else {
+                deliveryFeeRow.classList.add('hidden');
+            }
+
+            document.getElementById('subTotalText').innerText = `${subtotal.toLocaleString()} د.ع`;
+            document.getElementById('grandTotalText').innerText = `${grandTotal.toLocaleString()} د.ع`;
 
             renderCartDrawerItems();
         }
@@ -831,38 +838,30 @@
 
         function renderCartDrawerItems() {
             const container = document.getElementById('cartItemsContainer');
-            const subTotalText = document.getElementById('subTotalText');
-            const grandTotalText = document.getElementById('grandTotalText');
 
             if (cart.length === 0) {
                 container.innerHTML = `
-                    <div class="text-center py-12 text-burgundy-300">
-                        <i class="fas fa-shopping-basket text-3xl mb-3 text-burgundy-200"></i>
-                        <p class="text-xs font-bold text-burgundy-700">سلتك فارغة حالياً</p>
+                    <div class="text-center py-12 text-amber-300/60">
+                        <i class="fas fa-shopping-basket text-3xl mb-3 text-amber-300/40"></i>
+                        <p class="text-xs font-bold text-amber-200/80">سلتك فارغة حالياً</p>
                     </div>
                 `;
-                subTotalText.innerText = '0 ر.س';
-                grandTotalText.innerText = '0 ر.س';
                 return;
             }
 
-            const grandTotal = cart.reduce((sum, item) => sum + item.totalPrice, 0);
-            subTotalText.innerText = `${grandTotal} ر.س`;
-            grandTotalText.innerText = `${grandTotal} ر.س`;
-
             container.innerHTML = cart.map(item => `
-                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2 text-burgundy-900">
+                <div class="pt-3 first:pt-0 flex items-center justify-between gap-2 text-offwhite">
                     <div class="flex-1">
-                        <h4 class="font-bold text-burgundy-900 text-xs">${item.name}</h4>
-                        <div class="text-[10px] text-burgundy-600 mt-0.5">
+                        <h4 class="font-bold text-amber-200 text-xs">${item.name}</h4>
+                        <div class="text-[10px] text-offwhite/70 mt-0.5">
                             ${item.option ? `<span>الحجم: ${item.option}</span>` : ''}
                         </div>
-                        <span class="font-bold text-burgundy-700 text-xs mt-1 block">${item.totalPrice} ر.س</span>
+                        <span class="font-bold text-amber-300 text-xs mt-1 block">${item.totalPrice.toLocaleString()} د.ع</span>
                     </div>
 
                     <div class="flex items-center gap-2">
-                        <span class="text-xs font-bold px-2 py-1 bg-burgundy-100 rounded-lg">الكمية: ${item.qty}</span>
-                        <button onclick="removeCartItemDirect(${item.itemId})" class="text-rose-500 hover:text-rose-700 p-1 transition">
+                        <span class="text-xs font-bold px-2 py-1 bg-burgundy-950/60 rounded-lg border border-amber-300/20 text-amber-200">الكمية: ${item.qty}</span>
+                        <button onclick="removeCartItemDirect(${item.itemId})" class="text-rose-400 hover:text-rose-300 p-1 transition">
                             <i class="fas fa-trash-alt text-xs"></i>
                         </button>
                     </div>
@@ -882,15 +881,25 @@
         function sendOrderWhatsApp() {
             if (cart.length === 0) return;
 
+            const isDeliveryChecked = document.getElementById('deliveryCheckbox').checked;
             let msg = `*طلب جديد من منيو ايس هوم 🍦☕*\n\n`;
             cart.forEach((item, index) => {
                 msg += `${index + 1}. *${item.name}* (العدد: ${item.qty})\n`;
                 if (item.option) msg += `   • الحجم: ${item.option}\n`;
-                msg += `   • السعر: ${item.totalPrice} ر.س\n\n`;
+                msg += `   • السعر: ${item.totalPrice.toLocaleString()} د.ع\n\n`;
             });
 
-            const total = cart.reduce((s, i) => s + i.totalPrice, 0);
-            msg += `*إجمالي الطلب:* ${total} ر.س\n`;
+            const subtotal = cart.reduce((s, i) => s + i.totalPrice, 0);
+            const deliveryFee = isDeliveryChecked ? 2000 : 0;
+            const grandTotal = subtotal + deliveryFee;
+
+            if (isDeliveryChecked) {
+                msg += `🚚 *نوع الطلب:* توصيل إلى الدغارة (+2,000 د.ع)\n`;
+            } else {
+                msg += `🏪 *نوع الطلب:* استلام من الفرع\n`;
+            }
+
+            msg += `*إجمالي الطلب:* ${grandTotal.toLocaleString()} د.ع\n`;
             msg += `شكراً لاختياركم ايس هوم! ❤️`;
 
             const encoded = encodeURIComponent(msg);
@@ -899,8 +908,10 @@
 
         function showReceiptModal() {
             if (cart.length === 0) return;
-            const total = cart.reduce((s, i) => s + i.totalPrice, 0);
-            showNotification(`إجمالي الفاتورة الرقمية: ${total} ر.س — جاهزة للطلب`);
+            const subtotal = cart.reduce((s, i) => s + i.totalPrice, 0);
+            const isDeliveryChecked = document.getElementById('deliveryCheckbox').checked;
+            const grandTotal = subtotal + (isDeliveryChecked ? 2000 : 0);
+            showNotification(`إجمالي الفاتورة: ${grandTotal.toLocaleString()} د.ع — جاهزة للطلب ✨`);
         }
 
         function showNotification(text) {
