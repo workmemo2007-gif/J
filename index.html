@@ -236,31 +236,31 @@
             to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        /* أنماط أزرار الطاولات الشفافة والمخفية فوق الدوائر في الصورة */
+        /* أنماط أزرار الطاولات الدائرية المتطابقة مع الصورة */
         .table-hotspot {
             position: absolute;
-            border: 2px dashed rgba(245, 158, 11, 0.5);
-            background: rgba(245, 158, 11, 0.1);
+            border: 2px dashed rgba(245, 158, 11, 0.6);
+            background: rgba(245, 158, 11, 0.15);
             border-radius: 50%;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 900;
             color: #f59e0b;
         }
         .table-hotspot:hover {
-            background: rgba(245, 158, 11, 0.3);
+            background: rgba(245, 158, 11, 0.35);
             border-color: #f59e0b;
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
         .table-hotspot.selected {
-            background: rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.5);
             border: 3px solid #10b981;
             color: #ffffff;
-            box-shadow: 0 0 15px rgba(16, 185, 129, 0.8);
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.9);
         }
     </style>
 </head>
@@ -432,22 +432,21 @@
             <div class="w-full pb-2.5 border-b border-amber-300/30 flex items-center justify-between mb-3">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-chair text-amber-300 text-sm"></i>
-                    <h3 class="font-bold text-xs text-amber-200">اختر الطاولة (اختر طاولة واحدة فقط)</h3>
+                    <h3 class="font-bold text-xs text-amber-200">اختر الطاولة (انقر على إحدى الدوائر)</h3>
                 </div>
                 <button onclick="closeTableModal()" class="w-6 h-6 rounded-full bg-amber-300/10 border border-amber-300/30 flex items-center justify-center hover:scale-105 transition"><i class="fas fa-times text-[10px] text-amber-300"></i></button>
             </div>
             
-            <!-- حاوية الصورة مع الأزرار الشفافة التفاعلية فوقها -->
+            <!-- حاوية الصورة مع الأزرار الدائرية الخمسة الموضعة بدقة فوق دوائر اليسار -->
             <div class="relative w-full rounded-2xl overflow-hidden border border-amber-300/40 bg-burgundy-950/80 mb-3 flex items-center justify-center">
-                <img id="tableMapImage" src="https://raw.githubusercontent.com/workmemo2007-gif/J/6636dce98b799cd756268c737c4f85700b4abdc3/IMG_2769.jpeg" alt="تحديد الطاولة" class="w-full h-auto object-contain max-h-[55vh] block">
+                <img id="tableMapImage" src="https://raw.githubusercontent.com/workmemo2007-gif/J/6636dce98b799cd756268c737c4f85700b4abdc3/IMG_2769.jpeg" alt="تحديد الطاولة" class="w-full h-auto object-contain max-h-[60vh] block">
                 
-                <!-- 5 أزرار (نقاط ساخنة) فوق الدوائر الخمس في الصورة -->
-                <!-- ملاحظة: النسب المئوية أدناه (top, left, width, height) توزع الدوائر الخمس على الخريطة ويمكن تعديلها بدقة حسب مواقع الدوائر الفعلي في صورتك -->
-                <div class="table-hotspot" data-table="1" style="top: 15%; left: 25%; width: 14%; height: 14%;" onclick="selectTable(1)">طاولة 1</div>
-                <div class="table-hotspot" data-table="2" style="top: 15%; left: 60%; width: 14%; height: 14%;" onclick="selectTable(2)">طاولة 2</div>
-                <div class="table-hotspot" data-table="3" style="top: 45%; left: 42%; width: 14%; height: 14%;" onclick="selectTable(3)">طاولة 3</div>
-                <div class="table-hotspot" data-table="4" style="top: 75%; left: 25%; width: 14%; height: 14%;" onclick="selectTable(4)">طاولة 4</div>
-                <div class="table-hotspot" data-table="5" style="top: 75%; left: 60%; width: 14%; height: 14%;" onclick="selectTable(5)">طاولة 5</div>
+                <!-- أزرار دائرية متموضعة بدقة فوق الدوائر الخمس على جهة اليسار مرتبة عمودياً -->
+                <div class="table-hotspot" data-table="1" style="top: 10.5%; left: 10.5%; width: 14.5%; aspect-ratio: 1;" onclick="selectTable(1)">١</div>
+                <div class="table-hotspot" data-table="2" style="top: 24.5%; left: 10.5%; width: 14.5%; aspect-ratio: 1;" onclick="selectTable(2)">٢</div>
+                <div class="table-hotspot" data-table="3" style="top: 38.8%; left: 10.5%; width: 14.5%; aspect-ratio: 1;" onclick="selectTable(3)">٣</div>
+                <div class="table-hotspot" data-table="4" style="top: 54.5%; left: 10.5%; width: 14.5%; aspect-ratio: 1;" onclick="selectTable(4)">٤</div>
+                <div class="table-hotspot" data-table="5" style="top: 68.8%; left: 10.5%; width: 14.5%; aspect-ratio: 1;" onclick="selectTable(5)">٥</div>
             </div>
 
             <div id="selectedTableNotice" class="text-[11px] font-bold text-amber-300 mb-3">
@@ -999,7 +998,6 @@
         function selectTable(tableNum) {
             selectedTableNumber = tableNum;
             
-            // تحديث تصميم الأزرار (إزالة وتطبيق class المختارة)
             const hotspots = document.querySelectorAll('.table-hotspot');
             hotspots.forEach(spot => {
                 if (spot.getAttribute('data-table') == tableNum) {
