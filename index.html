@@ -212,7 +212,6 @@
             animation: glassGlowPulse 2.5s infinite ease-in-out;
         }
 
-        /* كارت سلة الجوال عائم وزجاجي عالي الشفافية */
         .ultra-glass-floating-card {
             background: rgba(45, 8, 15, 0.45) !important;
             backdrop-filter: blur(28px) !important;
@@ -289,7 +288,7 @@
         <div class="space-y-3 w-full my-auto">
             <h2 id="typewriterTitle" class="text-4xl sm:text-6xl font-bold ruqaa-welcome-text"></h2>
             <h1 id="typewriterSubtitle" class="text-2xl sm:text-5xl font-bold ruqaa-welcome-english"></h1>
-            <p class="text-[11px] text-offwhite/70 pt-2">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة[span_1](start_span)[span_1](end_span)</p>
+            <p class="text-[11px] text-offwhite/70 pt-2">انقر على زر القائمة العائم أدناه لاستعراض الأقسام الفاخرة</p>
         </div>
 
         <div class="w-full max-w-xs space-y-2 mt-auto pt-6">
@@ -329,7 +328,7 @@
     <!-- دوائر الأقسام العائمة على يمين الصفحة -->
     <div class="vertical-categories-stack" id="verticalCategoriesContainer"></div>
 
-    <!-- شريط السلة العائم الممتد الطويل من يسار الشاشة حتى أقصى اليمين بجانب دائرة الأقسام -->
+    <!-- شريط السلة العائم -->
     <div id="floatingCartTab" onclick="toggleCartDrawer()" class="hidden fixed bottom-5 left-5 right-24 z-50 cursor-pointer glowing-glass-cart-bar rounded-full py-3 px-5 flex items-center justify-between text-amber-200 shadow-2xl hover:scale-102 active:scale-98 transition-all duration-300">
         <div class="flex items-center gap-3">
             <div class="relative flex items-center justify-center">
@@ -352,7 +351,7 @@
         </button>
     </div>
 
-    <!-- كارت سلة الطلبات العائم والزجاجي الشفاف كلياً مع خلفية شديدة التلطيف والضبابية -->
+    <!-- كارت سلة الطلبات العائم -->
     <div id="cartDrawer" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-2xl transition-all duration-300">
         <div class="ultra-glass-floating-card text-offwhite w-full max-w-sm rounded-3xl p-4 shadow-2xl flex flex-col justify-between transform drawer-slide-in relative overflow-hidden max-h-[85vh]">
             
@@ -392,11 +391,32 @@
                     <button onclick="sendOrderWhatsApp()" class="bg-emerald-600/30 hover:bg-emerald-600/40 text-emerald-200 font-bold py-2 rounded-xl text-[11px] flex items-center justify-center gap-1.5 border border-emerald-400/40 hover:scale-102 transition shadow-lg">
                         <i class="fab fa-whatsapp text-xs text-emerald-400"></i> <span>واتساب</span>
                     </button>
-                    <button onclick="showReceiptModal()" class="bg-amber-300/10 hover:bg-amber-300/20 text-amber-200 font-bold py-2 rounded-xl text-[11px] flex items-center justify-center gap-1.5 border border-amber-300/40 hover:scale-102 transition shadow-lg">
-                        <i class="fas fa-file-invoice text-xs text-amber-300"></i> <span>الفاتورة</span>
+                    <button onclick="showTableModal()" class="bg-amber-300/10 hover:bg-amber-300/20 text-amber-200 font-bold py-2 rounded-xl text-[11px] flex items-center justify-center gap-1.5 border border-amber-300/40 hover:scale-102 transition shadow-lg">
+                        <i class="fas fa-chair text-xs text-amber-300"></i> <span>تحديد الطاولة</span>
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Modal عرض صورة الطاولة -->
+    <div id="tableModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-md transition-all duration-300">
+        <div class="ultra-glass-floating-card text-offwhite w-full max-w-sm rounded-3xl p-4 shadow-2xl flex flex-col items-center justify-between transform modal-fade-in relative overflow-hidden">
+            <div class="w-full pb-2.5 border-b border-amber-300/30 flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <i class="fas fa-chair text-amber-300 text-sm"></i>
+                    <h3 class="font-bold text-xs text-amber-200">اختر الطاولة</h3>
+                </div>
+                <button onclick="closeTableModal()" class="w-6 h-6 rounded-full bg-amber-300/10 border border-amber-300/30 flex items-center justify-center hover:scale-105 transition"><i class="fas fa-times text-[10px] text-amber-300"></i></button>
+            </div>
+            
+            <div class="w-full rounded-2xl overflow-hidden border border-amber-300/40 bg-burgundy-950/80 mb-3 p-1">
+                <img src="https://raw.githubusercontent.com/workmemo2007-gif/J/6a32520ae44262ff81039df9d916a107297c48a7/IMG_2769.jpeg" alt="تحديد الطاولة" class="w-full h-auto rounded-xl object-contain max-h-[60vh]">
+            </div>
+
+            <button onclick="closeTableModal()" class="w-full bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-bold py-2 rounded-xl text-xs border border-amber-300/40 transition">
+                تم الاختيار
+            </button>
         </div>
     </div>
 
@@ -919,12 +939,15 @@
             window.open(`https://wa.me/9647893035416?text=${encoded}`, '_blank');
         }
 
-        function showReceiptModal() {
+        function showTableModal() {
             if (cart.length === 0) return;
-            const subtotal = cart.reduce((s, i) => s + i.totalPrice, 0);
-            const isDeliveryChecked = document.getElementById('deliveryCheckbox').checked;
-            const grandTotal = subtotal + (isDeliveryChecked ? 2000 : 0);
-            showNotification(`إجمالي الفاتورة: ${grandTotal.toLocaleString()} د.ع — جاهزة للطلب ✨`);
+            const modal = document.getElementById('tableModal');
+            modal.classList.remove('hidden');
+        }
+
+        function closeTableModal() {
+            const modal = document.getElementById('tableModal');
+            modal.classList.add('hidden');
         }
 
         function showNotification(text) {
