@@ -58,14 +58,18 @@
             overflow-x: hidden;
             scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
         }
 
+        /* تم تعديل الخلفية لتتطابق بسلاسة مع أجهزة آبل (آيباد/آيفون) عند التدوير */
         .custom-bg-image {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
+            height: -webkit-fill-available;
             pointer-events: none;
             z-index: 0;
             background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://raw.githubusercontent.com/workmemo2007-gif/J/d40a2080aeb7b9c4ff515579cf26f7fed990e385/IMG_2730.png');
