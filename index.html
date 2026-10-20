@@ -235,6 +235,33 @@
             from { transform: translateY(30px) scale(0.95); opacity: 0; }
             to { transform: translateY(0) scale(1); opacity: 1; }
         }
+
+        /* أنماط أزرار الطاولات الشفافة والمخفية فوق الدوائر في الصورة */
+        .table-hotspot {
+            position: absolute;
+            border: 2px dashed rgba(245, 158, 11, 0.5);
+            background: rgba(245, 158, 11, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 900;
+            color: #f59e0b;
+        }
+        .table-hotspot:hover {
+            background: rgba(245, 158, 11, 0.3);
+            border-color: #f59e0b;
+            transform: scale(1.05);
+        }
+        .table-hotspot.selected {
+            background: rgba(16, 185, 129, 0.4);
+            border: 3px solid #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.8);
+        }
     </style>
 </head>
 <body class="relative min-h-screen pb-32 select-none">
@@ -392,30 +419,43 @@
                         <i class="fab fa-whatsapp text-xs text-emerald-400"></i> <span>واتساب</span>
                     </button>
                     <button onclick="showTableModal()" class="bg-amber-300/10 hover:bg-amber-300/20 text-amber-200 font-bold py-2 rounded-xl text-[11px] flex items-center justify-center gap-1.5 border border-amber-300/40 hover:scale-102 transition shadow-lg">
-                        <i class="fas fa-chair text-xs text-amber-300"></i> <span>تحديد الطاولة</span>
+                        <i class="fas fa-chair text-xs text-amber-300"></i> <span id="tableButtonText">تحديد الطاولة</span>
                     </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal عرض صورة الطاولة -->
-    <div id="tableModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/70 backdrop-blur-md transition-all duration-300">
-        <div class="ultra-glass-floating-card text-offwhite w-full max-w-sm rounded-3xl p-4 shadow-2xl flex flex-col items-center justify-between transform modal-fade-in relative overflow-hidden">
+    <!-- Modal تفاعلي لخريطة الطاولات -->
+    <div id="tableModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/75 backdrop-blur-md transition-all duration-300">
+        <div class="ultra-glass-floating-card text-offwhite w-full max-w-md rounded-3xl p-4 shadow-2xl flex flex-col items-center justify-between transform modal-fade-in relative overflow-hidden">
             <div class="w-full pb-2.5 border-b border-amber-300/30 flex items-center justify-between mb-3">
                 <div class="flex items-center gap-2">
                     <i class="fas fa-chair text-amber-300 text-sm"></i>
-                    <h3 class="font-bold text-xs text-amber-200">اختر الطاولة</h3>
+                    <h3 class="font-bold text-xs text-amber-200">اختر الطاولة (اختر طاولة واحدة فقط)</h3>
                 </div>
                 <button onclick="closeTableModal()" class="w-6 h-6 rounded-full bg-amber-300/10 border border-amber-300/30 flex items-center justify-center hover:scale-105 transition"><i class="fas fa-times text-[10px] text-amber-300"></i></button>
             </div>
             
-            <div class="w-full rounded-2xl overflow-hidden border border-amber-300/40 bg-burgundy-950/80 mb-3 p-1">
-                <img src="https://raw.githubusercontent.com/workmemo2007-gif/J/6a32520ae44262ff81039df9d916a107297c48a7/IMG_2769.jpeg" alt="تحديد الطاولة" class="w-full h-auto rounded-xl object-contain max-h-[60vh]">
+            <!-- حاوية الصورة مع الأزرار الشفافة التفاعلية فوقها -->
+            <div class="relative w-full rounded-2xl overflow-hidden border border-amber-300/40 bg-burgundy-950/80 mb-3 flex items-center justify-center">
+                <img id="tableMapImage" src="https://raw.githubusercontent.com/workmemo2007-gif/J/6636dce98b799cd756268c737c4f85700b4abdc3/IMG_2769.jpeg" alt="تحديد الطاولة" class="w-full h-auto object-contain max-h-[55vh] block">
+                
+                <!-- 5 أزرار (نقاط ساخنة) فوق الدوائر الخمس في الصورة -->
+                <!-- ملاحظة: النسب المئوية أدناه (top, left, width, height) توزع الدوائر الخمس على الخريطة ويمكن تعديلها بدقة حسب مواقع الدوائر الفعلي في صورتك -->
+                <div class="table-hotspot" data-table="1" style="top: 15%; left: 25%; width: 14%; height: 14%;" onclick="selectTable(1)">طاولة 1</div>
+                <div class="table-hotspot" data-table="2" style="top: 15%; left: 60%; width: 14%; height: 14%;" onclick="selectTable(2)">طاولة 2</div>
+                <div class="table-hotspot" data-table="3" style="top: 45%; left: 42%; width: 14%; height: 14%;" onclick="selectTable(3)">طاولة 3</div>
+                <div class="table-hotspot" data-table="4" style="top: 75%; left: 25%; width: 14%; height: 14%;" onclick="selectTable(4)">طاولة 4</div>
+                <div class="table-hotspot" data-table="5" style="top: 75%; left: 60%; width: 14%; height: 14%;" onclick="selectTable(5)">طاولة 5</div>
             </div>
 
-            <button onclick="closeTableModal()" class="w-full bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-bold py-2 rounded-xl text-xs border border-amber-300/40 transition">
-                تم الاختيار
+            <div id="selectedTableNotice" class="text-[11px] font-bold text-amber-300 mb-3">
+                لم يتم اختيار أي طاولة بعد
+            </div>
+
+            <button onclick="confirmTableSelection()" class="w-full bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 font-bold py-2 rounded-xl text-xs border border-amber-300/40 transition shadow-md">
+                تأكيد الطاولة المختارة
             </button>
         </div>
     </div>
@@ -465,6 +505,7 @@
         let isRightMenuOpen = false;
         let selectedOptionsState = {};
         let isAboutUsExpanded = false;
+        let selectedTableNumber = null;
 
         window.onload = function() {
             renderVerticalCategoriesStack();
@@ -916,6 +957,11 @@
 
             const isDeliveryChecked = document.getElementById('deliveryCheckbox').checked;
             let msg = `*طلب جديد من منيو ايس هوم 🍦☕*\n\n`;
+            
+            if (selectedTableNumber) {
+                msg += `🪑 *رقم الطاولة المحددة:* طاولة رقم (${selectedTableNumber})\n\n`;
+            }
+
             cart.forEach((item, index) => {
                 msg += `${index + 1}. *${item.name}* (العدد: ${item.qty})\n`;
                 if (item.option) msg += `   • الحجم: ${item.option}\n`;
@@ -929,7 +975,7 @@
             if (isDeliveryChecked) {
                 msg += `🚚 *نوع الطلب:* توصيل إلى الدغارة (+2,000 د.ع)\n`;
             } else {
-                msg += `🏪 *نوع الطلب:* استلام من الفرع\n`;
+                msg += `🏪 *نوع الطلب:* استلام داخل الصالة\n`;
             }
 
             msg += `*إجمالي الطلب:* ${grandTotal.toLocaleString()} د.ع\n`;
@@ -948,6 +994,33 @@
         function closeTableModal() {
             const modal = document.getElementById('tableModal');
             modal.classList.add('hidden');
+        }
+
+        function selectTable(tableNum) {
+            selectedTableNumber = tableNum;
+            
+            // تحديث تصميم الأزرار (إزالة وتطبيق class المختارة)
+            const hotspots = document.querySelectorAll('.table-hotspot');
+            hotspots.forEach(spot => {
+                if (spot.getAttribute('data-table') == tableNum) {
+                    spot.classList.add('selected');
+                } else {
+                    spot.classList.remove('selected');
+                }
+            });
+
+            document.getElementById('selectedTableNotice').innerText = `تم تحديد: طاولة رقم (${tableNum})`;
+        }
+
+        function confirmTableSelection() {
+            if (!selectedTableNumber) {
+                showNotification('يرجى اختيار طاولة واحدة أولاً ✨');
+                return;
+            }
+
+            document.getElementById('tableButtonText').innerText = `طاولة رقم (${selectedTableNumber})`;
+            closeTableModal();
+            showNotification(`تم تثبيت الطاولة رقم (${selectedTableNumber}) بنجاح ✨`);
         }
 
         function showNotification(text) {
