@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>ايس هوم | Ice Home - القائمة الرقمية الفاخرة</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -43,20 +43,29 @@
     </script>
     
     <style>
+        html, body {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-text-size-adjust: 100%;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             background-color: #FAF8f5;
             color: #FAF8f5;
             overflow-x: hidden;
             scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
         }
 
         .custom-bg-image {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
+            width: 100%;
+            height: 100%;
             pointer-events: none;
             z-index: 0;
             background-image: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://raw.githubusercontent.com/workmemo2007-gif/J/d40a2080aeb7b9c4ff515579cf26f7fed990e385/IMG_2730.png');
@@ -236,7 +245,6 @@
             to { transform: translateY(0) scale(1); opacity: 1; }
         }
 
-        /* أنماط أزرار الطاولات الدائرية المتطابقة مع الصورة */
         .table-hotspot {
             position: absolute;
             border: 2px dashed rgba(245, 158, 11, 0.6);
