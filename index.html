@@ -40,16 +40,14 @@
             scroll-behavior: smooth;
         }
 
-        /* Glassmorphism مع المزيج بين البرغندي والأوف وايت */
         .glass-card {
             background: rgba(251, 249, 245, 0.85);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(128, 0, 32, 0.25);
+            border: 1px solid rgba(128, 0, 32, 0.2);
             box-shadow: 0 8px 25px -5px rgba(128, 0, 32, 0.08);
         }
 
-        /* إطار البرغندي المشع عند التحويم أو التبريز */
         .burgundy-glow-border {
             border: 2px solid #C41E3A;
             box-shadow: 0 0 12px rgba(196, 30, 58, 0.4), inset 0 0 8px rgba(196, 30, 58, 0.15);
@@ -66,22 +64,37 @@
             transform: translateY(-3px);
         }
 
-        .nav-glass {
-            background: rgba(251, 249, 245, 0.92);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+        /* App-like grid icons style */
+        .app-icon-card {
+            background: rgba(251, 249, 245, 0.95);
+            border: 2px solid rgba(196, 30, 58, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Responsive vertical grid layout for dishes */
+        .app-icon-card:active, .app-icon-card:hover {
+            border-color: #C41E3A;
+            box-shadow: 0 0 15px rgba(196, 30, 58, 0.4);
+            transform: scale(0.96);
+        }
+
+        /* Hide scrollbars for clean horizontal slider */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
         .dishes-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
             gap: 0.85rem;
         }
 
         @media (min-width: 640px) {
             .dishes-grid {
-                grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
                 gap: 1.1rem;
             }
         }
@@ -93,26 +106,21 @@
     <!-- 1. الشاشة الترحيبية الرئيسية (WELCOME SCREEN) -->
     <!-- ========================================== -->
     <div id="welcome-screen" class="fixed inset-0 z-50 flex items-center justify-center bg-burgundy-dark p-4 transition-all duration-500 overflow-y-auto">
-        <!-- Background Overlay Image with Blend Mode -->
         <div class="absolute inset-0 z-0 opacity-20 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80');"></div>
 
-        <!-- Welcome Card Content -->
         <div class="relative z-10 max-w-md w-full bg-offwhite/95 border-2 border-burgundy-glow rounded-3xl p-6 sm:p-8 text-center text-burgundy-dark shadow-[0_0_30px_rgba(196,30,58,0.35)] space-y-6">
             
-            <!-- Logo Section with Radiant Glow -->
             <div class="relative inline-block">
                 <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=200&q=80" alt="شعار آيس هوم" class="w-28 h-28 mx-auto rounded-full burgundy-glow-border object-cover">
                 <div class="absolute -bottom-1 -right-1 bg-burgundy text-white w-9 h-8 rounded-full flex items-center justify-center text-base border-2 border-offwhite shadow-md">🧊</div>
             </div>
 
-            <!-- Title & Subtitle in Arabic and English -->
             <div class="space-y-1">
                 <h1 class="text-3xl font-black text-burgundy tracking-wide">آيس هوم</h1>
                 <h2 class="text-xl font-bold text-burgundy-glow tracking-widest uppercase">ICE HOME</h2>
                 <p class="text-xs font-semibold text-gray-600 pt-1">أهلاً وسهلاً بكم • Welcome</p>
             </div>
 
-            <!-- Language Select Buttons -->
             <div class="space-y-3 pt-2">
                 <button onclick="enterMenu('ar')" class="w-full py-3.5 px-6 rounded-2xl bg-burgundy hover:bg-burgundy-glow text-white font-bold text-base transition-all transform active:scale-95 shadow-[0_4px_15px_rgba(128,0,32,0.3)] flex items-center justify-center gap-2 border border-burgundy-glow">
                     <span>🇸🇦</span>
@@ -124,15 +132,12 @@
                 </button>
             </div>
 
-            <!-- Social Links & Location Buttons -->
             <div class="pt-4 border-t border-burgundy/20 flex items-center justify-center gap-4">
-                <!-- Location Button -->
                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 rounded-xl bg-cream hover:bg-burgundy hover:text-white text-burgundy transition-all text-xs font-bold flex items-center justify-center gap-2 border border-burgundy/20 shadow-sm">
                     <i class="fa-solid fa-location-dot text-sm text-burgundy-glow"></i>
                     <span>موقع المحل</span>
                 </a>
 
-                <!-- Instagram Button -->
                 <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="flex-1 py-2.5 px-4 rounded-xl bg-cream hover:bg-burgundy hover:text-white text-burgundy transition-all text-xs font-bold flex items-center justify-center gap-2 border border-burgundy/20 shadow-sm">
                     <i class="fa-brands fa-instagram text-sm text-burgundy-glow"></i>
                     <span>إنستغرام</span>
@@ -148,42 +153,15 @@
     <!-- ========================================== -->
     <div id="main-menu" class="hidden min-h-screen pb-16">
 
-        <!-- Header Navigation -->
-        <header class="sticky top-0 z-40 nav-glass border-b border-burgundy/20 transition-colors duration-300">
-            <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between gap-2">
-                <!-- Logo & Title -->
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-burgundy flex items-center justify-center text-white font-bold text-xl shadow-md border border-burgundy-glow">
-                        🧊
-                    </div>
-                    <div>
-                        <h1 class="text-xl sm:text-2xl font-extrabold text-burgundy tracking-wide" id="nav-title">آيس هوم</h1>
-                        <p class="text-[10px] sm:text-xs text-gray-600 font-medium">Ice Home Restaurant</p>
-                    </div>
-                </div>
-
-                <!-- Social Links & Language Switcher -->
-                <div class="flex items-center gap-2 sm:gap-3">
-                    <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full bg-cream text-burgundy hover:bg-burgundy hover:text-white border border-burgundy/20 transition-all text-xs flex items-center gap-1" title="موقع المطعم">
-                        <i class="fa-solid fa-location-dot text-sm text-burgundy-glow"></i>
-                        <span class="hidden sm:inline font-bold" id="nav-loc">الموقع</span>
-                    </a>
-
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="p-2 rounded-full bg-cream text-burgundy hover:bg-burgundy hover:text-white border border-burgundy/20 transition-all text-xs flex items-center gap-1" title="انستغرام">
-                        <i class="fa-brands fa-instagram text-sm text-burgundy-glow"></i>
-                        <span class="hidden sm:inline font-bold" id="nav-insta">انستغرام</span>
-                    </a>
-
-                    <button onclick="toggleLanguage()" id="lang-btn" class="px-3.5 py-1.5 text-xs font-bold rounded-full bg-burgundy text-white hover:bg-burgundy-glow border border-burgundy-glow transition-all shadow-sm">
-                        English
-                    </button>
-                </div>
-            </div>
-        </header>
-
-        <!-- Cover Banner Section -->
+        <!-- Cover Banner Section (بدون هيدر علوي) -->
         <section class="relative w-full h-56 sm:h-72 bg-burgundy-dark overflow-hidden border-b-2 border-burgundy-glow">
             <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="غلاف آيس هوم" class="w-full h-full object-cover opacity-40">
+            
+            <!-- Language Switcher Floating Badge inside Hero Banner -->
+            <button onclick="toggleLanguage()" id="lang-btn" class="absolute top-4 left-4 z-10 px-3.5 py-1.5 text-xs font-bold rounded-full bg-burgundy/80 backdrop-blur-md text-white hover:bg-burgundy-glow border border-burgundy-glow transition-all shadow-md">
+                English
+            </button>
+
             <div class="absolute inset-0 bg-gradient-to-t from-burgundy-dark via-burgundy-dark/40 to-transparent flex flex-col justify-end p-6 max-w-4xl mx-auto">
                 <div class="flex items-center gap-4">
                     <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=200&q=80" alt="شعار آيس هوم" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl burgundy-glow-border object-cover shadow-lg">
@@ -196,17 +174,40 @@
             </div>
         </section>
 
-        <!-- Category Shortcuts Navigation -->
+        <!-- Category Grid Navigation (مربعات الأقسام بشكل تطبيقات) -->
         <div class="max-w-4xl mx-auto px-4 pt-6">
-            <nav class="flex items-center gap-2 text-xs sm:text-sm font-bold overflow-x-auto pb-2 border-b-2 border-burgundy/10">
-                <a href="#appetizers" class="px-4 py-2 rounded-full bg-cream text-burgundy hover:bg-burgundy hover:text-white border border-burgundy/20 transition-all whitespace-nowrap" id="cat-appetizers">المقبلات</a>
-                <a href="#mains" class="px-4 py-2 rounded-full bg-cream text-burgundy hover:bg-burgundy hover:text-white border border-burgundy/20 transition-all whitespace-nowrap" id="cat-mains">الأطباق الرئيسية</a>
-                <a href="#drinks" class="px-4 py-2 rounded-full bg-cream text-burgundy hover:bg-burgundy hover:text-white border border-burgundy/20 transition-all whitespace-nowrap" id="cat-drinks">المشروبات والآيس كريم</a>
-            </nav>
+            <h2 class="text-xs font-black text-burgundy-glow mb-3 tracking-widest uppercase" id="section-app-title">تصفح الأقسام</h2>
+            <div class="grid grid-cols-3 gap-3 sm:gap-4">
+                
+                <!-- App Box 1: Appetizers -->
+                <a href="#appetizers" class="app-icon-card rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-2 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-burgundy/10 flex items-center justify-center text-burgundy text-xl border border-burgundy-glow/30">
+                        🥗
+                    </div>
+                    <span class="font-extrabold text-xs text-burgundy" id="cat-appetizers">المقبلات</span>
+                </a>
+
+                <!-- App Box 2: Main Courses -->
+                <a href="#mains" class="app-icon-card rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-2 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-burgundy/10 flex items-center justify-center text-burgundy text-xl border border-burgundy-glow/30">
+                        🍖
+                    </div>
+                    <span class="font-extrabold text-xs text-burgundy" id="cat-mains">الأطباق الرئيسية</span>
+                </a>
+
+                <!-- App Box 3: Drinks & Ice Cream -->
+                <a href="#drinks" class="app-icon-card rounded-2xl p-3 flex flex-col items-center justify-center text-center gap-2 shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-burgundy/10 flex items-center justify-center text-burgundy text-xl border border-burgundy-glow/30">
+                        🍦
+                    </div>
+                    <span class="font-extrabold text-xs text-burgundy" id="cat-drinks">المشروبات والآيس كريم</span>
+                </a>
+
+            </div>
         </div>
 
         <!-- Main Content Container -->
-        <main class="max-w-4xl mx-auto px-4 pt-6 space-y-10">
+        <main class="max-w-4xl mx-auto px-4 pt-8 space-y-10">
 
             <!-- Section 1: Appetizers -->
             <section id="appetizers" class="space-y-4">
@@ -215,34 +216,8 @@
                     <h2 class="text-lg sm:text-xl font-bold text-burgundy" data-ar="المقبلات" data-en="Appetizers">المقبلات</h2>
                 </div>
 
-                <div class="dishes-grid">
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1541518763669-27fef04b14e8?auto=format&fit=crop&w=300&q=80" alt="حمص بطحينة" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="حمص باللحم" data-en="Hummus with Meat">حمص باللحم</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="حمص طازج مع قطع اللحم والصنوبر" data-en="Fresh hummus topped with meat and pine nuts">حمص طازج مع قطع اللحم والصنوبر</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">2,500 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=300&q=80" alt="سلطة سيزر" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="سلطة سيزر" data-en="Caesar Salad">سلطة سيزر</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="خس طازج، دجاج مشوي وجبن" data-en="Fresh lettuce, grilled chicken and cheese">خس طازج، دجاج مشوي وجبن</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">3,000 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=300&q=80" alt="متبل باذنجان" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="متبل باذنجان" data-en="Mutabbal">متبل باذنجان</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="باذنجان مشوي مع الطحينة والزيت" data-en="Grilled eggplant with tahini & oil">باذنجان مشوي مع الطحينة والزيت</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">2,000 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=300&q=80" alt="فتوش" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="سلطة فتوش" data-en="Fattoush Salad">سلطة فتوش</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="خضار طازجة مع الخبز المحمص" data-en="Fresh veggies with crispy bread">خضار طازجة مع الخبز المحمص</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">2,500 د.ع</span>
-                    </div>
+                <div class="dishes-grid" id="grid-appetizers">
+                    <!-- Cards added dynamically/statically with onclick modal trigger -->
                 </div>
             </section>
 
@@ -253,34 +228,7 @@
                     <h2 class="text-lg sm:text-xl font-bold text-burgundy" data-ar="الأطباق الرئيسية" data-en="Main Courses">الأطباق الرئيسية</h2>
                 </div>
 
-                <div class="dishes-grid">
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=300&q=80" alt="كباب لحم" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="كباب آيس هوم" data-en="Ice Home Kebab">كباب آيس هوم</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="لحم غنم مشوي على الفحم" data-en="Charcoal grilled lamb kebab">لحم غنم مشوي على الفحم</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">8,500 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=300&q=80" alt="بيتزا" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="بيتزا ببروني" data-en="Pepperoni Pizza">بيتزا ببروني</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="جبنة موزاريلا مع الببروني" data-en="Mozzarella cheese with pepperoni">جبنة موزاريلا مع الببروني</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">7,000 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=300&q=80" alt="برغر" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="برغر كلاسيك" data-en="Classic Burger">برغر كلاسيك</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="شريحة لحم مع الجبن والبطاطا" data-en="Beef patty with cheese & fries">شريحة لحم مع الجبن والبطاطا</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">6,000 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=300&q=80" alt="قوزي" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="قوزي لحم" data-en="Lamb Quzi">قوزي لحم</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="لحم محمر يقدم مع أرز العنبر" data-en="Roasted lamb served with rice">لحم محمر يقدم مع أرز العنبر</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">11,000 د.ع</span>
-                    </div>
+                <div class="dishes-grid" id="grid-mains">
                 </div>
             </section>
 
@@ -291,34 +239,7 @@
                     <h2 class="text-lg sm:text-xl font-bold text-burgundy" data-ar="المشروبات والآيس كريم" data-en="Drinks & Ice Cream">المشروبات والآيس كريم</h2>
                 </div>
 
-                <div class="dishes-grid">
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=300&q=80" alt="آيس كريم" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="آيس كريم مشكل" data-en="Mixed Ice Cream">آيس كريم مشكل</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="طبقات متعددة النكهات" data-en="Multi-flavor layered ice cream">طبقات متعددة النكهات</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">2,000 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=300&q=80" alt="عصير برتقال" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="عصير برتقال" data-en="Fresh Orange Juice">عصير برتقال</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="طازج بدون سكر مضاف" data-en="Fresh with no added sugar">طازج بدون سكر مضاف</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">1,500 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=300&q=80" alt="موخيتو" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="موخيتو منعش" data-en="Fresh Mojito">موخيتو منعش</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="ليمون ونعناع مع الصودا" data-en="Lemon and mint with soda">ليمون ونعناع مع الصودا</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">2,500 د.ع</span>
-                    </div>
-
-                    <div class="glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card">
-                        <img src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=300&q=80" alt="ميلك شيك" class="w-full h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
-                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1" data-ar="ميلك شيك شوكولا" data-en="Chocolate Milkshake">ميلك شيك شوكولا</h3>
-                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1" data-ar="حليب غني بالشوكولاتة والآيس كريم" data-en="Rich chocolate milk with ice cream">حليب غني بالشوكولاتة والآيس كريم</p>
-                        <span class="text-burgundy-glow font-black text-xs mt-auto">3,000 د.ع</span>
-                    </div>
+                <div class="dishes-grid" id="grid-drinks">
                 </div>
             </section>
 
@@ -332,12 +253,138 @@
 
     </div>
 
+
     <!-- ========================================== -->
-    <!-- 3. JAVASCRIPT FOR SCREEN SWITCHING & LANG -->
+    <!-- 3. POPUP MODAL (توسيع الطبق والشريط الأفقي) -->
+    <!-- ========================================== -->
+    <div id="dish-modal" class="fixed inset-0 z-50 hidden flex items-end sm:items-center justify-center bg-black/70 backdrop-blur-sm p-0 sm:p-4 transition-all duration-300">
+        <div class="bg-offwhite border-t-2 sm:border-2 border-burgundy-glow w-full max-w-lg rounded-t-3xl sm:rounded-3xl p-5 shadow-[0_0_35px_rgba(196,30,58,0.4)] space-y-4 max-h-[90vh] overflow-y-auto relative">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 left-4 w-8 h-8 rounded-full bg-burgundy text-white flex items-center justify-center font-bold text-sm shadow-md border border-burgundy-glow z-10">
+                ✕
+            </button>
+
+            <!-- Expanded Active Dish Info -->
+            <div id="modal-content" class="space-y-3">
+                <img id="modal-img" src="" class="w-full h-48 sm:h-56 object-cover rounded-2xl border-2 border-burgundy-glow/40 shadow-md">
+                <div class="flex justify-between items-start gap-2 pt-1">
+                    <h3 id="modal-title" class="text-xl font-black text-burgundy"></h3>
+                    <span id="modal-price" class="px-3 py-1 bg-burgundy text-white font-extrabold text-sm rounded-full border border-burgundy-glow whitespace-nowrap"></span>
+                </div>
+                <p id="modal-desc" class="text-xs sm:text-sm text-gray-700 leading-relaxed bg-cream/60 p-3 rounded-xl border border-burgundy/10"></p>
+            </div>
+
+            <!-- Horizontal Scroll Slider for Other Dishes in same Category -->
+            <div class="pt-3 border-t border-burgundy/20 space-y-2">
+                <h4 class="text-xs font-black text-burgundy-glow" id="horizontal-slider-title">باقي أطباق القسم (إسحب أفقياً):</h4>
+                <div id="horizontal-carousel" class="flex gap-3 overflow-x-auto no-scrollbar pb-2 pt-1">
+                    <!-- Rendered horizontally -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- 4. JAVASCRIPT FOR DATA, MODAL & LANG -->
     <!-- ========================================== -->
     <script>
         let currentLang = 'ar';
+        let currentCategory = '';
 
+        // Complete Dishes Dataset
+        const menuData = {
+            appetizers: [
+                { id: 'app1', nameAr: 'حمص باللحم', nameEn: 'Hummus with Meat', descAr: 'حمص بطحينة طازج ممتاز يعلوه قطع لحم الغنم المحمرة والصنوبر.', descEn: 'Fresh hummus topped with fried lamb pieces and pine nuts.', price: '2,500 د.ع', img: 'https://images.unsplash.com/photo-1541518763669-27fef04b14e8?auto=format&fit=crop&w=600&q=80' },
+                { id: 'app2', nameAr: 'سلطة سيزر', nameEn: 'Caesar Salad', descAr: 'خس طازج مع شرائح الدجاج المشوي، جبن بارميزان وخبز محمص.', descEn: 'Fresh lettuce, grilled chicken slices, parmesan cheese, and croutons.', price: '3,000 د.ع', img: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80' },
+                { id: 'app3', nameAr: 'متبل باذنجان', nameEn: 'Mutabbal', descAr: 'باذنجان مشوي على الفحم ممزوج بالطحينة وزيت الزيتون الصافي.', descEn: 'Charcoal roasted eggplant mixed with tahini and extra virgin olive oil.', price: '2,000 د.ع', img: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80' },
+                { id: 'app4', nameAr: 'سلطة فتوش', nameEn: 'Fattoush Salad', descAr: 'خضار مقطعة طازجة مع دبس الرمان الخالص والخبز المقرمش.', descEn: 'Fresh diced vegetables with pomegranate molasses and crispy bread.', price: '2,500 د.ع', img: 'https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=600&q=80' }
+            ],
+            mains: [
+                { id: 'main1', nameAr: 'كباب آيس هوم', nameEn: 'Ice Home Kebab', descAr: 'ثلاثة أشياش من لحم الغنم الطازج المشوي على الفحم مع الخضار.', descEn: 'Three skewers of fresh charcoal grilled lamb kebab with vegetables.', price: '8,500 د.ع', img: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80' },
+                { id: 'main2', nameAr: 'بيتزا ببروني', nameEn: 'Pepperoni Pizza', descAr: 'عجينة ايطالية هشة تعلوها جبنة الموزاريلا وشرائح الببروني.', descEn: 'Crispy Italian dough topped with mozzarella cheese and pepperoni slices.', price: '7,000 د.ع', img: 'https://images.unsplash.com/photo-1604382355076-af4b0eb60143?auto=format&fit=crop&w=600&q=80' },
+                { id: 'main3', nameAr: 'برغر كلاسيك', nameEn: 'Classic Burger', descAr: 'شريحة لحم بقر مشوية مع جبنة الشيدر والصوص الخاص والبطاطس.', descEn: 'Grilled beef patty with cheddar cheese, signature sauce and fries.', price: '6,000 د.ع', img: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80' },
+                { id: 'main4', nameAr: 'قوزي لحم', nameEn: 'Lamb Quzi', descAr: 'لحم غنم محمر يقدم مع أرز العنبر العراقي الفاخر والمكسرات.', descEn: 'Roasted lamb served with premium Iraqi Amber rice and nuts.', price: '11,000 د.ع', img: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80' }
+            ],
+            drinks: [
+                { id: 'drk1', nameAr: 'آيس كريم مشكل', nameEn: 'Mixed Ice Cream', descAr: 'كاس آيس كريم بطبقات متعددة النكهات الطبيعية الفاخرة.', descEn: 'Layered cup of luxury natural flavor ice creams.', price: '2,000 د.ع', img: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=600&q=80' },
+                { id: 'drk2', nameAr: 'عصير برتقال', nameEn: 'Fresh Orange Juice', descAr: 'عصير برتقال طبيعي معصور طازج بدون سكر أو حافظات.', descEn: 'Freshly squeezed natural orange juice with no added sugar.', price: '1,500 د.ع', img: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80' },
+                { id: 'drk3', nameAr: 'موخيتو منعش', nameEn: 'Fresh Mojito', descAr: 'شرائح الليمون والنعناع الطازج مع الصودا الباردة والثلج.', descEn: 'Fresh lemon slices and mint with cold soda and ice.', price: '2,500 د.ع', img: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80' },
+                { id: 'drk4', nameAr: 'ميلك شيك شوكولا', nameEn: 'Chocolate Milkshake', descAr: 'حليب كامل الدسم غني بالشوكولاتة والآيس كريم والكريمة.', descEn: 'Full cream milk blended with rich chocolate, ice cream, and whipped cream.', price: '3,000 د.ع', img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80' }
+            ]
+        };
+
+        // Render Cards dynamically into Vertical Grid
+        function renderMenu() {
+            for (const category in menuData) {
+                const container = document.getElementById(`grid-${category}`);
+                if (!container) continue;
+                container.innerHTML = '';
+
+                menuData[category].forEach(dish => {
+                    const name = currentLang === 'ar' ? dish.nameAr : dish.nameEn;
+                    const desc = currentLang === 'ar' ? dish.descAr : dish.descEn;
+
+                    const card = document.createElement('div');
+                    card.className = "glass-card rounded-xl p-2.5 flex flex-col items-center text-center burgundy-glow-card cursor-pointer";
+                    card.onclick = () => openModal(dish.id, category);
+
+                    card.innerHTML = `
+                        <img src="${dish.img}" alt="${name}" class="w-full h-24 sm:h-28 object-cover rounded-lg border border-burgundy/20 mb-2" loading="lazy">
+                        <h3 class="font-bold text-xs sm:text-sm text-burgundy line-clamp-1">${name}</h3>
+                        <p class="text-[10px] text-gray-600 line-clamp-2 mt-0.5 mb-1">${desc}</p>
+                        <span class="text-burgundy-glow font-black text-xs mt-auto">${dish.price}</span>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        }
+
+        // Open Dish Details Modal & Populate Horizontal Carousel
+        function openModal(dishId, category) {
+            currentCategory = category;
+            const categoryDishes = menuData[category];
+            const dish = categoryDishes.find(d => d.id === dishId);
+            if (!dish) return;
+
+            const modal = document.getElementById('dish-modal');
+            
+            // Populate Main Dish Info
+            document.getElementById('modal-img').src = dish.img;
+            document.getElementById('modal-title').textContent = currentLang === 'ar' ? dish.nameAr : dish.nameEn;
+            document.getElementById('modal-desc').textContent = currentLang === 'ar' ? dish.descAr : dish.descEn;
+            document.getElementById('modal-price').textContent = dish.price;
+
+            // Render Horizontal Carousel with all dishes from same category
+            const carousel = document.getElementById('horizontal-carousel');
+            carousel.innerHTML = '';
+
+            categoryDishes.forEach(item => {
+                const itemName = currentLang === 'ar' ? item.nameAr : item.nameEn;
+                const isSelected = item.id === dishId;
+
+                const carouselCard = document.createElement('div');
+                carouselCard.className = `flex-shrink-0 w-28 p-2 rounded-xl border text-center cursor-pointer transition-all ${isSelected ? 'border-burgundy-glow bg-burgundy/10 shadow-sm' : 'border-burgundy/20 bg-cream/50 hover:bg-cream'}`;
+                carouselCard.onclick = () => openModal(item.id, category);
+
+                carouselCard.innerHTML = `
+                    <img src="${item.img}" class="w-full h-16 object-cover rounded-lg mb-1 border border-burgundy/10">
+                    <p class="text-[10px] font-bold text-burgundy line-clamp-1">${itemName}</p>
+                    <span class="text-[9px] font-black text-burgundy-glow">${item.price}</span>
+                `;
+                carousel.appendChild(carouselCard);
+            });
+
+            modal.classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('dish-modal').classList.add('hidden');
+        }
+
+        // Entrance Logic from Welcome Screen
         function enterMenu(lang) {
             const welcomeScreen = document.getElementById('welcome-screen');
             welcomeScreen.classList.add('opacity-0', 'pointer-events-none');
@@ -361,10 +408,9 @@
             const heroBadge = document.getElementById('hero-badge');
             const heroTitle = document.getElementById('hero-title');
             const heroSubtitle = document.getElementById('hero-subtitle');
-
-            const navLoc = document.getElementById('nav-loc');
-            const navInsta = document.getElementById('nav-insta');
             const footerText = document.getElementById('footer-text');
+            const appTitle = document.getElementById('section-app-title');
+            const sliderTitle = document.getElementById('horizontal-slider-title');
 
             const catAppetizers = document.getElementById('cat-appetizers');
             const catMains = document.getElementById('cat-mains');
@@ -378,10 +424,9 @@
                 heroBadge.textContent = 'Welcome';
                 heroTitle.textContent = 'Ice Home Restaurant';
                 heroSubtitle.textContent = 'Delicious fresh dishes served daily';
-
-                navLoc.textContent = 'Location';
-                navInsta.textContent = 'Instagram';
                 footerText.textContent = 'All prices include tax • Welcome to Ice Home';
+                appTitle.textContent = 'BROWSE CATEGORIES';
+                sliderTitle.textContent = 'Other Dishes in Category (Scroll horizontally):';
 
                 catAppetizers.textContent = 'Appetizers';
                 catMains.textContent = 'Main Courses';
@@ -398,10 +443,9 @@
                 heroBadge.textContent = 'مرحباً بكم';
                 heroTitle.textContent = 'مطعم ومعجنات آيس هوم';
                 heroSubtitle.textContent = 'أشهى الأطباق والوجبات الطازجة يومياً';
-
-                navLoc.textContent = 'الموقع';
-                navInsta.textContent = 'انستغرام';
                 footerText.textContent = 'جميع الأسعار شاملة للضريبة • أهلاً وسهلاً بكم في آيس هوم';
+                appTitle.textContent = 'تصفح الأقسام';
+                sliderTitle.textContent = 'باقي أطباق القسم (إسحب أفقياً):';
 
                 catAppetizers.textContent = 'المقبلات';
                 catMains.textContent = 'الأطباق الرئيسية';
@@ -411,6 +455,8 @@
                     el.textContent = el.getAttribute('data-ar');
                 });
             }
+
+            renderMenu();
         }
     </script>
 </body>
