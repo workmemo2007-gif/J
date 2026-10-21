@@ -153,23 +153,32 @@
     <!-- ========================================== -->
     <div id="main-menu" class="hidden min-h-screen pb-16">
 
-        <!-- Cover Banner Section (بدون هيدر علوي) -->
-        <section class="relative w-full h-56 sm:h-72 bg-burgundy-dark overflow-hidden border-b-2 border-burgundy-glow">
-            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="غلاف آيس هوم" class="w-full h-full object-cover opacity-40">
-            
-            <!-- Language Switcher Floating Badge inside Hero Banner -->
-            <button onclick="toggleLanguage()" id="lang-btn" class="absolute top-4 left-4 z-10 px-3.5 py-1.5 text-xs font-bold rounded-full bg-burgundy/80 backdrop-blur-md text-white hover:bg-burgundy-glow border border-burgundy-glow transition-all shadow-md">
-                English
-            </button>
-
-            <div class="absolute inset-0 bg-gradient-to-t from-burgundy-dark via-burgundy-dark/40 to-transparent flex flex-col justify-end p-6 max-w-4xl mx-auto">
-                <div class="flex items-center gap-4">
-                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=200&q=80" alt="شعار آيس هوم" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl burgundy-glow-border object-cover shadow-lg">
-                    <div class="text-offwhite">
-                        <span class="px-3 py-0.5 rounded-full text-[10px] font-bold bg-burgundy-glow text-white uppercase tracking-wider border border-white/20" id="hero-badge">مرحباً بكم</span>
-                        <h2 class="text-xl sm:text-3xl font-black mt-1 text-white" id="hero-title">مطعم ومعجنات آيس هوم</h2>
-                        <p class="text-xs sm:text-sm text-cream mt-0.5" id="hero-subtitle">أشهى الأطباق والوجبات الطازجة يومياً</p>
+        <!-- Top Simple Header Bar (شريط أفقي يحتوي فقط على الاسم والشعار) -->
+        <div class="sticky top-0 z-40 bg-burgundy-dark/95 backdrop-blur-md border-b-2 border-burgundy-glow px-4 py-2.5 shadow-lg">
+            <div class="max-w-4xl mx-auto flex items-center justify-between">
+                <div class="flex items-center gap-2.5">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=200&q=80" alt="شعار آيس هوم" class="w-9 h-9 rounded-full border border-burgundy-glow object-cover shadow-sm">
+                    <div>
+                        <h1 class="text-base sm:text-lg font-black text-white leading-none">آيس هوم</h1>
+                        <span class="text-[10px] font-bold text-burgundy-glow tracking-widest uppercase">ICE HOME</span>
                     </div>
+                </div>
+
+                <!-- Language Switcher -->
+                <button onclick="toggleLanguage()" id="lang-btn" class="px-3 py-1 text-xs font-bold rounded-full bg-burgundy hover:bg-burgundy-glow text-white border border-burgundy-glow transition-all shadow-sm">
+                    English
+                </button>
+            </div>
+        </div>
+
+        <!-- Cover Banner Section -->
+        <section class="relative w-full h-44 sm:h-60 bg-burgundy-dark overflow-hidden border-b-2 border-burgundy-glow/50">
+            <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80" alt="غلاف آيس هوم" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-t from-burgundy-dark via-burgundy-dark/30 to-transparent flex flex-col justify-end p-5 max-w-4xl mx-auto">
+                <div class="text-offwhite">
+                    <span class="px-3 py-0.5 rounded-full text-[10px] font-bold bg-burgundy-glow text-white uppercase tracking-wider border border-white/20" id="hero-badge">مرحباً بكم</span>
+                    <h2 class="text-xl sm:text-2xl font-black mt-1 text-white" id="hero-title">مطعم ومعجنات آيس هوم</h2>
+                    <p class="text-xs sm:text-sm text-cream mt-0.5" id="hero-subtitle">أشهى الأطباق والوجبات الطازجة يومياً</p>
                 </div>
             </div>
         </section>
@@ -211,36 +220,44 @@
 
             <!-- Section 1: Appetizers -->
             <section id="appetizers" class="space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-6 rounded-full bg-burgundy-glow shadow-[0_0_8px_#C41E3A]"></span>
-                    <h2 class="text-lg sm:text-xl font-bold text-burgundy" data-ar="المقبلات" data-en="Appetizers">المقبلات</h2>
+                <!-- شريط أفقي ممدود يحمل اسم القسم بخط عريض -->
+                <div class="w-full bg-burgundy text-white py-3 px-5 rounded-2xl border-2 border-burgundy-glow shadow-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🥗</span>
+                        <h2 class="text-base sm:text-lg font-black text-white tracking-wide" data-ar="قسم المقبلات" data-en="Appetizers Section">قسم المقبلات</h2>
+                    </div>
+                    <span class="text-xs text-burgundy-glow font-bold bg-white/10 px-3 py-1 rounded-full">آيس هوم</span>
                 </div>
 
-                <div class="dishes-grid" id="grid-appetizers">
-                    <!-- Cards added dynamically/statically with onclick modal trigger -->
-                </div>
+                <div class="dishes-grid" id="grid-appetizers"></div>
             </section>
 
             <!-- Section 2: Main Courses -->
             <section id="mains" class="space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-6 rounded-full bg-burgundy-glow shadow-[0_0_8px_#C41E3A]"></span>
-                    <h2 class="text-lg sm:text-xl font-bold text-burgundy" data-ar="الأطباق الرئيسية" data-en="Main Courses">الأطباق الرئيسية</h2>
+                <!-- شريط أفقي ممدود يحمل اسم القسم بخط عريض -->
+                <div class="w-full bg-burgundy text-white py-3 px-5 rounded-2xl border-2 border-burgundy-glow shadow-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🍖</span>
+                        <h2 class="text-base sm:text-lg font-black text-white tracking-wide" data-ar="قسم الأطباق الرئيسية" data-en="Main Courses Section">قسم الأطباق الرئيسية</h2>
+                    </div>
+                    <span class="text-xs text-burgundy-glow font-bold bg-white/10 px-3 py-1 rounded-full">آيس هوم</span>
                 </div>
 
-                <div class="dishes-grid" id="grid-mains">
-                </div>
+                <div class="dishes-grid" id="grid-mains"></div>
             </section>
 
             <!-- Section 3: Drinks & Ice Cream -->
             <section id="drinks" class="space-y-4">
-                <div class="flex items-center gap-2">
-                    <span class="w-3 h-6 rounded-full bg-burgundy-glow shadow-[0_0_8px_#C41E3A]"></span>
-                    <h2 class="text-lg sm:text-xl font-bold text-burgundy" data-ar="المشروبات والآيس كريم" data-en="Drinks & Ice Cream">المشروبات والآيس كريم</h2>
+                <!-- شريط أفقي ممدود يحمل اسم القسم بخط عريض -->
+                <div class="w-full bg-burgundy text-white py-3 px-5 rounded-2xl border-2 border-burgundy-glow shadow-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">🍦</span>
+                        <h2 class="text-base sm:text-lg font-black text-white tracking-wide" data-ar="قسم المشروبات والآيس كريم" data-en="Drinks & Ice Cream Section">قسم المشروبات والآيس كريم</h2>
+                    </div>
+                    <span class="text-xs text-burgundy-glow font-bold bg-white/10 px-3 py-1 rounded-full">آيس هوم</span>
                 </div>
 
-                <div class="dishes-grid" id="grid-drinks">
-                </div>
+                <div class="dishes-grid" id="grid-drinks"></div>
             </section>
 
         </main>
