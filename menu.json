@@ -18,19 +18,6 @@
           },
           "dishes": [
             {
-              "id": "xlsx-001",
-              "name": {
-                "ar": "وجبة دجاج الكاري",
-                "en": "وجبة دجاج الكاري"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793133101012-xlsx-001.png"
-            },
-            {
               "id": "xlsx-002",
               "name": {
                 "ar": "ستيك دجاج",
@@ -41,20 +28,20 @@
                 "en": ""
               },
               "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/43d5b43f66d78fc6877f.webp"
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793133486307-xlsx-002.jpg"
             },
             {
-              "id": "xlsx-003",
+              "id": "xlsx-001",
               "name": {
-                "ar": "صدر دجاج محشي بالخضار",
-                "en": "صدر دجاج محشي بالخضار"
+                "ar": "وجبة دجاج الكاري",
+                "en": "وجبة دجاج الكاري"
               },
               "desc": {
                 "ar": "",
                 "en": ""
               },
-              "price": 9000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/43d5b43f66d78fc6877f.webp"
+              "price": 8000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793131773300-xlsx-001.png"
             },
             {
               "id": "xlsx-004",
