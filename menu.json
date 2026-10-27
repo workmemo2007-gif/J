@@ -18,6 +18,19 @@
           },
           "dishes": [
             {
+              "id": "xlsx-013",
+              "name": {
+                "ar": "وجبة دجاج بالصلصة الحمراء (سبايسي)",
+                "en": "وجبة دجاج بالصلصة الحمراء (سبايسي)"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 9000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793134409441-xlsx-013.jpg"
+            },
+            {
               "id": "xlsx-005",
               "name": {
                 "ar": "وجبة شيش طاووق",
@@ -158,19 +171,6 @@
                 "en": ""
               },
               "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/43d5b43f66d78fc6877f.webp"
-            },
-            {
-              "id": "xlsx-013",
-              "name": {
-                "ar": "وجبة دجاج بالصلصة الحمراء (سبايسي)",
-                "en": "وجبة دجاج بالصلصة الحمراء (سبايسي)"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 9000,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/43d5b43f66d78fc6877f.webp"
             },
             {
