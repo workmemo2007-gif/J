@@ -18,6 +18,19 @@
           },
           "dishes": [
             {
+              "id": "xlsx-004",
+              "name": {
+                "ar": "وجبة فاهيتا دجاج",
+                "en": "وجبة فاهيتا دجاج"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 7000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793137192389-xlsx-004.png"
+            },
+            {
               "id": "xlsx-013",
               "name": {
                 "ar": "وجبة دجاج بالصلصة الحمراء (سبايسي)",
@@ -68,19 +81,6 @@
               },
               "price": 8000,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793131773300-xlsx-001.png"
-            },
-            {
-              "id": "xlsx-004",
-              "name": {
-                "ar": "وجبة فاهيتا دجاج",
-                "en": "وجبة فاهيتا دجاج"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 7000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/43d5b43f66d78fc6877f.webp"
             },
             {
               "id": "xlsx-006",
