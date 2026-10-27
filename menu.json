@@ -18,6 +18,19 @@
           },
           "dishes": [
             {
+              "id": "xlsx-005",
+              "name": {
+                "ar": "وجبة شيش طاووق",
+                "en": "وجبة شيش طاووق"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 7000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793133822725-xlsx-005.jpg"
+            },
+            {
               "id": "xlsx-002",
               "name": {
                 "ar": "ستيك دجاج",
@@ -48,19 +61,6 @@
               "name": {
                 "ar": "وجبة فاهيتا دجاج",
                 "en": "وجبة فاهيتا دجاج"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 7000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/43d5b43f66d78fc6877f.webp"
-            },
-            {
-              "id": "xlsx-005",
-              "name": {
-                "ar": "وجبة شيش طاووق",
-                "en": "وجبة شيش طاووق"
               },
               "desc": {
                 "ar": "",
