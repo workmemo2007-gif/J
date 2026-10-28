@@ -18,6 +18,19 @@
           },
           "dishes": [
             {
+              "id": "xlsx-002",
+              "name": {
+                "ar": "ستيك دجاج",
+                "en": "ستيك دجاج"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 8000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793207897537-xlsx-002.jpg"
+            },
+            {
               "id": "xlsx-007",
               "name": {
                 "ar": "وجبة دجاج صيني بالخضار",
@@ -68,19 +81,6 @@
               },
               "price": 7000,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793133822725-xlsx-005.jpg"
-            },
-            {
-              "id": "xlsx-002",
-              "name": {
-                "ar": "ستيك دجاج",
-                "en": "ستيك دجاج"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793133486307-xlsx-002.jpg"
             },
             {
               "id": "xlsx-001",
