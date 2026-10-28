@@ -18,6 +18,19 @@
           },
           "dishes": [
             {
+              "id": "715f2f40-7f9b-4658-801c-541cf005f30c",
+              "name": {
+                "ar": "وجبة دجاج صيني بالخضار",
+                "en": "وجبة دجاج صيني بالخضار"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 8000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793178021059-715f2f40-7f9b-4658-801c-541cf005f30c.jpg"
+            },
+            {
               "id": "xlsx-007",
               "name": {
                 "ar": "وجبة دجاج صيني بالخضار",
