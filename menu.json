@@ -18,6 +18,19 @@
           },
           "dishes": [
             {
+              "id": "xlsx-001",
+              "name": {
+                "ar": "وجبة دجاج الكاري",
+                "en": "وجبة دجاج الكاري"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 8000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298937525-xlsx-001.webp"
+            },
+            {
               "id": "xlsx-005",
               "name": {
                 "ar": "وجبة شيش طاووق",
@@ -81,19 +94,6 @@
               },
               "price": 8000,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916796-xlsx-002.webp"
-            },
-            {
-              "id": "xlsx-001",
-              "name": {
-                "ar": "وجبة دجاج الكاري",
-                "en": "وجبة دجاج الكاري"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793131773300-xlsx-001.png"
             },
             {
               "id": "xlsx-006",
