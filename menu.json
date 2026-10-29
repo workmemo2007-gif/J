@@ -18,43 +18,17 @@
           },
           "dishes": [
             {
-              "id": "xlsx-002",
+              "id": "xlsx-005",
               "name": {
-                "ar": "ستيك دجاج",
-                "en": "ستيك دجاج"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793207897537-xlsx-002.jpg"
-            },
-            {
-              "id": "xlsx-007",
-              "name": {
-                "ar": "وجبة دجاج صيني بالخضار",
-                "en": "وجبة دجاج صيني بالخضار"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 8000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793169569337-xlsx-007.png"
-            },
-            {
-              "id": "xlsx-004",
-              "name": {
-                "ar": "وجبة فاهيتا دجاج",
-                "en": "وجبة فاهيتا دجاج"
+                "ar": "وجبة شيش طاووق",
+                "en": "وجبة شيش طاووق"
               },
               "desc": {
                 "ar": "",
                 "en": ""
               },
               "price": 7000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793138461538-xlsx-004.png"
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916806-xlsx-005.webp"
             },
             {
               "id": "xlsx-013",
@@ -67,20 +41,46 @@
                 "en": ""
               },
               "price": 9000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793134409441-xlsx-013.jpg"
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916803-xlsx-013.webp"
             },
             {
-              "id": "xlsx-005",
+              "id": "xlsx-004",
               "name": {
-                "ar": "وجبة شيش طاووق",
-                "en": "وجبة شيش طاووق"
+                "ar": "وجبة فاهيتا دجاج",
+                "en": "وجبة فاهيتا دجاج"
               },
               "desc": {
                 "ar": "",
                 "en": ""
               },
               "price": 7000,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793133822725-xlsx-005.jpg"
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916801-xlsx-004.webp"
+            },
+            {
+              "id": "xlsx-007",
+              "name": {
+                "ar": "وجبة دجاج صيني بالخضار",
+                "en": "وجبة دجاج صيني بالخضار"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 8000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916799-xlsx-007.webp"
+            },
+            {
+              "id": "xlsx-002",
+              "name": {
+                "ar": "ستيك دجاج",
+                "en": "ستيك دجاج"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 8000,
+              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916796-xlsx-002.webp"
             },
             {
               "id": "xlsx-001",
