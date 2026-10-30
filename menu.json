@@ -18,19 +18,6 @@
           },
           "dishes": [
             {
-              "id": "4eb00707-5d29-4aa9-82bc-c3862dbabf0c",
-              "name": {
-                "ar": "بطيخ ر",
-                "en": "بطيخ"
-              },
-              "desc": {
-                "ar": "تب  بتب تبسايبس تنباا",
-                "en": ""
-              },
-              "price": 0,
-              "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793383075451-4eb00707-5d29-4aa9-82bc-c3862dbabf0c.webp"
-            },
-            {
               "id": "xlsx-001",
               "name": {
                 "ar": "وجبة دجاج الكاري",
