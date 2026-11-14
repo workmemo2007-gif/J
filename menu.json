@@ -18,6 +18,20 @@
           },
           "dishes": [
             {
+              "id": "a64ccab5-e95a-42bd-bed2-6e5b0ec478f6",
+              "name": {
+                "ar": "تمن ة مرك",
+                "en": "ةةةة"
+              },
+              "desc": {
+                "ar": "",
+                "en": ""
+              },
+              "price": 1660,
+              "img": "",
+              "status": "available"
+            },
+            {
               "id": "xlsx-001",
               "name": {
                 "ar": "وجبة دجاج الكاري",
