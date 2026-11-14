@@ -18,20 +18,6 @@
           },
           "dishes": [
             {
-              "id": "a64ccab5-e95a-42bd-bed2-6e5b0ec478f6",
-              "name": {
-                "ar": "تمن ة مرك",
-                "en": "ةةةة"
-              },
-              "desc": {
-                "ar": "",
-                "en": ""
-              },
-              "price": 1660,
-              "img": "",
-              "status": "available"
-            },
-            {
               "id": "xlsx-001",
               "name": {
                 "ar": "وجبة دجاج الكاري",
@@ -41,7 +27,7 @@
                 "ar": "",
                 "en": ""
               },
-              "price": 8000,
+              "price": 7978,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298937525-xlsx-001.webp",
               "status": "unavailable"
             },
