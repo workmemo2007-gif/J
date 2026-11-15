@@ -29,7 +29,7 @@
               },
               "price": 8000,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298937525-xlsx-001.webp",
-              "status": "unavailable"
+              "status": "available"
             },
             {
               "id": "xlsx-005",
@@ -56,7 +56,7 @@
               },
               "price": 9000,
               "img": "https://raw.githubusercontent.com/workmemo2007-gif/J/main/images/products/1793298916803-xlsx-013.webp",
-              "status": "unavailable"
+              "status": "available"
             },
             {
               "id": "xlsx-004",
